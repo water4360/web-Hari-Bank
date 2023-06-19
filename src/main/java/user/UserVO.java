@@ -18,5 +18,4 @@ public class UserVO {
 	private String postcode;
 	private String roadAddress;
 	private String detailAddress;
-	
 }

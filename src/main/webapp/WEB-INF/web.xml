@@ -2,7 +2,6 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
   <display-name>Hari-bank</display-name>
   
-  
   <!-- 이 클래스에 있는 것들은 모두 dispatcherServlet으로 처리할 것임 -->
   <!-- 서블릿은 1개이상의 맵핑을 가질 수 있음!!!! -->
 <!--   <servlet> -->
@@ -26,10 +25,10 @@
   </welcome-file-list>
     <servlet>
         <servlet-name>dispatcherServlet</servlet-name>
-        <servlet-class>kr.ac.kopo.controller.DispatcherServlet</servlet-class>
+        <servlet-class>controller.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>propLoc</param-name>
-            <param-value>C:\Users\User\eclipse-workspace-JSP\JYBanking\bean.properties</param-value>
+            <param-value>C:\Users\User\eclipse-workspace-JSP\web-Hari-bank\Hari-Bank\bean.properties</param-value>
         </init-param>
     </servlet>
     <servlet-mapping>
