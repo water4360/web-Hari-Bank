@@ -23,7 +23,9 @@ public class HandlerMapping {
 		mappings.put("/mypage.do", new MypageController());
 		
 		//메인 메뉴
+		mappings.put("/signup.do", new SignupController());
 		mappings.put("/login.do", new LoginController());
+		mappings.put("/kakaoLogin.do", new KakaoLoginController());
 		mappings.put("/create-account.do", new CreateAccountController());
 		
 		

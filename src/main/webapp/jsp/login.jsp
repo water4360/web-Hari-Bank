@@ -128,6 +128,11 @@ section {
 				<div class="kakao-login-box">
 					<a href="#" onclick="kakaoLogin()"><img alt="카카오 로그인"
 						src="assets/kakao_login_medium_narrow.png"></a>
+						
+					<a id="kakao-login-btn" href="#" onclick="loginWithKakao()">
+					<img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
+						width="222" alt="카카오 로그인 버튼" />
+					</a>
 				</div>
 			</div>
 		</div>
@@ -142,9 +147,12 @@ section {
 			Kakao.init('01de9cbef4bce203f1cd367ba95b3559');
 			Kakao.Auth.loginForm({
 				success : function(authObj) {
+					console.log("로그인 성공");
 					// 로그인 성공 시 처리 로직 작성
+					var accessToken = authObj.access_token;
+					getUserInfo(accessToken);
 					// 예시: 로그인 성공 후 메인 페이지로 리디렉션
-					window.location.href = 'main.do';
+// 					window.location.href = 'main.do';
 				},
 				fail : function(err) {
 					// 로그인 실패 시 처리 로직 작성
@@ -152,6 +160,58 @@ section {
 				}
 			});
 		}
+
+		function getUserInfo(accessToken) {
+			Kakao.API.request({
+				url : '/v2/user/me',
+				success : function(res) {
+					// 사용자 정보 요청 성공 시 처리 로직 작성
+					console.log("res : "+res);
+					console.log("res.id : "+res.id);
+					console.log("res.kakao_account : "+res.kakao_account);
+					console.log("res.nickname : " + JSON.stringify(res.properties.nickname));
+					console.log("email : " + JSON.stringify(res.kakao_account.email));
+					console.log("gender : " + JSON.stringify(res.kakao_account.gender));
+					console.log("birthday : " + JSON.stringify(res.kakao_account.birthday));
+
+					var userInfo = res; // 사용자 정보 저장
+					sendUserInfoToServlet(userInfo); // 서블릿으로 사용자 정보 전달
+					
+					$.ajax({
+	                    url:"kakaoLogin.do",
+	                    data:{"id":res.id, "name":JSON.stringify(res.properties.nickname)},
+	                    Type:"post",
+	                    success:function(data){
+	                        //성공적으로 하고나면 이동할 url
+	                        location.href="<%=request.getContextPath()%>";
+						}
+
+					});
+
+				},
+				fail : function(error) {
+					// 사용자 정보 요청 실패 시 처리 로직 작성
+					console.log(error); // 실패 정보 확인 예시
+				}
+			});
+		}
+
+		function sendUserInfoToServlet(userInfo) {
+			$.ajax({
+				type : 'POST',
+				url : 'kakaoLogin.do',
+				data : userInfo,
+				success : function(response) {
+					// 서블릿으로 전달 후 처리 로직 작성
+					console.log('User info sent to servlet');
+				},
+				error : function(xhr, status, error) {
+					// 전송 실패 시 처리 로직 작성
+					console.log(error); // 실패 정보 확인 예시
+				}
+			});
+		}
+		
 	</script>
 
 
