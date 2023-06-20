@@ -71,19 +71,17 @@
 					<div class="col-12 mb-3">
 						<label for="name">한글이름</label> <input type="text"
 							class="form-control" id="name" name="name" placeholder="이름 입력"
-							value="" pattern="[가-힣]{1,20}" required>
+							value="" pattern="[가-힣]{2,20}" required>
 						<div class="invalid-feedback">이름을 입력해주세요</div>
 					</div>
 					
 					<div class="col-5 mb-3">
 						<label for="birthdate">주민등록번호</label>
 						<input type="text"
-							class="form-control" id="birthdate" name="birthdate" placeholder="901208"
-							value="" pattern="[0-9]{6}" required>
-						<div class="invalid-feedback">생년월일을 입력해주세요</div>
-						-
+							class="form-control col-5 mb-3" id="birthdate" name="birthdate" placeholder="901208"
+							value="" pattern="[0-9]{6}" required>-
 						<input type="text"
-							class="form-control" id="gender" name="gender" placeholder=""
+							class="form-control col-5 mb-3" id="gender" name="gender" placeholder=""
 							value="" pattern="[0-9]{1}" required>●●●●●●
 						<div class="invalid-feedback">생년월일을 입력해주세요</div>
 					</div>

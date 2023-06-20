@@ -109,7 +109,15 @@ section {
 	height : 150px;
 }
 
-
+.input-form {
+	min-width: 400px;
+	max-width: 500px;
+	margin-top: 20px;
+	padding: 32px;
+	background: #fff;
+	border-radius: 10px;
+	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+}
 
 
 
