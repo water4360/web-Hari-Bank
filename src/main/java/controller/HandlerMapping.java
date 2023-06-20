@@ -25,6 +25,11 @@ public class HandlerMapping {
 		//메인 메뉴
 		mappings.put("/web-signup.do", new SignupWebController());
 		mappings.put("/kakao-signup.do", new SignupKakaoController());
+		mappings.put("/signupProcess.do", new SignupProcessController());
+		
+		//가입유효성 체크
+		mappings.put("/checkUserInfo.do", new CheckUserInfoController());
+		
 		
 		mappings.put("/login.do", new LoginController());
 		mappings.put("/kakaoLogin.do", new KakaoLoginController());

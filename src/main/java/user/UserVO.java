@@ -18,6 +18,30 @@ public class UserVO {
 	private String roadAddress;
 	private String detailAddress;
 	
+	
+	
+	//전체 생성자
+	public UserVO(String id, String pw, String korName, String birthdate, String gender, String telecom, String phone,
+			String email, String signupType, String regDate) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		this.korName = korName;
+		this.birthdate = birthdate;
+		this.gender = gender;
+		this.telecom = telecom;
+		this.phone = phone;
+		this.email = email;
+		this.signupType = signupType;
+		this.regDate = regDate;
+		this.role = role;
+		this.roleName = roleName;
+		this.addressType = addressType;
+		this.postcode = postcode;
+		this.roadAddress = roadAddress;
+		this.detailAddress = detailAddress;
+	}
+
 	public UserVO() {
 		super();
 	}

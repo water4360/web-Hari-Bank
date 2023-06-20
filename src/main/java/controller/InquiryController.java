@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
 
-public class InquiryController implements Controller{
+public class InquiryController extends BasicController {
 	
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {

@@ -15,26 +15,49 @@
 	rel="stylesheet" type="text/css" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="css/styles.css" rel="stylesheet" />
+
+<%-- 지도용 --%>
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=01de9cbef4bce203f1cd367ba95b3559"></script>
+
+<script>
+	window.onload = function() {
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		mapOption = {
+			// 지도의 중심좌표
+			center : new kakao.maps.LatLng(37.45897008681379,
+					127.15408793252612),
+			// 지도의 확대 레벨
+			level : 3
+		};
+
+		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+		var map = new kakao.maps.Map(mapContainer, mapOption);
+
+		//마커가 표시될 위치입니다 
+		var markerPosition = new kakao.maps.LatLng(37.45897008681379,
+				127.15408793252612);
+		//마커를 생성합니다
+		var marker = new kakao.maps.Marker({
+			position : markerPosition
+		});
+		marker.setMap(map);
+	};
+</script>
+
+
+
 </head>
 <body>
 	<%-- 하단지도/고객센터 --%>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<!-- 		<div id="map" style="width: 300px; height: 300px;"></div> -->
 		<div class="card mb-4">
-			<div class="card-header">지도</div>
+			<div class="card-header">경기도 성남시 수정로398 드림관 2층</div>
 			<div class="card-body">
-				<div class="row">
-					<div class="col-sm-6">
-						<iframe style="border:0; width: 100%; height: 200px;" src="https://www.google.com/maps/place/%ED%95%9C%EA%B5%AD%ED%8F%B4%EB%A6%AC%ED%85%8D%EB%8C%80%ED%95%99+%EC%84%B1%EB%82%A8%EC%BA%A0%ED%8D%BC%EC%8A%A4/@37.4589226,127.1537563,20.75z/data=!4m6!3m5!1s0x357caf33963d4e07:0xf472ab67f14582d2!8m2!3d37.4590828!4d127.1537789!16s%2Fm%2F0cnv0m4?hl=ko-KR&entry=ttu" frameborder="0" allowfullscreen></iframe>
-						<ul class="list-unstyled mb-0">
-						</ul>
-					</div>
-					<div class="col-sm-6">
-						<ul class="list-unstyled mb-0">
-							<li>경기도 성남시 수정로398</a></li>
-							<li>여기저기</li>
-						</ul>
-					</div>
-				</div>
+				<div id="map" style="width: 300px; height: 300px;"></div>
+				<ul class="list-unstyled mb-0">
+				</ul>
 			</div>
 		</div>
 		<div class="card mb-4">

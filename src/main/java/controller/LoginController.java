@@ -5,13 +5,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
 
-public class LoginController implements Controller{
+public class LoginController extends BasicController {
 	
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-
-		
-		
 		System.out.println("로긴Ctrl 진입");
 		return "/jsp/login.jsp";
 	}

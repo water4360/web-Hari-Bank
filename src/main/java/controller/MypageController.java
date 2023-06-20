@@ -3,7 +3,7 @@ package controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class MypageController implements Controller {
+public class MypageController extends BasicController {
 
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {

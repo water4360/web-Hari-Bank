@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
 
-public class CreateAccountController implements Controller{
+public class CreateAccountController extends BasicController{
 	
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {

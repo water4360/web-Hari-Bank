@@ -101,17 +101,20 @@ section {
 					<div class="form-group" align="center">
 						<h3>로그인</h3>
 						<div class="input-login-info">
-							<label for="id"> <input type="text" class="form-control"
-								placeholder="아이디" id="id" name="id">
-							</label> <label for="pw"> <input type="password"
-								class="form-control" placeholder="비밀번호" id="pw" name="pw">
+							<label for="id">
+							<input type="text" class="form-control"
+								placeholder="아이디" name="id">
+							</label>
+							<label for="pw">
+							<input type="password"
+								class="form-control" placeholder="비밀번호" name="pw">
 							</label>
 							<div class="checkbox mb-3">
-								<label for="saveId"> <input type="checkbox"
-									name="saveId" value="save"> 아이디기억 아직못해
-								</label>
+								<label for="saveId">
+								<input type="checkbox" name="saveId" value="save"> 아이디기억
+							</label>
 								<div id="loginError" style="color: red;">
-									<c:if test="${loginFeedback ne ''}">
+							<c:if test="${loginFeedback ne ''}">
 							${loginFeedback}
 						</c:if>
 								</div>

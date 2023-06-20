@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
 
-public class TransactionController implements Controller{
+public class TransactionController extends BasicController {
 	
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
