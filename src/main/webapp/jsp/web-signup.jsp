@@ -183,6 +183,30 @@
 
 
 	<script>
+	
+	
+	//gpt4 추천, idcheckservlet도 해야하고...
+	 function checkId() {
+         var userid = document.getElementById("userid").value;
+         
+         var xhttp = new XMLHttpRequest();
+         xhttp.onreadystatechange = function() {
+             if (this.readyState == 4 && this.status == 200) {
+                 document.getElementById("message").innerHTML = this.responseText;
+             }
+         };
+         xhttp.open("GET", "checkId.do?userid=" + userid, true);
+         xhttp.send();
+     }
+	
+	
+	
+	
+	
+	
+	
+	
+	
 		$(function() {
 			$("#id").on("keyup", function() {
 				var $checkID = $(this).val();
@@ -200,16 +224,14 @@
 
 				$.ajax({
 					type : "POST",
-					// url : "./jsp/checkId.jsp",
 					url : "checkUserInfo.do",
 					data : {
-						"id" : $checkID,
-						"pw" : $checkPW,
+						"id" : $checkID
 					},
 					dataType : "html",
 					async : true,
 					success : function(data) {
-						console.log("jsp data : " + data);
+						console.log("dao data : " + data);
 
 						if (data.trim() == "true") {
 							$error.html("❌이미 존재하는 아이디예요");
@@ -224,7 +246,13 @@
 								$msg.html("✔사용가능한 아이디예요");
 							}
 						}
-					}
+					},
+				    error: function(xhr, status, error) {
+				        console.error("Ajax 요청 실패!");
+				        console.error("HTTP 상태 코드: " + xhr.status);
+				        console.error("에러 메시지: " + error);
+				        // 요청이 실패했을 때의 처리를 여기에 작성합니다.
+				    }
 				});
 			});
 		});

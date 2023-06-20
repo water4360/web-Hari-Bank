@@ -12,7 +12,7 @@ public class UserDAO {
 	public void addUser(UserVO vo) {
 		StringBuilder sql = new StringBuilder();
 		sql.append("INSERT INTO B_USER_INFO(USER_ID, USER_PASSWORD, KOR_NAME,"
-				+ " BIRTHDATE, GENDER, TELECOM, PHONE_NO, EMAIL, SIGNUP_TYPE, REG_DATE) ");
+				+ " BIRTHDATE, GENDER, TELECOM, PHONE_NO, EMAIL, SIGNUP_TYPE, REG_DATETIME) ");
 		sql.append("  VALUES(?, ?, ?, ?, ?, ?, ?, ?, 'web', TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')) ");
 
 		try (Connection conn = new ConnectionFactory().getConnection();
@@ -38,7 +38,7 @@ public class UserDAO {
 	public boolean isDuplicated(String userInfo) {
 
 		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT COUNT(*) FROM B_USER_INFO WHERE USER_INFO=? ");
+		sql.append("SELECT COUNT(*) FROM B_USER_INFO WHERE USER_ID=? ");
 
 		try (Connection conn = new ConnectionFactory().getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
