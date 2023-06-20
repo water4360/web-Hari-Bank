@@ -104,7 +104,10 @@ section {
 	height : 150px;
 }
 
-
+#button-web-signup, #button-kakao-signup {
+	width : 200px;
+	height : 150px;
+}
 
 
 

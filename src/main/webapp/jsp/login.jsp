@@ -20,7 +20,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
 	integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="/css/styles.css">
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
@@ -91,7 +91,7 @@ section {
 		<jsp:include page="/jsp/main-jsp/topper.jsp"></jsp:include>
 	</header>
 	<section>
-		<div class="container" align="center">
+		<div class="login-outer-container" align="center">
 			<!-- 	액션이 갈지 말지 선택하는걸 이 onsubmit 에서 ... -->
 			<div class="login-container" style="width: 50rem" align="center">
 				<!-- 	submit 눌렀을때 어디로 보낼지 여기서 결정!-->
@@ -118,9 +118,11 @@ section {
 							</div>
 							<button type="submit" class="btn btn-success">로그인</button>
 						</div>
+						<div id="divide"></div>
 						<div>
 							<a href="findId.do">아이디 찾기</a> | <a href="findPw.do">비밀번호 찾기</a>
-							| <a href="signup.do">회원가입</a>
+							| <a href="" onclick="loadPage('signup-choice'); return false;">회원가입</a>
+<!-- 							<a href="transaction.do" onclick="loadPage('transaction.do'); return false;">이체하기</a> -->
 						</div>
 					</div>
 				</form>
@@ -128,11 +130,6 @@ section {
 				<div class="kakao-login-box">
 					<a href="#" onclick="kakaoLogin()"><img alt="카카오 로그인"
 						src="assets/kakao_login_medium_narrow.png"></a>
-						
-					<a id="kakao-login-btn" href="#" onclick="loginWithKakao()">
-					<img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"
-						width="222" alt="카카오 로그인 버튼" />
-					</a>
 				</div>
 			</div>
 		</div>
@@ -143,6 +140,33 @@ section {
 	</footer>
 
 	<script>
+	
+	
+    function loadPage(pageName) {
+        if (pageName === 'signup-choice') {
+            $.ajax({
+                url: "${pageContext.request.contextPath}/jsp/signup-choice.jsp",
+                type: "GET",
+                success: function(response) {
+                    $(".login-outer-container").html(response);
+                }
+            });
+        } else if(pageName === 'find-id') {
+            // 다른 페이지 로드 로직
+        } else if(pageName === 'find-pw') {
+            // 다른 페이지 로드 로직
+        }
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 		function kakaoLogin() {
 			Kakao.init('01de9cbef4bce203f1cd367ba95b3559');
 			Kakao.Auth.loginForm({
@@ -183,7 +207,7 @@ section {
 	                    Type:"post",
 	                    success:function(data){
 	                        //성공적으로 하고나면 이동할 url
-	                        location.href="<%=request.getContextPath()%>";
+	                    location.href="<%=request.getContextPath()%>";
 						}
 
 					});
@@ -211,7 +235,6 @@ section {
 				}
 			});
 		}
-		
 	</script>
 
 

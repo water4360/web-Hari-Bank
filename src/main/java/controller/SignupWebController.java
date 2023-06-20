@@ -3,11 +3,11 @@ package controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class SignupController implements Controller {
+public class SignupWebController implements Controller {
 
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-		return "/jsp/signup.jsp";
+		return "/jsp/web-signup.jsp";
 	}
 
 }
