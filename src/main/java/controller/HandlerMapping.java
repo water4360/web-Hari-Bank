@@ -30,7 +30,6 @@ public class HandlerMapping {
 		//가입유효성 체크
 		mappings.put("/checkUserInfo.do", new CheckUserInfoController());
 		
-		
 		mappings.put("/login.do", new LoginController());
 		mappings.put("/kakaoLogin.do", new KakaoLoginController());
 		

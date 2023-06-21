@@ -183,28 +183,19 @@
 
 
 	<script>
-	
-	
-	//gpt4 추천, idcheckservlet도 해야하고...
-	 function checkId() {
-         var userid = document.getElementById("userid").value;
+// 	//gpt4 추천, idcheckservlet도 해야하고...
+// 	 function checkId() {
+//          var userid = document.getElementById("userid").value;
          
-         var xhttp = new XMLHttpRequest();
-         xhttp.onreadystatechange = function() {
-             if (this.readyState == 4 && this.status == 200) {
-                 document.getElementById("message").innerHTML = this.responseText;
-             }
-         };
-         xhttp.open("GET", "checkId.do?userid=" + userid, true);
-         xhttp.send();
-     }
-	
-	
-	
-	
-	
-	
-	
+//          var xhttp = new XMLHttpRequest();
+//          xhttp.onreadystatechange = function() {
+//              if (this.readyState == 4 && this.status == 200) {
+//                  document.getElementById("message").innerHTML = this.responseText;
+//              }
+//          };
+//          xhttp.open("GET", "checkId.do?userid=" + userid, true);
+//          xhttp.send();
+//      }
 	
 	
 		$(function() {
@@ -224,7 +215,8 @@
 
 				$.ajax({
 					type : "POST",
-					url : "checkUserInfo.do",
+					url : "./jsp/check-jsp/checkId.jsp",
+// 					url : "/checkId",
 					data : {
 						"id" : $checkID
 					},

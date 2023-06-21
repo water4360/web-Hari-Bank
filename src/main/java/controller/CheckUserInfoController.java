@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import user.UserDAO;
-import user.UserVO;
 
 public class CheckUserInfoController extends BasicController {
 
