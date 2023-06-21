@@ -32,6 +32,8 @@ public class HandlerMapping {
 		
 		mappings.put("/login.do", new LoginController());
 		mappings.put("/kakaoLogin.do", new KakaoLoginController());
+		mappings.put("/loginProcess.do", new LoginProcessController());
+		mappings.put("/logout.do", new LogoutController());
 		
 		mappings.put("/create-account.do", new CreateAccountController());
 		

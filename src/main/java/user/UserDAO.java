@@ -11,9 +11,23 @@ public class UserDAO {
 	// 1.신규 웹 회원가입
 	public void addUser(UserVO vo) {
 		StringBuilder sql = new StringBuilder();
-		sql.append("INSERT INTO B_USER_INFO(USER_ID, USER_PASSWORD, KOR_NAME,"
-				+ " BIRTHDATE, GENDER, TELECOM, PHONE_NO, EMAIL, SIGNUP_TYPE, REG_DATETIME) ");
-		sql.append("  VALUES(?, ?, ?, ?, ?, ?, ?, ?, 'web', TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')) ");
+//		sql.append("INSERT INTO B_USER_INFO(USER_ID, USER_PASSWORD, KOR_NAME,"
+//				+ " BIRTHDATE, GENDER, TELECOM, PHONE_NO, EMAIL, SIGNUP_TYPE, REG_DATETIME) ");
+//		sql.append("  VALUES(?, ?, ?, ?, ?, ?, ?, ?, 'web', TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')) ");
+		
+//		SELECT ui.USER_ID, ui.USER_PASSWORD, ui.KOR_NAME, ui.BIRTHDATE, ui.GENDER, ui.TELECOM, ui.PHONE_NO, ui.EMAIL,
+//	       ua.POSTCODE, ua.ROAD_ADDRESS, ua.DETAIL_ADDRESS
+//	FROM B_USER_INFO ui
+//	LEFT JOIN B_USER_ADDRESS ua ON ui.USER_ID = ua.USER_ID
+//	WHERE ui.USER_ID = 'aaaa';
+		
+		 sql.append("INSERT ALL ");
+		    sql.append("INTO B_USER_INFO (USER_ID, USER_PASSWORD, KOR_NAME, BIRTHDATE, GENDER, TELECOM, PHONE_NO, EMAIL, SIGNUP_TYPE, REG_DATETIME) ");
+		    sql.append("VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'web', TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')) ");
+		    sql.append("INTO B_USER_ADDRESS (USER_ID, ADDRESS_TYPE, POSTCODE, ROAD_ADDRESS, DETAIL_ADDRESS) ");
+		    sql.append("VALUES (?, '자택', ?, ?, ?) ");
+		    sql.append("SELECT 1 FROM DUAL");
+		
 
 		try (Connection conn = new ConnectionFactory().getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
@@ -26,6 +40,14 @@ public class UserDAO {
 			pstmt.setString(7, vo.getPhone());
 			pstmt.setString(8, vo.getEmail());
 
+			
+			// for B_USER_ADDRESS
+	        pstmt.setString(9, vo.getId());
+//	        pstmt.setString(10, vo.getWhere()); //자택,직장
+	        pstmt.setString(10, vo.getPostcode());
+	        pstmt.setString(11, vo.getRoadAddress());
+	        pstmt.setString(12, vo.getDetailAddress());
+			
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

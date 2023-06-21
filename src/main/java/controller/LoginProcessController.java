@@ -19,16 +19,16 @@ public class LoginProcessController extends BasicController {
 		vo.setPw(pw);
 
 		UserDAO dao = new UserDAO();
-		UserVO mem = null;
+		UserVO user = null;
 		session = request.getSession();
 
 		
 		// VO에 담아준 걸로 DAO에서 비교해서 일치하는 사용자 정보 가져온게 mem
 		if (dao.isCorrectInfo(id, pw)) {
-			mem = dao.getUserById(id);
+			user = dao.getUserById(id);
 
-			// 그리고 이 mem을 session에 MemberVO형태 고대로 넘겨줌.
-			session.setAttribute("loginMember", mem);
+			// 그리고 이 user를 session에 UserVO형태 고대로 넘겨줌.
+			session.setAttribute("loginUser", user);
 			
 			System.out.println("회원정보 존재. by LoginController");
 			return "main.do";
@@ -43,6 +43,7 @@ public class LoginProcessController extends BasicController {
 			request.setAttribute("loginFeedback", "일치하는 회원이 없어요");
 			return "login.do";
 		}
+		
 		return "main.do";
 	}
 

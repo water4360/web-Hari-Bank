@@ -18,6 +18,10 @@ public class UserVO {
 	private String roadAddress;
 	private String detailAddress;
 	
+	//기본
+	public UserVO() {
+		super();
+	}
 	
 	
 	//전체 생성자
@@ -41,10 +45,29 @@ public class UserVO {
 		this.roadAddress = roadAddress;
 		this.detailAddress = detailAddress;
 	}
+//	(id, pw, name, birth, gen, tel, phone, email, signType, regDate);
+	
+	
 
-	public UserVO() {
+	//로그인시 저장정보
+	public UserVO(String id, String pw, String korName, String birthdate, String gender, String telecom, String phone,
+			String email, String signupType, String regDate, String role, String roleName) {
 		super();
+		this.id = id;
+		this.pw = pw;
+		this.korName = korName;
+		this.birthdate = birthdate;
+		this.gender = gender;
+		this.telecom = telecom;
+		this.phone = phone;
+		this.email = email;
+		this.signupType = signupType;
+		this.regDate = regDate;
+		this.role = role;
+		this.roleName = roleName;
 	}
+
+
 
 	public String getId() {
 		return id;

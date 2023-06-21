@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	
 <html>
 <head>
 <!-- Favicon-->
@@ -22,12 +24,12 @@
 			<a class="navbar-brand"
 				href="${pageContext.request.contextPath}/main.do">하리은행</a>
 			<div class="login-info">
-			<%-- <c:if test="${ not empty loginUser }"> --%>
-			<img alt="user" id="user" src="./source/src-img/user.png"> <b>${ loginUser.id }(${ loginUser.name })</b>
+			<c:if test="${ not empty loginUser }">
+			<img alt="user" id="user" src="${pageContext.request.contextPath}/assets/user.png"> <b>${ loginUser.id }(${ loginUser.korName })</b>
 			<a class="badge bg-secondary text-decoration-none link-light"
 				href="#!">로그인연장</a> <a
-				class="badge bg-secondary text-decoration-none link-light" href="#!">로그아웃</a>
-			<%-- </c:if> --%>
+				class="badge bg-secondary text-decoration-none link-light" href="logout.do">로그아웃</a>
+			</c:if>
 			</div>
 		</div>
 	</nav>

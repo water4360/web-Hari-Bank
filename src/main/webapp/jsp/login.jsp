@@ -37,19 +37,16 @@
 		let pwError = document.getElementById("pwError")
 
 		if (id.value.trim() === '') {
-			// 	        alert('ID를 입력하세요!');
 			loginError.innerText = '아이디를 입력하세요';
 			id.focus();
 			return false;
 		} else if (pw.value.trim() === '') {
-			// 	        alert('PW를 입력하세요!');
 			loginError.innerText = '비밀번호를 입력하세요';
 			pw.focus();
 			return false;
 		} else {
 			// 	비밀번호와 아이디가 모두 입력되었을 때에만 로그인 요청
 			// 	alert('로그인 프로세스로 진입!')
-			// 	f.action = "./jsp/loginProcess.jsp";
 			return true;
 		}
 	}
@@ -111,7 +108,7 @@ section {
 							</label>
 							<div class="checkbox mb-3">
 								<label for="saveId">
-								<input type="checkbox" name="saveId" value="save"> 아이디기억
+<!-- 								<input type="checkbox" name="saveId" value="save"> 아이디기억 -->
 							</label>
 								<div id="loginError" style="color: red;">
 							<c:if test="${loginFeedback ne ''}">
@@ -125,7 +122,6 @@ section {
 						<div>
 							<a href="findId.do">아이디 찾기</a> | <a href="findPw.do">비밀번호 찾기</a>
 							| <a href="" onclick="loadPage('signup-choice'); return false;">회원가입</a>
-<!-- 							<a href="transaction.do" onclick="loadPage('transaction.do'); return false;">이체하기</a> -->
 						</div>
 					</div>
 				</form>

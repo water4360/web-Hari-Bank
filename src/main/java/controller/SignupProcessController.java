@@ -44,7 +44,7 @@ public class SignupProcessController extends BasicController {
 			session.setAttribute("newUser", vo);
 			System.out.println("User등록-SignupProcessCtrl");
 			
-			return "계좌생성.do";
+			return "create-account.do";
 			
 		} catch (Exception e) {
 			e.printStackTrace();
