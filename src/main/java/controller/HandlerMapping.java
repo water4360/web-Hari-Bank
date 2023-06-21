@@ -27,6 +27,7 @@ public class HandlerMapping {
 		mappings.put("/kakao-signup.do", new SignupKakaoController());
 		mappings.put("/signupProcess.do", new SignupProcessController());
 		
+		
 		//가입유효성 체크
 		mappings.put("/checkUserInfo.do", new CheckUserInfoController());
 		
@@ -35,6 +36,7 @@ public class HandlerMapping {
 		mappings.put("/loginProcess.do", new LoginProcessController());
 		mappings.put("/logout.do", new LogoutController());
 		
+		//계좌 개설
 		mappings.put("/create-account.do", new CreateAccountController());
 		
 		

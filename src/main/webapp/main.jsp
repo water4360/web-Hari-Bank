@@ -64,13 +64,32 @@
 									<a class="btn btn-success" id="button-login" type="button"
 										href='login.do'> 로그인 <br>
 									<i class="fa-solid fa-right-to-bracket fa-2xl"></i>
-									</a> <a class="btn btn-success" id="button-create-account"
+									</a>
+									<a class="btn btn-success" id="button-create-account"
 										type="button"> 계좌개설 <br>
 									<i class="fa-solid fa-money-check fa-2xl"></i>
 									</a>
 								</div>
 							</div>
 						</c:when>
+						<c:otherwise>
+							<div class="col-lg-4">
+								<%-- 개설/조회/이체메뉴 --%>
+								<div class="card-body">
+									<a class="btn btn-success" id="button-create-account"
+										type="button" href='create-account.do'> 계좌개설 <br>
+									<i class="fa-solid fa-money-check fa-2xl"></i>
+									</a>
+									<a class="btn btn-success" id="button-inquiry" type="button"
+										href='inquiry.do'> 빠른조회 <br>
+									</a>
+									<a class="btn btn-success" id="button-transfer"
+										type="button" href='transaction.do'> 이체 <br>
+									</a>
+								</div>
+							</div>
+							
+						</c:otherwise>
 					</c:choose>
 					<!-- Categories widget-->
 					<div class="card col-lg-6">

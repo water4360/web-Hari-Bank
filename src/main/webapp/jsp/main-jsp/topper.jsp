@@ -25,7 +25,8 @@
 				href="${pageContext.request.contextPath}/main.do">하리은행</a>
 			<div class="login-info">
 			<c:if test="${ not empty loginUser }">
-			<img alt="user" id="user" src="${pageContext.request.contextPath}/assets/user.png"> <b>${ loginUser.korName }님 환영합니다</b>
+			<img alt="user" id="user" src="${pageContext.request.contextPath}/assets/user.png">
+			<b>${ loginUser.korName }님 환영합니다</b>
 			<a class="badge bg-secondary text-decoration-none link-light"
 				href="#!">로그인연장</a> <a
 				class="badge bg-secondary text-decoration-none link-light" href="logout.do">로그아웃</a>

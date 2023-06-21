@@ -15,7 +15,7 @@ public class CreateAccountController extends BasicController{
 		
 		
 		System.out.println("계좌생성Ctrl 진입");
-		return "/jsp/createAccount.jsp";
+		return "/jsp/create-account.jsp";
 	}
 
 }

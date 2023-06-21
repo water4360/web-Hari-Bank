@@ -120,7 +120,7 @@ public class UserDAO {
 //	FROM B_USER_INFO
 //	LEFT JOIN B_USER_AUTHORITY 
 //	ON B_USER_INFO.USER_ID = B_USER_AUTHORITY.USER_ID
-//	WHERE B_USER_INFO.USER_ID = 'aaaa' AND B_USER_INFO.USER_PASSWORD = '1111';
+//	WHERE B_USER_INFO.USER_ID = 'aaaa';
 		public UserVO getUserById(String userId) {
 			StringBuilder sql = new StringBuilder();
 			UserVO vo = null;
@@ -147,7 +147,7 @@ public class UserDAO {
 					String phone = rs.getString("PHONE_NO");
 					String email = rs.getString("EMAIL");
 					String signType = rs.getString("SIGNUP_TYPE");
-					String regDate = rs.getString("REG_DATE");
+					String regDate = rs.getString("REG_DATETIME");
 					String roleCode = rs.getString("ROLE_CODE");
 					String roleName = rs.getString("ROLE_NAME");
 					
