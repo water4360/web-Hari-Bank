@@ -31,6 +31,7 @@ public class LoginProcessController extends BasicController {
 			session.setAttribute("loginUser", user);
 			
 			System.out.println("회원정보 존재. by LoginController");
+			System.out.printf("%s 회원 접속by LoginController\n", id);
 			return "main.do";
 		} else if (dao.isDuplicated(id)) {
 			// 아이디는 존재, 비밀번호가 틀린 경우.

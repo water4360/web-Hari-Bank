@@ -26,6 +26,8 @@ public class UserDAO {
 		    sql.append("VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'web', TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')) ");
 		    sql.append("INTO B_USER_ADDRESS (USER_ID, ADDRESS_TYPE, POSTCODE, ROAD_ADDRESS, DETAIL_ADDRESS) ");
 		    sql.append("VALUES (?, '자택', ?, ?, ?) ");
+		    sql.append("INTO B_USER_AUTHORITY (ROLE_CODE, ROLE_NAME, USERID) ");
+		    sql.append("VALUES ('H1', '브론즈', ?) ");
 		    sql.append("SELECT 1 FROM DUAL");
 		
 
@@ -48,6 +50,9 @@ public class UserDAO {
 	        pstmt.setString(11, vo.getRoadAddress());
 	        pstmt.setString(12, vo.getDetailAddress());
 			
+	        // for B_USER_AUTHORITY
+	        pstmt.setString(13, vo.getId());
+	        
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -111,12 +116,20 @@ public class UserDAO {
 	
 	
 	// ID로 회원정보 찾기
-	//SELECT * FROM B_USER_INFO WHERE USER_ID = 'test';
+//	SELECT * 
+//	FROM B_USER_INFO
+//	LEFT JOIN B_USER_AUTHORITY 
+//	ON B_USER_INFO.USER_ID = B_USER_AUTHORITY.USER_ID
+//	WHERE B_USER_INFO.USER_ID = 'aaaa' AND B_USER_INFO.USER_PASSWORD = '1111';
 		public UserVO getUserById(String userId) {
 			StringBuilder sql = new StringBuilder();
 			UserVO vo = null;
 
-			sql.append("SELECT * FROM B_USER_INFO WHERE USER_ID = ? ");
+			sql.append("SELECT * ");
+			sql.append("FROM B_USER_INFO ");
+			sql.append("LEFT JOIN B_USER_AUTHORITY ");
+			sql.append("ON B_USER_INFO.USER_ID = B_USER_AUTHORITY.USER_ID ");
+			sql.append("WHERE B_USER_INFO.USER_ID = ? ");
 			try (Connection conn = new ConnectionFactory().getConnection();
 					PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
 				pstmt.setString(1, userId);
@@ -126,7 +139,7 @@ public class UserDAO {
 				// ID가 존재하면 쿼리를 실행하고
 				if (rs.next()) {
 					String id = rs.getString("USER_ID");
-					String pw = rs.getString("USER_PW");
+					String pw = rs.getString("USER_PASSWORD");
 					String name = rs.getString("KOR_NAME");
 					String birth = rs.getString("BIRTHDATE");
 					String gen = rs.getString("GENDER");
@@ -135,8 +148,11 @@ public class UserDAO {
 					String email = rs.getString("EMAIL");
 					String signType = rs.getString("SIGNUP_TYPE");
 					String regDate = rs.getString("REG_DATE");
+					String roleCode = rs.getString("ROLE_CODE");
+					String roleName = rs.getString("ROLE_NAME");
+					
 
-					vo = new UserVO(id, pw, name, birth, gen, tel, phone, email, signType, regDate);
+					vo = new UserVO(id, pw, name, birth, gen, tel, phone, email, signType, regDate, roleCode, roleName);
 					
 				}
 
