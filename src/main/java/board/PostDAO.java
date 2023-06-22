@@ -75,7 +75,7 @@ public class PostDAO {
 
 	public PostVO getPost(int qno) {
 		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT * FROM B_QNA WHERE NO = ? ");
+		sql.append("SELECT * FROM B_QNA WHERE Q_NO = ? ");
 		PostVO post = null;
 
 		try (Connection conn = new ConnectionFactory().getConnection();
@@ -87,7 +87,7 @@ public class PostDAO {
 			 
 			if(rs.next()) {
 				int no = rs.getInt("Q_NO");
-				String writer = rs.getString("USER_ID");
+				String writer = rs.getString("USER_NAME");
 				String title = rs.getString("Q_TITLE");
 				String contents = rs.getString("Q_CONTENTS");
 				String regDate = rs.getString("Q_REG_DATE");

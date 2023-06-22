@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -7,47 +7,50 @@
 <meta charset="UTF-8">
 <title>HR Bank - 문의게시판(Q&A)</title>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0v8FqFjcJ6pajs/rfdfs3SO+kD4Ck5BdPtF+to8xM6B5z6W5" crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 
 <style>
 table {
-    table-layout: auto;
-    width: 60%;
+	table-layout: auto;
+	width: 60%;
 }
 </style>
 
 </head>
 <body>
-    <header>
-        <%-- 상단고정 --%>
-        <jsp:include page="/jsp/main-jsp/topper.jsp"></jsp:include>
-    </header>
-    <section>
-        <div class="container mt-5">
-            <div class="text-center">
-                <h2>문의글 상세보기</h2>
-<!--                 서블릿에서 받아온 걸로 해야함. -->
+	<header>
+		<%-- 상단고정 --%>
+		<jsp:include page="/jsp/main-jsp/topper.jsp"></jsp:include>
+	</header>
+	<section>
+		<div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <h4>${post.title}</h4>
+                            <div class="btn-group">
+                                <button type="submit" class="btn btn-secondary mr-2">수정</button>
+                                <button type="submit" class="btn btn-secondary mr-2">삭제</button>
+                                <a href="${pageContext.request.contextPath }/qna.do" class="btn btn-secondary">목록으로</a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">${post.contents}</p>
+                        </div>
+                        <div class="card-footer text-muted">작성자 : ${post.writer} | 등록일 : ${post.regDate}</div>
+                    </div>
+                </div>
             </div>
-            <form action="insert-new-post.do" method="post">
-                <div class="mb-3">
-    				<h4></h4>             
-                </div>
-                <div class="mb-3">
-                    <textarea class="form-control" name="contents" rows="10" placeholder="내용을 입력하세요."></textarea>
-                </div>
-                <div class="mb-3 d-flex justify-content-center">
-                    <button type="submit" class="btn btn-success mr-2">수정</button>
-                    <button type="submit" class="btn btn-danger mr-2">삭제</button>
-                    <a href="${pageContext.request.contextPath }/qna.do" class="btn btn-secondary">목록으로</a>
-                </div>
-            </form>
-        </div>
-    </section>
-    <footer>
-        <%-- 하단고정 --%>
-        <jsp:include page="/jsp/main-jsp/footer.jsp"></jsp:include>
-    </footer>
+		</div>
+	</section>
+	<footer>
+		<%-- 하단고정 --%>
+		<jsp:include page="/jsp/main-jsp/footer.jsp"></jsp:include>
+	</footer>
 </body>
 </html>
