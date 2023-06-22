@@ -1,13 +1,15 @@
-package controller;
+package controller.signup;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class SignupKakaoController extends BasicController {
+import controller.BasicController;
+
+public class SignupWebController extends BasicController {
 
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-		return "/jsp/kakao-signup.jsp";
+		return "/jsp/web-signup.jsp";
 	}
 
 }

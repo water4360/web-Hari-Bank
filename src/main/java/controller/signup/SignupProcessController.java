@@ -1,8 +1,9 @@
-package controller;
+package controller.signup;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controller.BasicController;
 import user.UserDAO;
 import user.UserVO;
 

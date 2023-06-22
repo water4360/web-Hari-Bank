@@ -3,6 +3,21 @@ package controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import controller.board.InsertNewQnAController;
+import controller.board.QnAController;
+import controller.board.QnADetailsController;
+import controller.board.WriteQnAController;
+import controller.login.KakaoLoginController;
+import controller.login.LoginController;
+import controller.login.LoginProcessController;
+import controller.login.LogoutController;
+import controller.login.MypageController;
+import controller.signup.SignupKakaoController;
+import controller.signup.SignupProcessController;
+import controller.signup.SignupWebController;
+import controller.transaction.InquiryController;
+import controller.transaction.TransactionController;
+
 //클라이언트에서 Controller요청이 들어오면 얘가 상속받아서 넘겨주는...??...  
 public class HandlerMapping {
 	//선언. 여기서의 Controller = 만들어둔 인터페이스.
@@ -27,10 +42,16 @@ public class HandlerMapping {
 		mappings.put("/kakao-signup.do", new SignupKakaoController());
 		mappings.put("/signupProcess.do", new SignupProcessController());
 		
+//		mappings.put("/notice.do", new NoticeController());
+//		mappings.put("/fnq.do", new FnQController());
+		mappings.put("/qna.do", new QnAController());
+		mappings.put("/qna-details.do", new QnADetailsController());
 		
-		//가입유효성 체크
-		mappings.put("/checkUserInfo.do", new CheckUserInfoController());
+		mappings.put("/write-post.do", new WriteQnAController());
+		mappings.put("/insert-new-post.do", new InsertNewQnAController());
 		
+		
+		//로그인
 		mappings.put("/login.do", new LoginController());
 		mappings.put("/kakaoLogin.do", new KakaoLoginController());
 		mappings.put("/loginProcess.do", new LoginProcessController());

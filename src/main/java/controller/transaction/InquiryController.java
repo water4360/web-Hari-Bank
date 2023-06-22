@@ -1,16 +1,16 @@
-package controller;
+package controller.transaction;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controller.Controller;
+import controller.BasicController;
 
-public class LoginController extends BasicController {
+public class InquiryController extends BasicController {
 	
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("로긴Ctrl 진입");
-		return "/jsp/login.jsp";
+		System.out.println("inquiryCtrl 진입");
+		return "/jsp/inquiry.jsp";
 	}
 
 }

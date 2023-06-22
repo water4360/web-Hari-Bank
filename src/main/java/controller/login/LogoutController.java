@@ -1,7 +1,9 @@
-package controller;
+package controller.login;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import controller.BasicController;
 
 public class LogoutController extends BasicController {
 	@Override

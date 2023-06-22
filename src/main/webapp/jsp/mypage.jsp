@@ -37,7 +37,7 @@
 			<table class="table table-hover table-striped">
 				<thead>
 					<tr>
-						<th scope="colgroup">${loginUser.korName}님의HR등급은<b>${loginUser.roleName}</b>입니다.
+						<th scope="colgroup">${loginUser.korName}님의 HR등급은 <b>${loginUser.roleName}</b>입니다.
 						</th>
 						<th scope="col"></th>
 						<th scope="col"></th>
@@ -69,7 +69,7 @@
 							disabled></td>
 						<td class="email"><input type="email" id="email"
 							class="editable" value="${loginUser.email}" disabled></td>
-						<td class="regDate">${loginUser.regDate}</td>
+						<td class="regDatetime">${loginUser.regDatetime}</td>
 						<td>
 							<div class="btn-group">
 								<button type="button" class="btn btn-success" id="edit-btn"
@@ -92,7 +92,11 @@
 		</div>
 			<div class="btn-group">
 				<button type="button" class="btn btn-secondary" data-toggle="modal"
-					data-target="#withdrawMem" aria-expanded="false">더보기</button>
+					data-target="#더보기" aria-expanded="false">더보기</button>
+			</div>
+			<div class="btn-group">
+				<button type="button" class="btn btn-secondary" data-toggle="modal"
+					data-target="#문의하기" aria-expanded="false">문의하기</button>
 			</div>
 			<table class="table table-hover table-striped">
 				<thead>
@@ -108,8 +112,8 @@
 					<tr>
 						<td class="name">${loginUser.korName}</td>
 						<td class="id">${loginUser.id}</td>
-						<td class="regDate">${loginUser.regDate}</td>
-						<td class="regDate">${loginUser.regDate}</td>
+						<td class="regDate">${loginUser. id}</td>
+						<td class="regDate">${loginUser.id}</td>
 						<td></td>
 					</tr>
 				</tbody>

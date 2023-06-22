@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +20,6 @@
 <link href="css/styles.css" rel="stylesheet" />
 
 </head>
-
 <body>
 	<header>
 		<%-- 상단고정 --%>
@@ -62,12 +62,11 @@
 								<%-- 로그인/가입메뉴 --%>
 								<div class="card-body">
 									<a class="btn btn-success" id="button-login" type="button"
-										href='login.do'> 로그인 <br>
-									<i class="fa-solid fa-right-to-bracket fa-2xl"></i>
-									</a>
-									<a class="btn btn-success" id="button-create-account"
-										type="button"> 계좌개설 <br>
-									<i class="fa-solid fa-money-check fa-2xl"></i>
+										href='login.do'> 로그인 <br> <i
+										class="fa-solid fa-right-to-bracket fa-2xl"></i>
+									</a> <a class="btn btn-success" id="button-create-account"
+										type="button"> 계좌개설 <br> <i
+										class="fa-solid fa-money-check fa-2xl"></i>
 									</a>
 								</div>
 							</div>
@@ -77,22 +76,20 @@
 								<%-- 개설/조회/이체메뉴 --%>
 								<div class="card-body">
 									<a class="btn btn-success" id="button-create-account"
-										type="button" href='create-account.do'> 계좌개설 <br>
-									<i class="fa-solid fa-money-check fa-2xl"></i>
-									</a>
-									<a class="btn btn-success" id="button-inquiry" type="button"
+										type="button" href='create-account.do'> 계좌개설 <br> <i
+										class="fa-solid fa-money-check fa-2xl"></i>
+									</a> <a class="btn btn-success" id="button-inquiry" type="button"
 										href='inquiry.do'> 빠른조회 <br>
-									</a>
-									<a class="btn btn-success" id="button-transfer"
-										type="button" href='transaction.do'> 이체 <br>
+									</a> <a class="btn btn-success" id="button-transfer" type="button"
+										href='transaction.do'> 이체 <br>
 									</a>
 								</div>
 							</div>
-							
+
 						</c:otherwise>
 					</c:choose>
 					<!-- Categories widget-->
-					<div class="card col-lg-6">
+					<div class="card col-lg-4 mb-5">
 						<div class="card-header">공지사항</div>
 						<div class="card-body">
 							<div class="row">
@@ -106,16 +103,36 @@
 							</div>
 						</div>
 					</div>
-					<%-- 댓글창쪽 --%>
-					<!-- Comments section-->
-					<div class="col-lg-1"></div>
-					<!-- Side widget-->
-					<div class="card col-lg-5">
-						<div class="card-header">자주묻는 질문</div>
+					<div class="card col-lg-4 mb-5">
+						<div class="card-header">자주묻는질문(F&Q)</div>
 						<div class="card-body">You can put anything you want inside
 							of these side widgets. They are easy to use, and feature the
 							Bootstrap 5 card component!</div>
 					</div>
+					<div class="card col-4 mb-5">
+						<div class="card-header">
+							<a href="qna.do">회원전용문의(Q&A) 최근3건</a>
+						</div>
+						<div class="card-body">
+
+							<c:choose>
+								<c:when test="${ empty qnas }">
+									<td colspan="5" align="center" class="mt-3 mb-3">등록된 QnA가
+										없습니다.</td>
+								</c:when>
+								<c:otherwise>
+									<c:forEach var="qna" items="${qnas}" begin="0" end="2">
+									<ul class="list-unstyled mb-0">
+											<li class="qna-title"><a
+												href="qna-details.do?no=${qna.no}">${qna.title}</a>
+												</li>
+										</ul>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</div>

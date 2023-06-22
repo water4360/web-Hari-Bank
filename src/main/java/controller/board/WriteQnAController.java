@@ -1,12 +1,15 @@
-package controller;
+package controller.board;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class MainController extends BasicController {
+import controller.BasicController;
+
+public class WriteQnAController extends BasicController {
 
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-		return "main.jsp";
+		return "jsp/board/write-qna.jsp";
 	}
+
 }

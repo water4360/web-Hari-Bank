@@ -10,7 +10,7 @@ public class UserVO {
 	private String phone;
 	private String email;
 	private String signupType;
-	private String regDate;
+	private String regDatetime;
 	private String role;
 	private String roleName;
 	private String addressType;
@@ -26,7 +26,7 @@ public class UserVO {
 	
 	//전체 생성자
 	public UserVO(String id, String pw, String korName, String birthdate, String gender, String telecom, String phone,
-			String email, String signupType, String regDate) {
+			String email, String signupType, String regDatetime) {
 		super();
 		this.id = id;
 		this.pw = pw;
@@ -37,7 +37,7 @@ public class UserVO {
 		this.phone = phone;
 		this.email = email;
 		this.signupType = signupType;
-		this.regDate = regDate;
+		this.regDatetime = regDatetime;
 		this.role = role;
 		this.roleName = roleName;
 		this.addressType = addressType;
@@ -45,13 +45,13 @@ public class UserVO {
 		this.roadAddress = roadAddress;
 		this.detailAddress = detailAddress;
 	}
-//	(id, pw, name, birth, gen, tel, phone, email, signType, regDate);
+//	(id, pw, name, birth, gen, tel, phone, email, signType, regDatetime);
 	
 	
 
 	//로그인시 저장정보
 	public UserVO(String id, String pw, String korName, String birthdate, String gender, String telecom, String phone,
-			String email, String signupType, String regDate, String role, String roleName) {
+			String email, String signupType, String regDatetime, String role, String roleName) {
 		super();
 		this.id = id;
 		this.pw = pw;
@@ -62,7 +62,7 @@ public class UserVO {
 		this.phone = phone;
 		this.email = email;
 		this.signupType = signupType;
-		this.regDate = regDate;
+		this.regDatetime = regDatetime;
 		this.role = role;
 		this.roleName = roleName;
 	}
@@ -141,12 +141,12 @@ public class UserVO {
 		this.signupType = signupType;
 	}
 
-	public String getRegDate() {
-		return regDate;
+	public String getRegDatetime() {
+		return regDatetime;
 	}
 
-	public void setRegDate(String regDate) {
-		this.regDate = regDate;
+	public void setRegDate(String regDatetime) {
+		this.regDatetime = regDatetime;
 	}
 
 	public String getRole() {
@@ -195,6 +195,16 @@ public class UserVO {
 
 	public void setDetailAddress(String detailAddress) {
 		this.detailAddress = detailAddress;
+	}
+
+
+	@Override
+	public String toString() {
+		return "UserVO [id=" + id + ", pw=" + pw + ", korName=" + korName + ", birthdate=" + birthdate + ", gender="
+				+ gender + ", telecom=" + telecom + ", phone=" + phone + ", email=" + email + ", signupType="
+				+ signupType + ", regDatetime=" + regDatetime + ", role=" + role + ", roleName=" + roleName
+				+ ", addressType=" + addressType + ", postcode=" + postcode + ", roadAddress=" + roadAddress
+				+ ", detailAddress=" + detailAddress + "]";
 	}
 	
 	
