@@ -28,24 +28,27 @@ table {
 	</header>
 	<section>
 		<div class="container mt-5">
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="card mb-3">
-                        <div class="card-header d-flex align-items-center justify-content-between">
-                            <h4>${post.title}</h4>
-                            <div class="btn-group">
-                                <button type="submit" class="btn btn-secondary mr-2">수정</button>
-                                <button type="submit" class="btn btn-secondary mr-2">삭제</button>
-                                <a href="${pageContext.request.contextPath }/qna.do" class="btn btn-secondary">목록으로</a>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <p class="card-text">${post.contents}</p>
-                        </div>
-                        <div class="card-footer text-muted">작성자 : ${post.writer} | 등록일 : ${post.regDate}</div>
-                    </div>
-                </div>
-            </div>
+			<div class="row justify-content-center">
+				<div class="col-md-6">
+					<div class="card mb-3">
+						<div
+							class="card-header d-flex align-items-center justify-content-between">
+							<h4>${post.title}</h4>
+						</div>
+						<div class="card-body">
+							<p class="card-text">${post.contents}</p>
+						</div>
+						<div class="card-footer text-muted text-end">작성자 :
+							${post.writer} | 등록일 : ${post.regDate}</div>
+					</div>
+					<div class="btn-group" role="group">
+						<button type="submit" class="btn btn-secondary mb-2">수정</button>
+						<button type="submit" class="btn btn-secondary mb-2">삭제</button>
+						<a href="${pageContext.request.contextPath }/qna.do"
+							class="btn btn-secondary mb-2">목록으로</a>
+					</div>
+				</div>
+			</div>
 		</div>
 	</section>
 	<footer>

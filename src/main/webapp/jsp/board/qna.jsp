@@ -13,16 +13,6 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
-<style>
-table {
-	width: 100%; /* 너비 설정은 선택 사항입니다. 필요에 따라 조정하세요 */
-}
-
-.qna-title {
-	width: 50%;
-}
-</style>
-
 <body>
 	<header>
 		<%-- 상단고정 --%>
@@ -40,38 +30,44 @@ table {
 					<button type="submit" class="btn btn-secondary">문의하기</button>
 				</form>
 			</div>
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>작성자</th>
-						<th>등록일</th>
-						<th>조회수</th>
-					</tr>
-				</thead>
-				<%-- 테이블 내용 --%>
-				<tbody>
-					<c:choose>
-						<c:when test="${ empty qnas }">
-							<td colspan="5" align="center" class="mt-3 mb-3">등록된 QnA가 없습니다.</td>
-						</c:when>
-						
-						<c:otherwise>
-							<c:forEach var="qna" items="${qnas}">
-								<tr>
-									<td class="qna-no">${qna.no}</td>
-									<td class="qna-title"><a
-										href="qna-details.do?no=${qna.no}">${qna.title}</a></td>
-									<td class="qna-writer">${qna.writer}</td>
-									<td class="qna-regdate">${qna.regDate}</td>
-									<td class="qna-viewcnt">${qna.viewCnt}</td>
-								</tr>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
-				</tbody>
-			</table>
+			<div class="row justify-content-center">
+				<div class="col-md-10">
+					<!-- 이 부분을 수정하였습니다. 원하는 너비에 따라 'col-md-8' 값을 조절하실 수 있습니다. -->
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th class="col-md-1">번호</th>
+								<th class="col-md-4">제목</th>
+								<th class="col-md-2">작성자</th>
+								<th class="col-md-2">등록일</th>
+								<th class="col-md-1">조회수</th>
+							</tr>
+						</thead>
+						<%-- 테이블 내용 --%>
+						<tbody>
+							<c:choose>
+								<c:when test="${ empty qnas }">
+									<td colspan="5" align="center" class="mt-3 mb-3">등록된 QnA가
+										없습니다.</td>
+								</c:when>
+
+								<c:otherwise>
+									<c:forEach var="qna" items="${qnas}">
+										<tr>
+											<td class="qna-no">${qna.no}</td>
+											<td class="qna-title"><a
+												href="qna-details.do?no=${qna.no}">${qna.title}</a></td>
+											<td class="qna-writer">${qna.writer}</td>
+											<td class="qna-regdate">${qna.regDate}</td>
+											<td class="qna-viewcnt">${qna.viewCnt}</td>
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 	</section>
 
