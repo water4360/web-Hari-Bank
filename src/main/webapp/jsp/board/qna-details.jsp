@@ -46,10 +46,18 @@ table {
 							${post.writer} | 등록일 : ${post.regDate}</div>
 					</div>
 					<div class="btn-group" role="group">
-						<button type="submit" class="btn btn-secondary mb-2">수정</button>
-						<button type="submit" class="btn btn-secondary mb-2">삭제</button>
-						<a href="${pageContext.request.contextPath }/qna.do"
-							class="btn btn-secondary mb-2">목록으로</a>
+						<%-- 작성자일때, 관리자일때, 방문자일때 --%>
+					<c:choose>
+						<c:when test="${post.writer == loginUser.korName}">
+							<a href="modifyPost.do?no=${post.no}" class="btn btn-secondary mb-2">수정</a>
+							<a href="deletePost.do?no=${post.no}" class="btn btn-secondary mb-2">삭제</a>
+						</c:when>
+						<c:when test="${loginUser.role == 'A758'}">
+							<a href="deletePost.do?no=${post.no}" class="btn btn-secondary mb-2">삭제</a>
+						</c:when>
+					</c:choose>
+							<a href="${pageContext.request.contextPath }/qna.do"
+								class="btn btn-secondary mb-2">목록으로</a>
 					</div>
 				</div>
 			</div>

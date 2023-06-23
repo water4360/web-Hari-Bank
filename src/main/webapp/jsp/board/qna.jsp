@@ -25,20 +25,23 @@
 				<h2>문의게시판(Q&A)</h2>
 			</div>
 			<div class="btn-group">
-
+			
+			
+				<c:if test="${not empty loginUser}">
 				<form action="write-post.do" method="post">
 					<button type="submit" class="btn btn-secondary">문의하기</button>
 				</form>
+				</c:if>
 			</div>
 			<div class="row justify-content-center">
-				<div class="col-md-10">
+				<div class="col-md-11">
 					<table class="table table-hover">
 						<thead>
 							<tr>
 								<th class="col-md-1 narrow-column">번호</th>
-								<th class="col-md-4">제목</th>
-								<th class="col-md-2 narrow-column">글쓴이</th>
-								<th class="col-md-2 narrow-column">작성일</th>
+								<th class="col-md-6">제목</th>
+								<th class="col-md-1 narrow-column">글쓴이</th>
+								<th class="col-md-1 narrow-column">작성일</th>
 								<th class="col-md-1 narrow-column">조회</th>
 							</tr>
 						</thead>
@@ -46,7 +49,7 @@
 						<tbody>
 							<c:choose>
 								<c:when test="${ empty qnas }">
-									<td colspan="5" align="center" class="mt-5 mb-5">등록된 QnA가
+									<td colspan="5" align="center" style="padding: 50px 0;">등록된 QnA가
 										없습니다.</td>
 								</c:when>
 
@@ -90,21 +93,6 @@ function updateButtons() {
    window.onload = function() {
        updateButtons();
    };
-   
-   
-   <%-- 회원정보 수정모드 --%>
- function enableEdit() {
-     var inputs = document.getElementsByClassName('editable');
-     var editButton = document.getElementById('edit-btn');
-
-     // 모든 input 요소를 활성화 또는 비활성화
-     for (var i = 0; i < inputs.length; i++) {
-         inputs[i].disabled = !inputs[i].disabled;
-     }
-
-     // 수정 버튼의 텍스트 변경
-     editButton.innerText = inputs[0].disabled ? '수정' : '저장';
-     editButton.onclick = saveChanges;
  }
  
  <%-- 정보수정 반영 --%>
@@ -116,14 +104,9 @@ function updateButtons() {
       
       // 수정된 정보를 서버로 전송하는 로직 추가
       
-      
       // 저장 버튼을 수정 버튼으로 변경
       editButton.innerText = '수정';
       editButton.onclick = enableEdit;
-      
-// 입력 필드 비활성화
-phoneInput.disabled = true;
-emailInput.disabled = true;
   }
   
 </script>

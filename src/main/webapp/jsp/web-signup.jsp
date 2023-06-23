@@ -31,10 +31,10 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 </header>
 
 <body>
-	<div class="container">
+	<div class="container mt-5 mb-5">
 		<h3 align="center">회원가입</h3>
 
-		<div class="input-form-backgroud row">
+		<div class="input-form-backgroud row mt-3">
 			<div class="input-form mx-auto"
 				style="min-width: 400px; max-width: 500px;" align="left">
 				<form method="post" action="signupProcess.do" name="joinForm"
@@ -61,8 +61,9 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 						<label for="pw2">비밀번호 확인</label> <input type="password"
 							class="form-control" id="pw2" name="pw2" placeholder="비밀번호 재입력"
 							value="" onkeyup="checkPw()" required>
-<!-- 						<div id="pw2-feedback" style="color: red;"></div> -->
-						<div class="invalid-feedback" id="pw2-feedback">(class)비밀번호가 일치하지 않아요</div>
+						<!-- 						<div id="pw2-feedback" style="color: red;"></div> -->
+						<div class="invalid-feedback" id="pw2-feedback">(class)비밀번호가
+							일치하지 않아요</div>
 					</div>
 
 					<div class="col-6 mb-3">
@@ -87,11 +88,12 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 							</div>
 							<div class="col-1">●●●●●●</div>
 						</div>
-						<div class="invalid-feedback">(class)생년월일을 입력해주세요</div>
 					</div>
+					<div class="invalid-feedback">(class)생년월일을 입력해주세요</div>
 
 					<div class="col-6 mb-3">
-						<label for="phone">연락처</label> <select id="telecom" name="telecom">
+						<label for="phone">연락처</label> <br> <select id="telecom"
+							name="telecom">
 							<option selected disabled>통신사 선택</option>
 							<option value="SKT">SK</option>
 							<option value="KT">KT</option>
@@ -111,23 +113,24 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 
 					<div class="col-10 mb-3">
 						<input type="button" class="btn btn-secondary"
-							onclick="execDaumPostcode()" value="우편번호 찾기"><br> <input
-							type="text" class="form-control" id="postcode" placeholder="우편번호">
-						<input type="text" class="form-control" id="address"
-							placeholder="주소"> <input type="text" class="form-control"
-							id="extraAddress" placeholder="상세주소"> <input type="text"
-							class="form-control" id="detailAddress" placeholder="상세주소">
-						<div class="invalid-feedback">(class)이메일 주소가 올바르지 않아요</div>
+							onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+							<input type="text" class="form-control" id="postcode" name="postcode" placeholder="우편번호">
+							<input type="text" class="form-control" id="address" name="address" placeholder="주소">
+							<input type="text" class="form-control" id="extraAddress" name="roadAddress" placeholder="상세주소">
+							<input type="text" class="form-control" id="detailAddress" name="detailAddress"	placeholder="상세주소">
+						<div class="invalid-feedback">주소를 입력해주세요</div>
+						<div class="custom-control custom-checkbox mt-3">
+							<input type="checkbox" id="agreement"
+								class="custom-control-input" required> <label
+								class="custom-control-label" for="agreement"> (필수)개인정보
+								수집 및 이용에 동의할게요</label>
+						</div>
 					</div>
 
-					<div class="custom-control custom-checkbox">
-						<input type="checkbox" class="custom-control-input" required>
-						<label class="custom-control-label" for="agreement">(필수)개인정보
-							수집 및 이용에 동의할게요</label>
+					<div class="col-4 mb-4">
+						<button class="btn btn-success btn-lg" type="submit"
+							id="signup-btn">회원가입</button>
 					</div>
-					<div class="col-4 mb-4"></div>
-					<button class="btn btn-success btn-lg" type="submit"
-						id="signup-btn">회원가입</button>
 				</form>
 			</div>
 		</div>

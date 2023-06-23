@@ -22,17 +22,17 @@ public class UserDAO {
 //	WHERE ui.USER_ID = 'aaaa';
 		
 		 sql.append("INSERT ALL ");
-		    sql.append("INTO B_USER_INFO (USER_ID, USER_PASSWORD, KOR_NAME, BIRTHDATE, GENDER, TELECOM, PHONE_NO, EMAIL, SIGNUP_TYPE, REG_DATETIME) ");
-		    sql.append("VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'web', TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')) ");
+		    sql.append("INTO B_USER_INFO (USER_ID, USER_PASSWORD, KOR_NAME, BIRTHDATE, GENDER, TELECOM, PHONE_NO, EMAIL, SIGNUP_TYPE) ");
+		    sql.append("VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'web') ");
 		    sql.append("INTO B_USER_ADDRESS (USER_ID, ADDRESS_TYPE, POSTCODE, ROAD_ADDRESS, DETAIL_ADDRESS) ");
 		    sql.append("VALUES (?, '자택', ?, ?, ?) ");
-		    sql.append("INTO B_USER_AUTHORITY (ROLE_CODE, ROLE_NAME, USERID) ");
+		    sql.append("INTO B_USER_AUTHORITY (ROLE_CODE, ROLE_NAME, USER_ID) ");
 		    sql.append("VALUES ('H1', '브론즈', ?) ");
 		    sql.append("SELECT 1 FROM DUAL");
 		
 
 		try (Connection conn = new ConnectionFactory().getConnection();
-				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
+			 PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
 			pstmt.setString(1, vo.getId());
 			pstmt.setString(2, vo.getPw());
 			pstmt.setString(3, vo.getKorName());

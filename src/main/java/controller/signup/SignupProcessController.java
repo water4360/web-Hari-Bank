@@ -20,10 +20,14 @@ public class SignupProcessController extends BasicController {
 		String telecom = request.getParameter("telecom");
 		String phone = request.getParameter("phone");
 		String email = request.getParameter("email");
+		
+		String postcode = request.getParameter("postcode");
+		String roadAdd = request.getParameter("address") + request.getParameter("roadAddress");
+		String detailAdd = request.getParameter("detailAddress");
 
 		// 데이터 전달 확인용
-		System.out.printf("%s, %s, %s, %s, %s, %s, %s, %s, %s\n",
-						id, pw, pw2, name, birthdate, gender, telecom, phone, email);
+		System.out.printf("%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s\n",
+						id, pw, pw2, name, birthdate, gender, telecom, phone, email, postcode, roadAdd, detailAdd);
 		
 		try {
 			UserVO vo = new UserVO();
@@ -35,6 +39,10 @@ public class SignupProcessController extends BasicController {
 			vo.setTelecom(telecom);
 			vo.setPhone(phone);
 			vo.setEmail(email);
+			
+			vo.setPostcode(postcode);
+			vo.setRoadAddress(roadAdd);
+			vo.setDetailAddress(detailAdd);
 			
 			//DB에 등록하고
 			UserDAO dao = new UserDAO();
