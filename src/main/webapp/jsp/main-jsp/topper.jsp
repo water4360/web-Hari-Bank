@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-	
+
 <html>
 <head>
 <!-- Favicon-->
@@ -15,27 +15,44 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <!-- 내 스타일시트 -->
 <link href="/css/styles.css" rel="stylesheet" />
+
+<link
+	href="https://cdn.jsdelivr.net/gh/sunn-us/SUITE/fonts/static/woff2/SUITE.css"
+	rel="stylesheet">
+
+<style>
+* {
+	font-family: 'SUITE', sans-serif;
+}
+
+.navbar-brand {
+	font-size: xx-large !important;
+}
+
+
+
+</style>
+
 </head>
 <body>
-
-	<!-- Responsive navbar-->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<%-- 네비게이션 메뉴바 --%>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="flex-direction: column;">
 		<div class="container">
 			<a class="navbar-brand"
 				href="${pageContext.request.contextPath}/main.do">하리은행</a>
 			<div class="login-info">
-			<c:if test="${ not empty loginUser }">
-			<img alt="user" id="user" src="${pageContext.request.contextPath}/assets/user.png">
-			<b>${ loginUser.korName }님 환영합니다</b>
-			<a class="badge bg-secondary text-decoration-none link-light"
-				href="#!">로그인연장</a> <a
-				class="badge bg-secondary text-decoration-none link-light" href="logout.do">로그아웃</a>
-			</c:if>
+				<c:if test="${ not empty loginUser }">
+					<img alt="user" id="user"
+						src="${pageContext.request.contextPath}/assets/user.png">
+					<b>${ loginUser.korName }님 환영합니다</b>
+					<a class="badge bg-secondary text-decoration-none link-light"
+						href="#!">로그인연장</a>
+					<a class="badge bg-secondary text-decoration-none link-light"
+						href="logout.do">로그아웃</a>
+				</c:if>
 			</div>
 		</div>
-	</nav>
 	<%-- 네비게이션 메뉴바 --%>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container" align="center">
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -43,7 +60,8 @@
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent" align="center">
+			<div class="collapse navbar-collapse" id="navbarSupportedContent"
+				align="center">
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link" href="inquiry.do">조회</a></li>
 					<li class="nav-item"><a class="nav-link" href="transaction.do">이체</a></li>

@@ -20,7 +20,7 @@
 	</header>
 	<section>
 
-		<div class="container" align="center">
+		<div class="container mt-5" align="center">
 			<div>
 				<h2>문의게시판(Q&A)</h2>
 			</div>
@@ -32,34 +32,33 @@
 			</div>
 			<div class="row justify-content-center">
 				<div class="col-md-10">
-					<!-- 이 부분을 수정하였습니다. 원하는 너비에 따라 'col-md-8' 값을 조절하실 수 있습니다. -->
 					<table class="table table-hover">
 						<thead>
 							<tr>
-								<th class="col-md-1">번호</th>
+								<th class="col-md-1 narrow-column">번호</th>
 								<th class="col-md-4">제목</th>
-								<th class="col-md-2">작성자</th>
-								<th class="col-md-2">등록일</th>
-								<th class="col-md-1">조회수</th>
+								<th class="col-md-2 narrow-column">글쓴이</th>
+								<th class="col-md-2 narrow-column">작성일</th>
+								<th class="col-md-1 narrow-column">조회</th>
 							</tr>
 						</thead>
 						<%-- 테이블 내용 --%>
 						<tbody>
 							<c:choose>
 								<c:when test="${ empty qnas }">
-									<td colspan="5" align="center" class="mt-3 mb-3">등록된 QnA가
+									<td colspan="5" align="center" class="mt-5 mb-5">등록된 QnA가
 										없습니다.</td>
 								</c:when>
 
 								<c:otherwise>
 									<c:forEach var="qna" items="${qnas}">
 										<tr>
-											<td class="qna-no">${qna.no}</td>
+											<td class="qna-no narrow-column">${qna.no}</td>
 											<td class="qna-title"><a
 												href="qna-details.do?no=${qna.no}">${qna.title}</a></td>
-											<td class="qna-writer">${qna.writer}</td>
-											<td class="qna-regdate">${qna.regDate}</td>
-											<td class="qna-viewcnt">${qna.viewCnt}</td>
+											<td class="qna-writer narrow-column">${qna.writer}</td>
+											<td class="qna-regdate narrow-column">${qna.regDate}</td>
+											<td class="qna-viewcnt narrow-column">${qna.viewCnt}</td>
 										</tr>
 									</c:forEach>
 								</c:otherwise>

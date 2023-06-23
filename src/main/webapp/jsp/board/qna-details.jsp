@@ -18,6 +18,10 @@ table {
 	table-layout: auto;
 	width: 60%;
 }
+
+.card-body {
+	min-height : 200px;
+}
 </style>
 
 </head>
