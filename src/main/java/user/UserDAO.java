@@ -9,27 +9,25 @@ import common.ConnectionFactory;
 public class UserDAO {
 
 	// 1.신규 웹 회원가입
+//		INSERT INTO B_USER_INFO(USER_ID, USER_PASSWORD, KOR_NAME, BIRTHDATE, GENDER, TELECOM, PHONE_NO, EMAIL, SIGNUP_TYPE, ROLE_CODE)
+//        VALUES('aaaa', '1111', '김테스트', '901208', '2', 'SKT', '01083499438', 'aaaa@naver.com', 'web', 'H3');
+	
+//	SELECT UI.USER_ID, UI.USER_PASSWORD, UI.KOR_NAME, UI.BIRTHDATE, UI.GENDER, UI.TELECOM, UI.PHONE_NO, UI.EMAIL,
+//    UA.POSTCODE, UA.ROAD_ADDRESS, UA.DETAIL_ADDRESS
+//FROM B_USER_INFO UI
+//LEFT JOIN B_USER_ADDRESS UA ON UI.USER_ID = UA.USER_ID
+//WHERE UI.USER_ID = 'aaaa';
+	
 	public void addUser(UserVO vo) {
 		StringBuilder sql = new StringBuilder();
-//		sql.append("INSERT INTO B_USER_INFO(USER_ID, USER_PASSWORD, KOR_NAME,"
-//				+ " BIRTHDATE, GENDER, TELECOM, PHONE_NO, EMAIL, SIGNUP_TYPE, REG_DATETIME) ");
-//		sql.append("  VALUES(?, ?, ?, ?, ?, ?, ?, ?, 'web', TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS')) ");
-		
-//		SELECT ui.USER_ID, ui.USER_PASSWORD, ui.KOR_NAME, ui.BIRTHDATE, ui.GENDER, ui.TELECOM, ui.PHONE_NO, ui.EMAIL,
-//	       ua.POSTCODE, ua.ROAD_ADDRESS, ua.DETAIL_ADDRESS
-//	FROM B_USER_INFO ui
-//	LEFT JOIN B_USER_ADDRESS ua ON ui.USER_ID = ua.USER_ID
-//	WHERE ui.USER_ID = 'aaaa';
-		
-		 sql.append("INSERT ALL ");
-		    sql.append("INTO B_USER_INFO (USER_ID, USER_PASSWORD, KOR_NAME, BIRTHDATE, GENDER, TELECOM, PHONE_NO, EMAIL, SIGNUP_TYPE) ");
-		    sql.append("VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'web') ");
-		    sql.append("INTO B_USER_ADDRESS (USER_ID, ADDRESS_TYPE, POSTCODE, ROAD_ADDRESS, DETAIL_ADDRESS) ");
-		    sql.append("VALUES (?, '자택', ?, ?, ?) ");
-		    sql.append("INTO B_USER_AUTHORITY (ROLE_CODE, ROLE_NAME, USER_ID) ");
-		    sql.append("VALUES ('H1', '브론즈', ?) ");
+
+		sql.append("INSERT ALL ");
+			sql.append("INTO B_USER_INFO(USER_ID, USER_PASSWORD, KOR_NAME, BIRTHDATE, GENDER, "
+					+ "TELECOM, PHONE_NO, EMAIL, SIGNUP_TYPE, ROLE_CODE) ");
+			sql.append("  VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ");
+		    sql.append("INTO B_USER_ADDRESS(USER_ID, ADDRESS_TYPE, POSTCODE, ROAD_ADDRESS, DETAIL_ADDRESS)");
+		    sql.append(" VALUES(?, ?, ?, ?, ?) ");
 		    sql.append("SELECT 1 FROM DUAL");
-		
 
 		try (Connection conn = new ConnectionFactory().getConnection();
 			 PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
@@ -38,21 +36,20 @@ public class UserDAO {
 			pstmt.setString(3, vo.getKorName());
 			pstmt.setString(4, vo.getBirthdate());
 			pstmt.setString(5, vo.getGender());
+			
 			pstmt.setString(6, vo.getTelecom());
 			pstmt.setString(7, vo.getPhone());
 			pstmt.setString(8, vo.getEmail());
+			pstmt.setString(9, "web"); //vo.getSignupType()
+			pstmt.setString(10, "H3"); //vo.getRole()
 
-			
 			// for B_USER_ADDRESS
-	        pstmt.setString(9, vo.getId());
-//	        pstmt.setString(10, vo.getWhere()); //자택,직장
-	        pstmt.setString(10, vo.getPostcode());
-	        pstmt.setString(11, vo.getRoadAddress());
-	        pstmt.setString(12, vo.getDetailAddress());
+	        pstmt.setString(11, vo.getId());
+	        pstmt.setString(12, "자택"); //vo.getAddressType()
+	        pstmt.setString(13, vo.getPostcode());
+	        pstmt.setString(14, vo.getRoadAddress());
+	        pstmt.setString(15, vo.getDetailAddress());
 			
-	        // for B_USER_AUTHORITY
-	        pstmt.setString(13, vo.getId());
-	        
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

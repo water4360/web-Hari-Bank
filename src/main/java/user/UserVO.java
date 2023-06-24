@@ -26,7 +26,8 @@ public class UserVO {
 	
 	//전체 생성자
 	public UserVO(String id, String pw, String korName, String birthdate, String gender, String telecom, String phone,
-			String email, String signupType, String regDatetime) {
+			String email, String signupType, String regDatetime, String role, String roleName, String addressType,
+			String postcode, String roadAddress, String detailAddress) {
 		super();
 		this.id = id;
 		this.pw = pw;
@@ -45,6 +46,8 @@ public class UserVO {
 		this.roadAddress = roadAddress;
 		this.detailAddress = detailAddress;
 	}
+	
+	
 //	(id, pw, name, birth, gen, tel, phone, email, signType, regDatetime);
 	
 	
