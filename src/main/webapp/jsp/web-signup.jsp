@@ -6,14 +6,10 @@
 <title>HR Bank - 웹 회원가입</title>
 
 <link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-	integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
-	crossorigin="anonymous">
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-	crossorigin="anonymous"></script>
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
 /* 화살표 메뉴 숨기기 */
 input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button
@@ -94,7 +90,7 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 					<div class="col-10 mb-3">
 						<label for="phone">연락처</label>
                         <div class="row">
-                            <div class="col-3 pr-0">
+                            <div class="col-4 pr-0">
                                 <select id="telecom" name="telecom" class="form-control">
                                     <option selected disabled>통신사선택</option>
                                     <option value="SKT">SK</option>
@@ -103,7 +99,7 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
                                     <option value="알뜰폰">알뜰폰</option>
                                 </select>
                             </div>
-                            <div class="col-9 pl-0">
+                            <div class="col-6 pl-0">
                                 <input type="number" class="form-control" name="phone"
                                     placeholder="예) 01023456789" value="" maxlength="11" pattern="[0-9]{10,11}"
                                     required>

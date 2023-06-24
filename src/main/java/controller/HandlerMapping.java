@@ -42,6 +42,10 @@ public class HandlerMapping {
 		mappings.put("/kakao-signup.do", new SignupKakaoController());
 		mappings.put("/signupProcess.do", new SignupProcessController());
 		
+		//계좌 개설
+		mappings.put("/create-account.do", new CreateAccountController());
+		mappings.put("/createAccountProcess.do", new CreateAccountProcessController());
+		
 //		mappings.put("/notice.do", new NoticeController());
 //		mappings.put("/fnq.do", new FnQController());
 		mappings.put("/qna.do", new QnAController());
@@ -57,8 +61,7 @@ public class HandlerMapping {
 		mappings.put("/loginProcess.do", new LoginProcessController());
 		mappings.put("/logout.do", new LogoutController());
 		
-		//계좌 개설
-		mappings.put("/create-account.do", new CreateAccountController());
+		
 		
 		
 		

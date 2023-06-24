@@ -19,25 +19,22 @@ public class LoginProcessController extends BasicController {
 		vo.setId(id);
 		vo.setPw(pw);
 
-		UserDAO dao = new UserDAO();
 		UserVO user = null;
 		session = request.getSession();
 
 		
 		// VO에 담아준 걸로 DAO에서 비교해서 일치하는 사용자 정보 가져온게 mem
-		if (dao.isCorrectInfo(id, pw)) {
-			user = dao.getUserById(id);
+		if (daoService.isCorrectInfo(id, pw)) {
+			user = daoService.getUserById(id);
 
 			// 그리고 이 user를 session에 UserVO형태 고대로 넘겨줌.
 			session.setAttribute("loginUser", user);
-			
-			System.out.println("회원정보 존재. by LoginController");
-			System.out.printf("%s 회원 접속by LoginController\n", id);
+			System.out.printf("%s 회원 접속. by LoginController\n", id);
 			return "main.do";
 			
-		} else if (dao.isDuplicated(id)) {
+		} else if (daoService.isDuplicated(id)) {
 			// 아이디는 존재, 비밀번호가 틀린 경우.
-			if (!dao.isCorrectInfo(id, pw)) {
+			if (!daoService.isCorrectInfo(id, pw)) {
 				request.setAttribute("loginFeedback", "비밀번호가 일치하지 않아요");
 				return "login.do";
 			}

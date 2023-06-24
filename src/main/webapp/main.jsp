@@ -65,7 +65,7 @@
 										href='login.do'> 로그인 <br> <i
 										class="fa-solid fa-right-to-bracket fa-2xl"></i>
 									</a> <a class="btn btn-success" id="button-create-account"
-										type="button"> 계좌개설 <br> <i
+										type="button" href="create-account.do"> 계좌개설 <br> <i
 										class="fa-solid fa-money-check fa-2xl"></i>
 									</a>
 								</div>

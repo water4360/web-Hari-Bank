@@ -3,6 +3,7 @@ package controller.signup;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import common.DAOService;
 import controller.BasicController;
 import user.UserDAO;
 import user.UserVO;
@@ -45,13 +46,16 @@ public class SignupProcessController extends BasicController {
 			vo.setDetailAddress(detailAdd);
 			
 			//DB에 등록하고
-			UserDAO dao = new UserDAO();
-			dao.addUser(vo);
+			daoService.addUser(vo);
+			System.out.println("User등록완!-SignupProcessCtrl");
 			
 			//세션에도 등록하기
+			vo=null;
+			vo=daoService.getUserById(id);
 			session = request.getSession();
+			
 			session.setAttribute("newUser", vo);
-			System.out.println("User등록-SignupProcessCtrl");
+			System.out.println("User정보 DB에서 새로가져오기!-SignupProcessCtrl");
 			
 			return "create-account.do";
 			

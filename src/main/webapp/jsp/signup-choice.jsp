@@ -1,24 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-<style>
-</style>
-
-<!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-
-<!-- Font Awesome icons (free version)-->
-<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
-	crossorigin="anonymous"></script>
-
-<!-- Core theme CSS (includes Bootstrap)-->
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<!-- 내 스타일시트 -->
-<link href="/css/styles.css" rel="stylesheet" />
-
+	
 <div class="signup-container" style="width: 50rem; height: 300px;"
 	align="center">
-	<div>
+	<div class="mt-5">
 		<h2>회원가입 선택</h2>
 	</div>
 	<div>

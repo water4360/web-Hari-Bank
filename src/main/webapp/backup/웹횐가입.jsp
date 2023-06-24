@@ -91,19 +91,27 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 					</div>
 					<div class="invalid-feedback">(class)생년월일을 입력해주세요</div>
 
-					<div class="col-6 mb-3">
-						<label for="phone">연락처</label> <br> <select id="telecom"
-							name="telecom">
-							<option selected disabled>통신사 선택</option>
-							<option value="SKT">SK</option>
-							<option value="KT">KT</option>
-							<option value="LGU">LGU+</option>
-							<option value="알뜰폰">알뜰폰</option>
-						</select> <input type="number" class="form-control" name="phone"
-							placeholder="예)01023456789" value="" maxlength="11"
-							pattern="[0-9]{10,11}" required>
-						<div class="invalid-feedback">(class)연락처 형식이 올바르지 않아요</div>
+					<div class="col-10 mb-3">
+						<label for="phone">연락처</label>
+                        <div class="row">
+                            <div class="col-3 pr-0">
+                                <select id="telecom" name="telecom" class="form-control">
+                                    <option selected disabled>통신사선택</option>
+                                    <option value="SKT">SK</option>
+                                    <option value="KT">KT</option>
+                                    <option value="LGU">LGU+</option>
+                                    <option value="알뜰폰">알뜰폰</option>
+                                </select>
+                            </div>
+                            <div class="col-9 pl-0">
+                                <input type="number" class="form-control" name="phone"
+                                    placeholder="예) 01023456789" value="" maxlength="11" pattern="[0-9]{10,11}"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback">연락처 형식이 올바르지 않아요.</div>
 					</div>
+
 					<div class="col-6 mb-3">
 						<label for="email">이메일</label> <input type="email"
 							class="form-control" id="email" name="email"
@@ -113,11 +121,14 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 
 					<div class="col-10 mb-3">
 						<input type="button" class="btn btn-secondary"
-							onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-							<input type="text" class="form-control" id="postcode" name="postcode" placeholder="우편번호">
-							<input type="text" class="form-control" id="address" name="address" placeholder="주소">
-							<input type="text" class="form-control" id="extraAddress" name="roadAddress" placeholder="상세주소">
-							<input type="text" class="form-control" id="detailAddress" name="detailAddress"	placeholder="상세주소">
+							onclick="execDaumPostcode()" value="우편번호 찾기"><br> <input
+							type="text" class="form-control" id="postcode" name="postcode"
+							placeholder="우편번호"> <input type="text"
+							class="form-control" id="address" name="address" placeholder="주소">
+						<input type="text" class="form-control" id="extraAddress"
+							name="roadAddress" placeholder="상세주소"> <input type="text"
+							class="form-control" id="detailAddress" name="detailAddress"
+							placeholder="상세주소">
 						<div class="invalid-feedback">주소를 입력해주세요</div>
 						<div class="custom-control custom-checkbox mt-3">
 							<input type="checkbox" id="agreement"
@@ -129,7 +140,7 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 
 					<div class="col-4 mb-4">
 						<button class="btn btn-success btn-lg" type="submit"
-							id="signup-btn">회원가입 후 계좌개설</button>
+							id="signup-btn">회원가입</button>
 					</div>
 				</form>
 			</div>

@@ -1,25 +1,43 @@
 package bank;
 
-import java.util.Date;
-
 public class AccountVO {
-	private String bankCode;
-	private String userId;
-	private String productCode;
 	private String accountNo;
-	private Date createdDate;
+	private String accountPw;
+	private String createdDate;
+	private long totalBalance;
+	private String accountNickname;
+	private String productCode;
+	private String userId;
+	private String bankCode;
+	
+	
 	private String firstName;
 	private String lastName;
-	private String accountPw;
-	private String totalBalance;
 	private String benefitCode;
-	private String accountNickname;
 	private String transferOnceLimit;
 	private String transferDayLimit;
+	
 	public AccountVO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
+	
+	//간단 계좌생성
+	public AccountVO(String accountNo, String accountPw, String createdDate, long totalBalance,
+			String accountNickname, String productCode, String userId, String bankCode) {
+		super();
+		this.accountNo = accountNo;
+		this.accountPw = accountPw;
+		this.createdDate = createdDate;
+		this.totalBalance = totalBalance;
+		this.accountNickname = accountNickname;
+		this.productCode = productCode;
+		this.userId = userId;
+		this.bankCode = bankCode;
+	}
+	
+	
+	
+	
 	public String getBankCode() {
 		return bankCode;
 	}
@@ -44,10 +62,10 @@ public class AccountVO {
 	public void setAccountNo(String accountNo) {
 		this.accountNo = accountNo;
 	}
-	public Date getCreatedDate() {
+	public String getCreatedDate() {
 		return createdDate;
 	}
-	public void setCreatedDate(Date createdDate) {
+	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
 	}
 	public String getFirstName() {
@@ -68,10 +86,10 @@ public class AccountVO {
 	public void setAccountPw(String accountPw) {
 		this.accountPw = accountPw;
 	}
-	public String getTotalBalance() {
+	public long getTotalBalance() {
 		return totalBalance;
 	}
-	public void setTotalBalance(String totalBalance) {
+	public void setTotalBalance(long totalBalance) {
 		this.totalBalance = totalBalance;
 	}
 	public String getBenefitCode() {
@@ -98,24 +116,7 @@ public class AccountVO {
 	public void setTransferDayLimit(String transferDayLimit) {
 		this.transferDayLimit = transferDayLimit;
 	}
-	public AccountVO(String bankCode, String userId, String productCode, String accountNo, Date createdDate,
-			String firstName, String lastName, String accountPw, String totalBalance, String benefitCode,
-			String accountNickname, String transferOnceLimit, String transferDayLimit) {
-		super();
-		this.bankCode = bankCode;
-		this.userId = userId;
-		this.productCode = productCode;
-		this.accountNo = accountNo;
-		this.createdDate = createdDate;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.accountPw = accountPw;
-		this.totalBalance = totalBalance;
-		this.benefitCode = benefitCode;
-		this.accountNickname = accountNickname;
-		this.transferOnceLimit = transferOnceLimit;
-		this.transferDayLimit = transferDayLimit;
-	}
+	
 
 	
 	

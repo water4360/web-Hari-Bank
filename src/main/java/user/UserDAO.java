@@ -9,8 +9,13 @@ import common.ConnectionFactory;
 public class UserDAO {
 
 	// 1.신규 웹 회원가입
-//		INSERT INTO B_USER_INFO(USER_ID, USER_PASSWORD, KOR_NAME, BIRTHDATE, GENDER, TELECOM, PHONE_NO, EMAIL, SIGNUP_TYPE, ROLE_CODE)
-//        VALUES('aaaa', '1111', '김테스트', '901208', '2', 'SKT', '01083499438', 'aaaa@naver.com', 'web', 'H3');
+//	INSERT ALL
+//	  INTO B_USER_INFO(USER_ID, USER_PASSWORD, KOR_NAME, BIRTHDATE, GENDER, TELECOM, PHONE_NO, EMAIL, SIGNUP_TYPE, ROLE_CODE)
+//	                VALUES('aaaa', '1111', '김테스트', '901208', '2', 'SKT', '01083499438', 'aaaa@naver.com', 'web', 'H3')
+//	  INTO B_USER_ADDRESS(USER_ID, ADDRESS_TYPE, POSTCODE, ROAD_ADDRESS, DETAIL_ADDRESS)
+//	          VALUES('aaaa', '자택', '13073', '경기도 성남시 수정로', '한울관B309')
+//	SELECT 1 FROM DUAL;
+	
 	
 //	SELECT UI.USER_ID, UI.USER_PASSWORD, UI.KOR_NAME, UI.BIRTHDATE, UI.GENDER, UI.TELECOM, UI.PHONE_NO, UI.EMAIL,
 //    UA.POSTCODE, UA.ROAD_ADDRESS, UA.DETAIL_ADDRESS
@@ -113,20 +118,18 @@ public class UserDAO {
 	
 	
 	// ID로 회원정보 찾기
-//	SELECT * 
-//	FROM B_USER_INFO
-//	LEFT JOIN B_USER_AUTHORITY 
-//	ON B_USER_INFO.USER_ID = B_USER_AUTHORITY.USER_ID
-//	WHERE B_USER_INFO.USER_ID = 'aaaa';
+//	SELECT * FROM B_USER_INFO UI
+//	  LEFT JOIN B_USER_AUTHORITY UA ON UI.ROLE_CODE = UA.ROLE_CODE
+//	  WHERE UI.USER_ID = 'aaaa';
+
 		public UserVO getUserById(String userId) {
 			StringBuilder sql = new StringBuilder();
 			UserVO vo = null;
 
-			sql.append("SELECT * ");
-			sql.append("FROM B_USER_INFO ");
-			sql.append("LEFT JOIN B_USER_AUTHORITY ");
-			sql.append("ON B_USER_INFO.USER_ID = B_USER_AUTHORITY.USER_ID ");
-			sql.append("WHERE B_USER_INFO.USER_ID = ? ");
+			sql.append("SELECT * FROM B_USER_INFO UI ");
+			sql.append(" LEFT JOIN B_USER_AUTHORITY UA ON UI.ROLE_CODE = UA.ROLE_CODE ");
+			sql.append("  WHERE UI.USER_ID = ? ");
+			
 			try (Connection conn = new ConnectionFactory().getConnection();
 					PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
 				pstmt.setString(1, userId);

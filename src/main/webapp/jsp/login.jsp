@@ -53,13 +53,7 @@
 	}
 </script>
 <style>
-.login-container {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-evenly;
-	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
-}
+
 
 .web-login-box, .kakao-login-box {
 	display: flex;
@@ -148,7 +142,7 @@ section {
                 url: "${pageContext.request.contextPath}/jsp/signup-choice.jsp",
                 type: "GET",
                 success: function(response) {
-                    $(".login-outer-container").html(response);
+                    $(".login-container").html(response);
                 }
             });
         } else if(pageName === 'find-id') {
