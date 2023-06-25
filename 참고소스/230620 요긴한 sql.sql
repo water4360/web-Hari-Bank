@@ -40,7 +40,31 @@ BEGIN
 END;
 /
 
+--프로시저 저장용
+CREATE OR REPLACE PROCEDURE PRCD_GENERATE_UNIQUE_ACCOUNT_NO(
+  v_account_no OUT VARCHAR2
+) AS
+  v_duplicate_count NUMBER;
+BEGIN
+  LOOP
+    v_account_no := '0758-' || LPAD(TO_CHAR(FLOOR(DBMS_RANDOM.VALUE(10000000, 99999999))), 8, '0');
 
+    SELECT COUNT(*)
+    INTO v_duplicate_count
+    FROM B_USER_ACCOUNT -- 생성된 계좌번호를 비교할 테이블명
+    WHERE ACCOUNT_NO = v_account_no;
+
+    EXIT WHEN v_duplicate_count = 0;
+  END LOOP;
+  
+  -- Only return the account number, do not insert it here
+  -- INSERT INTO B_USER_ACCOUNT(ACCOUNT_NO) VALUES(v_account_no);
+  -- COMMIT;
+  
+END;
+/
+
+COMMIT;
 
 
 
@@ -52,6 +76,7 @@ SELECT * FROM B_USER_AUTHORITY;
 SELECT * FROM B_DEPOSIT;
 SELECT * FROM B_USER_ACCOUNT;
 SELECT * FROM B_USER_ADDRESS;
+
 
 --정렬된 것 중의 첫번째
 SELECT * FROM (SELECT * FROM B_USER_ACCOUNT WHERE USER_ID='aaaa' ORDER BY CREATED_DATE DESC)

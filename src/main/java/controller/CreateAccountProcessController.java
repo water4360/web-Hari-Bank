@@ -9,7 +9,7 @@ import user.UserVO;
 public class CreateAccountProcessController extends BasicController{
 	
 	@Override
-	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+	public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String accountPw = request.getParameter("account-pw");
 		
 		session = request.getSession();

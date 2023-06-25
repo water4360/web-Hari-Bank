@@ -43,7 +43,7 @@ public class DAOService {
 	 * AccountDAO
 	 */
 	//계좌개설
-	public void addAccount(AccountVO vo) {
+	public void addAccount(AccountVO vo) throws Exception {
 		ad.addAccount(vo);
 	}
 	

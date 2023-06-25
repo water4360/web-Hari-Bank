@@ -30,7 +30,12 @@ public class DispatcherServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		process(request, response);
+		try {
+			process(request, response);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -39,11 +44,15 @@ public class DispatcherServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		process(request, response);
+		try {
+			process(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	protected void process(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+			throws Exception {
 		String uri = request.getRequestURI();
 		// 슬래쉬 마지막에 나오는 걸로부터 경로 추출
 //		String path = uri.substring(uri.lastIndexOf("/"));
