@@ -104,7 +104,7 @@
 						</div>
 					</div>
 					<div class="card col-lg-4 mb-5">
-						<div class="card-header">자주묻는질문(F&Q)</div>
+						<div class="card-header"><a href="faq.do">자주묻는질문(FAQ)</a></div>
 						<div class="card-body">You can put anything you want inside
 							of these side widgets. They are easy to use, and feature the
 							Bootstrap 5 card component!</div>

@@ -18,10 +18,10 @@
 
 </head>
 <style>
-    table {
-        table-layout: auto;
-        width: 100%; /* 너비 설정은 선택 사항입니다. 필요에 따라 조정하세요 */
-    }
+table {
+	table-layout: auto;
+	width: 100%; /* 너비 설정은 선택 사항입니다. 필요에 따라 조정하세요 */
+}
 </style>
 
 <body>
@@ -33,10 +33,16 @@
 
 
 
-		<div class="container" align="center">
-			<table class="table table-hover table-striped">
-				<thead>
-					<tr>
+		<div class="container mt-5" align="center">
+			<div class="mb-3">
+				<h2>${loginUser.korName}님의
+					HR등급은 <b>${loginUser.roleName}</b>입니다.
+				</h2>
+			</div>
+			<form action="update-info.do">
+				<table class="table table-striped">
+					<thead>
+						<%-- <tr>
 						<th scope="colgroup">${loginUser.korName}님의 HR등급은 <b>${loginUser.roleName}</b>입니다.
 						</th>
 						<th scope="col"></th>
@@ -45,77 +51,79 @@
 						<th scope="col"></th>
 						<th scope="col"></th>
 						<th scope="col">최근접속일시</th>
-					</tr>
-					<tr>
-						<th scope="col">이름</th>
-						<th scope="col">ID</th>
-						<th scope="col">PW</th>
-						<th scope="col">연락처</th>
-						<th scope="col">이메일</th>
-						<th scope="col">가입일</th>
-						<th scope="col"></th>
-					</tr>
-				</thead>
-				<%-- 테이블 내용 --%>
-				<tbody>
-					<tr>
-						<td class="name">${loginUser.korName}</td>
-						<td class="id">${loginUser.id}</td>
-						<td class="pw"><input type="password" id="pw"
-							class="editable" value="${loginUser.pw}" style="width: 60px"
-							disabled></td>
-						<td class="phone"><input type="text" id="phone"
-							class="editable" value="${loginUser.phone}" style="width: 110px"
-							disabled></td>
-						<td class="email"><input type="email" id="email"
-							class="editable" value="${loginUser.email}" disabled></td>
-						<td class="regDatetime">${loginUser.regDatetime}</td>
-						<td>
-							<div class="btn-group">
-								<button type="button" class="btn btn-success" id="edit-btn"
-									onclick="enableEdit()">수정</button>
-							</div>
-							<div class="btn-group">
-								<button type="button" class="btn btn-danger" data-toggle="modal"
-									data-target="#withdrawMem" aria-expanded="false">탈퇴는
-									불가</button>
-							</div>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+					</tr> --%>
+						<tr>
+							<th scope="col">이름</th>
+							<th scope="col">ID</th>
+							<th scope="col">PW</th>
+							<th scope="col">연락처</th>
+							<th scope="col">이메일</th>
+							<th scope="col">가입일</th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<%-- 테이블 내용 --%>
+					<tbody>
+						<tr>
+							<td class="name">${loginUser.korName}</td>
+							<td class="id">${loginUser.id}</td>
+							<td class="pw"><input type="password" id="pw"
+								class="editable" value="${loginUser.pw}" style="width: 60px"
+								disabled></td>
+							<td class="phone"><input type="text" id="phone"
+								class="editable" value="${loginUser.phone}" style="width: 110px"
+								disabled></td>
+							<td class="email"><input type="email" id="email"
+								class="editable" value="${loginUser.email}" disabled></td>
+							<td class="regDatetime">${loginUser.regDatetime}</td>
+							<td>
+								<div class="btn-group">
+									<button type="button" class="btn btn-success" id="edit-btn"
+										onclick="enableEdit()">수정</button>
+								</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
 		</div>
-		
+
 		<div class="container" align="center">
-		<div>
-		<h2>최근 문의내역</h2>
-		</div>
-			<div class="btn-group">
-				<button type="button" class="btn btn-secondary" data-toggle="modal"
-					data-target="#더보기" aria-expanded="false">더보기</button>
+			<div>
+				<h2>최근 문의내역</h2>
 			</div>
 			<div class="btn-group">
 				<button type="button" class="btn btn-secondary" data-toggle="modal"
-					data-target="#문의하기" aria-expanded="false">문의하기</button>
+					data-target="#문의하기" aria-expanded="false">1:1 문의하기</button>
 			</div>
-			<table class="table table-hover table-striped">
+			<table class="table">
 				<thead>
 					<tr>
+						<th scope="col">카테고리</th>
 						<th scope="col">번호</th>
 						<th scope="col">제목</th>
 						<th scope="col">등록일</th>
-						<th scope="col">조회수</th>
 					</tr>
 				</thead>
 				<%-- 테이블 내용 --%>
 				<tbody>
-					<tr>
-						<td class="name">${loginUser.korName}</td>
-						<td class="id">${loginUser.id}</td>
-						<td class="regDate">${loginUser. id}</td>
-						<td class="regDate">${loginUser.id}</td>
-						<td></td>
-					</tr>
+					<c:choose>
+						<c:when test="${ empty qnaList }">
+							<td colspan="5" align="center" style="padding: 50px 0;">
+								문의하신 Q&A 내역이 없습니다</td>
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="qna" items="${qnaList}">
+								<tr>
+									<td class="category">${qna.category}</td>
+									<td class="no">${qna.no}</td>
+									<td class="title">${qna.title}</td>
+									<td class="regDate">${qna.regDate}</td>
+									<td></td>
+								</tr>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 				</tbody>
 			</table>
 		</div>

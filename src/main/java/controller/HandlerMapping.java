@@ -3,6 +3,7 @@ package controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import controller.board.FAQController;
 import controller.board.InsertNewQnAController;
 import controller.board.QnAController;
 import controller.board.QnADetailsController;
@@ -47,7 +48,7 @@ public class HandlerMapping {
 		mappings.put("/createAccountProcess.do", new CreateAccountProcessController());
 		
 //		mappings.put("/notice.do", new NoticeController());
-//		mappings.put("/fnq.do", new FnQController());
+		mappings.put("/faq.do", new FAQController());
 		mappings.put("/qna.do", new QnAController());
 		mappings.put("/qna-details.do", new QnADetailsController());
 		

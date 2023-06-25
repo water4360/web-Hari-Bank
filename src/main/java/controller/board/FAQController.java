@@ -5,11 +5,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.BasicController;
 
-public class FnQController extends BasicController {
+public class FAQController extends BasicController {
 
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-		return "./jsp/board/fnq.jsp";
+		return "./jsp/board/faq.jsp";
 	}
 
 }

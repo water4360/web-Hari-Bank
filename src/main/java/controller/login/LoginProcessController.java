@@ -1,5 +1,7 @@
 package controller.login;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -10,7 +12,7 @@ import user.UserVO;
 public class LoginProcessController extends BasicController {
 	
 	@Override
-	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+	public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
 
@@ -30,7 +32,21 @@ public class LoginProcessController extends BasicController {
 			// 그리고 이 user를 session에 UserVO형태 고대로 넘겨줌.
 			session.setAttribute("loginUser", user);
 			System.out.printf("%s 회원 접속. by LoginController\n", id);
-			return "main.do";
+			
+			// 이전 버튼 정보 가져오기
+			String prevBtn = (String)session.getAttribute("prevBtn");
+			System.out.println("prevBtn : " + prevBtn);
+			
+			
+			//직전메뉴로 리다이렉션
+			if(prevBtn.equals("inquiry")) {
+	            response.sendRedirect("inquiry.do");
+//				return "inquiry.do";
+			} else if(prevBtn.equals("transaction")) {
+				response.sendRedirect("transaction.do");
+			} else if(prevBtn.equals("mypage")) {
+				response.sendRedirect("mypage.do");
+			}
 			
 		} else if (daoService.isDuplicated(id)) {
 			// 아이디는 존재, 비밀번호가 틀린 경우.

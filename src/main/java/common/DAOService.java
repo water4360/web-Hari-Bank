@@ -1,7 +1,11 @@
 package common;
 
+import java.util.List;
+
 import bank.AccountDAO;
 import bank.AccountVO;
+import board.PostDAO;
+import board.PostVO;
 import user.UserDAO;
 import user.UserVO;
 
@@ -9,11 +13,13 @@ public class DAOService {
 
 	protected UserDAO ud;
 	protected AccountDAO ad;
+	protected PostDAO pd;
 	
 	public DAOService() {
 		super();
 		ud = new UserDAO();
 		ad = new AccountDAO();
+		pd = new PostDAO();
 	}
 	/*
 	 * UserDAO
@@ -39,6 +45,8 @@ public class DAOService {
 		return ud.isDuplicated(id);
 	}
 	
+	
+	
 	/*
 	 * AccountDAO
 	 */
@@ -50,6 +58,16 @@ public class DAOService {
 	//계좌찾기
 	public AccountVO getAccountById(String id) {
 		return ad.getAccountById(id);
+	}
+
+	
+	/*
+	 * PostDAO
+	 */
+	
+	//회원별 QNA 리스트
+	public List<PostVO> getQnaListById(String id) {
+		return pd.getQnaListById(id);
 	}
 	
 }
