@@ -33,11 +33,10 @@ public class BankVO {
 		this.userId = userId;
 	}
 
-	public BankVO(String bankCode, String bankName, String userId) {
+	public BankVO(String bankCode, String bankName) {
 		super();
 		this.bankCode = bankCode;
 		this.bankName = bankName;
-		this.userId = userId;
 	}
 	
 	

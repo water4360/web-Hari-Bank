@@ -2,6 +2,8 @@ package common;
 
 import java.util.List;
 
+import bank.BankDAO;
+import bank.BankVO;
 import bank.DepositDAO;
 import bank.DepositVO;
 import board.PostDAO;
@@ -17,6 +19,7 @@ public class DAOService {
 	protected AccountDAO ad;
 	protected PostDAO pd;
 	protected DepositDAO dd;
+	protected BankDAO bd;
 	
 	public DAOService() {
 		super();
@@ -24,6 +27,7 @@ public class DAOService {
 		ad = new AccountDAO();
 		pd = new PostDAO();
 		dd = new DepositDAO();
+		bd = new BankDAO();
 	}
 	/*
 	 * UserDAO
@@ -89,4 +93,10 @@ public class DAOService {
 		return dd.getDepositInfo(code);
 	}
 	
+	/*
+	 * BankDAO
+	 */
+	public List<BankVO> getBankList() {
+		return bd.getBankList();
+	}
 }

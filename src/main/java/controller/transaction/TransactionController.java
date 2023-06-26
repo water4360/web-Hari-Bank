@@ -1,9 +1,13 @@
 package controller.transaction;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bank.BankVO;
 import controller.BasicController;
+import user.AccountVO;
 import user.UserVO;
 
 public class TransactionController extends BasicController {
@@ -13,15 +17,27 @@ public class TransactionController extends BasicController {
 		System.out.println("이체Ctrl 진입");
 		session = request.getSession();
 		
+		String prevBtn = "transaction";
+		session.setAttribute("prevBtn", prevBtn);
+		
 		// 로그인 안된 경우
         if (session.getAttribute("loginUser") == null) {
-        	String prevBtn = "transaction";
-        	session.setAttribute("prevBtn", prevBtn);
-        	
             // 로그인 페이지로 리다이렉션
             return "login.do";
         } else {
-        	System.out.println("현재 로그인: " + (UserVO) request.getAttribute("loginUser"));
+        	UserVO user = (UserVO)session.getAttribute("loginUser");
+        	System.out.println("현재 로그인: " + user);
+        	
+        	String id = user.getId();
+        	
+        	//계좌목록 가져오기
+        	List<AccountVO> accountList = daoService.getAccountListById(id);
+        	session.setAttribute("myAccountList", accountList);
+        	
+        	//은행목록 가져오기
+        	List<BankVO> bankList = daoService.getBankList();
+        	session.setAttribute("bankList", bankList);
+        	
         	return "/jsp/transaction.jsp";
 		}
 	}
