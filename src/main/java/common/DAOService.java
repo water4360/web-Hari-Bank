@@ -23,6 +23,7 @@ public class DAOService {
 		ud = new UserDAO();
 		ad = new AccountDAO();
 		pd = new PostDAO();
+		dd = new DepositDAO();
 	}
 	/*
 	 * UserDAO

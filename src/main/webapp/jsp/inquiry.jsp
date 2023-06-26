@@ -86,10 +86,12 @@
 											<td>
 												<form action="inquiryDetail.do" method="post" style="display: inline-block;">
 													<input type="hidden" name="accountNo" value="${account.accountNo}">
+													<input type="hidden" name="productCode" value="${account.productCode}">
 													<input type="submit" class="btn btn-secondary" value="조회">
 												</form>
 												<form action="transaction.do" method="post" style="display: inline-block;">
 													<input type="hidden" name="accountNo" value="${account.accountNo}">
+													<input type="hidden" name="productCode" value="${account.productCode}">
 													<input type="submit" class="btn btn-secondary" value="이체">
 												</form>
 											</td>

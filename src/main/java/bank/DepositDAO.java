@@ -12,7 +12,7 @@ public class DepositDAO {
 	//코드로 계좌정보 확인
 	public DepositVO getDepositInfo(String productCode) {
 		StringBuilder sql = new StringBuilder();
-		DepositVO vo = null;
+		DepositVO deposit = null;
 
 		sql.append("SELECT * FROM B_DEPOSIT WHERE D_PRODUCT_CODE = ? ");
 		
@@ -30,14 +30,14 @@ public class DepositDAO {
 				String saleStatus = rs.getString("D_SALE_STATUS");
 				String detail = rs.getString("D_DETAIL");
 				
-				vo = new DepositVO(code, name, interest, saleStatus, detail);
+				deposit = new DepositVO(code, name, interest, saleStatus, detail);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return vo;
+		return deposit;
 	}
 
 

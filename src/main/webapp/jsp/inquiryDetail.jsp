@@ -15,6 +15,7 @@
 <link href="css/styles.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
+
 <style>
 .fixed-table {
 	table-layout: fixed;
@@ -45,15 +46,37 @@
 			</div>
 
 			<div class="card mx-auto" style="width: 30rem;">
+				<div class="card-header" align="center">
+					<h5 class="card-title">${account.accountNo}</h5>
+					<p class="card-text">${deposit.name}
+						<c:if test="${not empty account.accountNickname }">
+					 (별칭:
+						${account.accountNickName})</c:if>
+					</p>
+					<p class="card-text">신규개설 ${account.createdDate}</p>
+					<p class="card-text">
+						잔액 <b>${formattedTotalBalance}</b>
+					</p>
+				</div>
 				<div class="card-body">
-					<h5 class="card-title">계좌번호 : ${account.accountNo}</h5>
-					<p class="card-text">상품명 : ${account.productName} (별칭:
-						${account.nickName})</p>
-					<p class="card-text">잔액 : ${account.totalBalance}</p>
-					<p class="card-text">개설일자 : ${account.createdDate}</p>
-					<div class="d-flex justify-content-between">
-						<button class="btn btn-secondary">이체</button>
-						<button class="btn btn-secondary">계좌개설확인서</button>
+					<div class="d-flex justify-content-center">
+						<div class="btn-group">
+							<form action="inquiry.do" method="post">
+								<input type="hidden" name="accountNo"
+									value="${account.accountNo}">
+								<button type="submit" class="btn btn-secondary">전체계좌보기</button>
+							</form>
+							<form action="transaction.do"  style="margin-left:5px; margin-right:5px;" method="post">
+								<input type="hidden" name="accountNo"
+									value="${account.accountNo}">
+								<button type="submit" class="btn btn-secondary">이체</button>
+							</form>
+							<form action="account-format.do" method="post">
+								<input type="hidden" name="accountNo"
+									value="${account.accountNo}">
+								<button type="submit" class="btn btn-secondary">통장개설확인서</button>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
