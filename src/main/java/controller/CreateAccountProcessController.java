@@ -3,7 +3,7 @@ package controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bank.AccountVO;
+import user.AccountVO;
 import user.UserVO;
 
 public class CreateAccountProcessController extends BasicController{

@@ -2,10 +2,12 @@ package common;
 
 import java.util.List;
 
-import bank.AccountDAO;
-import bank.AccountVO;
+import bank.DepositDAO;
+import bank.DepositVO;
 import board.PostDAO;
 import board.PostVO;
+import user.AccountDAO;
+import user.AccountVO;
 import user.UserDAO;
 import user.UserVO;
 
@@ -14,6 +16,7 @@ public class DAOService {
 	protected UserDAO ud;
 	protected AccountDAO ad;
 	protected PostDAO pd;
+	protected DepositDAO dd;
 	
 	public DAOService() {
 		super();
@@ -59,6 +62,14 @@ public class DAOService {
 	public AccountVO getAccountById(String id) {
 		return ad.getAccountById(id);
 	}
+	//단일계좌 상세조회
+	public AccountVO getAccountInfo(String no) {
+		return ad.getAccountInfo(no);
+	}
+	//전체계좌조회
+	public List<AccountVO> getAccountListById(String id) {
+		return ad.getAccountListById(id);
+	}
 
 	
 	/*
@@ -68,6 +79,13 @@ public class DAOService {
 	//회원별 QNA 리스트
 	public List<PostVO> getQnaListById(String id) {
 		return pd.getQnaListById(id);
+	}
+	
+	/*
+	 * DepositDAO
+	 */
+	public DepositVO getDepositInfo(String code) {
+		return dd.getDepositInfo(code);
 	}
 	
 }

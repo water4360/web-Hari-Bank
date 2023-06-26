@@ -28,7 +28,7 @@
 			
 			
 				<c:if test="${not empty loginUser}">
-				<form action="write-post.do" method="post">
+				<form action="create-account.do" method="post">
 					<button type="submit" class="btn btn-secondary">문의하기</button>
 				</form>
 				</c:if>
@@ -49,7 +49,7 @@
 						<tbody>
 							<c:choose>
 								<c:when test="${ empty qnas }">
-									<td colspan="5" align="center" style="padding: 50px 0;">등록된 QnA가
+									<td colspan="5" align="center" style="padding: 50px 0;">등록된 Q&A가
 										없습니다.</td>
 								</c:when>
 

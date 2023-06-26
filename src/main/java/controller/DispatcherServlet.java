@@ -63,8 +63,14 @@ public class DispatcherServlet extends HttpServlet {
 		if (ctrl != null) {
 			//한줄 올려봄
 			String viewPage = ctrl.handleRequest(request, response);
-			RequestDispatcher rd = request.getRequestDispatcher(viewPage);
-			rd.forward(request, response);
+			
+			if(viewPage.startsWith("redirect:")) {
+				String viewUrl = viewPage.substring("redirect:".length());
+				response.sendRedirect(request.getContextPath() + viewUrl);
+			} else {
+				RequestDispatcher rd = request.getRequestDispatcher(viewPage);
+				rd.forward(request, response);
+			}
 		}
 	}
 

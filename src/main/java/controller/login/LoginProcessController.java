@@ -33,19 +33,31 @@ public class LoginProcessController extends BasicController {
 			session.setAttribute("loginUser", user);
 			System.out.printf("%s 회원 접속. by LoginController\n", id);
 			
-			// 이전 버튼 정보 가져오기
-			String prevBtn = (String)session.getAttribute("prevBtn");
-			System.out.println("prevBtn : " + prevBtn);
 			
+			String prevBtn = null;
+			// 이전 버튼 정보 가져오기
+			if(session.getAttribute("prevBtn")!=null) {
+				prevBtn = (String)session.getAttribute("prevBtn");
+				System.out.println("prevBtn : " + prevBtn);
+			}
 			
 			//직전메뉴로 리다이렉션
 			if(prevBtn.equals("inquiry")) {
-	            response.sendRedirect("inquiry.do");
+//	            response.sendRedirect("inquiry.do");
 //				return "inquiry.do";
+				return "redirect:/inquiry.do";
+	            
 			} else if(prevBtn.equals("transaction")) {
-				response.sendRedirect("transaction.do");
+//				response.sendRedirect("transaction.do");
+				return "redirect:/transaction.do";
 			} else if(prevBtn.equals("mypage")) {
-				response.sendRedirect("mypage.do");
+//				response.sendRedirect("mypage.do");
+				return "redirect:/mypage.do";
+				
+			} else {
+				//직전버튼 없으면 걍 메인 가는거지.
+//				response.sendRedirect("main.do");
+				return "redirect:/main.do";
 			}
 			
 		} else if (daoService.isDuplicated(id)) {
@@ -60,7 +72,7 @@ public class LoginProcessController extends BasicController {
 			return "login.do";
 		}
 		
-		return "main.do";
+		return "login.do";
 	}
 
 }

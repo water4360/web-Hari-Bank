@@ -1,4 +1,4 @@
-package bank;
+package user;
 
 public class AccountVO {
 	private String accountNo;

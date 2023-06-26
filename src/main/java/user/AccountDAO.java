@@ -1,4 +1,4 @@
-package bank;
+package user;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -6,8 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import common.ConnectionFactory;
 
@@ -36,8 +38,6 @@ public class AccountDAO {
 		System.out.println("생성된 계좌 : " + accountNo);
 	    return accountNo;
 	}
-	
-	
 	
 	
 	
@@ -89,7 +89,7 @@ public class AccountDAO {
 				String date = rs.getString("CREATED_DATE");
 				long balance = rs.getLong("TOTAL_BALANCE");
 				String nickname = rs.getString("ACCOUNT_NICKNAME");
-				String productCode = rs.getString("CREATED_DATE");
+				String productCode = rs.getString("D_PRODUCT_CODE");
 				String id = rs.getString("USER_ID");
 				String bankCode = rs.getString("B_BANK_CODE");
 				
@@ -104,17 +104,27 @@ public class AccountDAO {
 	}
 	
 	//아이디로 전체계좌리스트 확인
-	//아이디로 전체계좌리스트 확인
-	//아이디로 전체계좌리스트 확인
-	//아이디로 전체계좌리스트 확인
-	//아이디로 전체계좌리스트 확인
-	public List<AccountVO> getAllAccountsById(String userId) {
+	//은행코드가 0758이면 당행. 
+	//오픈뱅킹일때는 0758 외의 계좌를 출력할것
+	//은행코드로 은행명까지 가져오기.
+//	SELECT UA.*, BI.B_BANK_NAME
+//	FROM B_USER_ACCOUNT UA
+//	INNER JOIN B_BANK_INFO BI ON UA.B_BANK_CODE = BI.B_BANK_CODE
+//	WHERE UA.USER_ID = 'aaaa';
+	
+	
+//	SELECT UA.*, BI.B_BANK_NAME, BD.D_PRODUCT_NAME
+//	FROM B_USER_ACCOUNT UA
+//	INNER JOIN B_BANK_INFO BI ON UA.B_BANK_CODE = BI.B_BANK_CODE
+//	INNER JOIN B_DEPOSIT BD ON UA.D_PRODUCT_CODE = BD.D_PRODUCT_CODE
+//	WHERE UA.USER_ID = 'aaaa';
+	
+	public List<AccountVO> getAccountListById(String userId) {
 		List<AccountVO> list = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
 		AccountVO vo = null;
 		
-		sql.append("SELECT * FROM (SELECT * FROM B_USER_ACCOUNT WHERE USER_ID=? ORDER BY CREATED_DATE DESC)");
-		sql.append(" WHERE ROWNUM = 1 ");
+		sql.append("SELECT * FROM (SELECT * FROM B_USER_ACCOUNT WHERE USER_ID=? ORDER BY CREATED_DATE DESC) ");
 		
 		try (Connection conn = new ConnectionFactory().getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
@@ -123,19 +133,24 @@ public class AccountDAO {
 			ResultSet rs = pstmt.executeQuery();
 			
 			// ID가 존재하면 쿼리를 실행하고
-			if (rs.next()) {
+			while (rs.next()) {
 				String no = rs.getString("ACCOUNT_NO");
 				String pw = rs.getString("ACCOUNT_PASSWORD");
 				String date = rs.getString("CREATED_DATE");
 				long balance = rs.getLong("TOTAL_BALANCE");
 				String nickname = rs.getString("ACCOUNT_NICKNAME");
-				String productCode = rs.getString("CREATED_DATE");
-				String id = rs.getString(userId);
+				String productCode = rs.getString("D_PRODUCT_CODE");
+				String id = rs.getString("USER_ID");
 				String bankCode = rs.getString("B_BANK_CODE");
+				
+//				NumberFormat numFormat = NumberFormat.getInstance(Locale.KOREA);
+//		    	String formattedTotalBalance = numFormat.format(balance);
 				
 				vo = new AccountVO(no, pw, date, balance, nickname, productCode, id, bankCode);
 				list.add(vo);
 			}
+			System.out.println("accountDAO 체크 : " + list.size());
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -143,4 +158,46 @@ public class AccountDAO {
 		
 		return list;
 	}
-}
+
+
+	//단일계좌 상세조회
+	public AccountVO getAccountInfo(String no) {
+		StringBuilder sql = new StringBuilder();
+		AccountVO vo = null;
+
+		sql.append("SELECT * FROM B_USER_ACCOUNT WHERE ACCOUNT_NO=? ");
+		
+		try (Connection conn = new ConnectionFactory().getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
+			pstmt.setString(1, no);
+
+			ResultSet rs = pstmt.executeQuery();
+
+			// ID가 존재하면 쿼리를 실행하고
+			if(rs.next()) {
+				String pw = rs.getString("ACCOUNT_PASSWORD");
+				String date = rs.getString("CREATED_DATE");
+				long balance = rs.getLong("TOTAL_BALANCE");
+				String nickname = rs.getString("ACCOUNT_NICKNAME");
+				String productCode = rs.getString("D_PRODUCT_CODE");
+				String id = rs.getString("USER_ID");
+				String bankCode = rs.getString("B_BANK_CODE");
+				
+				vo = new AccountVO(no, pw, date, balance, nickname, productCode, id, bankCode);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return vo;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+}//end of class

@@ -11,6 +11,7 @@ public class TransactionController extends BasicController {
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("이체Ctrl 진입");
+		session = request.getSession();
 		
 		// 로그인 안된 경우
         if (session.getAttribute("loginUser") == null) {
@@ -21,9 +22,8 @@ public class TransactionController extends BasicController {
             return "login.do";
         } else {
         	System.out.println("현재 로그인: " + (UserVO) request.getAttribute("loginUser"));
+        	return "/jsp/transaction.jsp";
 		}
-		
-		return "/jsp/transaction.jsp";
 	}
 
 }

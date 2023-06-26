@@ -8,25 +8,17 @@
 <%-- 카카오 로그인용 스크립트 파일 --%>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
-<!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-
 <!-- Font Awesome icons (free version)-->
-<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
-	crossorigin="anonymous"></script>
+<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"></script>
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="css/styles.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-	integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
-	crossorigin="anonymous">
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/styles.css">
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
 <script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-	crossorigin="anonymous"></script>
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
 	//이 함수의 결과가 true이면 아래에 onsubmit이 넘어감.
@@ -34,8 +26,8 @@
 		let f = document.loginForm
 		let id = f.id
 		let pw = f.pw
-		let idError = document.getElementById("idError")
-		let pwError = document.getElementById("pwError")
+// 		let idError = document.getElementById("idError")
+// 		let pwError = document.getElementById("pwError")
 
 		if (id.value.trim() === '') {
 			loginError.innerText = '아이디를 입력하세요';
@@ -53,8 +45,6 @@
 	}
 </script>
 <style>
-
-
 .web-login-box, .kakao-login-box {
 	display: flex;
 	flex-direction: row;

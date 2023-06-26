@@ -14,6 +14,7 @@ public class MypageController extends BasicController {
 
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("마이페이지Ctrl 진입");
 		session = request.getSession();
 		
 		// 로그인 안된 경우

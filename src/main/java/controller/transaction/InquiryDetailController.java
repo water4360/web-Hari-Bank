@@ -9,53 +9,57 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bank.DepositVO;
 import controller.BasicController;
 import user.AccountVO;
 import user.UserVO;
 
-public class InquiryController extends BasicController {
+public class InquiryDetailController extends BasicController {
 	
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
 		session = request.getSession();
-		System.out.println("inquiryCtrl 진입");
+		System.out.println("계좌상세조회 진입");
+		
+		String no = request.getParameter("accountNo");
 		
 		
 		// 로그인 안된 경우
         if (session.getAttribute("loginUser") == null) {
-        	String prevBtn = "inquiry";
+        	String prevBtn = "inquiryDetail";
         	session.setAttribute("prevBtn", prevBtn);
         	
             // 로그인 페이지로 리다이렉션
-            return "login.do";
+//            return request.getContextPath()+"login.do";
+        	return "login.do";
         } else {
         	String id = ((UserVO)session.getAttribute("loginUser")).getId();
-        	List<AccountVO> accountList = daoService.getAccountListById(id);
-        	     	   	        	
-        	//보유계좌 총합계
-        	long totalBalance = 0;
-        	for(AccountVO vo: accountList) {
-        		totalBalance += vo.getTotalBalance();
-        	}
+        	AccountVO account = daoService.getAccountInfo(no);
+        	DepositVO deposit = daoService.getDepositInfo("파라미터로 전달받은 코드값?");
+        	
         	//자릿수 표기 + 원 붙이기
+//        	String totalBalance = String.valueOf(account.getTotalBalance());
+//        	System.out.println("long 계좌잔액을 스트링.valueof로 " + totalBalance);
+        	long totalBalance = account.getTotalBalance();
         	NumberFormat numFormat = NumberFormat.getInstance(Locale.KOREA);
         	String formattedTotalBalance = numFormat.format(totalBalance) + "원";
         	
+        	System.out.println(formattedTotalBalance);
         	
-        	
+        	//조회시각
         	LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter datetimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String formattedNow = now.format(datetimeFormat);
         	
-        	session.setAttribute("accountList", accountList);
-        	session.setAttribute("accountCount", accountList.size());
+            //계좌객체, 자릿수표기된 잔액, 조회시각 등록 
+        	session.setAttribute("account", account);
+        	session.setAttribute("deposit", deposit);
         	session.setAttribute("formattedTotalBalance", formattedTotalBalance);
         	session.setAttribute("formattedNow", formattedNow);
         	
-        	
         	System.out.println("현재 로그인: " + (UserVO) request.getAttribute("loginUser"));
 		}
-		return "/jsp/inquiry.jsp";
+		return "/jsp/inquiryDetail.jsp";
 	}
 
 }
