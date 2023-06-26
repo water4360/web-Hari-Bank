@@ -1,12 +1,10 @@
 package controller.login;
 
-import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import controller.BasicController;
-import user.UserDAO;
 import user.UserVO;
 
 public class LoginProcessController extends BasicController {
@@ -39,25 +37,19 @@ public class LoginProcessController extends BasicController {
 			if(session.getAttribute("prevBtn")!=null) {
 				prevBtn = (String)session.getAttribute("prevBtn");
 				System.out.println("prevBtn : " + prevBtn);
+			} else {
+				//직전버튼 없으면 걍 메인 가는거지.
+				return "redirect:/main.do";
 			}
 			
 			//직전메뉴로 리다이렉션
 			if(prevBtn.equals("inquiry")) {
-//	            response.sendRedirect("inquiry.do");
-//				return "inquiry.do";
 				return "redirect:/inquiry.do";
 	            
 			} else if(prevBtn.equals("transaction")) {
-//				response.sendRedirect("transaction.do");
 				return "redirect:/transaction.do";
 			} else if(prevBtn.equals("mypage")) {
-//				response.sendRedirect("mypage.do");
 				return "redirect:/mypage.do";
-				
-			} else {
-				//직전버튼 없으면 걍 메인 가는거지.
-//				response.sendRedirect("main.do");
-				return "redirect:/main.do";
 			}
 			
 		} else if (daoService.isDuplicated(id)) {

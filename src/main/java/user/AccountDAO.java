@@ -107,24 +107,28 @@ public class AccountDAO {
 	//은행코드가 0758이면 당행. 
 	//오픈뱅킹일때는 0758 외의 계좌를 출력할것
 	//은행코드로 은행명까지 가져오기.
-//	SELECT UA.*, BI.B_BANK_NAME
+//	SELECT 
+//	  UA.*, 
+//	  BI.B_BANK_NAME,
+//	  BD.D_PRODUCT_NAME
 //	FROM B_USER_ACCOUNT UA
-//	INNER JOIN B_BANK_INFO BI ON UA.B_BANK_CODE = BI.B_BANK_CODE
+//	JOIN B_DEPOSIT BD
+//	ON UA.D_PRODUCT_CODE = BD.D_PRODUCT_CODE
+//	JOIN B_BANK_INFO BI 
+//	ON UA.B_BANK_CODE = BI.B_BANK_CODE
 //	WHERE UA.USER_ID = 'aaaa';
-	
-	
-//	SELECT UA.*, BI.B_BANK_NAME, BD.D_PRODUCT_NAME
-//	FROM B_USER_ACCOUNT UA
-//	INNER JOIN B_BANK_INFO BI ON UA.B_BANK_CODE = BI.B_BANK_CODE
-//	INNER JOIN B_DEPOSIT BD ON UA.D_PRODUCT_CODE = BD.D_PRODUCT_CODE
-//	WHERE UA.USER_ID = 'aaaa';
-	
 	public List<AccountVO> getAccountListById(String userId) {
 		List<AccountVO> list = new ArrayList<>();
 		StringBuilder sql = new StringBuilder();
 		AccountVO vo = null;
 		
-		sql.append("SELECT * FROM (SELECT * FROM B_USER_ACCOUNT WHERE USER_ID=? ORDER BY CREATED_DATE DESC) ");
+		sql.append("SELECT UA.*, BI.B_BANK_NAME, BD.D_PRODUCT_NAME ");
+		sql.append("FROM B_USER_ACCOUNT UA ");
+		sql.append("JOIN B_DEPOSIT BD ");
+		sql.append("ON UA.D_PRODUCT_CODE = BD.D_PRODUCT_CODE ");
+		sql.append("JOIN B_BANK_INFO BI ");
+		sql.append("ON UA.B_BANK_CODE = BI.B_BANK_CODE ");
+		sql.append("WHERE UA.USER_ID = ? ");
 		
 		try (Connection conn = new ConnectionFactory().getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
@@ -142,11 +146,12 @@ public class AccountDAO {
 				String productCode = rs.getString("D_PRODUCT_CODE");
 				String id = rs.getString("USER_ID");
 				String bankCode = rs.getString("B_BANK_CODE");
+				String productName = rs.getString("D_PRODUCT_NAME");
 				
 //				NumberFormat numFormat = NumberFormat.getInstance(Locale.KOREA);
 //		    	String formattedTotalBalance = numFormat.format(balance);
 				
-				vo = new AccountVO(no, pw, date, balance, nickname, productCode, id, bankCode);
+				vo = new AccountVO(no, pw, date, balance, nickname, productCode, id, bankCode, productName);
 				list.add(vo);
 			}
 			System.out.println("accountDAO 체크 : " + list.size());
@@ -192,6 +197,11 @@ public class AccountDAO {
 
 		return vo;
 	}
+	
+	
+	
+	
+	
 	
 	
 	

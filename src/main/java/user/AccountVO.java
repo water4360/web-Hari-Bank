@@ -9,6 +9,7 @@ public class AccountVO {
 	private String productCode;
 	private String userId;
 	private String bankCode;
+	private String productName;
 	
 	
 	private String firstName;
@@ -36,11 +37,29 @@ public class AccountVO {
 	}
 	
 	
+	//계좌정보 가져오기
+	public AccountVO(String accountNo, String accountPw, String createdDate, long totalBalance, String accountNickname,
+			String productCode, String userId, String bankCode, String productName) {
+		super();
+		this.accountNo = accountNo;
+		this.accountPw = accountPw;
+		this.createdDate = createdDate;
+		this.totalBalance = totalBalance;
+		this.accountNickname = accountNickname;
+		this.productCode = productCode;
+		this.userId = userId;
+		this.bankCode = bankCode;
+		this.setProductName(productName);
+	}
+	
+	
 	
 	
 	public String getBankCode() {
 		return bankCode;
 	}
+
+
 	public void setBankCode(String bankCode) {
 		this.bankCode = bankCode;
 	}
@@ -116,8 +135,14 @@ public class AccountVO {
 	public void setTransferDayLimit(String transferDayLimit) {
 		this.transferDayLimit = transferDayLimit;
 	}
-	
 
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
 	
 	
 	
