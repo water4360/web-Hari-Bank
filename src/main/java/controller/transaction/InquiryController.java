@@ -42,7 +42,6 @@ public class InquiryController extends BasicController {
         	String formattedTotalBalance = numFormat.format(totalBalance) + "원";
         	
         	
-        	
         	LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter datetimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String formattedNow = now.format(datetimeFormat);
