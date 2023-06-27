@@ -87,7 +87,7 @@ public class TransactionDAO {
 		return null;
 	}
 
-	// 이체시 거래 내역 등록
+	// "당행"이체시 거래 내역 등록
 	public String insertTransactionInfo(String senderBankCode, String senderAccountNo, String receiverBankCode, String receiverAccountNo, long amount) throws Exception {
 		TransactionVO transaction = new TransactionVO();
 		
@@ -97,9 +97,9 @@ public class TransactionDAO {
 		int result = transferMoney(senderAccountNo, receiverAccountNo, amount);
 		String resultMsg = null;
 		
-		sql.append("  INSERT INTO B_TRANSACTION (T_TRANSACTION_NO, B_BANK_CODE, ACCOUNT_NO, ");
-		sql.append("T_RECEIVER_ACCOUNT, T_AMOUNT, T_TO_RECEIVER, T_FROM_MEMO, T_STATUS) ");
-		sql.append(" VALUES(?, ?, ?, ?, ?, ?, ?, ?) ");
+		sql.append("INSERT INTO B_TRANSACTION (T_TRANSACTION_NO, B_BANK_CODE, T_ACCOUNT_NO, T_RECEIVER_ACCOUNT, ");
+		sql.append("T_AMOUNT, T_TYPE, T_TO_RECEIVER, T_FROM_MEMO, T_STATUS) ");
+		sql.append(" VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?) ");
 
 		try (Connection conn = new ConnectionFactory().getConnection();
 			 PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
@@ -112,18 +112,31 @@ public class TransactionDAO {
 			pstmt.setString(4, receiverAccountNo);
 			pstmt.setDouble(5, amount);
 			pstmt.setString(6, transaction.getToMemo());
-			pstmt.setString(7, transaction.getFromMemo());
+			pstmt.setString(7, transaction.getToMemo());
+			
+			//당행이체 : 하리은행->하리은행
+			//타행이체 : 하리은행->룽지은행
+			//오픈뱅킹 : 다른은행->다른은행(하리은행 포함)
+			if(senderBankCode.equals("0758")) {
+				if(receiverBankCode.equals("0758")) {
+					pstmt.setString(8, "당행이체");
+				} else {
+					pstmt.setString(8, "타행이체");
+				}
+			} else {
+				pstmt.setString(8, "오픈뱅킹");
+			}
 			
 			//이체 성공했을때
 			if(result == 1) {
-				pstmt.setString(8, "이체완료");
+				pstmt.setString(9, "이체완료");
 				pstmt.executeUpdate();
 				
 				resultMsg = "이체가 완료되었습니다.";
 				return resultMsg;
 			} else {
 			//실패했을때
-				pstmt.setString(8, "이체실패");
+				pstmt.setString(9, "이체실패");
 				pstmt.executeUpdate();
 				
 				resultMsg = "이체에 실패했습니다.";
@@ -135,5 +148,15 @@ public class TransactionDAO {
 		}
 		return resultMsg;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }// end of class

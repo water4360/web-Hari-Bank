@@ -8,6 +8,7 @@ import bank.DepositDAO;
 import bank.DepositVO;
 import board.PostDAO;
 import board.PostVO;
+import tranjaction.TransactionDAO;
 import user.AccountDAO;
 import user.AccountVO;
 import user.UserDAO;
@@ -16,21 +17,23 @@ import user.UserVO;
 public class DAOService {
 
 	protected UserDAO ud;
-	protected AccountDAO ad;
 	protected PostDAO pd;
-	protected DepositDAO dd;
 	protected BankDAO bd;
+	protected AccountDAO ad;
+	protected DepositDAO dd;
+	protected TransactionDAO td;
 	
-	public DAOService() {
+	public DAOService(){
 		super();
 		ud = new UserDAO();
-		ad = new AccountDAO();
 		pd = new PostDAO();
-		dd = new DepositDAO();
 		bd = new BankDAO();
+		ad = new AccountDAO();
+		dd = new DepositDAO();
+		td = new TransactionDAO();
 	}
 	/*
-	 * UserDAO
+	 * UserDAO(사용자)
 	 */
 	
 	//회원가입
@@ -56,7 +59,7 @@ public class DAOService {
 	
 	
 	/*
-	 * AccountDAO
+	 * AccountDAO(계좌)
 	 */
 	//계좌개설
 	public void addAccount(AccountVO vo) throws Exception {
@@ -78,7 +81,7 @@ public class DAOService {
 
 	
 	/*
-	 * PostDAO
+	 * PostDAO(게시글)
 	 */
 	
 	//회원별 QNA 리스트
@@ -86,17 +89,39 @@ public class DAOService {
 		return pd.getQnaListById(id);
 	}
 	
+	
+	
 	/*
-	 * DepositDAO
+	 * DepositDAO(예금)
 	 */
 	public DepositVO getDepositInfo(String code) {
 		return dd.getDepositInfo(code);
 	}
 	
+	
+	
 	/*
-	 * BankDAO
+	 * BankDAO(은행)
 	 */
 	public List<BankVO> getBankList() {
 		return bd.getBankList();
 	}
+	
+	
+	/*
+	 * TransactionDAO(이체거래)
+	 */
+
+	//이체
+	public int transferMoney(String senderAccountNo, String receiverAccountNo, long amount) throws Exception {
+		return td.transferMoney(senderAccountNo, receiverAccountNo, amount);
+	}
+	
+	//거래정보 등록
+	public String insertTransactionInfo(String senderBankCode, String senderAccountNo, String receiverBankCode, String receiverAccountNo, long amount) throws Exception {
+		return td.insertTransactionInfo(senderBankCode, senderAccountNo, receiverBankCode, receiverAccountNo, amount);
+	}
+	
+	
+	
 }

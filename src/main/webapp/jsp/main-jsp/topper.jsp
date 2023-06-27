@@ -8,16 +8,14 @@
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
 <!-- Font Awesome icons (free version)-->
-<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
-	crossorigin="anonymous"></script>
+<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"></script>
 
 <!-- Core theme CSS (includes Bootstrap)-->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <!-- 내 스타일시트 -->
 <link href="/css/styles.css" rel="stylesheet" />
 
-<link
-	href="https://cdn.jsdelivr.net/gh/sunn-us/SUITE/fonts/static/woff2/SUITE.css"
+<link href="https://cdn.jsdelivr.net/gh/sunn-us/SUITE/fonts/static/woff2/SUITE.css"
 	rel="stylesheet">
 
 <style>
@@ -29,7 +27,9 @@
 	font-size: xx-large !important;
 }
 
-
+#user {
+	width:30px;
+}
 
 </style>
 
@@ -43,7 +43,7 @@
 			<div class="login-info">
 				<c:if test="${ not empty loginUser }">
 					<img alt="user" id="user"
-						src="${pageContext.request.contextPath}/assets/user.png">
+						src="./assets/gr-user2.png">
 					<b>${ loginUser.korName }님 환영합니다</b>
 					<a class="badge bg-secondary text-decoration-none link-light"
 						href="#!">로그인연장</a>
