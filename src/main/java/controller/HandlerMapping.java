@@ -19,6 +19,7 @@ import controller.signup.SignupWebController;
 import controller.transaction.InquiryController;
 import controller.transaction.InquiryDetailController;
 import controller.transaction.TransactionController;
+import controller.transaction.TransactionProcessController;
 import controller.transaction.CheckCurrentBalanceController;
 
 //클라이언트에서 Controller요청이 들어오면 얘가 상속받아서 넘겨주는...??...  
@@ -38,6 +39,7 @@ public class HandlerMapping {
 		mappings.put("/inquiryDetail.do", new InquiryDetailController());
 		
 		mappings.put("/transaction.do", new TransactionController());
+		mappings.put("/transactionProcess.do", new TransactionProcessController());
 		mappings.put("/checkCurrentBalance.do", new CheckCurrentBalanceController());
 		
 		mappings.put("/products.do", new ProductsController());
