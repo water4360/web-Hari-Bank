@@ -40,6 +40,7 @@ public class HandlerMapping {
 		
 		mappings.put("/transaction.do", new TransactionController());
 		mappings.put("/transactionProcess.do", new TransactionProcessController());
+		
 		mappings.put("/checkCurrentBalance.do", new CheckCurrentBalanceController());
 		
 		mappings.put("/products.do", new ProductsController());

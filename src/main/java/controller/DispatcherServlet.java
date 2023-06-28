@@ -60,6 +60,7 @@ public class DispatcherServlet extends HttpServlet {
 		System.out.println("uri : " + uri);
 		// 여기로 path가 넘어가면 해당 path에 대한 컨트롤러가 리턴되고
 		Controller ctrl = mapping.getController(uri);
+		
 		if (ctrl != null) {
 			//한줄 올려봄
 			String viewPage = ctrl.handleRequest(request, response);

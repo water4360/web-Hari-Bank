@@ -38,7 +38,7 @@ public class TransactionController extends BasicController {
         	List<BankVO> bankList = daoService.getBankList();
         	session.setAttribute("bankList", bankList);
         	
-        	return "/jsp/transaction.jsp";
+        	return "/jsp/transaction/transaction.jsp";
 		}
 	}
 
