@@ -1,4 +1,4 @@
-package board;
+package bank.board;
 
 public class PostVO {
 	//카테고리, 글번호, 작성자, 제목, 내용, 작성일, 조회수, 게시글 수

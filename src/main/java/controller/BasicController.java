@@ -17,4 +17,5 @@ public abstract class BasicController implements Controller {
 	public BasicController() {
 		daoService = DAOServiceFactory.getInstance();
 	}
+
 }

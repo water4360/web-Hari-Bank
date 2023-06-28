@@ -1,4 +1,4 @@
-package board;
+package bank.board;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

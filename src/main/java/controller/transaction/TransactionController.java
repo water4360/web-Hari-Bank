@@ -5,10 +5,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bank.BankVO;
+import bank.account.AccountVO;
+import bank.info.InfoVO;
+import bank.user.UserVO;
 import controller.BasicController;
-import user.AccountVO;
-import user.UserVO;
 
 public class TransactionController extends BasicController {
 	
@@ -35,7 +35,7 @@ public class TransactionController extends BasicController {
         	session.setAttribute("myAccountList", accountList);
         	
         	//은행목록 가져오기
-        	List<BankVO> bankList = daoService.getBankList();
+        	List<InfoVO> bankList = daoService.getBankList();
         	session.setAttribute("bankList", bankList);
         	
         	return "/jsp/transaction/transaction.jsp";

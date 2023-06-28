@@ -2,23 +2,24 @@ package common;
 
 import java.util.List;
 
-import bank.BankDAO;
-import bank.BankVO;
-import bank.DepositDAO;
-import bank.DepositVO;
-import board.PostDAO;
-import board.PostVO;
-import tranjaction.TransactionDAO;
-import user.AccountDAO;
-import user.AccountVO;
-import user.UserDAO;
-import user.UserVO;
+import bank.account.AccountDAO;
+import bank.account.AccountVO;
+import bank.board.PostDAO;
+import bank.board.PostVO;
+import bank.info.InfoDAO;
+import bank.info.InfoVO;
+import bank.product.DepositDAO;
+import bank.product.DepositVO;
+import bank.transaction.TransactionDAO;
+import bank.transaction.TransactionVO;
+import bank.user.UserDAO;
+import bank.user.UserVO;
 
 public class DAOService {
 
 	protected UserDAO ud;
 	protected PostDAO pd;
-	protected BankDAO bd;
+	protected InfoDAO bd;
 	protected AccountDAO ad;
 	protected DepositDAO dd;
 	protected TransactionDAO td;
@@ -27,7 +28,7 @@ public class DAOService {
 		super();
 		ud = new UserDAO();
 		pd = new PostDAO();
-		bd = new BankDAO();
+		bd = new InfoDAO();
 		ad = new AccountDAO();
 		dd = new DepositDAO();
 		td = new TransactionDAO();
@@ -103,7 +104,7 @@ public class DAOService {
 	/*
 	 * BankDAO(은행)
 	 */
-	public List<BankVO> getBankList() {
+	public List<InfoVO> getBankList() {
 		return bd.getBankList();
 	}
 	
@@ -118,8 +119,13 @@ public class DAOService {
 	}
 	
 	//거래정보 등록
-	public String insertTransactionInfo(String senderBankCode, String accountPw, String senderAccountNo, String receiverBankCode, String receiverAccountNo, long amount) throws Exception {
-		return td.insertTransactionInfo(senderBankCode, accountPw, senderAccountNo, receiverBankCode, receiverAccountNo, amount);
+	public String insertTransactionInfo(String senderBankCode, String senderAccountNo, String accountPw, String receiverBankCode, String receiverAccountNo, long amount, long currentBalance) throws Exception {
+		return td.insertTransactionInfo(senderBankCode, senderAccountNo, accountPw, receiverBankCode, receiverAccountNo, amount, currentBalance);
+	}
+	
+	//거래내역 조회
+	public List<TransactionVO> getTransactionList(String accountNo) {
+		return td.getTransactionList(accountNo);
 	}
 	
 	

@@ -9,10 +9,11 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bank.DepositVO;
+import bank.account.AccountVO;
+import bank.product.DepositVO;
+import bank.transaction.TransactionVO;
+import bank.user.UserVO;
 import controller.BasicController;
-import user.AccountVO;
-import user.UserVO;
 
 public class InquiryDetailController extends BasicController {
 	
@@ -34,13 +35,10 @@ public class InquiryDetailController extends BasicController {
 //            return request.getContextPath()+"login.do";
         	return "login.do";
         } else {
-        	String id = ((UserVO)session.getAttribute("loginUser")).getId();
         	AccountVO account = daoService.getAccountInfo(no);
         	DepositVO deposit = daoService.getDepositInfo(code);
         	
         	//자릿수 표기 + 원 붙이기
-//        	String totalBalance = String.valueOf(account.getTotalBalance());
-//        	System.out.println("long 계좌잔액을 스트링.valueof로 " + totalBalance);
         	long totalBalance = account.getTotalBalance();
         	NumberFormat numFormat = NumberFormat.getInstance(Locale.KOREA);
         	String formattedTotalBalance = numFormat.format(totalBalance) + "원";
@@ -51,12 +49,16 @@ public class InquiryDetailController extends BasicController {
         	LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter datetimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String formattedNow = now.format(datetimeFormat);
+            
+            //거래내역
+            List<TransactionVO> transList = daoService.getTransactionList(no);
         	
-            //계좌객체, 자릿수표기된 잔액, 조회시각 등록 
-        	session.setAttribute("account", account);
-        	session.setAttribute("deposit", deposit);
-        	session.setAttribute("formattedTotalBalance", formattedTotalBalance);
-        	session.setAttribute("formattedNow", formattedNow);
+            //계좌객체, 자릿수표기된 잔액, 조회시각, 거래내역 등록 
+        	request.setAttribute("account", account);
+        	request.setAttribute("deposit", deposit);
+        	request.setAttribute("formattedTotalBalance", formattedTotalBalance);
+        	request.setAttribute("formattedNow", formattedNow);
+        	request.setAttribute("transactionList", transList);
         	
         	System.out.println("현재 로그인: " + (UserVO) request.getAttribute("loginUser"));
 		}

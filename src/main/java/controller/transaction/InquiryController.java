@@ -9,9 +9,9 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bank.account.AccountVO;
+import bank.user.UserVO;
 import controller.BasicController;
-import user.AccountVO;
-import user.UserVO;
 
 public class InquiryController extends BasicController {
 	

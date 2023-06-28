@@ -1,4 +1,4 @@
-package bank;
+package bank.product;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

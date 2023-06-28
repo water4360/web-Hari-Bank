@@ -3,8 +3,8 @@ package controller.board;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.PostDAO;
-import board.PostVO;
+import bank.board.PostDAO;
+import bank.board.PostVO;
 import controller.BasicController;
 import controller.Controller;
 

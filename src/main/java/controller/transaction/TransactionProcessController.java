@@ -3,8 +3,9 @@ package controller.transaction;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bank.account.AccountVO;
+import bank.transaction.TransactionVO;
 import controller.BasicController;
-import tranjaction.TransactionVO;
 
 public class TransactionProcessController extends BasicController {
 	
@@ -15,6 +16,12 @@ public class TransactionProcessController extends BasicController {
 			String accountPw = request.getParameter("accountPassword");
 			String receiverBankCode = request.getParameter("receiverBankCode");
 			String receiverAccountNo = request.getParameter("receiverAccountNo");
+			
+			AccountVO account = daoService.getAccountInfo(senderAccountNo);
+
+			// 있는 계좌 정보라면 계좌조회
+			long currentBalance = account.getTotalBalance();
+			
 			long amount = Long.valueOf(request.getParameter("transferAmount"));
         	
 			
@@ -22,12 +29,13 @@ public class TransactionProcessController extends BasicController {
 					senderAccountNo, accountPw, receiverBankCode, receiverAccountNo, amount);
 			
 			//헐 비밀번호도 집어넣어야지!
-			daoService.transferMoney(senderAccountNo, accountPw, receiverAccountNo, amount);
-			String result = daoService.insertTransactionInfo("0758", senderAccountNo, accountPw, receiverBankCode, receiverAccountNo, amount);
+			String result = daoService.insertTransactionInfo("0758", senderAccountNo, accountPw, 
+					receiverBankCode, receiverAccountNo, amount, currentBalance);
+//			daoService.transferMoney(senderAccountNo, accountPw, receiverAccountNo, amount);
 			
 			request.setAttribute("result", result);
 			
-        	return "/jsp/transactionResult.jsp";
+        	return "/jsp/transaction/transactionResult.jsp";
 	}
 
 }

@@ -1,4 +1,4 @@
-<%@ page import="user.UserDAO"%>
+<%@ page import="bank.user.UserDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%
 String id = request.getParameter("id");

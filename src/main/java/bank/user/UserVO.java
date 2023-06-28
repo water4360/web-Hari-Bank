@@ -1,4 +1,4 @@
-package user;
+package bank.user;
 
 public class UserVO {
 	private String id;

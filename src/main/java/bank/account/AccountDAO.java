@@ -1,4 +1,4 @@
-package user;
+package bank.account;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import bank.transaction.TransactionVO;
 import common.ConnectionFactory;
 
 public class AccountDAO {
@@ -197,7 +198,6 @@ public class AccountDAO {
 
 		return vo;
 	}
-	
 	
 	
 	

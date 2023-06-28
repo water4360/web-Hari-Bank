@@ -3,10 +3,10 @@ package controller.signup;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bank.user.UserDAO;
+import bank.user.UserVO;
 import common.DAOService;
 import controller.BasicController;
-import user.UserDAO;
-import user.UserVO;
 
 public class SignupProcessController extends BasicController {
 

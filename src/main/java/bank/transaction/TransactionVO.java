@@ -1,4 +1,4 @@
-package tranjaction;
+package bank.transaction;
 
 //거래
 public class TransactionVO {
@@ -17,6 +17,23 @@ public class TransactionVO {
 	public TransactionVO() {
 		super();
 	}
+	
+	
+	
+	//계좌별 입출금거래내역 조회
+	public TransactionVO(String transactionNo, String date, String time, String type, String amount, String fromMemo, String previousBalance) {
+		super();
+		this.transactionNo = transactionNo;
+		this.date = date;
+		this.time = time;
+		this.type = type;
+		this.amount = amount;
+		this.fromMemo = fromMemo;
+		this.previousBalance = previousBalance;
+	}
+
+
+
 
 	public String getTransactionNo() {
 		return transactionNo;

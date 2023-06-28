@@ -1,11 +1,11 @@
-package bank;
+package bank.info;
 
-public class BankVO {
+public class InfoVO {
 	private String bankCode;
 	private String bankName;
 	private String userId;
 
-	public BankVO() {
+	public InfoVO() {
 		super();
 	}
 
@@ -33,7 +33,7 @@ public class BankVO {
 		this.userId = userId;
 	}
 
-	public BankVO(String bankCode, String bankName) {
+	public InfoVO(String bankCode, String bankName) {
 		super();
 		this.bankCode = bankCode;
 		this.bankName = bankName;

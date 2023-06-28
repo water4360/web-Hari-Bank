@@ -1,4 +1,4 @@
-package bank;
+package bank.product;
 
 public class DepositVO {
 	private String code;

@@ -1,10 +1,11 @@
-package controller;
+package controller.account;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import user.AccountVO;
-import user.UserVO;
+import bank.account.AccountVO;
+import bank.user.UserVO;
+import controller.BasicController;
 
 public class CreateAccountProcessController extends BasicController{
 	

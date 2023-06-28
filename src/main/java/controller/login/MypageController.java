@@ -6,9 +6,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.PostVO;
+import bank.board.PostVO;
+import bank.user.UserVO;
 import controller.BasicController;
-import user.UserVO;
 
 public class MypageController extends BasicController {
 

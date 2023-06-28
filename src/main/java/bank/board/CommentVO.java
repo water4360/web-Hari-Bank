@@ -1,4 +1,4 @@
-package board;
+package bank.board;
 
 public class CommentVO {
 	private String no;

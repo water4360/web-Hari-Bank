@@ -66,7 +66,8 @@
 									value="${account.accountNo}">
 								<button type="submit" class="btn btn-secondary">전체계좌보기</button>
 							</form>
-							<form action="transaction.do"  style="margin-left:5px; margin-right:5px;" method="post">
+							<form action="transaction.do"
+								style="margin-left: 5px; margin-right: 5px;" method="post">
 								<input type="hidden" name="accountNo"
 									value="${account.accountNo}">
 								<button type="submit" class="btn btn-secondary">이체</button>
@@ -80,6 +81,40 @@
 					</div>
 				</div>
 			</div>
+
+			<h2>거래내역</h2>
+			<table class="table table-striped fixed-table">
+				<thead class="thead-dark">
+					<tr class="text-white bg-secondary">
+						<th>거래일자</th>
+						<th>거래시각</th>
+						<th>구분</th>
+						<th>금액</th>
+						<th>내용</th>
+						<th>잔액</th>
+					</tr>
+					<c:choose>
+						<c:when test="${ empty transactionList }">
+							<tr>
+								<td colspan="5" class="text-center">거래내역이 존재하지 않습니다.</td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="trans" items="${transactionList}">
+								<tr>
+								<td>${trans.date}</td>
+								<td>${trans.time}</td>
+								<td>${trans.type}</td>
+								<td>${trans.amount}</td>
+								<td>${trans.fromMemo}</td>
+								<td>${trans.previousBalance}</td>
+								</tr>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+				</thead>
+			</table>
+
 
 		</div>
 

@@ -1,4 +1,4 @@
-package bank;
+package bank.info;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,13 +8,13 @@ import java.util.List;
 
 import common.ConnectionFactory;
 
-public class BankDAO {
+public class InfoDAO {
 	
 	//모든 은행정보 확인
-	public List<BankVO> getBankList() {
+	public List<InfoVO> getBankList() {
 			StringBuilder sql = new StringBuilder();
-			BankVO bank = null;
-			List<BankVO> bankList = new ArrayList<>();
+			InfoVO bank = null;
+			List<InfoVO> bankList = new ArrayList<>();
 
 			sql.append("SELECT * FROM B_BANK_INFO ");
 			
@@ -28,7 +28,7 @@ public class BankDAO {
 					String code = rs.getString("B_BANK_CODE");
 					String name = rs.getString("B_BANK_NAME");
 					
-					bank = new BankVO(code, name);
+					bank = new InfoVO(code, name);
 					bankList.add(bank);
 				}
 

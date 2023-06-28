@@ -1,14 +1,15 @@
-package controller;
+package controller.product;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CreateAccountController extends BasicController{
-	
+import controller.BasicController;
+
+public class ProductsController extends BasicController {
+
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("계좌생성Ctrl 진입");
-		return "/jsp/create-account.jsp";
+		return "/jsp/products.jsp";
 	}
 
 }

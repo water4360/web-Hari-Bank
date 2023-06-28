@@ -27,7 +27,7 @@
 			<div class="text-center mb-4">
 				<h2>당행/타행계좌이체</h2>
 			</div>
-			<form action="transactionProcess.do">
+			<form action="transactionProcess.do" method="POST">
 				<div class="card mx-auto" style="width: 30rem;">
 					<div class="card-header" align="center">
 						<h5 class="card-title">출금 정보</h5>
@@ -49,7 +49,8 @@
 							<div style="display: inline-block;" class="mt-2">
 								<input type="button" class="btn btn-secondary" value="잔액조회"
 									onclick="showCurrentBalance()">
-								<div id="currentBalance" style="display: inline-block;"></div>
+								<div id="currentBalance" style="display: inline-block;">
+								</div>
 							</div>
 						</div>
 						<div class="mb-3">

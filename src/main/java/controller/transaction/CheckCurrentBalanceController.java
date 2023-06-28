@@ -6,8 +6,8 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bank.account.AccountVO;
 import controller.BasicController;
-import user.AccountVO;
 
 public class CheckCurrentBalanceController extends BasicController {
 
@@ -32,7 +32,8 @@ public class CheckCurrentBalanceController extends BasicController {
 			
 			System.out.println("얼마? " + formattedTotalBalance);
 			
-			request.setAttribute("balance", formattedTotalBalance);
+			session.setAttribute("currentBalance", balance);
+			session.setAttribute("balance", formattedTotalBalance);
 //			request.setAttribute("account", account);
 			
 		} else {
