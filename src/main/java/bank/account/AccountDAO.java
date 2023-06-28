@@ -201,7 +201,30 @@ public class AccountDAO {
 	
 	
 	
-	
+	//단일계좌 상세조회
+		public boolean isCorrectAccountPw(String accountNo, String pw) {
+			StringBuilder sql = new StringBuilder();
+
+			sql.append("SELECT * FROM B_USER_ACCOUNT WHERE ACCOUNT_NO = ? AND ACCOUNT_PASSWORD = ? ");
+			
+			try (Connection conn = new ConnectionFactory().getConnection();
+					PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
+				pstmt.setString(1, accountNo);
+				pstmt.setString(2, pw);
+
+				ResultSet rs = pstmt.executeQuery();
+
+				// ID가 존재하면 쿼리를 실행하고
+				if(rs.next()) {
+					return true;
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return false;
+		}
 	
 	
 	

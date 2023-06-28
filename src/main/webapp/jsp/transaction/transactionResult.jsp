@@ -24,24 +24,19 @@
 
 	<section>
 		<div class="container mt-5">
-			<div class="text-center mb-4">
-				<h2>계좌이체결과</h2>
-			</div>
-
-			<div class="card mx-auto" style="width: 30rem;">
+			<div class="card mx-auto text-center" style="width: 30rem;">
 				<div class="card-header" align="center">
-					<h5 class="card-title">이체내역</h5>
+					<h4 class="card-title">즉시이체결과</h4>
 				</div>
 				<div class="card-body">
-					<div class="mb-3">
-						
-						이체결과 : ${result}
-						
-					</div>
+					<div class="mb-3">${result}</div>
+					<form action="inquiryDetail.do" method="post">
+						<input type="hidden" name="accountNo" value="${account.accountNo}">
+						<button type="submit" class="btn btn-secondary">거래내역보기</button>
+					</form>
 				</div>
 			</div>
 		</div>
-
 
 
 	</section>

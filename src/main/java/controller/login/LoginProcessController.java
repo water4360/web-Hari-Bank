@@ -46,7 +46,9 @@ public class LoginProcessController extends BasicController {
 				return "redirect:/transaction.do";
 			} else if (prevBtn.equals("mypage")) {
 				return "redirect:/mypage.do";
-			}
+			} else if (prevBtn.equals("inquiryDetail")) {
+				return "redirect:/inquiry.do";
+			} 
 			
 			
 		} else if (daoService.isDuplicated(id)) {

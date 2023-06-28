@@ -32,7 +32,7 @@ public class TransactionProcessController extends BasicController {
 			String result = daoService.insertTransactionInfo("0758", senderAccountNo, accountPw, 
 					receiverBankCode, receiverAccountNo, amount, currentBalance);
 //			daoService.transferMoney(senderAccountNo, accountPw, receiverAccountNo, amount);
-			
+			request.setAttribute("account", account);
 			request.setAttribute("result", result);
 			
         	return "/jsp/transaction/transactionResult.jsp";

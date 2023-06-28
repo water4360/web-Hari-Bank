@@ -41,7 +41,7 @@ public class CheckCurrentBalanceController extends BasicController {
 		}
 
 //		return "/jsp/transaction.jsp";
-		return "/jsp/transaction/currentBalance.jsp";
+		return "/jsp/check-jsp/currentBalance.jsp";
 	}
 
 }

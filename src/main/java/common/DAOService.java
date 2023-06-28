@@ -79,6 +79,10 @@ public class DAOService {
 	public List<AccountVO> getAccountListById(String id) {
 		return ad.getAccountListById(id);
 	}
+	//계좌비번 확인
+	public boolean isCorrectAccountPw(String accountNo, String pw) {
+		return ad.isCorrectAccountPw(accountNo, pw);
+	}
 
 	
 	/*

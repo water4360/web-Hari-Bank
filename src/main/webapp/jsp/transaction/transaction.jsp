@@ -46,17 +46,18 @@
 										(${myAccount.productName})</option>
 								</c:forEach>
 							</select>
+							<div id="senderAccountNo-feedback" style="display: none;"></div>
 							<div style="display: inline-block;" class="mt-2">
 								<input type="button" class="btn btn-secondary" value="잔액조회"
 									onclick="showCurrentBalance()">
-								<div id="currentBalance" style="display: inline-block;">
-								</div>
+								<div id="currentBalance" style="display: inline-block;"></div>
 							</div>
 						</div>
 						<div class="mb-3">
 							<label for="accountPassword" class="form-label">계좌 비밀번호</label> <input
-								type="password" class="form-control" id="accountPassword"
+								type="password" class="form-control mb-2" id="accountPassword"
 								name="accountPassword" maxlength="4">
+							<div id="accountPassword-feedback" style="display: inline-block;"></div>
 						</div>
 					</div>
 				</div>
@@ -76,25 +77,22 @@
 										(${bank.bankCode})</option>
 								</c:forEach>
 							</select>
+							<div id="receiverBankCode-feedback" style="display: none;"></div>
 						</div>
 						<div class="mb-3">
 							<label for="receiverAccountNo" class="form-label">입금 계좌
 								번호</label> <input type="text" class="form-control"
 								id="receiverAccountNo" name="receiverAccountNo">
+							<div id="receiverAccountNo-feedback" style="display: none;"></div>
 						</div>
 						<div class="mb-3">
-							<label for="transferAmount" class="form-label">이체 금액</label>
-							<input
+							<label for="transferAmount" class="form-label">이체 금액</label> <input
 								type="text" class="form-control" id="transferAmount"
 								name="transferAmount">
+							<div id="transferAmount-feedback" style="display: none;"></div>
 						</div>
 						<div class="d-flex justify-content-center mt-5">
 							<button type="submit" class="btn btn-primary">이체하기</button>
-							<!-- <button type="submit" class="btn btn-primary"> -->
-							<!-- onclick="location.href='transactionProcess.do'">이체하기</button> -->
-							<!-- <button type="submit" class="btn btn-success" data-toggle="modal" -->
-							<!-- data-target="#confirmTransactionInfo" aria-expanded="false" -->
-							<!-- id="transfer">이체하기</button> -->
 						</div>
 					</div>
 				</div>
@@ -139,15 +137,115 @@
 				error : function(jqXHR, textStatus, errorThrown) {
 					// 에러가 발생했을 때 실행되는 코드입니다.
 					console.log(textStatus, errorThrown);
-					alert('조회실패');
+					alert('잔액조회실패. 다시 시도하세요.');
 				}
 			});
 		}
 
-		function checkPw() {
-			let insertPw = $('#accountPassword').val();
+		//계좌비밀번호 4자리 일치확인
+		$('#accountPassword').on(
+				'keyup',
+				function() {
+					let accountPassword = $(this).val(); // 입력된 비밀번호를 가져옵니다.
+					let accountNo = $('#senderAccountNo').val(); // 선택된 계좌 번호를 가져옵니다.
 
-		}
+					// 계좌 번호나 비밀번호가 없거나, 비밀번호의 길이가 4가 아닌 경우 함수를 종료합니다.
+					if (!accountPassword || !accountNo
+							|| accountPassword.length != 4) {
+						$('#accountPassword-feedback').text('').hide(); // 피드백 메시지를 숨깁니다.
+						return;
+					}
+
+					$.ajax({
+						url : '/Hari-bank/checkAccountPassword.do',
+						method : 'POST',
+						data : {
+							accountNo : accountNo,
+							accountPassword : accountPassword
+						// 계좌 번호와 비밀번호를 서버로 전달합니다.
+						},
+						success : function(response) {
+							// 서버로부터 응답을 성공적으로 받았을 때 실행되는 코드입니다.
+							response = response.trim();
+							if (response == "true") {
+								$('#accountPassword-feedback').text(
+										'비밀번호가 일치합니다').css('color', 'green')
+										.show();
+							} else {
+								$('#accountPassword-feedback').text(
+										'비밀번호가 일치하지 않습니다').css('color', 'red')
+										.show();
+							}
+						},
+						error : function(jqXHR, textStatus, errorThrown) {
+							// 에러가 발생했을 때 실행되는 코드입니다.
+							console.log(textStatus, errorThrown);
+							alert('비밀번호 검증에 실패했습니다.');
+						}
+					});
+				});
+
+		//필드 유효성 검사
+		// 필드 값 변경 감지
+		$('#senderAccountNo, #accountPassword, #receiverBankCode, #receiverAccountNo, #transferAmount')
+				.on('change keyup', function() {
+					let id = $(this).attr('id');
+					let value = $(this).val();
+
+					// 해당 필드가 비어있지 않으면 피드백 메시지 숨기기
+					if (value) {
+						$('#' + id + '-feedback').text('').hide();
+					}
+				});
+
+		$('form').on(
+		'submit',
+		function(e) {
+			let senderAccountNo = $('#senderAccountNo').val();
+			let accountPassword = $('#accountPassword').val();
+			let receiverBankCode = $('#receiverBankCode').val();
+			let receiverAccountNo = $('#receiverAccountNo')
+					.val();
+			let transferAmount = $('#transferAmount').val();
+
+			// 모든 필드가 제대로 입력되었는지 확인합니다.
+			if (!senderAccountNo || !accountPassword
+					|| !receiverBankCode || !receiverAccountNo
+					|| !transferAmount) {
+				// 각 필드가 비어있는 경우에 대한 메시지를 설정합니다.
+				if (!senderAccountNo) {
+					$('#senderAccountNo-feedback').text(
+							'출금 계좌를 선택해주세요')
+							.css('color', 'red').show();
+				}
+				if (!accountPassword) {
+					$('#accountPassword-feedback').text(
+							'계좌 비밀번호를 입력해주세요').css('color',
+							'red').show();
+				}
+				if (!receiverBankCode) {
+					$('#receiverBankCode-feedback').text(
+							'입금 은행을 선택해주세요')
+							.css('color', 'red').show();
+				}
+				if (!receiverAccountNo) {
+					$('#receiverAccountNo-feedback').text(
+							'입금 계좌 번호를 입력해주세요').css('color',
+							'red').show();
+				}
+				if (!transferAmount) {
+					$('#transferAmount-feedback').text(
+							'이체 금액을 입력해주세요')
+							.css('color', 'red').show();
+				}
+
+				// 이벤트의 기본 동작을 중단합니다.
+				e.preventDefault();
+			} else {
+				// 모든 필드가 제대로 입력되었으면, 모든 피드백 메시지를 숨깁니다.
+				$('.feedback').text('').hide();
+			}
+		});
 	</script>
 
 
