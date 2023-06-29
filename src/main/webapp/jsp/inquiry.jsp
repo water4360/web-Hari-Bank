@@ -11,6 +11,12 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="css/styles.css" rel="stylesheet" />
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.5.0/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.5.0/js/bootstrap.bundle.min.js"></script>
+
 
 <style>
 .fixed-table {
@@ -24,6 +30,11 @@
 	white-space: nowrap;
 }
 </style>
+<script>
+    $(document).ready(function() {
+        $('#copyModal').modal();
+    });
+</script>
 
 
 </head>
@@ -38,24 +49,24 @@
 		<div class="container mt-5">
 			<div class="text-center mb-4">
 				<h2>전체계좌조회</h2>
-				<p>조회기준일시 : ${formattedNow}</p>
 			</div>
 			<div class="row justify-content-center">
 				<div class="col-md-10">
 					<!-- 					<table class="table table-striped"> -->
 					<table class="table table-striped fixed-table">
 						<thead class="thead-dark">
-							<tr class="text-white bg-secondary">
-								<th>입출금(총 ${accountCount} 계좌)</th>
+							<tr class="text-white bg-secondary table-lg">
+								<th style="text-align: center;">입출금(총 ${accountCount} 계좌)</th>
 								<th colspan="2">잔액 ${formattedTotalBalance}</th>
-								<th colspan="3"></th>
+								<th colspan="3" style="text-align: right;">조회기준일시 :
+									${formattedNow}</th>
 							</tr>
 							<tr>
-								<th>은행코드</th>
-								<th>예금상품명</th>
-								<th>계좌번호</th>
-								<th colspan="2">잔액</th>
-								<th></th>
+								<th style="text-align: center;">은행코드</th>
+								<th style="text-align: center;">예금상품명</th>
+								<th colspan="2" style="text-align: center; width: 40%;">계좌번호</th>
+								<th style="text-align: center; width: 20%;">잔액(원)</th>
+								<th style="text-align: center;">업무</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -76,19 +87,29 @@
 								<c:otherwise>
 									<c:forEach var="account" items="${accountList}">
 										<tr>
-											<td>${account.bankCode}</td>
-											<td>${account.productCode}</td>
-											<td id="account-no">${account.accountNo}</td>
-											<td colspan="2">${account.totalBalance}</td>
-											<td>
-												<form action="inquiryDetail.do" method="post" style="display: inline-block;">
-													<input type="hidden" name="accountNo" value="${account.accountNo}">
-													<input type="hidden" name="productCode" value="${account.productCode}">
+											<td style="text-align: center;">${account.bankName}</td>
+											<td style="text-align: center;">${account.productName}</td>
+											<td colspan="2" style="text-align: center;">${account.accountNo}
+												<button onclick="copyToClipboard('${account.accountNo}')"
+													class="btn link-dark btn-sm" data-bs-toggle="modal"
+													data-bs-target="#copyModal">
+													<i class="fas fa-copy"></i>
+												</button>
+											</td>
+											<td style="text-align: center;">${account.totalBalance}</td>
+											<td style="text-align: center;">
+												<form action="inquiryDetail.do" method="post"
+													style="display: inline-block;">
+													<input type="hidden" name="accountNo"
+														value="${account.accountNo}"> <input type="hidden"
+														name="productCode" value="${account.productCode}">
 													<input type="submit" class="btn btn-secondary" value="조회">
 												</form>
-												<form action="transaction.do" method="post" style="display: inline-block;">
-													<input type="hidden" name="accountNo" value="${account.accountNo}">
-													<input type="hidden" name="productCode" value="${account.productCode}">
+												<form action="transaction.do" method="post"
+													style="display: inline-block;">
+													<input type="hidden" name="accountNo"
+														value="${account.accountNo}"> <input type="hidden"
+														name="productCode" value="${account.productCode}">
 													<input type="submit" class="btn btn-secondary" value="이체">
 												</form>
 											</td>
@@ -103,7 +124,40 @@
 		</div>
 
 
+		<%-- 계좌번호 복사 모달 --%>
+		<div class="modal fade" id="copyModal" tabindex="-1"
+			aria-labelledby="copyModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="copyModalLabel">알림</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<p>계좌번호가 복사되었습니다.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-bs-dismiss="modal">닫기</button>
+					</div>
+				</div>
+			</div>
+		</div>
 
+
+<script>
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                // 모달 표시
+                $('#copyModal').modal('show');
+            })
+            .catch((error) => {
+                console.error("계좌번호 복사 실패:", error);
+            });
+    }
+</script>
 
 
 

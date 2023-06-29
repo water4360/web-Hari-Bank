@@ -31,17 +31,17 @@ public class InquiryController extends BasicController {
         } else {
         	String id = ((UserVO)session.getAttribute("loginUser")).getId();
         	List<AccountVO> accountList = daoService.getAccountListById(id);
-        	     	   	        	
+        	 
         	//보유계좌 총합계
         	long totalBalance = 0;
         	for(AccountVO vo: accountList) {
-        		totalBalance += vo.getTotalBalance();
+        		totalBalance += vo.getBalance();
         	}
         	//자릿수 표기 + 원 붙이기
         	NumberFormat numFormat = NumberFormat.getInstance(Locale.KOREA);
         	String formattedTotalBalance = numFormat.format(totalBalance) + "원";
         	
-        	
+        	//조회기준일시 표기
         	LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter datetimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
             String formattedNow = now.format(datetimeFormat);
@@ -51,8 +51,7 @@ public class InquiryController extends BasicController {
         	session.setAttribute("formattedTotalBalance", formattedTotalBalance);
         	session.setAttribute("formattedNow", formattedNow);
         	
-        	
-        	System.out.println("현재 로그인: " + (UserVO) request.getAttribute("loginUser"));
+        	System.out.println("현재 로그인: " + (UserVO) session.getAttribute("loginUser"));
 		}
 		return "/jsp/inquiry.jsp";
 	}

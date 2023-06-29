@@ -2,42 +2,71 @@ package bank.transaction;
 
 //거래
 public class TransactionVO {
+	//0629 은행코드신규추가
+	//senderBank, AccNo가 무조건 내 계좌로 고정인 상태.
+	//입금이 발생한 경우 금액은 +일것이고
+	//출금이 발생한 경우 금액은 -겠지
+	
 	private String transactionNo;
+	private String senderBank; //내계좌
 	private String senderAccountNo;
+	private String receiverBank; //상대계좌
 	private String receiverAccountNo;
 	private String amount;
 	private String date;
 	private String time;
 	private String type;
+	private String balance;
+	private String toMemo; //보내는 메모
+	private String fromMemo; //내통장 메모
 	
-	private String previousBalance;
-	private String toMemo;
-	private String fromMemo;
+	
 
 	public TransactionVO() {
 		super();
 	}
 	
 	
+
 	
-	//계좌별 입출금거래내역 조회
-	public TransactionVO(String transactionNo, String date, String time, String type, String amount, String fromMemo, String previousBalance) {
-		super();
-		this.transactionNo = transactionNo;
-		this.date = date;
-		this.time = time;
-		this.type = type;
-		this.amount = amount;
-		this.fromMemo = fromMemo;
-		this.previousBalance = previousBalance;
+	
+	
+	
+	
+	
+	
+
+	public String getSenderBank() {
+		return senderBank;
 	}
 
+
+
+	public void setSenderBank(String senderBank) {
+		this.senderBank = senderBank;
+	}
+
+
+
+	public String getReceiverBank() {
+		return receiverBank;
+	}
+
+
+
+	public void setReceiverBank(String receiverBank) {
+		this.receiverBank = receiverBank;
+	}
+
+
+	
 
 
 
 	public String getTransactionNo() {
 		return transactionNo;
 	}
+
 
 	public void setTransactionNo(String transactionNo) {
 		this.transactionNo = transactionNo;
@@ -91,12 +120,12 @@ public class TransactionVO {
 		this.type = type;
 	}
 
-	public String getPreviousBalance() {
-		return previousBalance;
+	public String getBalance() {
+		return balance;
 	}
 
-	public void setPreviousBalance(String previousBalance) {
-		this.previousBalance = previousBalance;
+	public void setBalance(String balance) {
+		this.balance = balance;
 	}
 
 	public String getToMemo() {
@@ -117,20 +146,20 @@ public class TransactionVO {
 
 	//거래내역 등록
 	public TransactionVO(String transactionNo, String senderAccountNo, String receiverAccountNo, String amount,
-			String type, String previousBalance, String toMemo, String fromMemo) {
+			String type, String balance, String toMemo, String fromMemo) {
 		super();
 		this.transactionNo = transactionNo;
 		this.senderAccountNo = senderAccountNo;
 		this.receiverAccountNo = receiverAccountNo;
 		this.amount = amount;
 		this.type = type;
-		this.previousBalance = previousBalance;
+		this.balance = balance;
 		this.toMemo = toMemo;
 		this.fromMemo = fromMemo;
 	}
 	//거래내역 가져오기
 	public TransactionVO(String transactionNo, String senderAccountNo, String receiverAccountNo, String amount,
-			String date, String time, String type, String previousBalance, String toMemo, String fromMemo) {
+			String date, String time, String type, String balance, String toMemo, String fromMemo) {
 		super();
 		this.transactionNo = transactionNo;
 		this.senderAccountNo = senderAccountNo;
@@ -139,12 +168,23 @@ public class TransactionVO {
 		this.date = date;
 		this.time = time;
 		this.type = type;
-		this.previousBalance = previousBalance;
+		this.balance = balance;
 		this.toMemo = toMemo;
 		this.fromMemo = fromMemo;
 	}
 	
-	
+	//계좌별 입출금거래내역 조회
+		public TransactionVO(String transactionNo, String date, String time, String type, String amount, String fromMemo, String balance) {
+			super();
+			this.transactionNo = transactionNo;
+			this.date = date;
+			this.time = time;
+			this.type = type;
+			this.amount = amount;
+			this.fromMemo = fromMemo;
+			this.balance = balance;
+		}
+
 	
 	
 	

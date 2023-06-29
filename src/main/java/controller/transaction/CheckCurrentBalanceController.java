@@ -24,7 +24,7 @@ public class CheckCurrentBalanceController extends BasicController {
 
 		// 있는 계좌 정보라면 계좌조회
 		if (account != null) {
-			long balance = account.getTotalBalance();
+			long balance = Long.valueOf(account.getBalance());
 			
         	//자릿수 표기 + 원 붙이기
         	NumberFormat numFormat = NumberFormat.getInstance(Locale.KOREA);

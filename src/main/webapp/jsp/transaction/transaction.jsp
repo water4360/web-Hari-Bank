@@ -46,6 +46,7 @@
 										(${myAccount.productName})</option>
 								</c:forEach>
 							</select>
+							<input type="hidden" name="senderBankCode" value="0758">
 							<div id="senderAccountNo-feedback" style="display: none;"></div>
 							<div style="display: inline-block;" class="mt-2">
 								<input type="button" class="btn btn-secondary" value="잔액조회"
@@ -53,7 +54,7 @@
 								<div id="currentBalance" style="display: inline-block;"></div>
 							</div>
 						</div>
-						<div class="mb-3">
+						<div>
 							<label for="accountPassword" class="form-label">계좌 비밀번호</label> <input
 								type="password" class="form-control mb-2" id="accountPassword"
 								name="accountPassword" maxlength="4">
@@ -62,7 +63,7 @@
 					</div>
 				</div>
 
-				<div class="card mx-auto mt-5 mb-5" style="width: 30rem;">
+				<div class="card mx-auto mt-1 mb-5" style="width: 30rem;">
 					<div class="card-header" align="center">
 						<h5 class="card-title">입금 정보</h5>
 					</div>
@@ -73,8 +74,7 @@
 								name="receiverBankCode">
 								<!-- Options here -->
 								<c:forEach var="bank" items="${bankList}">
-									<option value="${bank.bankCode}">${bank.bankName}
-										(${bank.bankCode})</option>
+									<option value="${bank.bankCode}">${bank.bankName}</option>
 								</c:forEach>
 							</select>
 							<div id="receiverBankCode-feedback" style="display: none;"></div>
@@ -89,6 +89,18 @@
 							<label for="transferAmount" class="form-label">이체 금액</label> <input
 								type="text" class="form-control" id="transferAmount"
 								name="transferAmount">
+							<div id="transferAmount-feedback" style="display: none;"></div>
+						</div>
+						<div class="mb-3">
+							<label for="to-memo" class="form-label">받는통장 메모</label> <input
+								type="text" class="form-control" id="toMemo"
+								name="toMemo" placeholder="(선택)7자 이내 입력">
+							<div id="transferAmount-feedback" style="display: none;"></div>
+						</div>
+						<div class="mb-3">
+							<label for="from-memo" class="form-label">내통장 메모</label> <input
+								type="text" class="form-control" id="fromMemo"
+								name="fromMemo" placeholder="(선택)7자 이내 입력">
 							<div id="transferAmount-feedback" style="display: none;"></div>
 						</div>
 						<div class="d-flex justify-content-center mt-5">
@@ -187,7 +199,8 @@
 
 		//필드 유효성 검사
 		// 필드 값 변경 감지
-		$('#senderAccountNo, #accountPassword, #receiverBankCode, #receiverAccountNo, #transferAmount')
+		$(
+				'#senderAccountNo, #accountPassword, #receiverBankCode, #receiverAccountNo, #transferAmount')
 				.on('change keyup', function() {
 					let id = $(this).attr('id');
 					let value = $(this).val();
@@ -198,54 +211,55 @@
 					}
 				});
 
-		$('form').on(
-		'submit',
-		function(e) {
-			let senderAccountNo = $('#senderAccountNo').val();
-			let accountPassword = $('#accountPassword').val();
-			let receiverBankCode = $('#receiverBankCode').val();
-			let receiverAccountNo = $('#receiverAccountNo')
-					.val();
-			let transferAmount = $('#transferAmount').val();
+		$('form')
+				.on(
+						'submit',
+						function(e) {
+							let senderAccountNo = $('#senderAccountNo').val();
+							let accountPassword = $('#accountPassword').val();
+							let receiverBankCode = $('#receiverBankCode').val();
+							let receiverAccountNo = $('#receiverAccountNo')
+									.val();
+							let transferAmount = $('#transferAmount').val();
 
-			// 모든 필드가 제대로 입력되었는지 확인합니다.
-			if (!senderAccountNo || !accountPassword
-					|| !receiverBankCode || !receiverAccountNo
-					|| !transferAmount) {
-				// 각 필드가 비어있는 경우에 대한 메시지를 설정합니다.
-				if (!senderAccountNo) {
-					$('#senderAccountNo-feedback').text(
-							'출금 계좌를 선택해주세요')
-							.css('color', 'red').show();
-				}
-				if (!accountPassword) {
-					$('#accountPassword-feedback').text(
-							'계좌 비밀번호를 입력해주세요').css('color',
-							'red').show();
-				}
-				if (!receiverBankCode) {
-					$('#receiverBankCode-feedback').text(
-							'입금 은행을 선택해주세요')
-							.css('color', 'red').show();
-				}
-				if (!receiverAccountNo) {
-					$('#receiverAccountNo-feedback').text(
-							'입금 계좌 번호를 입력해주세요').css('color',
-							'red').show();
-				}
-				if (!transferAmount) {
-					$('#transferAmount-feedback').text(
-							'이체 금액을 입력해주세요')
-							.css('color', 'red').show();
-				}
+							// 모든 필드가 제대로 입력되었는지 확인합니다.
+							if (!senderAccountNo || !accountPassword
+									|| !receiverBankCode || !receiverAccountNo
+									|| !transferAmount) {
+								// 각 필드가 비어있는 경우에 대한 메시지를 설정합니다.
+								if (!senderAccountNo) {
+									$('#senderAccountNo-feedback').text(
+											'출금 계좌를 선택해주세요')
+											.css('color', 'red').show();
+								}
+								if (!accountPassword) {
+									$('#accountPassword-feedback').text(
+											'계좌 비밀번호를 입력해주세요').css('color',
+											'red').show();
+								}
+								if (!receiverBankCode) {
+									$('#receiverBankCode-feedback').text(
+											'입금 은행을 선택해주세요')
+											.css('color', 'red').show();
+								}
+								if (!receiverAccountNo) {
+									$('#receiverAccountNo-feedback').text(
+											'입금 계좌 번호를 입력해주세요').css('color',
+											'red').show();
+								}
+								if (!transferAmount) {
+									$('#transferAmount-feedback').text(
+											'이체 금액을 입력해주세요')
+											.css('color', 'red').show();
+								}
 
-				// 이벤트의 기본 동작을 중단합니다.
-				e.preventDefault();
-			} else {
-				// 모든 필드가 제대로 입력되었으면, 모든 피드백 메시지를 숨깁니다.
-				$('.feedback').text('').hide();
-			}
-		});
+								// 이벤트의 기본 동작을 중단합니다.
+								e.preventDefault();
+							} else {
+								// 모든 필드가 제대로 입력되었으면, 모든 피드백 메시지를 숨깁니다.
+								$('.feedback').text('').hide();
+							}
+						});
 	</script>
 
 

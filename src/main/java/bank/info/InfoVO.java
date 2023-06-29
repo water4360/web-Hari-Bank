@@ -3,7 +3,6 @@ package bank.info;
 public class InfoVO {
 	private String bankCode;
 	private String bankName;
-	private String userId;
 
 	public InfoVO() {
 		super();
@@ -23,14 +22,6 @@ public class InfoVO {
 
 	public void setBankName(String bankName) {
 		this.bankName = bankName;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
 	}
 
 	public InfoVO(String bankCode, String bankName) {

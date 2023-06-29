@@ -12,26 +12,40 @@ public class TransactionProcessController extends BasicController {
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 			session = request.getSession();
+			//사용자입력 거래정보 등록
+			
+			String senderBank = request.getParameter("senderBankCode");
 			String senderAccountNo = request.getParameter("senderAccountNo");
-			String accountPw = request.getParameter("accountPassword");
-			String receiverBankCode = request.getParameter("receiverBankCode");
+			String receiverBank = request.getParameter("receiverBankCode");
 			String receiverAccountNo = request.getParameter("receiverAccountNo");
+			String senderMemo = request.getParameter("toMemo");
+			String receiverMemo = request.getParameter("fromMemo");
 			
 			AccountVO account = daoService.getAccountInfo(senderAccountNo);
+			
+			//현재 계좌 잔고
+			String balance = String.valueOf(account.getBalance());
+			String amount = request.getParameter("transferAmount");
+			
+			System.out.printf("보내는은행 : %s, 보내는계좌 : %s, 받는은행 : %s, 받는계좌 : %s, 금액 : %s,\n"
+					+ " 현재잔고 : %s, 보내는메모 : %s, 내통장메모 : %s",
+					senderBank, senderAccountNo, receiverBank, receiverAccountNo, amount, 
+					balance, senderMemo, receiverMemo);
+			
+			TransactionVO vo = new TransactionVO();
+			vo.setSenderBank(senderBank);
+			vo.setSenderAccountNo(senderAccountNo);
+			vo.setReceiverBank(receiverBank);
+			vo.setReceiverAccountNo(receiverAccountNo);
+			vo.setAmount(amount);
+			vo.setBalance(balance);
+			vo.setToMemo(senderMemo);
+			vo.setFromMemo(receiverMemo);
+			
 
-			// 있는 계좌 정보라면 계좌조회
-			long currentBalance = account.getTotalBalance();
+			String result = daoService.insertTransactionInfo(vo);
+
 			
-			long amount = Long.valueOf(request.getParameter("transferAmount"));
-        	
-			
-			System.out.printf("보내는계좌 : %s, 계좌비번 : %s, 받는은행 : %s, 받는계좌 : %s, 금액 : %d\n",
-					senderAccountNo, accountPw, receiverBankCode, receiverAccountNo, amount);
-			
-			//헐 비밀번호도 집어넣어야지!
-			String result = daoService.insertTransactionInfo("0758", senderAccountNo, accountPw, 
-					receiverBankCode, receiverAccountNo, amount, currentBalance);
-//			daoService.transferMoney(senderAccountNo, accountPw, receiverAccountNo, amount);
 			request.setAttribute("account", account);
 			request.setAttribute("result", result);
 			

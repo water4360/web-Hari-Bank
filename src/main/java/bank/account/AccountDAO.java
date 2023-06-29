@@ -147,12 +147,19 @@ public class AccountDAO {
 				String productCode = rs.getString("D_PRODUCT_CODE");
 				String id = rs.getString("USER_ID");
 				String bankCode = rs.getString("B_BANK_CODE");
+				
+				String bankName = rs.getString("B_BANK_NAME");
 				String productName = rs.getString("D_PRODUCT_NAME");
+				long totalBalance = 0;
+				totalBalance += rs.getLong("TOTAL_BALANCE");
 				
-//				NumberFormat numFormat = NumberFormat.getInstance(Locale.KOREA);
-//		    	String formattedTotalBalance = numFormat.format(balance);
 				
-				vo = new AccountVO(no, pw, date, balance, nickname, productCode, id, bankCode, productName);
+				
+				//표기용 전체잔고
+				NumberFormat numFormat = NumberFormat.getInstance(Locale.KOREA);
+		    	String formattedBalance = numFormat.format(totalBalance);
+				
+				vo = new AccountVO(no, pw, date, balance, nickname, productCode, id, bankName, bankCode, productName, formattedBalance);
 				list.add(vo);
 			}
 			System.out.println("accountDAO 체크 : " + list.size());

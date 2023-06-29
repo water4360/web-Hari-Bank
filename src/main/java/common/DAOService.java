@@ -118,13 +118,13 @@ public class DAOService {
 	 */
 
 	//이체
-	public int transferMoney(String senderAccountNo, String accountPw, String receiverAccountNo, long amount) throws Exception {
-		return td.transferMoney(senderAccountNo, accountPw, receiverAccountNo, amount);
+	public int transferMoney(String senderBankCode, String senderAccountNo, String receiverBankCode, String receiverAccountNo, long amount) throws Exception {
+		return td.transferMoney(senderBankCode, senderAccountNo, receiverBankCode, receiverAccountNo, amount);
 	}
 	
 	//거래정보 등록
-	public String insertTransactionInfo(String senderBankCode, String senderAccountNo, String accountPw, String receiverBankCode, String receiverAccountNo, long amount, long currentBalance) throws Exception {
-		return td.insertTransactionInfo(senderBankCode, senderAccountNo, accountPw, receiverBankCode, receiverAccountNo, amount, currentBalance);
+	public String insertTransactionInfo(TransactionVO vo) throws Exception {
+		return td.insertTransactionInfo(vo);
 	}
 	
 	//거래내역 조회

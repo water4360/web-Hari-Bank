@@ -39,7 +39,7 @@ public class InquiryDetailController extends BasicController {
         	DepositVO deposit = daoService.getDepositInfo(code);
         	
         	//자릿수 표기 + 원 붙이기
-        	long totalBalance = account.getTotalBalance();
+        	long totalBalance = Long.valueOf(account.getBalance());
         	NumberFormat numFormat = NumberFormat.getInstance(Locale.KOREA);
         	String formattedTotalBalance = numFormat.format(totalBalance) + "원";
         	

@@ -39,13 +39,13 @@
 	</header>
 	<section>
 
-		<div class="container mt-5">
-			<div class="text-center mb-4">
+		<div class="container mt-5 mb-7" align="center">
+			<div class="text-center mb-3">
 				<h2>계좌상세조회</h2>
 				<p>조회기준일시 : ${formattedNow}</p>
 			</div>
 
-			<div class="card mx-auto" style="width: 30rem;">
+			<div class="card mx-auto mb-3" style="width: 30rem;">
 				<div class="card-header" align="center">
 					<h5 class="card-title">${account.accountNo}</h5>
 					<p class="card-text">${deposit.name}
@@ -81,9 +81,7 @@
 					</div>
 				</div>
 			</div>
-
-			<h2>거래내역</h2>
-			<table class="table table-striped fixed-table">
+			<table class="table table-striped fixed-table mb-7" style="width: 60rem;">
 				<thead class="thead-dark">
 					<tr class="text-white bg-secondary">
 						<th>거래일자</th>
@@ -96,7 +94,7 @@
 					<c:choose>
 						<c:when test="${ empty transactionList }">
 							<tr>
-								<td colspan="5" class="text-center">거래내역이 존재하지 않습니다.</td>
+								<td colspan="6" class="text-center">거래내역이 존재하지 않습니다.</td>
 							</tr>
 						</c:when>
 						<c:otherwise>
@@ -107,7 +105,7 @@
 								<td>${trans.type}</td>
 								<td>${trans.amount}</td>
 								<td>${trans.fromMemo}</td>
-								<td>${trans.previousBalance}</td>
+								<td>${trans.balance}</td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>

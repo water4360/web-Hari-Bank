@@ -4,12 +4,15 @@ public class AccountVO {
 	private String accountNo;
 	private String accountPw;
 	private String createdDate;
-	private long totalBalance;
+	private long balance;
 	private String accountNickname;
 	private String productCode;
 	private String userId;
 	private String bankCode;
+	
+	private String bankName;
 	private String productName;
+	private String totalBalnce;
 	
 	
 	private String firstName;
@@ -23,13 +26,13 @@ public class AccountVO {
 	}
 	
 	//간단 계좌생성
-	public AccountVO(String accountNo, String accountPw, String createdDate, long totalBalance,
+	public AccountVO(String accountNo, String accountPw, String createdDate, long balance,
 			String accountNickname, String productCode, String userId, String bankCode) {
 		super();
 		this.accountNo = accountNo;
 		this.accountPw = accountPw;
 		this.createdDate = createdDate;
-		this.totalBalance = totalBalance;
+		this.balance = balance;
 		this.accountNickname = accountNickname;
 		this.productCode = productCode;
 		this.userId = userId;
@@ -38,18 +41,35 @@ public class AccountVO {
 	
 	
 	//계좌정보 가져오기
-	public AccountVO(String accountNo, String accountPw, String createdDate, long totalBalance, String accountNickname,
+	public AccountVO(String accountNo, String accountPw, String createdDate, long balance, String accountNickname,
 			String productCode, String userId, String bankCode, String productName) {
 		super();
 		this.accountNo = accountNo;
 		this.accountPw = accountPw;
 		this.createdDate = createdDate;
-		this.totalBalance = totalBalance;
+		this.balance = balance;
 		this.accountNickname = accountNickname;
 		this.productCode = productCode;
 		this.userId = userId;
 		this.bankCode = bankCode;
-		this.setProductName(productName);
+		this.productName = productName;
+	}
+	// 전체 잔액이 포함된 계좌정보 가져오기
+	public AccountVO(String accountNo, String accountPw, String createdDate, long balance, String accountNickname,
+			String productCode, String userId, String bankName, String bankCode, String productName, String totalBalance) {
+		super();
+		this.accountNo = accountNo;
+		this.accountPw = accountPw;
+		this.createdDate = createdDate;
+		this.balance = balance;
+		this.accountNickname = accountNickname;
+		this.productCode = productCode;
+		this.userId = userId;
+		this.bankCode = bankCode;
+		
+		this.bankName = bankName;
+		this.productName = productName;
+		this.totalBalnce = totalBalance;
 	}
 	
 	
@@ -58,10 +78,14 @@ public class AccountVO {
 	public String getBankCode() {
 		return bankCode;
 	}
-
-
 	public void setBankCode(String bankCode) {
 		this.bankCode = bankCode;
+	}
+	public String getBankName() {
+		return bankName;
+	}
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
 	}
 	public String getUserId() {
 		return userId;
@@ -105,11 +129,17 @@ public class AccountVO {
 	public void setAccountPw(String accountPw) {
 		this.accountPw = accountPw;
 	}
-	public long getTotalBalance() {
-		return totalBalance;
+	public long getBalance() {
+		return balance;
 	}
-	public void setTotalBalance(long totalBalance) {
-		this.totalBalance = totalBalance;
+	public void setBalance(long balance) {
+		this.balance = balance;
+	}
+	public String getTotalBalance() {
+		return totalBalnce;
+	}
+	public void setTotalBalance(String totalBalance) {
+		this.totalBalnce = totalBalance;
 	}
 	public String getBenefitCode() {
 		return benefitCode;
