@@ -94,22 +94,48 @@
 						<div class="mb-3">
 							<label for="to-memo" class="form-label">받는통장 메모</label> <input
 								type="text" class="form-control" id="toMemo"
-								name="toMemo" placeholder="(선택)7자 이내 입력">
+								name="toMemo" placeholder="(선택)7자 이내 입력" maxlength="21">
 							<div id="transferAmount-feedback" style="display: none;"></div>
 						</div>
 						<div class="mb-3">
 							<label for="from-memo" class="form-label">내통장 메모</label> <input
 								type="text" class="form-control" id="fromMemo"
-								name="fromMemo" placeholder="(선택)7자 이내 입력">
+								name="fromMemo" placeholder="(선택)7자 이내 입력" maxlength="21">
 							<div id="transferAmount-feedback" style="display: none;"></div>
 						</div>
 						<div class="d-flex justify-content-center mt-5">
-							<button type="submit" class="btn btn-primary">이체하기</button>
+<!-- 							<button type="submit" class="btn btn-primary">이체하기</button> -->
+							<button type="submit" class="btn btn-success">이체실행</button>
+							
+							
 						</div>
 					</div>
 				</div>
 			</form>
 		</div>
+
+
+<!-- Modal -->
+		<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="confirmModalLabel">이체 정보 확인</h5>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body" id="confirmModalBody">
+		        <!-- This will be filled by the script -->
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+		        <button type="button" class="btn btn-primary" id="confirmTransfer">확인</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+		
+
 
 
 
@@ -211,56 +237,72 @@
 					}
 				});
 
-		$('form')
-				.on(
-						'submit',
-						function(e) {
-							let senderAccountNo = $('#senderAccountNo').val();
-							let accountPassword = $('#accountPassword').val();
-							let receiverBankCode = $('#receiverBankCode').val();
-							let receiverAccountNo = $('#receiverAccountNo')
-									.val();
-							let transferAmount = $('#transferAmount').val();
+		$('form').on('submit', function(e) {
+		    let senderAccountNo = $('#senderAccountNo').val();
+		    let accountPassword = $('#accountPassword').val();
+		    let receiverBankCode = $('#receiverBankCode').val();
+		    let receiverAccountNo = $('#receiverAccountNo').val();
+		    let transferAmount = $('#transferAmount').val();
+		    let toMemo = $('#toMemo').val();
+		    let fromMemo = $('#fromMemo').val();
 
-							// 모든 필드가 제대로 입력되었는지 확인합니다.
-							if (!senderAccountNo || !accountPassword
-									|| !receiverBankCode || !receiverAccountNo
-									|| !transferAmount) {
-								// 각 필드가 비어있는 경우에 대한 메시지를 설정합니다.
-								if (!senderAccountNo) {
-									$('#senderAccountNo-feedback').text(
-											'출금 계좌를 선택해주세요')
-											.css('color', 'red').show();
-								}
-								if (!accountPassword) {
-									$('#accountPassword-feedback').text(
-											'계좌 비밀번호를 입력해주세요').css('color',
-											'red').show();
-								}
-								if (!receiverBankCode) {
-									$('#receiverBankCode-feedback').text(
-											'입금 은행을 선택해주세요')
-											.css('color', 'red').show();
-								}
-								if (!receiverAccountNo) {
-									$('#receiverAccountNo-feedback').text(
-											'입금 계좌 번호를 입력해주세요').css('color',
-											'red').show();
-								}
-								if (!transferAmount) {
-									$('#transferAmount-feedback').text(
-											'이체 금액을 입력해주세요')
-											.css('color', 'red').show();
-								}
+		    // 모든 필드가 제대로 입력되었는지 확인합니다.
+		    if (!senderAccountNo || !accountPassword || !receiverBankCode || !receiverAccountNo || !transferAmount) {
+		        // 각 필드가 비어있는 경우에 대한 메시지를 설정합니다.
+		        if (!senderAccountNo) {
+		            $('#senderAccountNo-feedback').text('출금 계좌를 선택해주세요').css('color', 'red').show();
+		        }
+		        if (!accountPassword) {
+		            $('#accountPassword-feedback').text('계좌 비밀번호를 입력해주세요').css('color', 'red').show();
+		        }
+		        if (!receiverBankCode) {
+		            $('#receiverBankCode-feedback').text('입금 은행을 선택해주세요').css('color', 'red').show();
+		        }
+		        if (!receiverAccountNo) {
+		            $('#receiverAccountNo-feedback').text('입금 계좌 번호를 입력해주세요').css('color', 'red').show();
+		        }
+		        if (!transferAmount) {
+		            $('#transferAmount-feedback').text('이체 금액을 입력해주세요').css('color', 'red').show();
+		        }
 
-								// 이벤트의 기본 동작을 중단합니다.
-								e.preventDefault();
-							} else {
-								// 모든 필드가 제대로 입력되었으면, 모든 피드백 메시지를 숨깁니다.
-								$('.feedback').text('').hide();
-							}
-						});
+		        // 이벤트의 기본 동작을 중단합니다.
+		        e.preventDefault();
+		    } else {
+		        // 모든 필드가 제대로 입력되었으면, 모든 피드백 메시지를 숨깁니다.
+		        $('.feedback').text('').hide();
+		        
+		        // 사용자에게 확인을 요청합니다.
+		        let confirmation = confirm(`출금 계좌: ${senderAccountNo}\n입금 은행 코드: ${receiverBankCode}\n입금 계좌: ${receiverAccountNo}\n이체 금액: ${transferAmount}\n받는통장 메모: ${toMemo}\n내통장 메모: ${fromMemo}\n\n위의 정보가 맞습니까?`);
+		        if (!confirmation) {
+		            // 사용자가 취소를 누른 경우 이벤트의 기본 동작을 중단합니다.
+		            e.preventDefault();
+		        }
+		    }
+		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
+		
+		
+		
+		
+		
+		
 	</script>
+
+
+
+
 
 
 

@@ -84,34 +84,6 @@ public class TransactionDAO {
 		}
 	}
 
-//	// 거래번호 생성
-//	public String generateTransactionNo() throws Exception {
-//		StringBuilder sql = new StringBuilder();
-//		String transactionNo = null;
-//
-//		sql.append("SELECT TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS') ");
-//		sql.append(" ||'-'|| LPAD(seq_transaction_no.nextval, 3, '0')");
-//		sql.append("  AS TRANSACTION_NO FROM dual ");
-//
-//		try (Connection conn = new ConnectionFactory().getConnection();
-//				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
-//
-//			ResultSet rs = pstmt.executeQuery();
-//
-//			while (rs.next()) {
-//				transactionNo = rs.getString("TRANSACTION_NO");
-//
-//			}
-//			System.out.println("거래번호(DAO) 생성완료");
-//			return transactionNo;
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			System.out.println("거래번호생성에러(DAO)");
-//		}
-//		return null;
-//	}
-
 	// 계좌내역의 아이디를 통해 유저의 이름 가져오기
 //	SELECT UI.KOR_NAME, UA.ACCOUNT_NO
 //	FROM B_USER_ACCOUNT UA
@@ -203,22 +175,19 @@ public class TransactionDAO {
 		
 		StringBuilder sql = new StringBuilder();
 		
+		//넘어오는 값들.
 		String senderBank = vo.getSenderBank();
 		String senderAccountNo = vo.getSenderAccountNo();
 		String receiverBank = vo.getReceiverBank();
 		String receiverAccountNo = vo.getReceiverAccountNo();
 		long amount = Long.valueOf(vo.getAmount());
 		long balance = Long.valueOf(vo.getBalance());
-		
 		String toMemo = vo.getToMemo();
 		String fromMemo = vo.getFromMemo();
 		
 		
-		int result = transferMoney(vo.getSenderBank(), vo.getSenderAccountNo(), 
-				vo.getReceiverBank(), vo.getReceiverAccountNo(), Long.valueOf(vo.getAmount()));
+		int result = transferMoney(senderBank, senderAccountNo, receiverBank, receiverAccountNo, amount);
 		String resultMsg = null;
-//		String transactionNo = generateTransactionNo();
-
 		
 		int idx = 1;
 		// 보내는은행, 보내는계쫘, 받는은행, 받는계좌, 금액, 구분, 보내는메모, 남기는메모, 처리상태, 잔고
@@ -253,7 +222,7 @@ public class TransactionDAO {
 			String receiverName = getUserNameByAccountNo(receiverBank, receiverAccountNo);
 			
 			// 보내는 메모
-			if (toMemo == null) {
+			if (toMemo.equals("")) {
 				// 메모가 따로 없으면 계좌주의 이름.
 				pstmt.setString(idx++, senderName);
 			} else {
@@ -261,7 +230,7 @@ public class TransactionDAO {
 			}
 			
 			// 남기는 메모
-			if (fromMemo == null) {
+			if (fromMemo.equals("")) {
 				// 메모가 따로 없으면 받는 사람의 이름.
 				pstmt.setString(idx++, receiverName);
 			} else {

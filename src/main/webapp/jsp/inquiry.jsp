@@ -30,12 +30,6 @@
 	white-space: nowrap;
 }
 </style>
-<script>
-    $(document).ready(function() {
-        $('#copyModal').modal();
-    });
-</script>
-
 
 </head>
 
@@ -124,42 +118,18 @@
 		</div>
 
 
-		<%-- 계좌번호 복사 모달 --%>
-		<div class="modal fade" id="copyModal" tabindex="-1"
-			aria-labelledby="copyModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="copyModalLabel">알림</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
-					<div class="modal-body">
-						<p>계좌번호가 복사되었습니다.</p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-bs-dismiss="modal">닫기</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
 <script>
-    function copyToClipboard(text) {
-        navigator.clipboard.writeText(text)
-            .then(() => {
-                // 모달 표시
-                $('#copyModal').modal('show');
-            })
-            .catch((error) => {
-                console.error("계좌번호 복사 실패:", error);
-            });
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text)
+        .then(() => {
+            // 모달 표시
+            alert('계좌번호가 복사되었습니다. ctrl+v로 붙여넣기 할 수 있습니다.');
+        })
+        .catch((error) => {
+            console.error("계좌번호 복사 실패:", error);
+        });
     }
 </script>
-
-
 
 
 
