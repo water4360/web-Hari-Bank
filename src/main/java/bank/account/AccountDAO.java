@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Locale;
 
 import bank.transaction.TransactionVO;
+import bank.user.UserVO;
 import common.ConnectionFactory;
 
 public class AccountDAO {
@@ -166,7 +167,116 @@ public class AccountDAO {
 
 		return list;
 	}
+	
+	
+	
+	
+	
+	
+	///////////////////오픈뱅킹 계좌조회
+	//생각해보자.
+	//1. 이름, 생년월일, 폰번호가 일치하는 회원이 각 은행의 DB에 있는지 먼저 확인=boolean.
+	//2. 은행상관없이 리스트에 넣어. 결과에 따라 계좌 정보 가져오기.
+	//은행코드에 따라 다른 쿼리 실행.
+	
+	public List<AccountVO> getOpenbankAccountListByUserInfo(UserVO user) {
+		List<AccountVO> list = new ArrayList<>();
+		StringBuilder sql = new StringBuilder();
+		
+		int idx = 1;
+		sql.append("SELECT UA.*, BI.B_BANK_NAME, BD.D_PRODUCT_NAME ");
+		sql.append("FROM B_USER_ACCOUNT UA ");
+		sql.append("WHERE UA.USER_ID = ? ");
+		
+		
+		String userName =  user.getKorName();
+		String birthDate = user.getBirthdate();
+		String phone =  user.getPhone();
+		String bankCode = user.getBankCode();
+		
+		try (Connection conn = new ConnectionFactory().getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
+			pstmt.setString(idx++, userName);
+			pstmt.setString(idx++, birthDate);
+			pstmt.setString(idx++, phone);
+			
+			
+			switch (bankCode) {
+			case "0758":
+				sql.append("SELECT * FROM B_USER_ACCOUNT ");
+				sql.append("WHERE B_BANK_CODE=? AND ACCOUNT_NO=? ");
+				break;
+			case "JH":
+				sql.append("SELECT * FROM BANK_ACCOUNT @JHBANK");
+				sql.append("WHERE BANK_CD= ? AND ACCOUNT_NO = ? ");
+				break;
+			case "BGH":
+				sql.append("SELECT * FROM B_ACCOUNT @BGHBank ");
+				sql.append("WHERE BANK_CODE= ? AND ACCOUNT_NO = ? ");
+				break;
+			case "H.J":
+				sql.append("SELECT * FROM B_ACCOUNT @HJBANK ");
+				sql.append("WHERE BANKCODE= ? AND ACCOUNT_NO = ? ");
+				break;
+			default:
+				System.out.println(bankCode + " << 받는 은행코드가 스위치에 없나봄?");
+				break;
+			}
+			
+			
+			
+			
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			// ID가 존재하면 쿼리를 실행하고
+			while (rs.next()) {
+				String no = rs.getString("ACCOUNT_NO");
+				String pw = rs.getString("ACCOUNT_PASSWORD");
+				String date = rs.getString("CREATED_DATE");
+				long balance = rs.getLong("TOTAL_BALANCE");
+				String nickname = rs.getString("ACCOUNT_NICKNAME");
+				String productCode = rs.getString("D_PRODUCT_CODE");
+				String id = rs.getString("USER_ID");
+				String openBankCode = rs.getString("B_BANK_CODE");
+				
+				String bankName = rs.getString("B_BANK_NAME");
+				String productName = rs.getString("D_PRODUCT_NAME");
+				long totalBalance = 0;
+				totalBalance += rs.getLong("TOTAL_BALANCE");
+				
+				// 표기용 전체잔고
+				NumberFormat numFormat = NumberFormat.getInstance(Locale.KOREA);
+				String formattedBalance = numFormat.format(totalBalance);
+				
+				AccountVO vo = new AccountVO(no, pw, date, balance, nickname, productCode, id, bankName, openBankCode, productName,
+						formattedBalance);
+				list.add(vo);
+			}
+			System.out.println("accountDAO 체크 : " + list.size());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// 단일계좌 상세조회
 	public AccountVO getAccountInfo(String no) {
 		StringBuilder sql = new StringBuilder();

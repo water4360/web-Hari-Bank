@@ -64,6 +64,7 @@
 				align="center">
 				<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 					<li class="nav-item"><a class="nav-link" href="inquiry.do">조회</a></li>
+					<li class="nav-item"><a class="nav-link" href="inquiry-op.do">오픈뱅킹</a></li>
 					<li class="nav-item"><a class="nav-link" href="transaction.do">이체</a></li>
 					<li class="nav-item"><a class="nav-link" href="products.do">금융상품</a></li>
 					<li class="nav-item"><a class="nav-link" href="customer.do">고객센터</a></li>
