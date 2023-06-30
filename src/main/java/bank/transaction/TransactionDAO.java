@@ -158,19 +158,15 @@ public class TransactionDAO {
 
 	/*
 	 * 
-	 * 자, 지금 출금은행코드랑 입금은행코드가 뒤섞였죠??? 이거 구분하고. 테이블에서 B_BANK_CODE도 T_SENDER_BANK_CODE로
+	 * 자, 지금 출금은행코드랑 입금은행코드가 뒤섞였죠??? 이거 구분하고.
+	 * 테이블에서 B_BANK_CODE도 T_SENDER_BANK_CODE로
 	 * 고쳐서 명확하게 하고 T_RECEIVER_BANK_CODE로 명확하게 하고
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
 	 * 
 	 * 
 	 */
 
 	// 당행에 이체거래내역 등록
+	// 입금 출금 둘 다!!!!
 	public String insertTransactionInfo(TransactionVO vo) throws Exception {
 		
 		StringBuilder sql = new StringBuilder();
@@ -189,12 +185,13 @@ public class TransactionDAO {
 		int result = transferMoney(senderBank, senderAccountNo, receiverBank, receiverAccountNo, amount);
 		String resultMsg = null;
 		
+		//입금계좌용 기록남기기!!!!!!!!!!!!!!!!!!
 		int idx = 1;
 		// 보내는은행, 보내는계쫘, 받는은행, 받는계좌, 금액, 구분, 보내는메모, 남기는메모, 처리상태, 잔고
 		sql.append("INSERT INTO B_TRANSACTION (T_SENDER_BANK_CODE, T_SENDER_ACCOUNT_NO, ");
 		sql.append(" T_RECEIVER_BANK_CODE, T_RECEIVER_ACCOUNT_NO, ");
-		sql.append(" T_AMOUNT, T_TYPE, T_TO_MEMO, T_FROM_MEMO, T_STATUS, T_PREVIOUS_BALANCE) ");
-		sql.append(" VALUES(?, ?,  ?, ?,  ?, ?, ?, ?, ?, ?) ");
+		sql.append(" T_AMOUNT, T_TYPE, T_TO_MEMO, T_FROM_MEMO, T_STATUS, T_PREVIOUS_BALANCE, T_IN_OUT) ");
+		sql.append(" VALUES(?, ?,  ?, ?,  ?, ?, ?, ?, ?, ?, ?) ");
 		
 		try (Connection conn = new ConnectionFactory().getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
@@ -245,11 +242,13 @@ public class TransactionDAO {
 			if (result == 1) {
 				pstmt.setString(idx++, "이체완료");
 				pstmt.setDouble(idx++, balance - amount);
+				pstmt.setString(idx++, "입금");
 				resultMsg = "이체가 완료되었습니다.";
 			} else {
 				// 실패했을때
 				pstmt.setString(idx++, "이체실패");
 				pstmt.setDouble(idx++, balance);
+				pstmt.setString(idx++, "입금");
 				resultMsg = "이체에 실패했습니다.";
 			}
 			
@@ -259,6 +258,20 @@ public class TransactionDAO {
 			System.out.println("거래내역추가실패(DAO)");
 		}
 		return resultMsg;
+		
+		
+		
+		
+		
+		
+		
+		//출금계좌용 기록 남기기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		
+		
+		
+		
+		
+		
 	}
 	
 	
@@ -450,9 +463,12 @@ public class TransactionDAO {
 	
 	
 	
-	// 거래내역리스트 조회
-	// 입금 또는 출금내역에 계좌가 있는 경우.
-	// 최신순으로 정렬
+	// 0630 다시하자!!!!! 거래내역리스트 조회
+	// sender 계좌에 내계좌는 기본. receiver = 상대계좌.
+	// 입금 출금 구분을 T_IN_OUT 컬럼에서.
+	// 만약 T_IN_OUT에 따라, 금액에 -를 하든, 그대로 두든(양수) 하는 것임.
+	// 그렇다면 TO 메모, FROM 메모는 어떻게 할것인가? 순서를 바꿔서 넣어야지.
+	
 	// SELECT * FROM B_TRANSACTION WHERE T_ACCOUNT_NO = '0758-53920545'
 	// OR T_RECEIVER_ACCOUNT='0758-53920545' ORDER BY T_DATE DESC, T_TIME DESC;
 	public List<TransactionVO> getTransactionList(String no) {
@@ -460,21 +476,17 @@ public class TransactionDAO {
 		TransactionVO vo = null;
 		List<TransactionVO> transList = new ArrayList<TransactionVO>();
 
-		sql.append("SELECT * FROM B_TRANSACTION WHERE T_SENDER_ACCOUNT_NO = ? OR T_RECEIVER_ACCOUNT_NO = ? ");
+		sql.append("SELECT * FROM B_TRANSACTION WHERE T_SENDER_ACCOUNT_NO = ?");
 		sql.append("ORDER BY T_DATE DESC, T_TIME DESC ");
 
 		try (Connection conn = new ConnectionFactory().getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
 			pstmt.setString(1, no);
-			pstmt.setString(2, no);
 
 			ResultSet rs = pstmt.executeQuery();
 
-			// ID가 존재하면 쿼리를 실행하고
+			// no가 존재하면 쿼리를 실행하고
 			// 거래번호, 날짜, 시간, 구분(타행,OP...), 입출금액, 내용 + 잔액?
-			// JSP에서 보내는계좌가 null이면 입금이니까 +금액으로 넣고
-			// 받는계좌가 null이면 출금이니까 -금액으로 넣는걸로.
-			// 내용에는 내통장메모
 			while (rs.next()) {
 				String transactionNo = rs.getString("T_TRANSACTION_NO");
 				String date = rs.getString("T_DATE");
@@ -488,9 +500,9 @@ public class TransactionDAO {
 				String formatedAmount = numFormat.format(amount);
 				String memo = "내용없음";
 
-				// 조회하려는 계좌가 출금계좌인 경우.
-				// TO_MEMO=TO_RECEIVER, FROM_MEMO=FROM_SENDER
-				if (rs.getString("T_SENDER_ACCOUNT_NO").equals(no)) {
+				// 내계좌 출금인 경우.
+				// TO_MEMO=받는통장, FROM_MEMO=내통장
+				if (rs.getString("T_IN_OUT").equals("출금")) {
 					formatedAmount = "- " + formatedAmount;
 					memo = rs.getString("T_FROM_MEMO");
 				} else {
@@ -512,5 +524,83 @@ public class TransactionDAO {
 
 		return transList;
 	}
+	
+	
+	
+	
+	
+	
+	
+//	// 거래내역리스트 조회
+//	// 입금 또는 출금내역에 계좌가 있는 경우.
+//	// 최신순으로 정렬
+//	// SELECT * FROM B_TRANSACTION WHERE T_ACCOUNT_NO = '0758-53920545'
+//	// OR T_RECEIVER_ACCOUNT='0758-53920545' ORDER BY T_DATE DESC, T_TIME DESC;
+//	public List<TransactionVO> getTransactionList(String no) {
+//		StringBuilder sql = new StringBuilder();
+//		TransactionVO vo = null;
+//		List<TransactionVO> transList = new ArrayList<TransactionVO>();
+//
+//		sql.append("SELECT * FROM B_TRANSACTION WHERE T_SENDER_ACCOUNT_NO = ?");
+//		sql.append("ORDER BY T_DATE DESC, T_TIME DESC ");
+//
+//		try (Connection conn = new ConnectionFactory().getConnection();
+//				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
+//			pstmt.setString(1, no);
+//			pstmt.setString(2, no);
+//
+//			ResultSet rs = pstmt.executeQuery();
+//
+//			// ID가 존재하면 쿼리를 실행하고
+//			// 거래번호, 날짜, 시간, 구분(타행,OP...), 입출금액, 내용 + 잔액?
+//			// JSP에서 보내는계좌가 null이면 입금이니까 +금액으로 넣고
+//			// 받는계좌가 null이면 출금이니까 -금액으로 넣는걸로.
+//			// 내용에는 내통장메모
+//			while (rs.next()) {
+//				String transactionNo = rs.getString("T_TRANSACTION_NO");
+//				String date = rs.getString("T_DATE");
+//				String time = rs.getString("T_TIME");
+//				String type = rs.getString("T_TYPE");
+//
+//				// 금액은 자릿수 표기
+//				NumberFormat numFormat = NumberFormat.getInstance(Locale.KOREA);
+//
+//				long amount = rs.getLong("T_AMOUNT");
+//				String formatedAmount = numFormat.format(amount);
+//				String memo = "내용없음";
+//
+//				// 조회하려는 계좌가 출금계좌인 경우.
+//				// TO_MEMO=TO_RECEIVER, FROM_MEMO=FROM_SENDER
+//				if (rs.getString("T_SENDER_ACCOUNT_NO").equals(no)) {
+//					formatedAmount = "- " + formatedAmount;
+//					memo = rs.getString("T_FROM_MEMO");
+//				} else {
+//					formatedAmount = "+ " + formatedAmount;
+//					memo = rs.getString("T_TO_MEMO");
+//				}
+//				long balance = rs.getLong("T_PREVIOUS_BALANCE");
+//
+//				// 자릿수 표기 + 원 붙이기
+//				String formattedBalance = numFormat.format(balance);
+//
+//				vo = new TransactionVO(transactionNo, date, time, type, formatedAmount, memo, formattedBalance);
+//				transList.add(vo);
+//			}
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//
+//		return transList;
+//	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }// end of class

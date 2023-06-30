@@ -43,9 +43,12 @@ public class TransactionProcessController extends BasicController {
 			vo.setFromMemo(receiverMemo);
 			
 
+			boolean checkReceiver = daoService.isCorrectReceiver(vo.getReceiverBank(), vo.getReceiverAccountNo()); 
 			String result = daoService.insertTransactionInfo(vo);
-
 			
+			System.out.println("계좌 유효성 체크 : " + checkReceiver);
+
+			request.setAttribute("receiverAccount", checkReceiver);
 			request.setAttribute("account", account);
 			request.setAttribute("result", result);
 			

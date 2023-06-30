@@ -83,6 +83,11 @@ public class DAOService {
 	public boolean isCorrectAccountPw(String accountNo, String pw) {
 		return ad.isCorrectAccountPw(accountNo, pw);
 	}
+	
+	//상대계좌 유효성체크
+	public boolean isCorrectReceiver(String bankCode, String accountNo) {
+		return ad.isCorrectReceiver(bankCode, accountNo);
+	}
 
 	
 	/*

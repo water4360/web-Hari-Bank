@@ -59,8 +59,6 @@ public class InquiryDetailController extends BasicController {
         	request.setAttribute("formattedTotalBalance", formattedTotalBalance);
         	request.setAttribute("formattedNow", formattedNow);
         	request.setAttribute("transactionList", transList);
-        	
-        	System.out.println("현재 로그인: " + (UserVO) request.getAttribute("loginUser"));
 		}
 		return "/jsp/inquiryDetail.jsp";
 	}

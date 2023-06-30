@@ -11,8 +11,8 @@ public class CheckAccountPasswordController extends BasicController {
 		
 		String accountNo = request.getParameter("accountNo");
 		String accountPw = request.getParameter("accountPassword");
-		System.out.println("계좌번호 넘어오나? " + accountNo);
-		System.out.println("계좌비번 넘어오나? " + accountPw);
+		System.out.println("계좌&비번 일치 체크용 " + accountNo);
+		System.out.println("계좌&비번 일치 체크용 " + accountPw);
 		
 		if(daoService.isCorrectAccountPw(accountNo, accountPw)) {
 			request.setAttribute("checkAccountPwResult", "true");
