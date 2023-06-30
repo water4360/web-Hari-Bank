@@ -38,7 +38,11 @@
 										name="senderAccountNo">
 										<option disabled selected>--출금계좌를 선택하세요--</option>
 										<c:forEach var="myAccount" items="${myAccountList}">
-											<option value="${myAccount.accountNo}">${myAccount.accountNo}
+											<option value="${myAccount.accountNo}"
+											<c:if test="${myAccount.accountNo eq selectedAccount}">
+												selected
+											</c:if>
+											>${myAccount.accountNo}
 												(${myAccount.productName})</option>
 										</c:forEach>
 									</select>

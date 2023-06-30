@@ -217,8 +217,7 @@ public class TransactionDAO {
 
 	/*
 	 * 
-	 * 자, 지금 출금은행코드랑 입금은행코드가 뒤섞였죠??? 이거 구분하고.
-	 * 테이블에서 B_BANK_CODE도 T_SENDER_BANK_CODE로
+	 * 자, 지금 출금은행코드랑 입금은행코드가 뒤섞였죠??? 이거 구분하고. 테이블에서 B_BANK_CODE도 T_SENDER_BANK_CODE로
 	 * 고쳐서 명확하게 하고 T_RECEIVER_BANK_CODE로 명확하게 하고
 	 * 
 	 * 
@@ -227,11 +226,11 @@ public class TransactionDAO {
 	// 당행에 이체거래내역 등록
 	// 입금 출금 둘 다!!!!
 	public String insertTransactionInfo(TransactionVO vo) throws Exception {
-		
+
 		StringBuilder sql = new StringBuilder();
 		String resultMsg = null;
-		
-		//넘어오는 값들.
+
+		// 넘어오는 값들.
 		String senderBank = vo.getSenderBank();
 		String senderAccountNo = vo.getSenderAccountNo();
 		String receiverBank = vo.getReceiverBank();
@@ -240,27 +239,26 @@ public class TransactionDAO {
 		long balance = Long.valueOf(vo.getBalance());
 		String toMemo = vo.getToMemo();
 		String fromMemo = vo.getFromMemo();
-		
-		
+
 		int result = transferMoney(senderBank, senderAccountNo, receiverBank, receiverAccountNo, amount);
-		
-		//출금계좌용 기록!!!!!!!!!!!!!!!!!!
+
+		// 출금계좌용 기록!!!!!!!!!!!!!!!!!!
 		int idx = 1;
 		// 보내는은행, 보내는계쫘, 받는은행, 받는계좌, 금액, 구분, 보내는메모, 남기는메모, 처리상태, 잔고
 		sql.append("INSERT INTO B_TRANSACTION (T_SENDER_BANK_CODE, T_SENDER_ACCOUNT_NO, ");
 		sql.append(" T_RECEIVER_BANK_CODE, T_RECEIVER_ACCOUNT_NO, ");
 		sql.append(" T_AMOUNT, T_TYPE, T_TO_MEMO, T_FROM_MEMO, T_STATUS, T_PREVIOUS_BALANCE, T_IN_OUT) ");
 		sql.append(" VALUES(?, ?,  ?, ?,  ?, ?, ?, ?, ?, ?, ?) ");
-		
+
 		try (Connection conn = new ConnectionFactory().getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
-			
+
 			pstmt.setString(idx++, senderBank);
 			pstmt.setString(idx++, senderAccountNo);
 			pstmt.setString(idx++, receiverBank);
 			pstmt.setString(idx++, receiverAccountNo);
 			pstmt.setDouble(idx++, amount);
-			
+
 			// 당행이체 : 하리은행->하리은행
 			// 타행이체 : 하리은행->룽지은행
 			// 오픈뱅킹 : 다른은행->다른은행(하리은행 포함)
@@ -273,10 +271,10 @@ public class TransactionDAO {
 			} else {
 				pstmt.setString(idx++, "오픈뱅킹");
 			}
-			
+
 			String senderName = getUserNameByAccountNo(senderBank, senderAccountNo);
 			String receiverName = getUserNameByAccountNo(receiverBank, receiverAccountNo);
-			
+
 			// 보내는 메모
 			if (toMemo.equals("")) {
 				// 메모가 따로 없으면 계좌주의 이름.
@@ -284,7 +282,7 @@ public class TransactionDAO {
 			} else {
 				pstmt.setString(idx++, toMemo);
 			}
-			
+
 			// 남기는 메모
 			if (fromMemo.equals("")) {
 				// 메모가 따로 없으면 받는 사람의 이름.
@@ -293,10 +291,10 @@ public class TransactionDAO {
 				// 메모가 있으면 그 이름.
 				pstmt.setString(idx++, fromMemo);
 			}
-			
+
 			System.out.println("트랜잭션DAO 메모테스트 보내는 메모: " + toMemo);
 			System.out.println("트랜잭션DAO 메모테스트 내통장 메모: " + fromMemo);
-			
+
 			// 이체 성공했을때
 			if (result == 1) {
 				pstmt.setString(idx++, "이체완료");
@@ -310,16 +308,15 @@ public class TransactionDAO {
 				pstmt.setString(idx++, "출금");
 				resultMsg = "이체에 실패하였습니다. 거래내역을 다시 확인해주세요.";
 			}
-			
+
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("거래내역추가실패(DAO)");
 		}
-		
-		
-		/////////////////////////입금용 기록!!!!!!!!!!
-		//여기서는 위의 정보 다시 리셋.
+
+		///////////////////////// 입금용 기록!!!!!!!!!!
+		// 여기서는 위의 정보 다시 리셋.
 		sql = new StringBuilder();
 		idx = 1;
 		// 보내는은행, 보내는계쫘, 받는은행, 받는계좌, 금액, 구분, 보내는메모, 남기는메모, 처리상태, 잔고
@@ -327,16 +324,16 @@ public class TransactionDAO {
 		sql.append(" T_RECEIVER_BANK_CODE, T_RECEIVER_ACCOUNT_NO, ");
 		sql.append(" T_AMOUNT, T_TYPE, T_TO_MEMO, T_FROM_MEMO, T_STATUS, T_PREVIOUS_BALANCE, T_IN_OUT) ");
 		sql.append(" VALUES(?, ?,  ?, ?,  ?, ?, ?, ?, ?, ?, ?) ");
-		
+
 		try (Connection conn = new ConnectionFactory().getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
-			
+
 			pstmt.setString(idx++, receiverBank);
 			pstmt.setString(idx++, receiverAccountNo);
 			pstmt.setString(idx++, senderBank);
 			pstmt.setString(idx++, senderAccountNo);
 			pstmt.setDouble(idx++, amount);
-			
+
 			if (senderBank.equals("0758")) {
 				if (receiverBank.equals("0758")) {
 					pstmt.setString(idx++, "당행이체");
@@ -346,17 +343,17 @@ public class TransactionDAO {
 			} else {
 				pstmt.setString(idx++, "오픈뱅킹");
 			}
-			
+
 			String senderName = getUserNameByAccountNo(senderBank, senderAccountNo);
 			String receiverName = getUserNameByAccountNo(receiverBank, receiverAccountNo);
-			
+
 			// 보내는 메모
 			if (toMemo.equals("")) {
 				pstmt.setString(idx++, receiverName);
 			} else {
 				pstmt.setString(idx++, toMemo);
 			}
-			
+
 			// 남기는 메모
 			if (fromMemo.equals("")) {
 				// 메모가 따로 없으면 받는 사람의 이름.
@@ -365,7 +362,7 @@ public class TransactionDAO {
 				// 메모가 있으면 그 이름.
 				pstmt.setString(idx++, fromMemo);
 			}
-			
+
 			// 이체 성공했을때
 			if (result == 1) {
 				pstmt.setString(idx++, "이체완료");
@@ -379,22 +376,17 @@ public class TransactionDAO {
 				pstmt.setString(idx++, "입금");
 				System.out.println("(입금)이체거래내역추가실패(DAO)");
 			}
-			
+
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("거래내역추가실패(DAO)");
 		}
-		
-		
-		
-		
+
 		return resultMsg;
-		
+
 	}
-	
-	
-	
+
 //	// 당행에 이체거래내역 등록(13:41 vo타입으로 바꾸기 전 원본!!!!!!)
 //	public String insertTransactionInfo(String senderBankCode, String senderAccountNo, String receiverBankCode,
 //			String receiverAccountNo, long amount, long currentBalance) throws Exception {
@@ -476,37 +468,36 @@ public class TransactionDAO {
 //		return resultMsg;
 //	}
 //	
-	
-	
+
 	// 타행에 이체거래내역 등록해주기
 	public String insertTransactionInfoToOthers(String senderBankCode, String senderAccountNo, String receiverBankCode,
 			String receiverAccountNo, long amount, long currentBalance) throws Exception {
 		TransactionVO transaction = new TransactionVO();
-		
+
 		StringBuilder sql = new StringBuilder();
 //		String transactionNo = generateTransactionNo();
 		String senderName = getUserNameByAccountNo(senderBankCode, senderAccountNo);
 		String receiverName = getUserNameByAccountNo(receiverBankCode, receiverAccountNo);
-		
+
 		int idx = 1;
 		int result = transferMoney(senderBankCode, senderAccountNo, receiverBankCode, receiverAccountNo, amount);
 		String resultMsg = null;
-		
+
 		// 거래번호, 보내는은행, 보내는계쫘, 받는은행, 받는계좌, 금액, 구분, 보내는메모, 남기는메모, 처리상태, 잔고
 		sql.append("INSERT INTO B_TRANSACTION (T_SENDER_BANK_CODE, T_SENDER_ACCOUNT_NO, ");
 		sql.append(" T_RECEIVER_BANK_CODE, T_RECEIVER_ACCOUNT_NO, ");
 		sql.append(" T_AMOUNT, T_TYPE, T_TO_MEMO, T_FROM_MEMO, T_STATUS, T_PREVIOUS_BALANCE) ");
 		sql.append(" VALUES(?, ?, ?,  ?, ?,  ?, ?, ?, ?, ?, ?) ");
-		
+
 		try (Connection conn = new ConnectionFactory().getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
-			
+
 			pstmt.setString(idx++, senderBankCode);
 			pstmt.setString(idx++, senderAccountNo);
-			
+
 			pstmt.setString(idx++, receiverBankCode);
 			pstmt.setString(idx++, receiverAccountNo);
-			
+
 			pstmt.setDouble(idx++, amount);
 			// 당행이체 : 하리은행->하리은행
 			// 타행이체 : 하리은행->룽지은행
@@ -520,7 +511,7 @@ public class TransactionDAO {
 			} else {
 				pstmt.setString(idx++, "오픈뱅킹");
 			}
-			
+
 			// 보내는 메모
 			if (transaction.getToMemo() == null) {
 				// 메모가 따로 없으면 계좌주의 이름.
@@ -528,7 +519,7 @@ public class TransactionDAO {
 			} else {
 				pstmt.setString(idx++, transaction.getToMemo());
 			}
-			
+
 			// 남기는 메모
 			if (transaction.getFromMemo() == null) {
 				// 메모가 따로 없으면 받는 사람의 이름.
@@ -537,7 +528,7 @@ public class TransactionDAO {
 				// 메모가 있으면 그 이름.
 				pstmt.setString(idx++, transaction.getFromMemo());
 			}
-			
+
 			// 이체 성공했을때
 			if (result == 1) {
 				pstmt.setString(idx++, "이체완료");
@@ -549,7 +540,7 @@ public class TransactionDAO {
 				pstmt.setDouble(idx++, currentBalance);
 				resultMsg = "이체에 실패했습니다.";
 			}
-			
+
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -558,36 +549,12 @@ public class TransactionDAO {
 		return resultMsg;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	// 0630 다시하자!!!!! 거래내역리스트 조회
 	// sender 계좌에 내계좌는 기본. receiver = 상대계좌.
 	// 입금 출금 구분을 T_IN_OUT 컬럼에서.
 	// 만약 T_IN_OUT에 따라, 금액에 -를 하든, 그대로 두든(+) 하는 것임.
 	// 그렇다면 TO 메모, FROM 메모는 어떻게 할것인가? 순서를 바꿔서 넣어야지.
-	
+
 	// SELECT * FROM B_TRANSACTION WHERE T_ACCOUNT_NO = '0758-53920545'
 	// OR T_RECEIVER_ACCOUNT='0758-53920545' ORDER BY T_DATE DESC, T_TIME DESC;
 	public List<TransactionVO> getTransactionList(String no) {
@@ -621,13 +588,18 @@ public class TransactionDAO {
 
 				// 내계좌 출금인 경우.
 				// TO_MEMO=받는통장, FROM_MEMO=내통장
-				if (rs.getString("T_IN_OUT").equals("출금")) {
-					formatedAmount = "- " + formatedAmount;
-					memo = rs.getString("T_FROM_MEMO");
-				} else {
-					formatedAmount = "+ " + formatedAmount;
-					memo = rs.getString("T_TO_MEMO");
+				// 0630 자꾸 null 에러때문에 일단 if문 감싸줌.
+				if (rs.getString("T_IN_OUT") != null) {
+
+					if (rs.getString("T_IN_OUT").equals("출금")) {
+						formatedAmount = "- " + formatedAmount;
+						memo = rs.getString("T_FROM_MEMO");
+					} else {
+						formatedAmount = "+ " + formatedAmount;
+						memo = rs.getString("T_TO_MEMO");
+					}
 				}
+
 				long balance = rs.getLong("T_PREVIOUS_BALANCE");
 
 				// 자릿수 표기 + 원 붙이기
@@ -643,13 +615,7 @@ public class TransactionDAO {
 
 		return transList;
 	}
-	
-	
-	
-	
-	
-	
-	
+
 //	// 거래내역리스트 조회
 //	// 입금 또는 출금내역에 계좌가 있는 경우.
 //	// 최신순으로 정렬
@@ -713,13 +679,4 @@ public class TransactionDAO {
 //		return transList;
 //	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }// end of class

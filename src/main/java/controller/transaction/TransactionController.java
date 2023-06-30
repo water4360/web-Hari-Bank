@@ -34,20 +34,22 @@ public class TransactionController extends BasicController {
         	List<AccountVO> accountList = daoService.getAccountListById(id);
         	List<InfoVO> bankList = daoService.getBankList();
         	
+        	System.out.println("계좌리스트 : " + accountList.size());
+        	String selectedAccount = request.getParameter("accountNo");
+
+        	System.out.println("선택된 계좌 : " + selectedAccount);
         	//개설된 계좌가 없으면
-        	if(accountList.equals(null)) {
+        	if(accountList.size()!=0) {
+        		//계좌리스트 불러오고 은행목록 가져오기
+        		session.setAttribute("selectedAccount", selectedAccount);
         		session.setAttribute("myAccountList", accountList);
-        		//은행목록 가져오기
         		session.setAttribute("bankList", bankList);
+        		return "/jsp/transaction/transaction.jsp";
         	} else {
         		//개설계좌가 없으면 계좌 개설 화면으로 돌아가기.
-        		//원래라면 알림을 보여줘야.
+        		//원래라면 알림을 보여줘야.................
         		return "redirect:/create-account.do";
-        		
         	}
-        	System.out.println("계좌리스트 : " + accountList.equals(null));
-        	
-        	return "/jsp/transaction/transaction.jsp";
 		}
 	}
 
