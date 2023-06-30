@@ -43,13 +43,18 @@ public class TransactionProcessController extends BasicController {
 			vo.setFromMemo(receiverMemo);
 			
 
-			boolean checkReceiver = daoService.isCorrectReceiver(vo.getReceiverBank(), vo.getReceiverAccountNo()); 
-			String result = daoService.insertTransactionInfo(vo);
-			
-			System.out.println("계좌 유효성 체크 : " + checkReceiver);
-
+			boolean checkReceiver = daoService.isCorrectReceiver(vo.getReceiverBank(), vo.getReceiverAccountNo());
 			request.setAttribute("receiverAccount", checkReceiver);
 			request.setAttribute("account", account);
+			
+//			String result = daoService.insertTransactionInfo(vo);
+			String result = "";
+			if(daoService.transferMoney(vo)==1) {
+				result = "이체가 완료되었습니다.";
+			} else {
+				result = "이체에 실패하였습니다. 내역을 확인해주세요.";
+			}
+			
 			request.setAttribute("result", result);
 			
         	return "/jsp/transaction/transactionResult.jsp";

@@ -122,15 +122,19 @@ public class DAOService {
 	 * TransactionDAO(이체거래)
 	 */
 
+//	//이체
+//	public int transferMoney(String senderBankCode, String senderAccountNo, String receiverBankCode, String receiverAccountNo, long amount) throws Exception {
+//		return td.transferMoney(senderBankCode, senderAccountNo, receiverBankCode, receiverAccountNo, amount);
+//	}
 	//이체
-	public int transferMoney(String senderBankCode, String senderAccountNo, String receiverBankCode, String receiverAccountNo, long amount) throws Exception {
-		return td.transferMoney(senderBankCode, senderAccountNo, receiverBankCode, receiverAccountNo, amount);
+	public int transferMoney(TransactionVO vo) throws Exception {
+		return td.transferMoney(vo);
 	}
 	
-	//거래정보 등록
-	public String insertTransactionInfo(TransactionVO vo) throws Exception {
-		return td.insertTransactionInfo(vo);
-	}
+//	//거래정보 등록
+//	public String insertTransactionInfo(TransactionVO vo) throws Exception {
+//		return td.insertTransactionInfo(vo);
+//	}
 	
 	//거래내역 조회
 	public List<TransactionVO> getTransactionList(String accountNo) {
