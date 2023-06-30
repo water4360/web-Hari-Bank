@@ -46,6 +46,10 @@ public class DAOService {
 	public UserVO getUserById(String id) {
 		return ud.getUserById(id);
 	}
+	//주소 찾기
+	public UserVO getUserAddressById(String userId) {
+		return ud.getUserAddressById(userId);
+	}
 	
 	//로그인 확인
 	public boolean isCorrectInfo(String id, String pw) {
@@ -98,6 +102,16 @@ public class DAOService {
 	public List<PostVO> getQnaListById(String id) {
 		return pd.getQnaListById(id);
 	}
+	//글쓰기
+	public int writePost(PostVO post) {
+		return pd.writePost(post); 
+	}
+	//모든 qna 불러오기
+	public List<PostVO> getAllQnas() {
+		return pd.getAllQnas();
+	}
+	
+
 	
 	
 	
@@ -140,7 +154,6 @@ public class DAOService {
 	public List<TransactionVO> getTransactionList(String accountNo) {
 		return td.getTransactionList(accountNo);
 	}
-	
 	
 	
 }

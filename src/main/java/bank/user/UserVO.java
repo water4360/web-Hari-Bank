@@ -17,6 +17,7 @@ public class UserVO {
 	private String postcode;
 	private String roadAddress;
 	private String detailAddress;
+	private String bankCode;
 	
 	//기본
 	public UserVO() {
@@ -27,7 +28,7 @@ public class UserVO {
 	//전체 생성자
 	public UserVO(String id, String pw, String korName, String birthdate, String gender, String telecom, String phone,
 			String email, String signupType, String regDatetime, String role, String roleName, String addressType,
-			String postcode, String roadAddress, String detailAddress) {
+			String postcode, String roadAddress, String detailAddress, String bankCode) {
 		super();
 		this.id = id;
 		this.pw = pw;
@@ -45,6 +46,8 @@ public class UserVO {
 		this.postcode = postcode;
 		this.roadAddress = roadAddress;
 		this.detailAddress = detailAddress;
+		this.bankCode = bankCode;
+
 	}
 	
 	
@@ -54,7 +57,7 @@ public class UserVO {
 
 	//로그인시 저장정보
 	public UserVO(String id, String pw, String korName, String birthdate, String gender, String telecom, String phone,
-			String email, String signupType, String regDatetime, String role, String roleName) {
+			String email, String signupType, String regDatetime, String role, String roleName, String bankCode) {
 		super();
 		this.id = id;
 		this.pw = pw;
@@ -68,8 +71,37 @@ public class UserVO {
 		this.regDatetime = regDatetime;
 		this.role = role;
 		this.roleName = roleName;
+		this.bankCode = bankCode;
 	}
 
+
+	
+	//주소정보만 가져오기
+	public UserVO(String id, String addressType, String postcode, String roadAddress, String detailAddress) {
+		super();
+		this.id = id;
+		this.addressType = addressType;
+		this.postcode = postcode;
+		this.roadAddress = roadAddress;
+		this.detailAddress = detailAddress;
+	}
+
+	public String getBankCode() {
+		return bankCode;
+	}
+
+
+
+
+
+	public void setBankCode(String bankCode) {
+		this.bankCode = bankCode;
+	}
+
+
+	public void setRegDatetime(String regDatetime) {
+		this.regDatetime = regDatetime;
+	}
 
 
 	public String getId() {
@@ -207,7 +239,7 @@ public class UserVO {
 				+ gender + ", telecom=" + telecom + ", phone=" + phone + ", email=" + email + ", signupType="
 				+ signupType + ", regDatetime=" + regDatetime + ", role=" + role + ", roleName=" + roleName
 				+ ", addressType=" + addressType + ", postcode=" + postcode + ", roadAddress=" + roadAddress
-				+ ", detailAddress=" + detailAddress + "]";
+				+ ", detailAddress=" + detailAddress + ", bankCode=" + bankCode + "]";
 	}
 	
 	

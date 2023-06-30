@@ -150,9 +150,10 @@ public class UserDAO {
 					String regDate = rs.getString("REG_DATETIME");
 					String roleCode = rs.getString("ROLE_CODE");
 					String roleName = rs.getString("ROLE_NAME");
+					String bankCode = rs.getString("B_BANK_CODE");
 					
 
-					vo = new UserVO(id, pw, name, birth, gen, tel, phone, email, signType, regDate, roleCode, roleName);
+					vo = new UserVO(id, pw, name, birth, gen, tel, phone, email, signType, regDate, roleCode, roleName, bankCode);
 					
 				}
 
@@ -163,6 +164,39 @@ public class UserDAO {
 			return vo;
 		}
 	
+		//유저 주소정보 가져오기
+//		SELECT * FROM B_USER_ADDRESS WHERE USER_ID = 'j.hyun758';
+		public UserVO getUserAddressById(String userId) {
+			StringBuilder sql = new StringBuilder();
+			UserVO vo = null;
+
+			sql.append("SELECT * FROM B_USER_ADDRESS WHERE USER_ID = ? ");
+			
+			try (Connection conn = new ConnectionFactory().getConnection();
+					PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
+				pstmt.setString(1, userId);
+
+				ResultSet rs = pstmt.executeQuery();
+
+				// ID가 존재하면 쿼리를 실행하고
+				if (rs.next()) {
+					String id = rs.getString("USER_ID");
+					String addrType = rs.getString("ADDRESS_TYPE");
+					String postcode = rs.getString("POSTCODE");
+					String roadAddr = rs.getString("ROAD_ADDRESS");
+					String detailAddr = rs.getString("DETAIL_ADDRESS");
+					
+
+					vo = new UserVO(id, addrType, postcode, roadAddr, detailAddr);
+					
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			return vo;
+		}
 	
 	
 	

@@ -48,7 +48,7 @@ table {
 					<div class="btn-group" role="group">
 						<%-- 작성자일때, 관리자일때, 방문자일때 --%>
 					<c:choose>
-						<c:when test="${post.writer == loginUser.korName}">
+						<c:when test="${post.writer == loginUser.id}">
 							<a href="modifyPost.do?no=${post.no}" class="btn btn-secondary mb-2">수정</a>
 							<a href="deletePost.do?no=${post.no}" class="btn btn-secondary mb-2">삭제</a>
 						</c:when>

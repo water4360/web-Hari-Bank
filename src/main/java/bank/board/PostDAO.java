@@ -22,17 +22,18 @@ public class PostDAO {
 		int result = 0;
 		StringBuilder sql = new StringBuilder();
 
-		sql.append("INSERT INTO B_BOARD(P_NO, P_WRITER, P_TITLE, P_CONTENTS) ");
-		sql.append("	 VALUES(SEQ_QNA_NO.NEXTVAL, ?, ?, ?) ");
+		int idx = 1;
+		sql.append("INSERT INTO B_BOARD(P_NO, P_WRITER, P_TITLE, P_CONTENTS, P_CATEGORY) ");
+		sql.append("	 VALUES(SEQ_QNA_NO.NEXTVAL, ?, ?, ?, ?) ");
 
 		try (Connection conn = new ConnectionFactory().getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
-			pstmt.setString(1, vo.getWriter());
-			pstmt.setString(2, vo.getTitle());
-			pstmt.setString(3, vo.getContents());
+			pstmt.setString(idx++, vo.getWriter());
+			pstmt.setString(idx++, vo.getTitle());
+			pstmt.setString(idx++, vo.getContents());
+			pstmt.setString(idx++, vo.getCategory());
 
-			result = pstmt.executeUpdate();
-			return result; // 1이면 성공
+			result = pstmt.executeUpdate();			return result; // 1이면 성공
 
 		} catch (Exception e) {
 			e.printStackTrace();
