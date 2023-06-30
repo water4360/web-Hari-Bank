@@ -7,14 +7,10 @@
 <title>HR Bank - 나의 HR</title>
 
 <link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
-	integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
-	crossorigin="anonymous">
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-	crossorigin="anonymous"></script>
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
 <style>
@@ -34,24 +30,17 @@ table {
 
 
 		<div class="container mt-5" align="center">
-			<div class="mb-3">
-				<h2>${loginUser.korName}님의
-					HR등급은 <b>${loginUser.roleName}</b>입니다.
-				</h2>
+			<div class="card col-6 pt-2 mb-4">
+				<div class="card-body">
+					<h5><b>${loginUser.korName}</b>님의
+						HR등급 <b>[${loginUser.roleName}]</b>
+					</h5>
+					* 등급혜택 : <b>타행이체시 수수료 면제</b>
+				</div>
 			</div>
 			<form action="update-info.do">
-				<table class="table table-striped">
+				<table class="table table-striped col-8">
 					<thead>
-						<%-- <tr>
-						<th scope="colgroup">${loginUser.korName}님의 HR등급은 <b>${loginUser.roleName}</b>입니다.
-						</th>
-						<th scope="col"></th>
-						<th scope="col"></th>
-						<th scope="col"></th>
-						<th scope="col"></th>
-						<th scope="col"></th>
-						<th scope="col">최근접속일시</th>
-					</tr> --%>
 						<tr>
 							<th scope="col">이름</th>
 							<th scope="col">ID</th>
@@ -83,75 +72,98 @@ table {
 								</div>
 							</td>
 						</tr>
+						<tr>
+							<th scope="col">생년월일</th>
+							<th scope="col">가입구분</th>
+							<th scope="col">자택주소</th>
+							<th scope="col"></th>
+							<th scope="col"></th>
+							<th scope="col"></th>
+							<th scope="col"></th>
+						</tr>
+						<tr>
+							<td class="name">${loginUser.birthdate}</td>
+							<td class="id">${loginUser.signupType}</td>
+							<td class="pw"><input type="text" id="pw"
+								class="editable" value="${userAddr.postcode}" style="width: 60px"
+								disabled></td>
+							<td class="phone" colspan="2"><input type="text" id="phone"
+								class="editable" value="${userAddr.roadAddress}" style="width: 250px"
+								disabled></td>
+							<td class="email"><input type="email" id="email"
+								class="editable" value="${userAddr.detailAddress}" disabled></td>
+							<td>
+								<div class="btn-group">
+									<button type="button" class="btn btn-success" id="edit-btn"
+										onclick="enableEdit()">수정</button>
+								</div>
+							</td>
+						</tr>
 					</tbody>
 				</table>
 			</form>
 		</div>
 
-		<div class="container" align="center">
+		<div class="container mt-5" align="center">
 			<div>
 				<h2>최근 문의내역</h2>
 			</div>
-			<div class="btn-group">
-				<button type="button" class="btn btn-secondary" data-toggle="modal"
-					data-target="#문의하기" aria-expanded="false">1:1 문의하기</button>
+			<div class="btn-group mb-3">
+				<button type="button" onclick="location.href='write-post.do'"
+					class="btn btn-secondary">1:1 문의하기</button>
 			</div>
-			<table class="table">
-				<thead>
-					<tr>
-						<th scope="col">카테고리</th>
-						<th scope="col">번호</th>
-						<th scope="col">제목</th>
-						<th scope="col">등록일</th>
-					</tr>
-				</thead>
-				<%-- 테이블 내용 --%>
-				<tbody>
-					<c:choose>
-						<c:when test="${ empty qnaList }">
-							<td colspan="5" align="center" style="padding: 50px 0;">
-								문의하신 Q&A 내역이 없습니다</td>
-						</c:when>
-						<c:otherwise>
-							<c:forEach var="qna" items="${qnaList}">
-								<tr>
-									<td class="category">${qna.category}</td>
-									<td class="no">${qna.no}</td>
-									<td class="title">${qna.title}</td>
-									<td class="regDate">${qna.regDate}</td>
-									<td></td>
-								</tr>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
-				</tbody>
-			</table>
+			<div class="row justify-content-center">
+				<div class="col-8">
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th class="col-md-1 narrow-column">번호</th>
+								<th class="col-md-4">제목</th>
+								<th class="col-md-1 narrow-column">글쓴이</th>
+								<th class="col-md-2 narrow-column">작성일</th>
+								<th class="col-md-1 narrow-column">조회</th>
+							</tr>
+						</thead>
+						<%-- 테이블 내용 --%>
+						<tbody>
+							<c:choose>
+								<c:when test="${ empty qnaList }">
+									<td colspan="5" align="center" style="padding: 50px 0;">
+									문의하신 Q&A 내역이 없습니다.</td>
+								</c:when>
+
+								<c:otherwise>
+									<c:forEach var="qna" items="${qnaList}">
+										<tr>
+											<td class="qna-no narrow-column">${qna.no}</td>
+											<td class="qna-title"><a
+												href="qna-details.do?no=${qna.no}">${qna.title}</a></td>
+											<td class="qna-writer narrow-column">${qna.writer}</td>
+											<td class="qna-regdate narrow-column">${qna.regDate}</td>
+											<td class="qna-viewcnt narrow-column">${qna.viewCnt}</td>
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
+			
+			
+			
+			
+			
+			
+		
 
 
 	</section>
 
 
 	<script>
-<%-- 버튼 상태변경 --%>
-function updateButtons() {
-       var buttons = document.getElementsById('btn-rent');
-       
-       for (var i = 0; i < buttons.length; i++) {
-           var status = buttons[i].getAttribute(${book.status});
-           
-           if (status === '0' ) {
-               buttons[i].disabled = false; // 대출 가능일 때 버튼 활성화
-           } else {
-               buttons[i].disabled = true; // 대출 불가일 때 버튼 비활성화
-           }
-       }
-   }
-   // 페이지 로드 시 버튼 업데이트
-   window.onload = function() {
-       updateButtons();
-   };
-   
+
    
    <%-- 회원정보 수정모드 --%>
  function enableEdit() {

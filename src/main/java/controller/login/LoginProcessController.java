@@ -19,14 +19,17 @@ public class LoginProcessController extends BasicController {
 		vo.setPw(pw);
 
 		UserVO user = null;
+		UserVO addr = null;
 		session = request.getSession();
 
 		// 회원이 있는 경우
 		if (daoService.isCorrectInfo(id, pw)) {
 			user = daoService.getUserById(id);
+			addr = daoService.getUserAddressById(id);
 
 			// 그리고 이 user를 session에 UserVO형태 고대로 넘겨줌.
 			session.setAttribute("loginUser", user);
+			session.setAttribute("userAddr", addr);
 			System.out.printf("%s 회원 접속. by LoginController\n", id);
 
 			String prevBtn = null;

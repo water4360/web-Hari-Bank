@@ -1,4 +1,4 @@
-package controller.transaction;
+package controller;
 
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
@@ -11,25 +11,24 @@ import javax.servlet.http.HttpServletResponse;
 
 import bank.account.AccountVO;
 import bank.user.UserVO;
-import controller.BasicController;
 
-public class InquiryController extends BasicController {
-	
+public class InquiryOpenbankController extends BasicController {
+
 	@Override
-	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
+	public String handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		session = request.getSession();
-		System.out.println("inquiryCtrl 진입");
-		
+		System.out.println("오픈뱅킹조회Ctrl 진입");
 		
 		// 로그인 안된 경우
-        if (session.getAttribute("loginUser") == null) {
+		if(session.getAttribute("loginUser") == null) {
         	String prevBtn = "inquiry";
         	session.setAttribute("prevBtn", prevBtn);
         	
             // 로그인 페이지로 포워딩
             return "login.do";
-        } else {
-        	String id = ((UserVO)session.getAttribute("loginUser")).getId();
+		} else {
+			
+			String id = ((UserVO)session.getAttribute("loginUser")).getId();
         	List<AccountVO> accountList = daoService.getAccountListById(id);
         	 
         	//보유계좌 총합계
@@ -53,7 +52,8 @@ public class InquiryController extends BasicController {
         	
         	System.out.println("현재 로그인: " + (UserVO) session.getAttribute("loginUser"));
 		}
-		return "/jsp/transaction/inquiry.jsp";
+		
+		return "/jsp/transaction/inquiry-op.jsp";
 	}
 
 }

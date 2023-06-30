@@ -43,6 +43,9 @@ public class HandlerMapping {
 		mappings.put("/inquiry.do", new InquiryController());
 		mappings.put("/inquiryDetail.do", new InquiryDetailController());
 		
+		mappings.put("/inquiry-op.do", new InquiryOpenbankController());
+		mappings.put("/inquiryDetail.do", new InquiryDetailController());
+		
 		mappings.put("/transaction.do", new TransactionController());
 		mappings.put("/transactionProcess.do", new TransactionProcessController());
 		

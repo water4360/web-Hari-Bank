@@ -60,7 +60,7 @@ public class InquiryDetailController extends BasicController {
         	request.setAttribute("formattedNow", formattedNow);
         	request.setAttribute("transactionList", transList);
 		}
-		return "/jsp/inquiryDetail.jsp";
+		return "/jsp/transaction/inquiryDetail.jsp";
 	}
 
 }
