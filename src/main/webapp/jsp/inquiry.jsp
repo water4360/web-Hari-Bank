@@ -67,10 +67,10 @@
 							<c:choose>
 								<c:when test="${ empty accountList }">
 									<tr>
-										<td colspan="5" class="text-center">보유중인 계좌가 없습니다.</td>
+										<td colspan="6" class="text-center">보유중인 계좌가 없습니다.</td>
 									</tr>
 									<tr>
-										<td colspan="5" class="text-center">
+										<td colspan="6" class="text-center">
 											<form action="create-account.do" method="post">
 												<button type="submit" class="btn btn-secondary mt-3">비대면
 													계좌개설하기</button>

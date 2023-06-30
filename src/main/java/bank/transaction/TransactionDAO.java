@@ -83,6 +83,65 @@ public class TransactionDAO {
 			}
 		}
 	}
+//	// 이체 함수 원본!!!!!!!!!!!!!!!!!!!
+//	public int transferMoney(String senderBankCode, String senderAccountNo, String receiverBankCode,
+//			String receiverAccountNo, long amount) throws Exception {
+//		Connection conn = null;
+//		CallableStatement callableStatement = null;
+//		int result = 0;
+//		int idx = 1;
+//		
+//		StringBuilder sql = new StringBuilder();
+//		
+//		// 밑에서 conn을 또 써야 해서 향상된 try~catch가 아닌 것으로 수정함. 20:13
+//		try {
+//			conn = new ConnectionFactory().getConnection();
+//			
+//			// 오토커밋 안되도록!
+//			conn.setAutoCommit(false);
+//			switch (receiverBankCode) {
+//			case "0758":
+//				sql.append("{CALL TRANSFER(?, ?, ?)} "); // 완료
+//				break;
+//			case "JH":
+//				sql.append("{CALL TRANSFER_TO_JHBANK(?, ?, ?)} "); // 완료
+//				break;
+//			case "BGH":
+//				sql.append("{CALL TRANSFER_TO_BGHBANK(?, ?, ?)} ");
+//				break;
+//			case "H.J":
+//				sql.append("{CALL TRANSFER_TO_HJBANK(?, ?, ?)} ");
+//				break;
+//			default:
+//				System.out.println(receiverBankCode + " << 받는 은행코드가 스위치에 없나본데?");
+//				break;
+//			}
+//			
+//			callableStatement = conn.prepareCall(sql.toString());
+//			
+//			callableStatement.setString(idx++, senderAccountNo);
+//			callableStatement.setString(idx++, receiverAccountNo);
+//			callableStatement.setLong(idx++, amount);
+//			
+//			result = callableStatement.executeUpdate();
+//			conn.commit();
+//			
+//			return result;
+//			
+//		} catch (SQLException e) {
+//			conn.rollback();
+//			System.out.println("이체에러(DAO) : " + e.getMessage());
+//			return 0;
+//			
+//		} finally {
+//			if (callableStatement != null) {
+//				callableStatement.close();
+//			}
+//			if (conn != null) {
+//				conn.close();
+//			}
+//		}
+//	}
 
 	// 계좌내역의 아이디를 통해 유저의 이름 가져오기
 //	SELECT UI.KOR_NAME, UA.ACCOUNT_NO
