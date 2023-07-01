@@ -89,7 +89,7 @@
 								번호</label>
 							<!-- 입금 계좌 번호 입력 필드 -->
 							<input type="text" class="form-control" id="receiverAccountNo"
-								name="receiverAccountNo">
+								name="receiverAccountNo" onkeyup="cleanAccountNo(this)">
 							<div id="receiverAccountNo-feedback" class="invalid-feedback"
 								style="display: none;"></div>
 							<!-- 클래스와 스타일 수정 -->
@@ -104,13 +104,13 @@
 							<!-- 클래스와 스타일 수정 -->
 						</div>
 						<div class="mb-3">
-							<label for="to-memo" class="form-label">받는통장 메모</label> <input
+							<label for="to-memo" class="form-label">받는통장 메모(미입력시 예금주명)</label> <input
 								type="text" class="form-control" id="toMemo" name="toMemo"
 								placeholder="(선택)7자 이내 입력" maxlength="21">
 							<div id="transferAmount-feedback" style="display: none;"></div>
 						</div>
 						<div class="mb-3">
-							<label for="from-memo" class="form-label">내통장 메모</label> <input
+							<label for="from-memo" class="form-label">내통장 메모(미입력시 예금주명)</label> <input
 								type="text" class="form-control" id="fromMemo" name="fromMemo"
 								placeholder="(선택)7자 이내 입력" maxlength="21">
 							<div id="transferAmount-feedback" style="display: none;"></div>
@@ -186,7 +186,8 @@
 				error : function(jqXHR, textStatus, errorThrown) {
 					// 에러가 발생했을 때 실행되는 코드입니다.
 					console.log(textStatus, errorThrown);
-					alert('잔액조회실패. 다시 시도하세요.');
+					$('#currentBalance').text('잔액조회실패. 다시 시도하세요.').css('color', 'red');
+// 					alert('잔액조회실패. 다시 시도하세요.');
 				}
 			});
 		}
@@ -202,7 +203,7 @@
 					if (!accountPassword || !accountNo
 							|| accountPassword.length != 4) {
 						$(this).removeClass('is-valid is-invalid'); // 클래스 초기화
-						$('#accountPassword-feedback').text('').hide(); // 피드백 메시지를 숨깁니다.
+// 						$('#accountPassword-feedback').text('').hide(); // 피드백 메시지를 숨깁니다.
 						return;
 					}
 
@@ -221,13 +222,12 @@
 								$('#accountPassword').removeClass('is-invalid')
 										.addClass('is-valid'); // 유효성 검사 통과 시 클래스 추가
 								$('#accountPassword-feedback').text(
-										'비밀번호가 일치합니다').addClass('d-block')
-										.removeClass('d-none'); // 클래스 및 스타일 수정
+										'비밀번호가 일치합니다').addClass('d-block').css('color','green') // 클래스 및 스타일 수정
 							} else {
 								$('#accountPassword').removeClass('is-valid')
 										.addClass('is-invalid'); // 유효성 검사 실패 시 클래스 추가
 								$('#accountPassword-feedback').text(
-										'비밀번호가 일치하지 않습니다').addClass('d-block')
+										'비밀번호가 일치하지 않습니다').addClass('d-block').css('color','red')
 										.removeClass('d-none'); // 클래스 및 스타일 수정
 							}
 						},
@@ -284,13 +284,12 @@
 										.addClass('is-invalid'); // 유효성 검사 실패 시 클래스 추가
 								$('#receiverAccountNo-feedback').text(
 										'출금계좌와 입금계좌는 동일할 수 없습니다').addClass(
-										'd-block').removeClass('d-none'); // 클래스 및 스타일 수정
+										'd-block').css('color','red') // 클래스 및 스타일 수정
 							} else {
 								$('#receiverAccountNo').removeClass('is-valid')
 										.addClass('is-invalid'); // 유효성 검사 실패 시 클래스 추가
 								$('#receiverAccountNo-feedback').text(
-										'유효하지 않은 계좌번호입니다').addClass('d-block')
-										.removeClass('d-none'); // 클래스 및 스타일 수정
+										'유효하지 않은 계좌번호입니다').addClass('d-block').css('color','red') // 클래스 및 스타일 수정
 							}
 						},
 						error : function(jqXHR, textStatus, errorThrown) {
@@ -304,7 +303,7 @@
 		// 필드 유효성 검사
 		// 필드 값 변경 감지
 		$(
-				'#senderAccountNo, #accountPassword, #receiverBankCode, #receiverAccountNo, #transferAmount, #toMemo, #fromMemo')
+				'#senderAccountNo, #receiverBankCode, #toMemo, #fromMemo')
 				.on('change keyup', function() {
 					let id = $(this).attr('id');
 					let value = $(this).val();
@@ -315,64 +314,67 @@
 					}
 				});
 
-		$('form')
-				.on(
-						'submit',
-						function(e) {
-							let senderAccountNo = $('#senderAccountNo').val();
-							let accountPassword = $('#accountPassword').val();
-							let receiverBankCode = $('#receiverBankCode').val();
-							let receiverAccountNo = $('#receiverAccountNo')
-									.val();
-							let transferAmount = $('#transferAmount').val();
-							let toMemo = $('#toMemo').val();
-							let fromMemo = $('#fromMemo').val();
+		$('form').on('submit',
+			function(e) {
+				let senderAccountNo = $('#senderAccountNo').val();
+				let accountPassword = $('#accountPassword').val();
+				let receiverBankCode = $('#receiverBankCode').val();
+				let receiverAccountNo = $('#receiverAccountNo').val();
+				let transferAmount = $('#transferAmount').val();
+				let toMemo = $('#toMemo').val();
+				let fromMemo = $('#fromMemo').val();
 
-							// 모든 필드가 제대로 입력되었는지 확인합니다.
-							if (!senderAccountNo || !accountPassword
-									|| !receiverBankCode || !receiverAccountNo
-									|| !transferAmount) {
-								// 각 필드가 비어있는 경우에 대한 메시지를 설정합니다.
-								if (!senderAccountNo) {
-									$('#senderAccountNo-feedback').text(
-											'출금 계좌를 선택해주세요')
-											.css('color', 'red').show();
-								}
-								if (!accountPassword) {
-									$('#accountPassword-feedback').text(
-											'계좌 비밀번호를 입력해주세요').css('color',
-											'red').show();
-								}
-								if (!receiverBankCode) {
-									$('#receiverBankCode-feedback').text(
-											'입금 은행을 선택해주세요')
-											.css('color', 'red').show();
-								}
-								if (!receiverAccountNo) {
-									$('#receiverAccountNo-feedback').text(
-											'입금 계좌 번호를 입력해주세요').css('color',
-											'red').show();
-								}
-								if (!transferAmount) {
-									$('#transferAmount-feedback').text(
-											'이체 금액을 입력해주세요')
-											.css('color', 'red').show();
-								}
+				// 모든 필드가 제대로 입력되었는지 확인합니다.
+				if (!senderAccountNo || !accountPassword
+						|| !receiverBankCode || !receiverAccountNo
+						|| !transferAmount) {
+					// 각 필드가 비어있는 경우에 대한 메시지를 설정합니다.
+					if (!senderAccountNo) {
+						$('#senderAccountNo-feedback').text(
+								'출금 계좌를 선택해주세요')
+								.css('color', 'red').show();
+					}
+					if (!accountPassword) {
+						$('#accountPassword-feedback').text(
+								'계좌 비밀번호를 입력해주세요').css('color',
+								'red').show();
+					}
+					if (!receiverBankCode) {
+						$('#receiverBankCode-feedback').text(
+								'입금 은행을 선택해주세요')
+								.css('color', 'red').show();
+					}
+					if (!receiverAccountNo) {
+						$('#receiverAccountNo-feedback').text(
+								'입금 계좌 번호를 입력해주세요').css('color',
+								'red').show();
+					}
+					if (!transferAmount) {
+						$('#transferAmount-feedback').text(
+								'이체 금액을 입력해주세요')
+								.css('color', 'red').show();
+					}
 
-								// 이벤트의 기본 동작을 중단합니다.
-								e.preventDefault();
-							} else {
-								// 모든 필드가 제대로 입력되었으면, 모든 피드백 메시지를 숨깁니다.
-								$('.feedback').text('').hide();
+					// 이벤트의 기본 동작을 중단합니다.
+					e.preventDefault();
+				} else {
+					// 모든 필드가 제대로 입력되었으면, 모든 피드백 메시지를 숨깁니다.
+					$('.feedback').text('').hide();
 
-								// 사용자에게 확인을 요청합니다.
-								let confirmation = confirm('입력하신 정보로 이체를 실행할까요?');
-								if (!confirmation) {
-									// 사용자가 취소를 누른 경우 이벤트의 기본 동작을 중단합니다.
-									e.preventDefault();
-								}
-							}
-						});
+					// 사용자에게 확인을 요청합니다.
+					let confirmation = confirm('입력하신 정보로 이체를 실행할까요?');
+					if (!confirmation) {
+						// 사용자가 취소를 누른 경우 이벤트의 기본 동작을 중단합니다.
+						e.preventDefault();
+					}
+				}
+			});
+		
+		function cleanAccountNo(element) {
+			// 입력값에서 숫자와 하이픈(-)을 제외한 모든 문자를 제거합니다.
+			element.value = element.value.replace(/[^0-9-]/g, '');
+		}
+		
 	</script>
 
 
