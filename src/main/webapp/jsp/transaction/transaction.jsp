@@ -98,7 +98,7 @@
 							<label for="transferAmount" class="form-label">이체 금액</label>
 							<!-- 이체 금액 입력 필드 -->
 							<input type="text" class="form-control" id="transferAmount"
-								name="transferAmount">
+								name="transferAmount" onkeyup="cleanAmount(this)">
 							<div id="transferAmount-feedback" class="invalid-feedback"
 								style="display: none;"></div>
 							<!-- 클래스와 스타일 수정 -->
@@ -373,6 +373,11 @@
 		function cleanAccountNo(element) {
 			// 입력값에서 숫자와 하이픈(-)을 제외한 모든 문자를 제거합니다.
 			element.value = element.value.replace(/[^0-9-]/g, '');
+		}
+		
+		function cleanAmount(element) {
+			// 입력값에서 숫자와 하이픈(-)을 제외한 모든 문자를 제거합니다.
+			element.value = element.value.replace(/[^0-9]/g, '');
 		}
 		
 	</script>
