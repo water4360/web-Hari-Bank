@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
 <html>
 <head>
 <meta charset="UTF-8">
@@ -89,7 +87,7 @@
 					</div>
 				</div>
 			</div>
-			<%-- <table class="table table-striped fixed-table mb-7"
+			<table class="table table-striped fixed-table mb-7"
 				style="width: 60rem;">
 				<thead class="thead-dark">
 					<tr class="text-white bg-secondary">
@@ -130,72 +128,7 @@
 						</c:otherwise>
 					</c:choose>
 				</thead>
-			</table> --%>
-			
-			<table class="table table-striped fixed-table mb-7" style="width: 60rem;">
-  <thead class="thead-dark">
-    <tr class="text-white bg-secondary">
-      <th>거래일자</th>
-      <th>거래시각</th>
-      <th>구분</th>
-      <th>금액</th>
-      <th>내용</th>
-      <th>잔액</th>
-    </tr>
-    <c:choose>
-      <c:when test="${empty transactionList}">
-        <tr>
-          <td colspan="6" class="text-center">거래내역이 존재하지 않습니다.</td>
-        </tr>
-      </c:when>
-      <c:otherwise>
-        <c:set var="pageSize" value="5" /> <!-- 페이지당 항목 수 -->
-        <c:set var="currentPage" value="1" /> <!-- 현재 페이지 -->
-        <c:set var="startIndex" value="${(currentPage - 1) * pageSize}" /> <!-- 시작 인덱스 -->
-        <c:set var="endIndex" value="${currentPage * pageSize - 1}" /> <!-- 끝 인덱스 -->
-        <c:forEach var="trans" items="${transactionList}" varStatus="status">
-          <c:if test="${status.index >= startIndex && status.index <= endIndex}">
-            <tr>
-              <td>${trans.date}</td>
-              <td>${trans.time}</td>
-              <td>${trans.type}</td>
-              <td>${trans.amount}</td>
-              <td>${trans.fromMemo}</td>
-              <td>${trans.balance}</td>
-            </tr>
-          </c:if>
-        </c:forEach>
-      </c:otherwise>
-    </c:choose>
-  </thead>
-</table>
-
-<!-- 페이지네이션 -->
-<c:set var="totalItems" value="${fn:length(transactionList)}" /> <!-- 전체 항목 수 -->
-<c:set var="totalPages" value="${(totalItems + pageSize - 1) / pageSize}" /> <!-- 전체 페이지 수 -->
-
-<c:if test="${totalPages > 1}">
-  <nav aria-label="페이지네이션">
-    <ul class="pagination justify-content-center">
-      <li class="page-item ${currentPage == 1 ? 'disabled' : ''}">
-        <a class="page-link" href="?page=${currentPage - 1}" aria-label="이전">
-          <span aria-hidden="true">&laquo;</span>
-        </a>
-      </li>
-      <c:forEach var="page" begin="1" end="${totalPages}">
-        <li class="page-item ${page == currentPage ? 'active' : ''}">
-          <a class="page-link" href="?page=${page}">${page}</a>
-        </li>
-      </c:forEach>
-      <li class="page-item ${currentPage == totalPages ? 'disabled' : ''}">
-        <a class="page-link" href="?page=${currentPage + 1}" aria-label="다음">
-          <span aria-hidden="true">&raquo;</span>
-        </a>
-      </li>
-    </ul>
-  </nav>
-</c:if>
-			
+			</table>
 
 
 

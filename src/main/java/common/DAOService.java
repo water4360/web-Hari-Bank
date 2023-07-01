@@ -113,6 +113,15 @@ public class DAOService {
 	public List<PostVO> getAllQnas() {
 		return pd.getAllQnas();
 	}
+	//qna 수정 + 조회수 추가 포함
+	public void modifyPost(PostVO vo) {
+		pd.modifyPost(vo);
+	}
+	//qna 삭제
+	public void deletePost(int no) {
+		pd.deletePost(no);
+	}
+	
 	
 
 	
@@ -164,5 +173,5 @@ public class DAOService {
 	public String getUserNameByAccountNo(String bankCode, String no) throws Exception {
 		return td.getUserNameByAccountNo(bankCode, no); 
 	}
-	
+
 }

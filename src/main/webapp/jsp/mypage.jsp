@@ -32,7 +32,6 @@ table {
 		<div class="container mt-5" align="center">
 			<div class="card col-6 pt-2 mb-4">
 				<div class="card-header">
-					<h2>MY HR</h2>
 					<h6>최종접속시각 : ${latestLoginTime}</h6>
 				</div>
 
@@ -64,19 +63,18 @@ table {
 							<td>${loginUser.korName}</td>
 							<td>${loginUser.id}</td>
 							<td></td>
-							<td><input type="text" id="phone" name="phone" class="editable"
-								value="${loginUser.phone}" style="width: 130px" disabled></td>
-							<td><input type="email" id="email" name="email" class="editable"
-								value="${loginUser.email}" disabled></td>
+							<td><input type="text" id="phone" name="phone"
+								class="editable" value="${loginUser.phone}" style="width: 130px"
+								disabled></td>
+							<td><input type="email" id="email" name="email"
+								class="editable" value="${loginUser.email}" disabled></td>
 							<td>${loginUser.signupType}</td>
 							<td>${loginUser.regDatetime}</td>
-							<td>
+							<td><input type="hidden" name="id" value="${loginUser.id}">
 								<div class="btn-group">
-								<input type="hidden" name="id" value="${loginUser.id}">
 									<button type="submit" class="btn btn-success" id="edit-btn"
 										onclick="enableEdit(event)">수정</button>
-								</div>
-							</td>
+								</div></td>
 						</tr>
 					</tbody>
 				</table>
@@ -158,16 +156,19 @@ table {
 
 			// 수정 버튼의 텍스트 변경
 			editButton.innerText = phoneInput.disabled ? '수정' : '저장';
-			editButton.onclick = phoneInput.disabled ? function(event) { enableEdit(event); } : function(event) { saveChanges(event); };
+			editButton.onclick = phoneInput.disabled ? function(event) {
+				enableEdit(event);
+			} : function(event) {
+				saveChanges(event);
+			};
 		}
-		
 	<%-- 정보수정 반영 --%>
-	function saveChanges(event) {
-		event.preventDefault();
+		function saveChanges(event) {
+			event.preventDefault();
 
-		var form = document.getElementById('myinfo-form');
-		form.submit();
-	}
+			var form = document.getElementById('myinfo-form');
+			form.submit();
+		}
 	</script>
 
 

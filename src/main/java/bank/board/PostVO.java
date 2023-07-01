@@ -69,7 +69,7 @@ public class PostVO {
 	public void setViewCnt(int viewCnt) {
 		this.viewCnt = viewCnt;
 	}
-
+	//신규생성용
 	public PostVO(int no, String writer, String title, String contents, String regDate, int viewCnt) {
 		super();
 		this.no = no;
@@ -78,6 +78,16 @@ public class PostVO {
 		this.contents = contents;
 		this.regDate = regDate;
 		this.viewCnt = viewCnt;
+	}
+	
+	//수정용
+	public PostVO(int no, String writer, String title, String contents, String category) {
+		super();
+		this.no = no;
+		this.writer = writer;
+		this.title = title;
+		this.contents = contents;
+		this.category = category;
 	}
 
 	@Override

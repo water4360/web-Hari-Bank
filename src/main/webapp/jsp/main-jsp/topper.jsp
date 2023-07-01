@@ -20,7 +20,7 @@
 
 <style>
 * {
-	font-family: 'SUITE', sans-serif;
+	font-family: 'SUITE', sans-serif !important;
 }
 
 .navbar-brand {
@@ -38,6 +38,7 @@
 	<%-- 네비게이션 메뉴바 --%>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="flex-direction: column;">
 		<div class="container">
+		<img alt="main-bank-logo" src="/assets/">
 			<a class="navbar-brand"
 				href="${pageContext.request.contextPath}/main.do">하리은행</a>
 			<div class="login-info">
@@ -69,7 +70,6 @@
 					<li class="nav-item"><a class="nav-link" href="products.do">금융상품</a></li>
 					<li class="nav-item"><a class="nav-link" href="customer.do">고객센터</a></li>
 					<li class="nav-item"><a class="nav-link" href="mypage.do">마이페이지</a></li>
-					<!--<li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li> -->
 				</ul>
 			</div>
 		</div>

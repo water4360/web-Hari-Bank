@@ -9,12 +9,6 @@ import java.util.List;
 import common.ConnectionFactory;
 
 public class PostDAO {
-	// DB연결용
-	private Connection conn;
-	// 쿼리 실행용
-	private PreparedStatement stmt;
-	// 쿼리 결과받아오기
-	private ResultSet rs;
 
 	// 게시글 등록
 //	INSERT INTO B_BOARD(P_NO, P_WRITER, P_TITLE, P_CONTENTS, P_CATEGORY) VALUES(SEQ_QNA_NO.NEXTVAL, 'aaaa', '문의합니다', '내용이 많습니다', 'QNA');
@@ -100,26 +94,7 @@ public class PostDAO {
 		return postList;
 	}
 	
-	//Q&A 업데이트
-	public void updatePost(PostVO post) {
-		StringBuilder sql = new StringBuilder();
-		sql.append("UPDATE B_BOARD SET P_TITLE = ?, P_CONTENTS = ?, P_HIT = ? WHERE P_NO = ? ");
-		
-		int idx = 1;
-		try(Connection conn = new ConnectionFactory().getConnection();
-			PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
-			
-			pstmt.setString(idx++, post.getTitle());
-			pstmt.setString(idx++, post.getContents());
-			pstmt.setInt(idx++, post.getViewCnt());
-			pstmt.setInt(idx++, post.getNo());
-			
-			pstmt.executeUpdate();
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+
 	
 
 	//Q&A 상세보기?
@@ -150,14 +125,63 @@ public class PostDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		updatePost(post);
+		modifyPost(post);
 		return post;
 	}
 
+	//Q&A 업데이트
+	public void modifyPost(PostVO post) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("UPDATE B_BOARD SET P_TITLE = ?, P_CONTENTS = ?, P_HIT = ? WHERE P_NO = ? ");
+		
+		int idx = 1;
+		try(Connection conn = new ConnectionFactory().getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
+			
+			pstmt.setString(idx++, post.getTitle());
+			pstmt.setString(idx++, post.getContents());
+			pstmt.setInt(idx++, post.getViewCnt());
+			pstmt.setInt(idx++, post.getNo());
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//Q&A 삭제
+	public void deletePost(int no) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("DELETE B_BOARD WHERE P_NO = ? ");
+		
+		int idx = 1;
+		try(Connection conn = new ConnectionFactory().getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
+			
+			pstmt.setInt(idx++, no);
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//개인별 QNA
 	public List<PostVO> getQnaListById(String id) {
 		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT * FROM B_BOARD WHERE P_WRITER = ? ");
+		sql.append("SELECT * FROM B_BOARD WHERE P_WRITER = ? ORDER BY P_NO DESC ");
 		
 		PostVO post = null;
 		List<PostVO> qnaList = new ArrayList<>();
@@ -169,7 +193,7 @@ public class PostDAO {
 			 
 			 ResultSet rs = pstmt.executeQuery();
 			 
-			if(rs.next()) {
+			while(rs.next()) {
 				int no = rs.getInt("P_NO");
 				String writer = rs.getString("P_WRITER");
 				String title = rs.getString("P_TITLE");
@@ -187,4 +211,6 @@ public class PostDAO {
 		
 		return qnaList;
 	}
+
+
 }

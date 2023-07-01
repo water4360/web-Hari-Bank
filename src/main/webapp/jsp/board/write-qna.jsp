@@ -25,7 +25,7 @@ table {
         <jsp:include page="/jsp/main-jsp/topper.jsp"></jsp:include>
     </header>
     <section>
-        <div class="container mt-5">
+        <div class="container col-5 mt-5">
             <div class="text-center">
                 <h2>문의글 작성</h2>
             </div>
@@ -38,9 +38,10 @@ table {
                 <div class="mb-3">
                     <textarea class="form-control" name="contents" rows="10" placeholder="내용을 입력하세요."></textarea>
                 </div>
-                <div class="mb-3 d-flex justify-content-center">
+                <div class="mb-3 justify-content-center">
                     <button type="submit" class="btn btn-success mr-2">글등록</button>
                     <a href="${pageContext.request.contextPath }/qna.do" class="btn btn-secondary">목록으로</a>
+                    <a href="${pageContext.request.contextPath }/mypage.do" class="btn btn-secondary">이전으로</a>
                 </div>
             </form>
         </div>

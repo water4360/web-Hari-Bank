@@ -88,26 +88,6 @@
 						</c:otherwise>
 					</c:choose>
 					<!-- Categories widget-->
-					<div class="card col-lg-4 mb-5">
-						<div class="card-header">공지사항</div>
-						<div class="card-body">
-							<div class="row">
-								<div class="col-sm-6">
-									<ul class="list-unstyled mb-0">
-										<li><a href="#!">Web Design</a></li>
-										<li><a href="#!">HTML</a></li>
-										<li><a href="#!">Freebies</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="card col-lg-4 mb-5">
-						<div class="card-header"><a href="faq.do">자주묻는질문(FAQ)</a></div>
-						<div class="card-body">You can put anything you want inside
-							of these side widgets. They are easy to use, and feature the
-							Bootstrap 5 card component!</div>
-					</div>
 				</div>
 			</div>
 		</div>

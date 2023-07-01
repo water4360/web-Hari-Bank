@@ -5,8 +5,10 @@ import java.util.Map;
 
 import controller.account.CreateAccountController;
 import controller.account.CreateAccountProcessController;
+import controller.board.DeleteQnAController;
 import controller.board.FAQController;
 import controller.board.InsertNewQnAController;
+import controller.board.ModifyQnAController;
 import controller.board.QnAController;
 import controller.board.QnADetailsController;
 import controller.board.WriteQnAController;
@@ -75,7 +77,10 @@ public class HandlerMapping {
 		mappings.put("/qna.do", new QnAController());
 		mappings.put("/qna-details.do", new QnADetailsController());
 		
+		//게시판용
 		mappings.put("/write-post.do", new WriteQnAController());
+		mappings.put("/modify-post.do", new ModifyQnAController());
+		mappings.put("/delete-post.do", new DeleteQnAController());
 		mappings.put("/insert-new-post.do", new InsertNewQnAController());
 		
 		

@@ -21,7 +21,6 @@ public class MypageController extends BasicController {
 		
 		// 로그인 안된 경우
 		if (session.getAttribute("loginUser") == null) {
-		
         	String prevBtn = "mypage";
         	session.setAttribute("prevBtn", prevBtn);
         	
@@ -39,6 +38,8 @@ public class MypageController extends BasicController {
         	
     		List<PostVO> qnaList = new ArrayList<>();
     		qnaList = daoService.getQnaListById(id);
+    		
+    		System.out.println("1:1문의 개수 : " + qnaList.size());
     		session.setAttribute("qnaList", qnaList);
     		
         	System.out.println("현재 로그인: " + (UserVO) request.getAttribute("loginUser"));
