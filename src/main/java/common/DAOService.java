@@ -61,7 +61,10 @@ public class DAOService {
 		return ud.isDuplicated(id);
 	}
 	
-	
+	//회원정보 변경
+	public int updateMyInfo(UserVO user) {
+		return ud.updateMyInfo(user);
+	}
 	
 	/*
 	 * AccountDAO(계좌)
@@ -118,6 +121,7 @@ public class DAOService {
 	/*
 	 * DepositDAO(예금)
 	 */
+	//예금정보 조회
 	public DepositVO getDepositInfo(String code) {
 		return dd.getDepositInfo(code);
 	}
@@ -127,6 +131,7 @@ public class DAOService {
 	/*
 	 * BankDAO(은행)
 	 */
+	//제휴은행 목록불러오기
 	public List<InfoVO> getBankList() {
 		return bd.getBankList();
 	}
@@ -155,5 +160,9 @@ public class DAOService {
 		return td.getTransactionList(accountNo);
 	}
 	
+	//은행코드랑 계좌번호로 유저이름 찾아오기
+	public String getUserNameByAccountNo(String bankCode, String no) throws Exception {
+		return td.getUserNameByAccountNo(bankCode, no); 
+	}
 	
 }

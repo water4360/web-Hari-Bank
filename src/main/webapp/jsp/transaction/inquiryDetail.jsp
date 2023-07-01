@@ -47,12 +47,18 @@
 
 			<div class="card mx-auto mb-3" style="width: 30rem;">
 				<div class="card-header" align="center">
-					<h5 class="card-title">${account.accountNo}</h5>
+					<h5 class="card-title">${account.accountNo}
+						<button onclick="copyToClipboard('${account.accountNo}')"
+							class="btn link-dark btn-sm">
+							<i class="fas fa-copy"></i>
+						</button>
+					</h5>
+
 					<p class="card-text">${deposit.name}
 						<c:if test="${not empty account.accountNickname }">
-					 (별칭:
-						${account.accountNickName})</c:if>
+					 (${account.accountNickname})</c:if>
 					</p>
+
 					<p class="card-text">신규개설 ${account.createdDate}</p>
 					<p class="card-text">
 						잔액 <b>${formattedTotalBalance}</b>
@@ -72,16 +78,17 @@
 									value="${account.accountNo}">
 								<button type="submit" class="btn btn-secondary">이체</button>
 							</form>
-							<form action="account-format.do" method="post">
+							<form action="inquiry.do" method="post">
 								<input type="hidden" name="accountNo"
-									value="${account.accountNo}">
-								<button type="submit" class="btn btn-secondary">통장개설확인서</button>
+								value="${account.accountNo}">
+							<button type="button" class="btn btn-secondary">통장개설확인서</button>
 							</form>
 						</div>
 					</div>
 				</div>
 			</div>
-			<table class="table table-striped fixed-table mb-7" style="width: 60rem;">
+			<table class="table table-striped fixed-table mb-7"
+				style="width: 60rem;">
 				<thead class="thead-dark">
 					<tr class="text-white bg-secondary">
 						<th>거래일자</th>
@@ -100,23 +107,32 @@
 						<c:otherwise>
 							<c:forEach var="trans" items="${transactionList}">
 								<tr>
-								<td>${trans.date}</td>
-								<td>${trans.time}</td>
-								<td>${trans.type}</td>
-								<td>${trans.amount}</td>
-								<td>${trans.fromMemo}</td>
-								<td>${trans.balance}</td>
+									<td>${trans.date}</td>
+									<td>${trans.time}</td>
+									<td>${trans.type}</td>
+									<td>${trans.amount}</td>
+									<td>${trans.fromMemo}</td>
+									<td>${trans.balance}</td>
 								</tr>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
 				</thead>
 			</table>
-
-
 		</div>
 
-
+		<script>
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text)
+        .then(() => {
+            // 모달 표시
+            alert('계좌번호가 복사되었습니다. ctrl+v로 붙여넣기 할 수 있습니다.');
+        })
+        .catch((error) => {
+            console.error("계좌번호 복사 실패:", error);
+        });
+    }
+</script>
 
 
 

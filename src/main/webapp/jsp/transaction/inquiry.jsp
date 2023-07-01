@@ -85,8 +85,7 @@
 											<td style="text-align: center;">${account.productName}</td>
 											<td colspan="2" style="text-align: center;">${account.accountNo}
 												<button onclick="copyToClipboard('${account.accountNo}')"
-													class="btn link-dark btn-sm" data-bs-toggle="modal"
-													data-bs-target="#copyModal">
+													class="btn link-dark btn-sm">
 													<i class="fas fa-copy"></i>
 												</button>
 											</td>

@@ -23,7 +23,7 @@ public class InquiryDetailController extends BasicController {
 		System.out.println("계좌상세조회 진입");
 		
 		String no = request.getParameter("accountNo");
-		String code = request.getParameter("productCode");
+//		String code = request.getParameter("productCode");
 		
 		
 		// 로그인 안된 경우
@@ -36,7 +36,7 @@ public class InquiryDetailController extends BasicController {
         	return "login.do";
         } else {
         	AccountVO account = daoService.getAccountInfo(no);
-        	DepositVO deposit = daoService.getDepositInfo(code);
+        	DepositVO deposit = daoService.getDepositInfo(no);
         	
         	//자릿수 표기 + 원 붙이기
         	long totalBalance = Long.valueOf(account.getBalance());
