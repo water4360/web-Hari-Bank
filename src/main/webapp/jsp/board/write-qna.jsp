@@ -30,7 +30,7 @@ table {
                 <h2>문의글 작성</h2>
             </div>
             <form action="insert-new-post.do" method="post">
-            <input type="hidden" name="writer" value="${loginUser.korName}">
+            <input type="hidden" name="writer" value="${loginUser.id}">
             <input type="hidden" name="category" value="QNA">
                 <div class="mb-3">
                     <input type="text" class="form-control" name="title" placeholder="제목을 입력해 주세요.">

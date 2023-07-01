@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import bank.board.PostVO;
 import common.ConnectionFactory;
 
 public class UserDAO {
@@ -147,7 +148,7 @@ public class UserDAO {
 					String phone = rs.getString("PHONE_NO");
 					String email = rs.getString("EMAIL");
 					String signType = rs.getString("SIGNUP_TYPE");
-					String regDate = rs.getString("REG_DATETIME");
+					String regDate = rs.getString("REG_DATETIME").substring(0, 10); //날짜만
 					String roleCode = rs.getString("ROLE_CODE");
 					String roleName = rs.getString("ROLE_NAME");
 					String bankCode = rs.getString("B_BANK_CODE");
@@ -198,6 +199,39 @@ public class UserDAO {
 			return vo;
 		}
 	
+		
+		
+		
+		//회원정보 업데이트
+		public int updateMyInfo(UserVO user) {
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE B_USER_INFO SET PHONE_NO = ?, EMAIL = ? WHERE USER_ID = ? ");
+			
+			int result = 0;
+			int idx = 1;
+			try(Connection conn = new ConnectionFactory().getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
+				
+				pstmt.setString(idx++, user.getPhone());
+				pstmt.setString(idx++, user.getEmail());
+				pstmt.setString(idx++, user.getId());
+				
+				result = pstmt.executeUpdate();
+				
+				return result;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return result;
+		}
+		
+		
+		
+		
+		
+		
+		
+		
 	
 	
 

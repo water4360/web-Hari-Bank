@@ -1,5 +1,7 @@
 package controller.login;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +30,13 @@ public class MypageController extends BasicController {
         } else {
         	String id = ((UserVO)session.getAttribute("loginUser")).getId();
     		
+        	//조회기준일시 표기
+        	LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter datetimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String latestLoginTime = now.format(datetimeFormat);
+            session.setAttribute("latestLoginTime", latestLoginTime);
+        	
+        	
     		List<PostVO> qnaList = new ArrayList<>();
     		qnaList = daoService.getQnaListById(id);
     		session.setAttribute("qnaList", qnaList);

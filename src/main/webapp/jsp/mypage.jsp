@@ -31,71 +31,50 @@ table {
 
 		<div class="container mt-5" align="center">
 			<div class="card col-6 pt-2 mb-4">
+				<div class="card-header">
+					<h2>MY HR</h2>
+					<h6>최종접속시각 : ${latestLoginTime}</h6>
+				</div>
+
+
 				<div class="card-body">
-					<h5><b>${loginUser.korName}</b>님의
-						HR등급 <b>[${loginUser.roleName}]</b>
+					<h5>
+						<b>${loginUser.korName}</b>님의 HR등급 <b>[${loginUser.roleName}]</b>
 					</h5>
 					* 등급혜택 : <b>타행이체시 수수료 면제</b>
 				</div>
 			</div>
-			<form action="update-info.do">
+			<form id="myinfo-form" action="update-info.do" method="POST">
 				<table class="table table-striped col-8">
 					<thead>
 						<tr>
-							<th scope="col">이름</th>
-							<th scope="col">ID</th>
-							<th scope="col">PW</th>
-							<th scope="col">연락처</th>
-							<th scope="col">이메일</th>
-							<th scope="col">가입일</th>
-							<th scope="col"></th>
+							<th>이름</th>
+							<th>ID</th>
+							<th></th>
+							<th>연락처</th>
+							<th>이메일</th>
+							<th>가입구분</th>
+							<th>가입일</th>
+							<th></th>
 						</tr>
 					</thead>
 					<%-- 테이블 내용 --%>
 					<tbody>
 						<tr>
-							<td class="name">${loginUser.korName}</td>
-							<td class="id">${loginUser.id}</td>
-							<td class="pw"><input type="password" id="pw"
-								class="editable" value="${loginUser.pw}" style="width: 60px"
-								disabled></td>
-							<td class="phone"><input type="text" id="phone"
-								class="editable" value="${loginUser.phone}" style="width: 110px"
-								disabled></td>
-							<td class="email"><input type="email" id="email"
-								class="editable" value="${loginUser.email}" disabled></td>
-							<td class="regDatetime">${loginUser.regDatetime}</td>
+							<td>${loginUser.korName}</td>
+							<td>${loginUser.id}</td>
+							<td></td>
+							<td><input type="text" id="phone" name="phone" class="editable"
+								value="${loginUser.phone}" style="width: 130px" disabled></td>
+							<td><input type="email" id="email" name="email" class="editable"
+								value="${loginUser.email}" disabled></td>
+							<td>${loginUser.signupType}</td>
+							<td>${loginUser.regDatetime}</td>
 							<td>
 								<div class="btn-group">
-									<button type="button" class="btn btn-success" id="edit-btn"
-										onclick="enableEdit()">수정</button>
-								</div>
-							</td>
-						</tr>
-						<tr>
-							<th scope="col">생년월일</th>
-							<th scope="col">가입구분</th>
-							<th scope="col">자택주소</th>
-							<th scope="col"></th>
-							<th scope="col"></th>
-							<th scope="col"></th>
-							<th scope="col"></th>
-						</tr>
-						<tr>
-							<td class="name">${loginUser.birthdate}</td>
-							<td class="id">${loginUser.signupType}</td>
-							<td class="pw"><input type="text" id="pw"
-								class="editable" value="${userAddr.postcode}" style="width: 60px"
-								disabled></td>
-							<td class="phone" colspan="2"><input type="text" id="phone"
-								class="editable" value="${userAddr.roadAddress}" style="width: 250px"
-								disabled></td>
-							<td class="email"><input type="email" id="email"
-								class="editable" value="${userAddr.detailAddress}" disabled></td>
-							<td>
-								<div class="btn-group">
-									<button type="button" class="btn btn-success" id="edit-btn"
-										onclick="enableEdit()">수정</button>
+								<input type="hidden" name="id" value="${loginUser.id}">
+									<button type="submit" class="btn btn-success" id="edit-btn"
+										onclick="enableEdit(event)">수정</button>
 								</div>
 							</td>
 						</tr>
@@ -129,7 +108,7 @@ table {
 							<c:choose>
 								<c:when test="${ empty qnaList }">
 									<td colspan="5" align="center" style="padding: 50px 0;">
-									문의하신 Q&A 내역이 없습니다.</td>
+										문의하신 Q&A 내역이 없습니다.</td>
 								</c:when>
 
 								<c:otherwise>
@@ -150,56 +129,46 @@ table {
 				</div>
 			</div>
 		</div>
-			
-			
-			
-			
-			
-			
-		
+
+
+
+
+
+
+
 
 
 	</section>
 
 
 	<script>
+		
+	<%-- 회원정보 수정모드 --%>
+		function enableEdit(event) {
+			event.preventDefault();
 
-   
-   <%-- 회원정보 수정모드 --%>
- function enableEdit() {
-     var inputs = document.getElementsByClassName('editable');
-     var editButton = document.getElementById('edit-btn');
+			var phoneInput = document.getElementById('phone');
+			var emailInput = document.getElementById('email');
+			var editButton = document.getElementById('edit-btn');
+			var form = document.getElementById('myinfo-form');
 
-     // 모든 input 요소를 활성화 또는 비활성화
-     for (var i = 0; i < inputs.length; i++) {
-         inputs[i].disabled = !inputs[i].disabled;
-     }
+			// 모든 input 요소를 활성화 또는 비활성화
+			phoneInput.disabled = !phoneInput.disabled;
+			emailInput.disabled = !emailInput.disabled;
 
-     // 수정 버튼의 텍스트 변경
-     editButton.innerText = inputs[0].disabled ? '수정' : '저장';
-     editButton.onclick = saveChanges;
- }
- 
- <%-- 정보수정 반영 --%>
-  function saveChanges() {
-      var pwInput = document.getElementById('pw');
-      var phoneInput = document.getElementById('phone');
-      var emailInput = document.getElementById('email');
-      var editButton = document.getElementById('edit-btn');
-      
-      // 수정된 정보를 서버로 전송하는 로직 추가
-      
-      
-      // 저장 버튼을 수정 버튼으로 변경
-      editButton.innerText = '수정';
-      editButton.onclick = enableEdit;
-      
-// 입력 필드 비활성화
-phoneInput.disabled = true;
-emailInput.disabled = true;
-  }
-  
-</script>
+			// 수정 버튼의 텍스트 변경
+			editButton.innerText = phoneInput.disabled ? '수정' : '저장';
+			editButton.onclick = phoneInput.disabled ? function(event) { enableEdit(event); } : function(event) { saveChanges(event); };
+		}
+		
+	<%-- 정보수정 반영 --%>
+	function saveChanges(event) {
+		event.preventDefault();
+
+		var form = document.getElementById('myinfo-form');
+		form.submit();
+	}
+	</script>
 
 
 

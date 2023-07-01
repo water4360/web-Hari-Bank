@@ -43,7 +43,7 @@ table {
 							<p class="card-text">${post.contents}</p>
 						</div>
 						<div class="card-footer text-muted text-end">작성자 :
-							${post.writer} | 등록일 : ${post.regDate}</div>
+							${post.writer} | 등록일 : ${post.regDate} | 조회수 : ${post.viewCnt}</div>
 					</div>
 					<div class="btn-group" role="group">
 						<%-- 작성자일때, 관리자일때, 방문자일때 --%>

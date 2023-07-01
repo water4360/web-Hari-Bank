@@ -16,6 +16,7 @@ import controller.login.LoginController;
 import controller.login.LoginProcessController;
 import controller.login.LogoutController;
 import controller.login.MypageController;
+import controller.login.UpdateMyInfoController;
 import controller.product.ProductsController;
 import controller.signup.SignupKakaoController;
 import controller.signup.SignupProcessController;
@@ -58,6 +59,7 @@ public class HandlerMapping {
 		mappings.put("/products.do", new ProductsController());
 		mappings.put("/customer.do", new CustomerController());
 		mappings.put("/mypage.do", new MypageController());
+		mappings.put("/update-info.do", new UpdateMyInfoController());
 		
 		//메인 메뉴
 		mappings.put("/web-signup.do", new SignupWebController());

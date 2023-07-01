@@ -17,7 +17,7 @@ public class PostDAO {
 	private ResultSet rs;
 
 	// 게시글 등록
-//	INSERT INTO B_BOARD(P_NO, P_WRITER, P_TITLE, P_CONTENTS) VALUES(SEQ_QNA_NO.NEXTVAL, 'aaaa', '문의합니다', '내용이 많습니다');
+//	INSERT INTO B_BOARD(P_NO, P_WRITER, P_TITLE, P_CONTENTS, P_CATEGORY) VALUES(SEQ_QNA_NO.NEXTVAL, 'aaaa', '문의합니다', '내용이 많습니다', 'QNA');
 	public int writePost(PostVO vo) {
 		int result = 0;
 		StringBuilder sql = new StringBuilder();
@@ -33,7 +33,8 @@ public class PostDAO {
 			pstmt.setString(idx++, vo.getContents());
 			pstmt.setString(idx++, vo.getCategory());
 
-			result = pstmt.executeUpdate();			return result; // 1이면 성공
+			result = pstmt.executeUpdate();
+			return result; // 1이면 성공
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -98,6 +99,28 @@ public class PostDAO {
 		}
 		return postList;
 	}
+	
+	//Q&A 업데이트
+	public void updatePost(PostVO post) {
+		StringBuilder sql = new StringBuilder();
+		sql.append("UPDATE B_BOARD SET P_TITLE = ?, P_CONTENTS = ?, P_HIT = ? WHERE P_NO = ? ");
+		
+		int idx = 1;
+		try(Connection conn = new ConnectionFactory().getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
+			
+			pstmt.setString(idx++, post.getTitle());
+			pstmt.setString(idx++, post.getContents());
+			pstmt.setInt(idx++, post.getViewCnt());
+			pstmt.setInt(idx++, post.getNo());
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 
 	//Q&A 상세보기?
 	public PostVO getPost(int qno) {
@@ -105,10 +128,11 @@ public class PostDAO {
 		sql.append("SELECT * FROM B_BOARD WHERE P_NO = ? ");
 		PostVO post = null;
 
+		int idx = 1;
 		try (Connection conn = new ConnectionFactory().getConnection();
 			 PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
 			
-			 pstmt.setInt(1, qno);
+			 pstmt.setInt(idx++, qno);
 			 
 			 ResultSet rs = pstmt.executeQuery();
 			 
@@ -118,7 +142,7 @@ public class PostDAO {
 				String title = rs.getString("P_TITLE");
 				String contents = rs.getString("P_CONTENTS");
 				String regDate = rs.getString("P_REG_DATE");
-				int viewCnt  = rs.getInt("P_HIT");
+				int viewCnt  = rs.getInt("P_HIT")+1;
 				
 				post = new PostVO(no, writer, title, contents, regDate, viewCnt);
 			}
@@ -126,7 +150,7 @@ public class PostDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+		updatePost(post);
 		return post;
 	}
 
