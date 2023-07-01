@@ -28,7 +28,7 @@
 			
 			
 				<c:if test="${not empty loginUser}">
-				<form action="create-account.do" method="post">
+				<form action="write-post.do" method="post">
 					<button type="submit" class="btn btn-secondary">문의하기</button>
 				</form>
 				</c:if>
