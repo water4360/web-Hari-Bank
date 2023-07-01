@@ -1,5 +1,8 @@
 package controller.transaction;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -42,19 +45,31 @@ public class TransactionProcessController extends BasicController {
 			vo.setToMemo(senderMemo);
 			vo.setFromMemo(receiverMemo);
 			
+			//자릿수 표기 + 원 붙이기
+        	long amount2 = Long.valueOf(vo.getAmount());
+        	NumberFormat numFormat = NumberFormat.getInstance(Locale.KOREA);
+        	String formattedAmount = numFormat.format(amount2) + "원";
+			
 
 			boolean checkReceiver = daoService.isCorrectReceiver(vo.getReceiverBank(), vo.getReceiverAccountNo());
 			request.setAttribute("receiverAccount", checkReceiver);
 			request.setAttribute("account", account);
 			
+			String receiverName = daoService.getUserNameByAccountNo(receiverBank, receiverAccountNo);
+			
 //			String result = daoService.insertTransactionInfo(vo);
 			String result = "";
 			if(daoService.transferMoney(vo)==1) {
-				result = "이체가 완료되었습니다.";
+				result = "이체가 정상적으로 완료되었습니다";
+				request.setAttribute("receiver", receiverName);
+	        	request.setAttribute("formattedAmount", formattedAmount);
+				request.setAttribute("transaction", vo);
+				vo = null;
 			} else {
-				result = "이체에 실패하였습니다. 내역을 확인해주세요.";
+				result = "이체에 실패하였습니다. 반드시 내역을 확인해주세요.";
+				request.setAttribute("transaction", vo);
+				vo = null;
 			}
-			
 			request.setAttribute("result", result);
 			
         	return "/jsp/transaction/transactionResult.jsp";

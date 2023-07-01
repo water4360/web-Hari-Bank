@@ -301,6 +301,7 @@ public class AccountDAO {
 				String bankCode = rs.getString("B_BANK_CODE");
 
 				vo = new AccountVO(no, pw, date, balance, nickname, productCode, id, bankCode);
+				System.out.println("AccountDAO에서 : " + vo);
 			}
 
 		} catch (Exception e) {
@@ -336,6 +337,13 @@ public class AccountDAO {
 	}
 
 ////////////////////////////////////////계좌 유효성 체크
+	//계좌번호 있는지, 계좌상태 정상인지
+	//지현(1은 정상, 0은 휴면)
+	//건희(O는 정상, X는 휴면)
+	//현종(T는 정상, F는 휴면)
+//	SELECT * FROM B_ACCOUNT @HJBANK BA
+//	JOIN B_ACCOUNTLIST @HJBANK BAL ON BA.ACCOUNT_NO @HJBANK = BAL.ACCOUNT_NO
+//	WHERE BAL.ACCOUNT_NO='12345678' AND BAL.STATUS='F';
 	public boolean isCorrectReceiver(String bankCode, String accountNo) {
 		StringBuilder sql = new StringBuilder();
 		boolean result = false;
@@ -343,19 +351,21 @@ public class AccountDAO {
 		switch (bankCode) {
 		case "0758":
 			sql.append("SELECT * FROM B_USER_ACCOUNT ");
-			sql.append("WHERE B_BANK_CODE=? AND ACCOUNT_NO=? ");
+			sql.append("WHERE ACCOUNT_NO= ? AND ACCOUNT_STATUS = '정상' ");
 			break;
 		case "JH":
-			sql.append("SELECT * FROM BANK_ACCOUNT @JHBANK");
-			sql.append("WHERE BANK_CD= ? AND ACCOUNT_NO = ? ");
+			sql.append("SELECT * FROM BANK_ACCOUNT @JHBANK ");
+			sql.append("WHERE ACCOUNT_NO = ? AND STATUS='1' ");
 			break;
 		case "BGH":
-			sql.append("SELECT * FROM B_ACCOUNT @BGHBank ");
-			sql.append("WHERE BANK_CODE= ? AND ACCOUNT_NO = ? ");
+			sql.append("SELECT * FROM B_ACCOUNT @BGHBANK BA ");
+			sql.append("JOIN B_ACCOUNTLIST @BGHBANK BAL ON BA.ACCOUNT_NO @BGHBANK = BAL.ACCOUNT_NO ");
+			sql.append("WHERE BAL.ACCOUNT_NO = ? AND BAL.ACCOUNTLIST_POSSIBLE='O' ");
 			break;
 		case "H.J":
-			sql.append("SELECT * FROM B_ACCOUNT @HJBANK ");
-			sql.append("WHERE BANKCODE= ? AND ACCOUNT_NO = ? ");
+			sql.append("SELECT * FROM B_ACCOUNT @HJBANK BA ");
+			sql.append("JOIN B_ACCOUNTLIST @HJBANK BAL ON BA.ACCOUNT_NO @HJBANK = BAL.ACCOUNT_NO ");
+			sql.append("WHERE BAL.ACCOUNT_NO = ? AND BAL.STATUS='T' ");
 			break;
 		default:
 			System.out.println(bankCode + " << 받는 은행코드가 스위치에 없나봄?");
@@ -366,7 +376,6 @@ public class AccountDAO {
 		try (Connection conn = new ConnectionFactory().getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
 
-			pstmt.setString(idx++, bankCode);
 			pstmt.setString(idx++, accountNo);
 			ResultSet rs = pstmt.executeQuery();
 

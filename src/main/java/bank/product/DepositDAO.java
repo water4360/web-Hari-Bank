@@ -9,16 +9,20 @@ import common.ConnectionFactory;
 public class DepositDAO {
 	
 	
-	//코드로 계좌정보 확인
-	public DepositVO getDepositInfo(String productCode) {
+	//계좌로 상품정보 확인
+	public DepositVO getDepositInfo(String accountNo) {
 		StringBuilder sql = new StringBuilder();
 		DepositVO deposit = null;
 
-		sql.append("SELECT * FROM B_DEPOSIT WHERE D_PRODUCT_CODE = ? ");
+		int idx = 1;
+		sql.append("SELECT UA.ACCOUNT_NO, DE.* ");
+		sql.append("FROM B_USER_ACCOUNT UA ");
+		sql.append("JOIN B_DEPOSIT DE ON UA.D_PRODUCT_CODE = DE.D_PRODUCT_CODE ");
+		sql.append("WHERE UA.ACCOUNT_NO = ?");
 		
 		try (Connection conn = new ConnectionFactory().getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
-			pstmt.setString(1, productCode);
+			pstmt.setString(idx++, accountNo);
 
 			ResultSet rs = pstmt.executeQuery();
 

@@ -22,7 +22,7 @@ public class TransactionController extends BasicController {
 		
 		// 로그인 안된 경우
         if (session.getAttribute("loginUser") == null) {
-            // 로그인 페이지로 리다이렉션
+            // 로그인 페이지로 포 워 딩!
             return "login.do";
         } else {
         	UserVO user = (UserVO)session.getAttribute("loginUser");
@@ -41,7 +41,7 @@ public class TransactionController extends BasicController {
         	//개설된 계좌가 없으면
         	if(accountList.size()!=0) {
         		//계좌리스트 불러오고 은행목록 가져오기
-        		session.setAttribute("selectedAccount", selectedAccount);
+        		request.setAttribute("selectedAccount", selectedAccount);
         		session.setAttribute("myAccountList", accountList);
         		session.setAttribute("bankList", bankList);
         		return "/jsp/transaction/transaction.jsp";

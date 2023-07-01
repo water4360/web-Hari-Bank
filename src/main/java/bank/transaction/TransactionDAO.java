@@ -513,13 +513,14 @@ public class TransactionDAO {
 				String memo = "내용없음";
 
 				// 내계좌 출금인 경우.
-				// TO_MEMO=받는통장, FROM_MEMO=내통장
+				// TO_MEMO=받는통장, FROM_MEMO=보내는통장
 				// 0630 자꾸 null 에러때문에 일단 if문 감싸줌.
+				// 내가 보내는 사람일때는 FROM 메모가
 				if (rs.getString("T_IN_OUT") != null) {
 
 					if (rs.getString("T_IN_OUT").equals("출금")) {
 						formatedAmount = "- " + formatedAmount;
-						memo = rs.getString("T_FROM_MEMO");
+						memo = rs.getString("T_TO_MEMO");
 					} else {
 						formatedAmount = "+ " + formatedAmount;
 						memo = rs.getString("T_TO_MEMO");

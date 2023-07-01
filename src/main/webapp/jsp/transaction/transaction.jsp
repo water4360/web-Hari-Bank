@@ -362,11 +362,16 @@
 					$('.feedback').text('').hide();
 
 					// 사용자에게 확인을 요청합니다.
-					let confirmation = confirm('입력하신 정보로 이체를 실행할까요?');
+/* 					let confirmation = confirm('입력하신 정보로 이체를 실행할까요?');
 					if (!confirmation) {
 						// 사용자가 취소를 누른 경우 이벤트의 기본 동작을 중단합니다.
 						e.preventDefault();
-					}
+					} */
+					
+					
+					
+					
+					
 				}
 			});
 		
@@ -378,6 +383,11 @@
 		function cleanAmount(element) {
 			// 입력값에서 숫자와 하이픈(-)을 제외한 모든 문자를 제거합니다.
 			element.value = element.value.replace(/[^0-9]/g, '');
+			
+			// 이체 금액이 0으로 시작하는 경우 0을 제거합니다.
+			  if (element.value.length > 0 && element.value.charAt(0) === '0') {
+			    element.value = element.value.substring(1);
+			  }
 		}
 		
 	</script>
