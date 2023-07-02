@@ -129,7 +129,9 @@
 
 	</section>
 
+
 	<script>
+	
 		// 다른 계좌를 선택하면 이전 잔액 보이지 않도록.
 		$('#senderAccountNo').change(function() {
 			$('#currentBalance').text('');
@@ -341,6 +343,12 @@
 
 								// 모든 필드가 제대로 입력되었으면, 모든 피드백 메시지를 숨깁니다.
 								$('.feedback').text('').hide();
+								
+								
+// 								// 기본 이벤트를 중단하고 modal을 표시합니다.
+// 							    e.preventDefault();
+// 							    var myModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+// 							    myModal.show();
 
 								// 사용자에게 확인을 요청합니다.
 								let confirmation = confirm('입력하신 정보로 이체를 실행할까요?');
@@ -351,7 +359,8 @@
 
 							}
 						});
-
+		
+		
 		function cleanAccountNo(element) {
 			// 입력값에서 숫자와 하이픈(-)을 제외한 모든 문자를 제거합니다.
 			element.value = element.value.replace(/[^0-9-]/g, '');
@@ -367,6 +376,28 @@
 			}
 		}
 	</script>
+
+
+	<div class="modal fade" id="confirmModal" tabindex="-1"
+		aria-labelledby="confirmModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="confirmModalLabel">Confirmation</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">입력하신 정보로 이체를 실행할까요?</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">취소</button>
+					<button type="button" class="btn btn-primary" id="confirmBtn">확인</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 
 
 	<footer>
