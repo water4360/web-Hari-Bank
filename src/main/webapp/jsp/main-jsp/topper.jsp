@@ -12,7 +12,7 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
 	crossorigin="anonymous">
-	
+
 <!-- 여기는 topper Jquery-3.6.0 -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script
@@ -20,7 +20,8 @@
 	crossorigin="anonymous"></script>
 
 <%-- 클립보드 아이콘용 스타일시트 및 icon 링크--%>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v6.3.0/css/all.css">
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"></script>
 
 
@@ -34,12 +35,11 @@
 * {
 	font-family: 'SUITE', sans-serif !important;
 }
+
 .nav-item {
-	padding-right:0;
+	padding-right: 0;
 	font-size: large !important;
 }
-
-
 </style>
 
 </head>
@@ -47,19 +47,22 @@
 	<%-- 네비게이션 메뉴바 --%>
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark pt-5"
 		style="flex-direction: column;">
-	<div class="container">
+		<div class="container">
 			<a class="navbar-brand"
 				href="${pageContext.request.contextPath}/main.do"> <img
 				alt="main-bank-logo" src="./assets/bank-logo.png" width="80%"></a>
-			<div class="info-and-topmenu" style="display:flex; flex-direction:column; align-items:flex-end;">
-				<div class="login-info" style="padding-right:8px; font-size:large;">
+			<div class="info-and-topmenu"
+				style="display: flex; flex-direction: column; align-items: flex-end;">
+				<div class="login-info"
+					style="padding-right: 8px; font-size: large;">
 					<c:if test="${ not empty loginUser }">
-						<img alt="user" id="user" src="./assets/gr-user2.png" style="width:30px;">
+						<img alt="user" id="user" src="./assets/gr-user2.png"
+							style="width: 30px;">
 						<b>${ loginUser.korName }님 환영합니다</b>
 						<a class="badge bg-secondary text-decoration-none link-light"
 							href="#!">로그인연장</a>
 						<a class="badge bg-secondary text-decoration-none link-light"
-							href="logout.do">로그아웃</a>
+							href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">로그아웃</a>
 					</c:if>
 				</div>
 				<div class="topmenu-container" align="center">
@@ -86,6 +89,41 @@
 			</div>
 		</div>
 	</nav>
+
+
+
+	<!-- 로그아웃 모달 -->
+	<div class="modal fade" id="logoutModal" tabindex="-1"
+		aria-labelledby="logoutModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="logoutModalLabel">로그아웃 확인</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">하리은행 인터넷뱅킹을 로그아웃하고 안전하게 떠날까요?</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">취소</button>
+					<a href="logout.do" type="button" class="btn btn-basic">로그아웃</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>

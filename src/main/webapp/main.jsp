@@ -48,15 +48,20 @@
 						<c:otherwise>
 							<div class="col-lg-3" style="display: flex; flex-direction: column; align-items: center;">
 								<%-- 개설/조회/이체메뉴 --%>
-									<a class="btn btn-gradient" id="button-create-account" type="button"
-										href='create-account.do'> 계좌추가개설 <br> <i
-										class="fa-solid fa-money-check fa-2xl"></i>
-									</a> <a class="btn btn-gradient" id="button-inquiry" type="button"
-										href='inquiry.do'> 빠른조회 <br> <i class="fa-brands fa-searchengin fa-2xl"></i>
-									</a> <a class="btn btn-gradient" id="button-transfer" type="button"
+									<a class="btn btn-gradient" id="button-transfer" type="button"
 										href='transaction.do'>즉시이체 <br>
 									<i class="fa-solid fa-money-bill-transfer fa-2xl"></i>
 									</a>
+									
+									<a class="btn btn-gradient" id="button-inquiry" type="button"
+										href='inquiry.do'> 빠른조회 <br> <i class="fa-brands fa-searchengin fa-2xl"></i>
+									</a>
+									
+									<a class="btn btn-gradient" id="button-create-account" type="button"
+										href='create-account.do'> 계좌추가개설 <br> <i
+										class="fa-solid fa-money-check fa-2xl"></i>
+									</a>
+									
 							</div>
 
 						</c:otherwise>
