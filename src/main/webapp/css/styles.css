@@ -1,23 +1,103 @@
 
 
+*{
+	font-size: large;
+}
+
+html {
+	height: 100%;
+}
+
+
 
 body {
-	margin : 0;
+	margin: 0;
+	
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 100%;
 }
 
 section {
 	min-height: 600px;
 }
 
-#button-login, #button-create-account {
-	width : 200px;
-	height : 150px;
+/* #button-login, #button-create-account { */
+/* 	width: 200px; */
+/* 	height: 150px; */
+/* } */
+
+/* #button-web-signup, #button-kakao-signup { */
+/* 	width: 200px; */
+/* 	height: 150px; */
+/* } */
+.btn-gradient {
+	margin: 2px;
+	width: 250px;
+	height: 180px;
+	padding: 1rem 1rem;
+	font-size: x-large;
+	line-height: 1.5;
+	
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }
 
-#button-web-signup, #button-kakao-signup {
-	width : 200px;
-	height : 150px;
+.btn-gradient {
+	color: #fff;
+	border: none;
+	background-color: #15274d;
 }
+
+.btn-gradient:hover {
+	color: #fff;
+	border: none;
+	background-image: linear-gradient(to top, #5CE1E6, #15274d);
+}
+
+.btn-basic {
+	color: #fff;
+	border: none;
+	background-color: #15274d;
+}
+
+.btn-basic:hover {
+	color: #fff;
+	border: none;
+	background-color: #5CE1E6;
+}
+
+a {
+	color: #15274d;
+	text-decoration: none !important;
+}
+
+a:hover {
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.bg-dark, .bottomMenu {
+  background-color: #15274d !important;
+}
+
+/* 풋터 여백조정 */
+.bottomMenu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 250px;
+}
+
+.nav-link {
+	font-weight: bolder;
+    font-size: x-large;
+}
+
 
 /* 로긴 컨테이너 그림자효과 */
 .login-container, signup-container {
@@ -27,7 +107,6 @@ section {
 	justify-content: space-evenly;
 	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 }
-
 
 .input-form {
 	min-width: 400px;
@@ -39,18 +118,18 @@ section {
 	box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
 }
 
+.navbar>.container {
+	display: flex;
+	flex-wrap: inherit;
+	justify-content: space-between;
+	align-items: baseline;
+}
+
 .map {
-	z-index: 2; 
+	z-index: 2;
 }
 
-.login-info {
-	font-size : large;
- 	color: #FFFFFF !important;
+.login-info, .topmenu-container {
+	font-size: large !important;
+	color: #FFFFFF !important;
 }
-
-.narrow-column {
-	width: 50px;
-}
-
-
-

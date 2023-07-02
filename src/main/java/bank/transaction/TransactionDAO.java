@@ -35,8 +35,20 @@ public class TransactionDAO {
 		String senderAccountNo = vo.getSenderAccountNo();
 		String receiverBankCode = vo.getReceiverBank();
 		String receiverAccountNo = vo.getReceiverAccountNo();
-		String senderName = getUserNameByAccountNo(senderBankCode, senderAccountNo); //받는이름은 별개로
-		String receiverName = getUserNameByAccountNo(receiverBankCode, receiverAccountNo); //보내는이름은 별개로
+		String senderName = "";
+		if(vo.getToMemo().equals("")) {
+			senderName = getUserNameByAccountNo(senderBankCode, senderAccountNo);	
+		} else {
+			senderName = vo.getToMemo();
+		}
+		
+		String receiverName = "";
+		if(vo.getFromMemo().equals("")) {
+			receiverName = getUserNameByAccountNo(receiverBankCode, receiverAccountNo);
+		} else {
+			receiverName = vo.getFromMemo();
+		}
+		
 		long amount = Long.valueOf(vo.getAmount());
 		
 		

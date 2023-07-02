@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HR Bank - 회원가입 완료</title>
+<title>HB하리은행 - 회원가입 완료</title>
 
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -36,7 +36,7 @@
 				</div>
 				<div class="col-12 mb-4 center-align">
 					<div>
-						<a href="create-account.do" class="btn btn-success btn-lg">
+						<a href="create-account.do" class="btn btn-lg">
 							이어서 계좌개설하기</a>
 						<a href="login.do" class="btn btn-secondary btn-lg">로그인하기</a>
 						<a href="main.do" class="btn btn-secondary btn-lg">메인으로</a>

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HR Bank - 계좌상세조회</title>
+<title>HB하리은행 - 계좌상세조회</title>
 
 
 <style>
@@ -63,13 +63,13 @@
 							<form action="inquiry.do" method="post">
 								<input type="hidden" name="accountNo"
 									value="${account.accountNo}">
-								<button type="submit" class="btn btn-secondary">전체계좌보기</button>
+								<button type="submit" class="btn btn-basic">전체계좌보기</button>
 							</form>
 							<form action="transaction.do"
 								style="margin-left: 5px; margin-right: 5px;" method="post">
 								<input type="hidden" name="accountNo"
 									value="${account.accountNo}">
-								<button type="submit" class="btn btn-secondary">이체</button>
+								<button type="submit" class="btn btn-basic">이체</button>
 							</form>
 							<form action="inquiry.do" method="post">
 								<input type="hidden" name="accountNo"
@@ -80,7 +80,7 @@
 					</div>
 				</div>
 			</div>
-			<%-- <table class="table table-striped fixed-table mb-7"
+			<table class="table table-striped fixed-table mb-7"
 				style="width: 60rem;">
 				<thead class="thead-dark">
 					<tr class="text-white bg-secondary">
@@ -121,9 +121,9 @@
 						</c:otherwise>
 					</c:choose>
 				</thead>
-			</table> --%>
+			</table>
 
-			<table class="table table-striped fixed-table mb-7"
+	<%-- 		<table class="table table-striped fixed-table mb-7"
 				style="width: 60rem;">
 				<thead class="thead-dark">
 					<tr class="text-white bg-secondary">
@@ -178,7 +178,7 @@
 				</thead>
 			</table>
 
-			<!-- 페이지네이션 -->
+	 		<!-- 페이지네이션 -->
 			<c:set var="totalItems" value="${fn:length(transactionList)}" />
 			<!-- 전체 항목 수 -->
 			<c:set var="totalPages"
@@ -206,7 +206,7 @@
 						</li>
 					</ul>
 				</nav>
-			</c:if>
+			</c:if>  --%>
 
 
 

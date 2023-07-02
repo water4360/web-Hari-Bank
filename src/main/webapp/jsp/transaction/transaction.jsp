@@ -4,15 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HR Bank - 당행/타행계좌이체</title>
+<title>HB하리은행 - 당행/타행계좌이체</title>
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
-<!-- Font Awesome icons (free version)-->
-<script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"></script>
-<!-- Core theme CSS (includes Bootstrap)-->
-<link href="css/styles.css" rel="stylesheet" />
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 </head>
 
 <body>
@@ -50,7 +45,7 @@
 
 									<div id="senderAccountNo-feedback" style="display: none;"></div>
 									<div style="display: inline-block;" class="mt-2">
-										<input type="button" class="btn btn-secondary" value="잔액조회"
+										<input type="button" class="btn btn-basic" value="잔액조회"
 											onclick="showCurrentBalance()">
 										<div id="currentBalance" style="display: inline-block;"></div>
 									</div>
@@ -73,7 +68,7 @@
 						<h5 class="card-title">입금 정보</h5>
 					</div>
 					<div class="card-body">
-						<div class="mb-3">
+						<div class="mb-2">
 							<label for="receiverBankCode" class="form-label">입금 은행 목록</label>
 							<select class="form-select" id="receiverBankCode"
 								name="receiverBankCode">
@@ -84,7 +79,7 @@
 							</select>
 							<div id="receiverBankCode-feedback" style="display: none;"></div>
 						</div>
-						<div class="mb-3">
+						<div class="mb-2">
 							<label for="receiverAccountNo" class="form-label">입금 계좌
 								번호</label>
 							<!-- 입금 계좌 번호 입력 필드 -->
@@ -94,7 +89,7 @@
 								style="display: none;"></div>
 							<!-- 클래스와 스타일 수정 -->
 						</div>
-						<div class="mb-3">
+						<div class="mb-2">
 							<label for="transferAmount" class="form-label">이체 금액</label>
 							<!-- 이체 금액 입력 필드 -->
 							<input type="text" class="form-control" id="transferAmount"
@@ -103,20 +98,20 @@
 								style="display: none;"></div>
 							<!-- 클래스와 스타일 수정 -->
 						</div>
-						<div class="mb-3">
+						<div class="mb-2">
 							<label for="to-memo" class="form-label">받는통장 메모(미입력시 예금주명)</label> <input
 								type="text" class="form-control" id="toMemo" name="toMemo"
 								placeholder="(선택)7자 이내 입력" maxlength="21">
 							<div id="transferAmount-feedback" style="display: none;"></div>
 						</div>
-						<div class="mb-3">
+						<div class="mb-1">
 							<label for="from-memo" class="form-label">내통장 메모(미입력시 예금주명)</label> <input
 								type="text" class="form-control" id="fromMemo" name="fromMemo"
 								placeholder="(선택)7자 이내 입력" maxlength="21">
 							<div id="transferAmount-feedback" style="display: none;"></div>
 						</div>
-						<div class="d-flex justify-content-center mt-5">
-							<button type="submit" class="btn btn-success">이체실행</button>
+						<div class="d-flex justify-content-center mt-3">
+							<button type="submit" class="btn btn-lg btn-basic">이체실행</button>
 
 
 						</div>

@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HR Bank - 비대면 계좌개설</title>
+<title>HB하리은행 - 비대면 계좌개설</title>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -33,7 +33,7 @@
 					<div class="col-md-8 mb-5">
 						<div class="card">
 							<div class="card-header">
-								<h4>HR하리사랑통장</h4>
+								<h4>HB하리사랑통장</h4>
 							</div>
 							<div class="card-body">
 								<h5 class="card-title">입출금자유예금</h5>
@@ -67,7 +67,7 @@
 					</div>
 
 					<div class="col-4 mb-4"></div>
-					<button class="btn btn-success btn-lg" type="submit"
+					<button class="btn btn-basic btn-lg" type="submit"
 						id="signup-btn">계좌개설</button>
 
 

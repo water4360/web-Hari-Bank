@@ -4,19 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HR Bank - 계좌조회</title>
+<title>HB하리은행 - 계좌조회</title>
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-
-<!-- Core theme CSS (includes Bootstrap)-->
-<link href="css/styles.css" rel="stylesheet" />
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.5.0/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.5.0/js/bootstrap.bundle.min.js"></script>
-
 
 <style>
 .fixed-table {
@@ -39,7 +29,6 @@
 		<jsp:include page="/jsp/main-jsp/topper.jsp"></jsp:include>
 	</header>
 	<section>
-
 		<div class="container mt-5">
 			<div class="text-center mb-4">
 				<h2>전체계좌조회</h2>
@@ -89,21 +78,21 @@
 													<i class="fas fa-copy"></i>
 												</button>
 											</td>
-											<td style="text-align: center;">${account.totalBalance}</td>
+											<td style="text-align: center;"><b>${account.totalBalance}</b></td>
 											<td style="text-align: center;">
 												<form action="inquiryDetail.do" method="post"
 													style="display: inline-block;">
 													<input type="hidden" name="accountNo"
 														value="${account.accountNo}"> <input type="hidden"
 														name="productCode" value="${account.productCode}">
-													<input type="submit" class="btn btn-secondary" value="조회">
+													<input type="submit" class="btn btn-basic" value="조회">
 												</form>
 												<form action="transaction.do" method="post"
 													style="display: inline-block;">
 													<input type="hidden" name="accountNo"
 														value="${account.accountNo}"> <input type="hidden"
 														name="productCode" value="${account.productCode}">
-													<input type="submit" class="btn btn-secondary" value="이체">
+													<input type="submit" class="btn btn-basic" value="이체">
 												</form>
 											</td>
 										</tr>

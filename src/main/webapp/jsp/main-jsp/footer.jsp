@@ -20,20 +20,20 @@
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=01de9cbef4bce203f1cd367ba95b3559"></script>
 <style>
-        #map {
-            width: 100px;
-            height: 100px;
-        }
-        .bottomMenu-bar {
-            color: #fff;
-            padding: 10px;
-        }
-        .bottomMenu-item1,
-        .bottomMenu-item2,
-        .bottomMenu-item3 {
-            color: #fff;
-        }
-    </style>
+#map {
+	width: 100px;
+	height: 100px;
+}
+
+.bottomMenu-bar {
+	color: #fff;
+	padding: 10px;
+}
+
+.bottomMenu-item1, .bottomMenu-item2, .bottomMenu-item3 {
+	color: #fff;
+}
+</style>
 <script>
 	window.onload = function() {
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -63,28 +63,21 @@
 </head>
 <body>
 	<%-- 하단지도/고객센터 --%>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<!-- 		<div id="map" style="width: 300px; height: 300px;"></div> -->
-		<div class="card mb-4">
-			<div class="card-header">경기도 성남시 수정로398 드림관 2층</div>
-			<div class="card-body">
-				<div id="map" style="width: 100px; height: 100px;"></div>
-				<ul class="list-unstyled mb-0">
-				</ul>
-			</div>
-		</div>
+	<div class="bottomMenu center pl-4 pr-4" style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
 		<div class="bottomMenu-bar center">
 			<div class="bottomMenu-item1">개인정보처리방침 · 경영공시 · 고객정보취급방침 ·
-				보호금융상품등록부 · 상품공시실 · 전자민원접수 · 위치정보수집 이용약관 · 위치기반서비스 이용약관</div>
+				보호금융상품등록부 · 전자민원접수 · 위치기반서비스 이용약관</div>
 			<br>
 			<div class="bottomMenu-item2">이메일 문의 : webcustomer@haribank.com</div>
 			<div class="bottomMenu-item2">고객상담 1588-0758 | 해외
 				82-2-1588-0758</div>
-				
-			<div class="bottomMenu-item3">평일 09:00~16:00 (법정공휴일 및 은행휴무일 제외)</div>
-			<div class="bottomMenu-item4"> HariBank © All rights reserved.</div>
 
+			<div class="bottomMenu-item3">평일 09:00~16:00 (법정공휴일 및 은행휴무일 제외)</div>
+			<div class="bottomMenu-item4">HariBank All rights reserved.</div>
 		</div>
-	</nav>
+		<div class="bottomMenu-map center">
+			<div id="map" style="width: 400px; height: 150px;"></div>
+		</div>
+	</div>
 </body>
 </html>

@@ -4,19 +4,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HR Bank - 나의 HR</title>
+<title>HB하리은행 - 나의 HB</title>
 
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- <link rel="stylesheet" -->
+<!-- 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"> -->
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
+<!-- <script -->
+<!-- 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script> -->
 
 </head>
 <style>
 table {
 	table-layout: auto;
-	width: 100%; /* 너비 설정은 선택 사항입니다. 필요에 따라 조정하세요 */
 }
 </style>
 
@@ -28,22 +27,20 @@ table {
 	<section>
 
 
-
 		<div class="container mt-5" align="center">
-			<div class="card col-6 pt-2 mb-4">
-				<div class="card-header">
-					<h6>최종접속시각 : ${latestLoginTime}</h6>
+				<div class="card-header col-8">
+					<h2>나의 HB</h2>
+					<h6>최근접속시각 ${latestLoginTime}</h6>
 				</div>
 
 
-				<div class="card-body">
+				<div class="card-body mb-3">
 					<h5>
-						<b>${loginUser.korName}</b>님의 HR등급 <b>[${loginUser.roleName}]</b>
+						<b>${loginUser.korName}</b>님의 HB등급 <b>[${loginUser.roleName}]</b>
 					</h5>
-					* 등급혜택 : <b>타행이체시 수수료 면제</b>
+					<h6>* 등급혜택 : <b>타행이체시 수수료 면제</b></h6>
 				</div>
-			</div>
-			<form id="myinfo-form" action="update-info.do" method="POST">
+			<form id="myinfo-form" class="col-8" action="update-info.do" method="POST">
 				<table class="table table-striped col-8">
 					<thead>
 						<tr>
@@ -72,7 +69,7 @@ table {
 							<td>${loginUser.regDatetime}</td>
 							<td><input type="hidden" name="id" value="${loginUser.id}">
 								<div class="btn-group">
-									<button type="submit" class="btn btn-success" id="edit-btn"
+									<button type="submit" class="btn btn-secondary" id="edit-btn"
 										onclick="enableEdit(event)">수정</button>
 								</div></td>
 						</tr>
@@ -87,7 +84,7 @@ table {
 			</div>
 			<div class="btn-group mb-3">
 				<button type="button" onclick="location.href='write-post.do'"
-					class="btn btn-secondary">1:1 문의하기</button>
+					class="btn btn-basic">1:1 문의하기</button>
 			</div>
 			<div class="row justify-content-center">
 				<div class="col-8">

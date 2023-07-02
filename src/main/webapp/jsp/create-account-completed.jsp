@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HR Bank - 계좌개설 완료</title>
+<title>HB하리은행 - 계좌개설 완료</title>
 
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -28,7 +28,7 @@
 <body>
 	<section>
 		<div class="container mt-5 mb-5">
-			<h3 align="center">HR하리사랑통장 개설완료</h3>
+			<h3 align="center">HB하리사랑통장 개설완료</h3>
 			<div class="card mt-3">
 				<div class="card-body center-align">
 					<h5 class="card-title">계좌번호</h5>
@@ -36,7 +36,7 @@
 				</div>
 				<div class="col-12 mb-4 center-align">
 					<div>
-						<a href="inquiry.do" class="btn btn-success btn-lg">
+						<a href="inquiry.do" class="btn btn-lg">
 							계좌조회</a>
 						<a href="main.do" class="btn btn-secondary btn-lg">메인으로</a>
 					</div>

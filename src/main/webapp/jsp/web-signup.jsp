@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HR Bank - 웹 회원가입</title>
+<title>HB하리은행 - 웹 회원가입</title>
 
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -135,7 +135,7 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 					</div>
 
 					<div class="col-4 mb-4">
-						<button class="btn btn-success btn-lg" type="submit"
+						<button class="btn btn-lg" type="submit"
 							id="signup-btn">회원가입</button>
 					</div>
 				</form>

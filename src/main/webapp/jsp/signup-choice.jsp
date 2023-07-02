@@ -7,7 +7,7 @@
 		<h2>회원가입 선택</h2>
 	</div>
 	<div>
-		<a class="btn btn-success" id="button-web-signup" type="button"
+		<a class="btn" id="button-web-signup" type="button"
 			href='web-signup.do'>웹 회원가입 <br></a>
 		<a class="btn btn-warning" id="button-kakao-signup" type="button"
 			href='kakao-signup.do'> 카카오 회원가입 <br></a>

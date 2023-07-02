@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HR Bank - 통합로그인</title>
+<title>HB하리은행 - 통합로그인</title>
 <%-- 카카오 로그인용 스크립트 파일 --%>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
@@ -91,7 +91,7 @@ section {
 							<input type="password"
 								class="form-control" placeholder="비밀번호" name="pw">
 							</label>
-							<div class="checkbox mb-3">
+							<div class="checkbox mb-1">
 								<label for="saveId">
 <!-- 								<input type="checkbox" name="saveId" value="save"> 아이디기억 -->
 							</label>
@@ -101,12 +101,12 @@ section {
 						</c:if>
 								</div>
 							</div>
-							<button type="submit" class="btn btn-success">로그인</button>
+							<button type="submit" class="btn btn-basic mb-3">로그인</button>
 						</div>
 						<div id="divide"></div>
 						<div>
-							<a href="findId.do">아이디 찾기</a> | <a href="findPw.do">비밀번호 찾기</a>
-							| <a href="" onclick="loadPage('signup-choice'); return false;">회원가입</a>
+							<a href="findId.do">아이디 찾기</a> | <a href="findPw.do">비밀번호 찾기</a><br>
+							하리은행을 처음 방문하셨나요? <a href="" onclick="loadPage('signup-choice'); return false;"><b>회원가입</b></a>
 						</div>
 					</div>
 				</form>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HR Bank - 당행/타행계좌이체</title>
+<title>HB하리은행 - 당행/타행계좌이체</title>
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 

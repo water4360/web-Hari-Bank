@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HR Bank - 문의게시판(Q&A)</title>
+<title>HB하리은행 - 문의게시판(Q&A)</title>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0v8FqFjcJ6pajs/rfdfs3SO+kD4Ck5BdPtF+to8xM6B5z6W5" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 
 <style>
 table {
@@ -39,7 +39,7 @@ table {
                     <textarea class="form-control" name="contents" rows="10" placeholder="내용을 입력하세요."></textarea>
                 </div>
                 <div class="mb-3 justify-content-center">
-                    <button type="submit" class="btn btn-success mr-2">글등록</button>
+                    <button type="submit" class="btn mr-2 btn-basic">글등록</button>
                     <a href="${pageContext.request.contextPath }/qna.do" class="btn btn-secondary">목록으로</a>
                     <a href="${pageContext.request.contextPath }/mypage.do" class="btn btn-secondary">이전으로</a>
                 </div>
