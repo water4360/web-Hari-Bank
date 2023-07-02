@@ -29,26 +29,24 @@
 					<div class="card-body">
 						<div class="mb-3">
 							<label for="senderAccountNo" class="form-label">보유 계좌 목록</label>
-									<select class="form-select" id="senderAccountNo"
-										name="senderAccountNo">
-										<option disabled selected>--출금계좌를 선택하세요--</option>
-										<c:forEach var="myAccount" items="${myAccountList}">
-											<option value="${myAccount.accountNo}"
-											<c:if test="${myAccount.accountNo eq selectedAccount}">
+							<select class="form-select" id="senderAccountNo"
+								name="senderAccountNo">
+								<option disabled selected>--출금계좌를 선택하세요--</option>
+								<c:forEach var="myAccount" items="${myAccountList}">
+									<option value="${myAccount.accountNo}"
+										<c:if test="${myAccount.accountNo eq selectedAccount}">
 												selected
-											</c:if>
-											>${myAccount.accountNo}
-												(${myAccount.productName})</option>
-										</c:forEach>
-									</select>
-									<input type="hidden" name="senderBankCode" value="0758">
+											</c:if>>${myAccount.accountNo}
+										(${myAccount.productName})</option>
+								</c:forEach>
+							</select> <input type="hidden" name="senderBankCode" value="0758">
 
-									<div id="senderAccountNo-feedback" style="display: none;"></div>
-									<div style="display: inline-block;" class="mt-2">
-										<input type="button" class="btn btn-basic" value="잔액조회"
-											onclick="showCurrentBalance()">
-										<div id="currentBalance" style="display: inline-block;"></div>
-									</div>
+							<div id="senderAccountNo-feedback" style="display: none;"></div>
+							<div style="display: inline-block;" class="mt-2">
+								<input type="button" class="btn btn-basic" value="잔액조회"
+									onclick="showCurrentBalance()">
+								<div id="currentBalance" style="display: inline-block;"></div>
+							</div>
 						</div>
 						<div>
 							<label for="accountPassword" class="form-label">계좌 비밀번호</label>
@@ -99,50 +97,31 @@
 							<!-- 클래스와 스타일 수정 -->
 						</div>
 						<div class="mb-2">
-							<label for="to-memo" class="form-label">받는통장 메모(미입력시 예금주명)</label> <input
-								type="text" class="form-control" id="toMemo" name="toMemo"
-								placeholder="(선택)7자 이내 입력" maxlength="21">
+							<label for="to-memo" class="form-label">받는통장 메모(미입력시
+								예금주명)</label> <input type="text" class="form-control" id="toMemo"
+								name="toMemo" placeholder="(선택)7자 이내 입력" maxlength="21">
 							<div id="transferAmount-feedback" style="display: none;"></div>
 						</div>
 						<div class="mb-1">
-							<label for="from-memo" class="form-label">내통장 메모(미입력시 예금주명)</label> <input
-								type="text" class="form-control" id="fromMemo" name="fromMemo"
-								placeholder="(선택)7자 이내 입력" maxlength="21">
+							<label for="from-memo" class="form-label">내통장 메모(미입력시
+								예금주명)</label> <input type="text" class="form-control" id="fromMemo"
+								name="fromMemo" placeholder="(선택)7자 이내 입력" maxlength="21">
 							<div id="transferAmount-feedback" style="display: none;"></div>
 						</div>
 						<div class="d-flex justify-content-center mt-3">
 							<button type="submit" class="btn btn-lg btn-basic">이체실행</button>
-
+							<!-- 							<button type="button" class="btn btn-lg btn-basic" -->
+							<!-- 								data-toggle="modal" data-target="#confirmModal">모달이체실행</button> -->
+							<!-- 	<button type="button" class="btn btn-success" data-toggle="modal" -->
+							<!-- 	data-target="#addNewBook" aria-expanded="false">신규도서 등록</button> -->
+							<!-- <a class="badge bg-secondary text-decoration-none link-light" -->
+							<!-- href="#" data-bs-toggle="modal" data-bs-target="#logoutModal">로그아웃</a> -->
 
 						</div>
 					</div>
 				</div>
 			</form>
 		</div>
-
-
-		<!-- Modal -->
-		<div class="modal fade" id="confirmModal" tabindex="-1"
-			aria-labelledby="confirmModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h5 class="modal-title" id="confirmModalLabel">이체 정보 확인</h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal"
-							aria-label="Close"></button>
-					</div>
-					<div class="modal-body" id="confirmModalBody">
-						<!-- This will be filled by the script -->
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-bs-dismiss="modal">취소</button>
-						<button type="button" class="btn btn-primary" id="confirmTransfer">확인</button>
-					</div>
-				</div>
-			</div>
-		</div>
-
 
 
 
@@ -181,8 +160,9 @@
 				error : function(jqXHR, textStatus, errorThrown) {
 					// 에러가 발생했을 때 실행되는 코드입니다.
 					console.log(textStatus, errorThrown);
-					$('#currentBalance').text('잔액조회실패. 다시 시도하세요.').css('color', 'red');
-// 					alert('잔액조회실패. 다시 시도하세요.');
+					$('#currentBalance').text('잔액조회실패. 다시 시도하세요.').css('color',
+							'red');
+					// 					alert('잔액조회실패. 다시 시도하세요.');
 				}
 			});
 		}
@@ -198,7 +178,7 @@
 					if (!accountPassword || !accountNo
 							|| accountPassword.length != 4) {
 						$(this).removeClass('is-valid is-invalid'); // 클래스 초기화
-// 						$('#accountPassword-feedback').text('').hide(); // 피드백 메시지를 숨깁니다.
+						// 						$('#accountPassword-feedback').text('').hide(); // 피드백 메시지를 숨깁니다.
 						return;
 					}
 
@@ -217,13 +197,15 @@
 								$('#accountPassword').removeClass('is-invalid')
 										.addClass('is-valid'); // 유효성 검사 통과 시 클래스 추가
 								$('#accountPassword-feedback').text(
-										'비밀번호가 일치합니다').addClass('d-block').css('color','green') // 클래스 및 스타일 수정
+										'비밀번호가 일치합니다').addClass('d-block').css(
+										'color', 'green') // 클래스 및 스타일 수정
 							} else {
 								$('#accountPassword').removeClass('is-valid')
 										.addClass('is-invalid'); // 유효성 검사 실패 시 클래스 추가
 								$('#accountPassword-feedback').text(
-										'비밀번호가 일치하지 않습니다').addClass('d-block').css('color','red')
-										.removeClass('d-none'); // 클래스 및 스타일 수정
+										'비밀번호가 일치하지 않습니다').addClass('d-block')
+										.css('color', 'red').removeClass(
+												'd-none'); // 클래스 및 스타일 수정
 							}
 						},
 						error : function(jqXHR, textStatus, errorThrown) {
@@ -279,12 +261,13 @@
 										.addClass('is-invalid'); // 유효성 검사 실패 시 클래스 추가
 								$('#receiverAccountNo-feedback').text(
 										'출금계좌와 입금계좌는 동일할 수 없습니다').addClass(
-										'd-block').css('color','red') // 클래스 및 스타일 수정
+										'd-block').css('color', 'red') // 클래스 및 스타일 수정
 							} else {
 								$('#receiverAccountNo').removeClass('is-valid')
 										.addClass('is-invalid'); // 유효성 검사 실패 시 클래스 추가
 								$('#receiverAccountNo-feedback').text(
-										'유효하지 않은 계좌번호입니다').addClass('d-block').css('color','red') // 클래스 및 스타일 수정
+										'유효하지 않은 계좌번호입니다').addClass('d-block')
+										.css('color', 'red') // 클래스 및 스타일 수정
 							}
 						},
 						error : function(jqXHR, textStatus, errorThrown) {
@@ -297,9 +280,8 @@
 
 		// 필드 유효성 검사
 		// 필드 값 변경 감지
-		$(
-				'#senderAccountNo, #receiverBankCode, #toMemo, #fromMemo')
-				.on('change keyup', function() {
+		$('#senderAccountNo, #receiverBankCode, #toMemo, #fromMemo').on(
+				'change keyup', function() {
 					let id = $(this).attr('id');
 					let value = $(this).val();
 
@@ -309,82 +291,81 @@
 					}
 				});
 
-		$('form').on('submit',
-			function(e) {
-				let senderAccountNo = $('#senderAccountNo').val();
-				let accountPassword = $('#accountPassword').val();
-				let receiverBankCode = $('#receiverBankCode').val();
-				let receiverAccountNo = $('#receiverAccountNo').val();
-				let transferAmount = $('#transferAmount').val();
-				let toMemo = $('#toMemo').val();
-				let fromMemo = $('#fromMemo').val();
+		$('form')
+				.on(
+						'submit',
+						function(e) {
+							let senderAccountNo = $('#senderAccountNo').val();
+							let accountPassword = $('#accountPassword').val();
+							let receiverBankCode = $('#receiverBankCode').val();
+							let receiverAccountNo = $('#receiverAccountNo')
+									.val();
+							let transferAmount = $('#transferAmount').val();
+							let toMemo = $('#toMemo').val();
+							let fromMemo = $('#fromMemo').val();
 
-				// 모든 필드가 제대로 입력되었는지 확인합니다.
-				if (!senderAccountNo || !accountPassword
-						|| !receiverBankCode || !receiverAccountNo
-						|| !transferAmount) {
-					// 각 필드가 비어있는 경우에 대한 메시지를 설정합니다.
-					if (!senderAccountNo) {
-						$('#senderAccountNo-feedback').text(
-								'출금 계좌를 선택해주세요')
-								.css('color', 'red').show();
-					}
-					if (!accountPassword) {
-						$('#accountPassword-feedback').text(
-								'계좌 비밀번호를 입력해주세요').css('color',
-								'red').show();
-					}
-					if (!receiverBankCode) {
-						$('#receiverBankCode-feedback').text(
-								'입금 은행을 선택해주세요')
-								.css('color', 'red').show();
-					}
-					if (!receiverAccountNo) {
-						$('#receiverAccountNo-feedback').text(
-								'입금 계좌 번호를 입력해주세요').css('color',
-								'red').show();
-					}
-					if (!transferAmount) {
-						$('#transferAmount-feedback').text(
-								'이체 금액을 입력해주세요')
-								.css('color', 'red').show();
-					}
+							// 모든 필드가 제대로 입력되었는지 확인합니다.
+							if (!senderAccountNo || !accountPassword
+									|| !receiverBankCode || !receiverAccountNo
+									|| !transferAmount) {
+								// 각 필드가 비어있는 경우에 대한 메시지를 설정합니다.
+								if (!senderAccountNo) {
+									$('#senderAccountNo-feedback').text(
+											'출금 계좌를 선택해주세요')
+											.css('color', 'red').show();
+								}
+								if (!accountPassword) {
+									$('#accountPassword-feedback').text(
+											'계좌 비밀번호를 입력해주세요').css('color',
+											'red').show();
+								}
+								if (!receiverBankCode) {
+									$('#receiverBankCode-feedback').text(
+											'입금 은행을 선택해주세요')
+											.css('color', 'red').show();
+								}
+								if (!receiverAccountNo) {
+									$('#receiverAccountNo-feedback').text(
+											'입금 계좌 번호를 입력해주세요').css('color',
+											'red').show();
+								}
+								if (!transferAmount) {
+									$('#transferAmount-feedback').text(
+											'이체 금액을 입력해주세요')
+											.css('color', 'red').show();
+								}
 
-					// 이벤트의 기본 동작을 중단합니다.
-					e.preventDefault();
-				} else {
-					// 모든 필드가 제대로 입력되었으면, 모든 피드백 메시지를 숨깁니다.
-					$('.feedback').text('').hide();
+								// 이벤트의 기본 동작을 중단합니다.
+								e.preventDefault();
+							} else {
 
-					// 사용자에게 확인을 요청합니다.
-/* 					let confirmation = confirm('입력하신 정보로 이체를 실행할까요?');
-					if (!confirmation) {
-						// 사용자가 취소를 누른 경우 이벤트의 기본 동작을 중단합니다.
-						e.preventDefault();
-					} */
-					
-					
-					
-					
-					
-				}
-			});
-		
+								// 모든 필드가 제대로 입력되었으면, 모든 피드백 메시지를 숨깁니다.
+								$('.feedback').text('').hide();
+
+								// 사용자에게 확인을 요청합니다.
+								let confirmation = confirm('입력하신 정보로 이체를 실행할까요?');
+								if (!confirmation) {
+									// 사용자가 취소를 누른 경우 이벤트의 기본 동작을 중단합니다.
+									e.preventDefault();
+								}
+
+							}
+						});
+
 		function cleanAccountNo(element) {
 			// 입력값에서 숫자와 하이픈(-)을 제외한 모든 문자를 제거합니다.
 			element.value = element.value.replace(/[^0-9-]/g, '');
 		}
-		
+
 		function cleanAmount(element) {
 			// 입력값에서 숫자와 하이픈(-)을 제외한 모든 문자를 제거합니다.
 			element.value = element.value.replace(/[^0-9]/g, '');
-			
+
 			// 이체 금액이 0으로 시작하는 경우 0을 제거합니다.
-			  if (element.value.length > 0 && element.value.charAt(0) === '0') {
-			    element.value = element.value.substring(1);
-			  }
+			if (element.value.length > 0 && element.value.charAt(0) === '0') {
+				element.value = element.value.substring(1);
+			}
 		}
-		
 	</script>
 
 
