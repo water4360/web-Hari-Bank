@@ -25,6 +25,20 @@ public class AccountVO {
 		super();
 	}
 	
+	
+	
+	
+	@Override
+	public String toString() {
+		return "AccountVO [accountNo=" + accountNo + ", accountPw=" + accountPw + ", createdDate=" + createdDate
+				+ ", balance=" + balance + ", accountNickname=" + accountNickname + ", productCode=" + productCode
+				+ ", userId=" + userId + ", bankCode=" + bankCode + ", bankName=" + bankName + ", productName="
+				+ productName + ", totalBalnce=" + totalBalnce + "]";
+	}
+
+
+
+
 	//간단 계좌생성
 	public AccountVO(String accountNo, String accountPw, String createdDate, long balance,
 			String accountNickname, String productCode, String userId, String bankCode) {

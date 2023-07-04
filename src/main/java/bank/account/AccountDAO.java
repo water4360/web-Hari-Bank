@@ -405,5 +405,100 @@ public class AccountDAO {
 		}
 		return false;
 	}
+	
+	
+	
+	 // 오픈뱅킹 계좌 리스트
+    public List<AccountVO> getOpenbankAccountListById(String bankCode, String id) {
+        StringBuilder sql = new StringBuilder();
+        int idx=1;
+        switch (bankCode) {
+        case "JH":
+            sql.append("SELECT ACCOUNT_NO,");
+            sql.append("       BANK_CD,");
+            sql.append("       ACCOUNT_NM,");
+            sql.append("       ACCOUNT_PWD,");
+            sql.append("       DEPOSIT_CD,");
+            sql.append("       USER_ID,");
+            sql.append("       REG_DATE,");
+            sql.append("       BALANCE");
+            sql.append("  FROM BANK_ACCOUNT@JHBANK");
+            sql.append(" WHERE USER_ID = ?");
+            break;
+        case "BGH":
+            sql.append("SELECT ACCOUNT_NO,");
+            sql.append("       BANK_CODE       BANK_CD,");
+            sql.append("       ACCOUNT_NAME    ACCOUNT_NM,");
+            sql.append("       ACCOUNT_PW      ACCOUNT_PWD,");
+            sql.append("       PRODUCT_NO      DEPOSIT_CD,");
+            sql.append("       USER_ID,");
+            sql.append("       NULL AS REG_DATE,");
+            sql.append("       ACCOUNT_BALANCE BALANCE");
+            sql.append("  FROM B_ACCOUNT @BGHBANK");
+            sql.append(" WHERE USER_ID = ?");
+            break;
+        case "H.J":
+            sql.append("SELECT ACCOUNT_NO, ");
+            sql.append("       BANKCODE  BANK_CD,");
+            sql.append("       NULL      AS ACCOUNT_NM,");
+            sql.append("       PASSWORD  ACCOUNT_PWD,");
+            sql.append("       PRODUCTID DEPOSIT_CD,");
+            sql.append("       MEMBERID  USER_ID,");
+            sql.append("       NULL      AS REG_DATE,");
+            sql.append("       MONEY     BALANCE");
+            sql.append("  FROM B_ACCOUNT @HJBANK");
+            sql.append(" WHERE MEMBERID = ?");
+            break;
+        }
+
+        List<AccountVO> accountList = new ArrayList<AccountVO>();
+        try(Connection conn = new ConnectionFactory().getConnection();
+			PreparedStatement pstmt = conn.prepareStatement(sql.toString());) 
+        {
+            pstmt.setString(idx, id);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                AccountVO account = new AccountVO();
+                account.setAccountNo(rs.getString("ACCOUNT_NO"));
+                account.setBankCode(rs.getString("BANK_CD"));
+                account.setAccountNickname(rs.getString("ACCOUNT_NM"));
+                account.setAccountPw(rs.getString("ACCOUNT_PWD"));
+                account.setProductCode(rs.getString("DEPOSIT_CD"));
+                account.setUserId(rs.getString("USER_ID"));
+                account.setCreatedDate(String.valueOf(rs.getDate("REG_DATE")));
+                account.setBalance(rs.getLong("BALANCE"));
+//                account.setStatus(rs.getInt("STATUS"));
+
+             // 표기용 전체잔고
+				NumberFormat numFormat = NumberFormat.getInstance(Locale.KOREA);
+				String formattedBalance = numFormat.format(rs.getLong("BALANCE"));
+                
+				//자릿수 표시된 잔액.
+				account.setTotalBalance(formattedBalance);
+                
+                accountList.add(account);
+                System.out.println("account별 정보 : " + account);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("오픈뱅킹계좌 불러오기 실패(DAO)");
+        }
+        return accountList;
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }// end of class

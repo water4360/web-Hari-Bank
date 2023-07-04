@@ -25,6 +25,8 @@ import controller.signup.SignupProcessController;
 import controller.signup.SignupWebController;
 import controller.transaction.InquiryController;
 import controller.transaction.InquiryDetailController;
+import controller.transaction.InquiryDetailOpenbankController;
+import controller.transaction.InquiryOpenbankController;
 import controller.transaction.TransactionController;
 import controller.transaction.TransactionProcessController;
 import controller.transaction.CheckCurrentBalanceController;
@@ -46,8 +48,8 @@ public class HandlerMapping {
 		mappings.put("/inquiry.do", new InquiryController());
 		mappings.put("/inquiryDetail.do", new InquiryDetailController());
 		
-		mappings.put("/inquiry-op.do", new InquiryOpenbankController());
-		mappings.put("/inquiryDetail.do", new InquiryDetailController());
+		mappings.put("/inquiryOpenbank.do", new InquiryOpenbankController());
+		mappings.put("/inquiryDetailOpenbank.do", new InquiryDetailOpenbankController());
 		
 		mappings.put("/transaction.do", new TransactionController());
 		mappings.put("/transactionProcess.do", new TransactionProcessController());

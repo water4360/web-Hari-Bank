@@ -53,6 +53,8 @@ public class LoginProcessController extends BasicController {
 				return "redirect:/inquiry.do";
 			} else if (prevBtn.equals("create-account")) {
 				return "redirect:/create-account.do";
+			} else if (prevBtn.equals("inquiryOpenbank")) {
+				return "redirect:/inquiryOpenbank.do";
 			}
 			
 			

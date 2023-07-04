@@ -23,8 +23,6 @@ public class InquiryDetailController extends BasicController {
 		System.out.println("계좌상세조회 진입");
 		
 		String no = request.getParameter("accountNo");
-//		String code = request.getParameter("productCode");
-		
 		
 		// 로그인 안된 경우
         if (session.getAttribute("loginUser") == null) {

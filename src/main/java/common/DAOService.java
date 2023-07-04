@@ -95,6 +95,14 @@ public class DAOService {
 	public boolean isCorrectReceiver(String bankCode, String accountNo) {
 		return ad.isCorrectReceiver(bankCode, accountNo);
 	}
+	
+	//오픈뱅킹 계좌리스트
+	public List<AccountVO> getOpenbankAccountListById(String bankCode, String id){
+		return ad.getOpenbankAccountListById(bankCode, id);
+	}
+//	public List<List<AccountVO>> getAllOpenbankAccountList(String bankCode, String accountNo){
+//		return ad.getOpenbankAccountListById(bankCode, accountNo);
+//	}
 
 	
 	/*
