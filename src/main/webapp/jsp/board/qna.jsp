@@ -39,9 +39,9 @@
 						<thead>
 							<tr>
 								<th class="col-md-1 narrow-column">번호</th>
-								<th class="col-md-6">제목</th>
+								<th class="col-md-5">제목</th>
 								<th class="col-md-1 narrow-column">글쓴이</th>
-								<th class="col-md-1 narrow-column">작성일</th>
+								<th class="col-md-2 narrow-column">작성일</th>
 								<th class="col-md-1 narrow-column">조회</th>
 							</tr>
 						</thead>
@@ -93,7 +93,6 @@ function updateButtons() {
    window.onload = function() {
        updateButtons();
    };
- }
  
  <%-- 정보수정 반영 --%>
   function saveChanges() {

@@ -14,7 +14,6 @@ public class QnAController extends BasicController {
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
 		PostDAO dao = new PostDAO();
-		
 		List<PostVO> postList = dao.getAllQnas();
 		
 		System.out.println("포스트길이 : " + postList.size());
