@@ -81,7 +81,7 @@
 							<li class="nav-item"><a class="nav-link"
 								href="transaction.do">이체</a></li>
 							<li class="nav-item"><a class="nav-link" href="products.do">금융상품</a></li>
-							<li class="nav-item"><a class="nav-link" href="customer.do">고객센터</a></li>
+							<li class="nav-item"><a class="nav-link" href="qna.do">문의게시판</a></li>
 							<li class="nav-item"><a class="nav-link" href="mypage.do">마이페이지</a></li>
 						</ul>
 					</div>

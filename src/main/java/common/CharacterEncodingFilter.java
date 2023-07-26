@@ -20,7 +20,6 @@ public class CharacterEncodingFilter implements Filter {
      */
 	//기본생성자가 존재
     public CharacterEncodingFilter() {
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -28,7 +27,6 @@ public class CharacterEncodingFilter implements Filter {
 	 */
     //필터는 소멸자가 존재
 	public void destroy() {
-		// TODO Auto-generated method stub
 	}
 
 	/**
@@ -49,7 +47,6 @@ public class CharacterEncodingFilter implements Filter {
 	 * @see Filter#init(FilterConfig)
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
 	}
 
 }
