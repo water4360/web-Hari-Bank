@@ -36,7 +36,7 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 				<form method="post" action="signupProcess.do" name="joinForm"
 					class="validation-form" novalidate>
 
-					<div class="col-6 mb-3">
+					<div class="col-8 mb-3">
 						<label for="id">아이디</label> <input type="text"
 							class="form-control" id="id" name="id" autocorrect="off"
 							autocapitalize="none" placeholder="4~20자 영문, 숫자 입력" value=""
@@ -47,13 +47,13 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 							입력해주세요</div>
 					</div>
 
-					<div class="col-6 mb-3">
+					<div class="col-8 mb-3">
 						<label for="pw">비밀번호</label> <input type="password"
 							class="form-control" id="pw" name="pw"
 							placeholder="4~12자 영문+숫자+특수문자" value="" required>
 						<div class="invalid-feedback">(class)비밀번호를 입력해주세요</div>
 					</div>
-					<div class="col-6 mb-3">
+					<div class="col-8 mb-3">
 						<label for="pw2">비밀번호 확인</label> <input type="password"
 							class="form-control" id="pw2" name="pw2" placeholder="비밀번호 재입력"
 							value="" onkeyup="checkPw()" required>
@@ -62,7 +62,7 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 							일치하지 않아요</div>
 					</div>
 
-					<div class="col-6 mb-3">
+					<div class="col-8 mb-3">
 						<label for="name">한글이름</label> <input type="text"
 							class="form-control" id="name" name="name" placeholder="한글이름 입력"
 							value="" pattern="[가-힣]{2,20}" required>
@@ -99,7 +99,7 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
                                     <option value="알뜰폰">알뜰폰</option>
                                 </select>
                             </div>
-                            <div class="col-6 pl-0">
+                            <div class="col-8 pl-0">
                                 <input type="number" class="form-control" name="phone"
                                     placeholder="예) 01023456789" value="" maxlength="11" pattern="[0-9]{10,11}"
                                     required>
@@ -108,7 +108,7 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
                         <div class="invalid-feedback">연락처 형식이 올바르지 않아요.</div>
 					</div>
 
-					<div class="col-6 mb-3">
+					<div class="col-8 mb-3">
 						<label for="email">이메일</label> <input type="email"
 							class="form-control" id="email" name="email"
 							placeholder="예)soob@library.com" required>
@@ -135,7 +135,7 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 					</div>
 
 					<div class="col-4 mb-4">
-						<button class="btn btn-lg" type="submit"
+						<button class="btn btn-basic btn-lg" type="submit"
 							id="signup-btn">회원가입</button>
 					</div>
 				</form>
