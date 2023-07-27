@@ -35,7 +35,7 @@ public class PostDAO {
 	//Q&A 상세보기?
 	public PostVO selectPostByNo(int qno) {
 		PostVO post = session.selectOne("bank.board.PostDAO.selectPostByNo", qno);
-		modifyPost(post); //조회수+1?
+//		modifyPost(post); //조회수+1?
 		return post;
 	}
 	

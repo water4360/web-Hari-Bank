@@ -20,7 +20,7 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public PostVO getPost(int no) {
+	public PostVO getPostByNo(int no) {
 		return dao.selectPostByNo(no);
 	}
 

@@ -8,5 +8,5 @@ public interface PostService {
 
 	public List<PostVO> getAllQnas();
 	
-	public PostVO getPost(int no);
+	public PostVO getPostByNo(int no);
 }
