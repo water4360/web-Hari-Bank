@@ -41,57 +41,57 @@ public class HandlerMapping {
 	public HandlerMapping() {
 		mappings = new HashMap<String, Controller>();
 		
-		//xxx.do가 들어오면 xxxControlloer()로 안내!
-		mappings.put("/main.do", new MainController());
+		//xxx가 들어오면 xxxControlloer()로 안내!
+        mappings.put("/", new MainController());
+		mappings.put("/main", new MainController());
 		
 		//상단 메뉴들
-		mappings.put("/inquiry.do", new InquiryController());
-		mappings.put("/inquiryDetail.do", new InquiryDetailController());
+		mappings.put("/inquiry", new InquiryController());
+		mappings.put("/inquiryDetail", new InquiryDetailController());
 		
-		mappings.put("/inquiryOpenbank.do", new InquiryOpenbankController());
-		mappings.put("/inquiryDetailOpenbank.do", new InquiryDetailOpenbankController());
+		mappings.put("/inquiryOpenbank", new InquiryOpenbankController());
+		mappings.put("/inquiryDetailOpenbank", new InquiryDetailOpenbankController());
 		
-		mappings.put("/transaction.do", new TransactionController());
-		mappings.put("/transactionProcess.do", new TransactionProcessController());
+		mappings.put("/transaction", new TransactionController());
+		mappings.put("/transactionProcess", new TransactionProcessController());
 		
 		//단순검증
-		mappings.put("/checkCurrentBalance.do", new CheckCurrentBalanceController());
-		mappings.put("/checkAccountPassword.do", new CheckAccountPasswordController());
-		mappings.put("/checkReceiverAccount.do", new CheckReceiverAccountController());
+		mappings.put("/checkCurrentBalance", new CheckCurrentBalanceController());
+		mappings.put("/checkAccountPassword", new CheckAccountPasswordController());
+		mappings.put("/checkReceiverAccount", new CheckReceiverAccountController());
 		
 		
-		mappings.put("/products.do", new ProductsController());
-		mappings.put("/customer.do", new CustomerController());
-		mappings.put("/mypage.do", new MypageController());
-		mappings.put("/update-info.do", new UpdateMyInfoController());
+		mappings.put("/products", new ProductsController());
+		mappings.put("/customer", new CustomerController());
+		mappings.put("/mypage", new MypageController());
+		mappings.put("/update-info", new UpdateMyInfoController());
 		
 		//메인 메뉴
-		mappings.put("/web-signup.do", new SignupWebController());
-		mappings.put("/kakao-signup.do", new SignupKakaoController());
-		mappings.put("/signupProcess.do", new SignupProcessController());
+		mappings.put("/web-signup", new SignupWebController());
+		mappings.put("/kakao-signup", new SignupKakaoController());
+		mappings.put("/signupProcess", new SignupProcessController());
 		
 		//계좌 개설
-		mappings.put("/create-account.do", new CreateAccountController());
-		mappings.put("/createAccountProcess.do", new CreateAccountProcessController());
+		mappings.put("/create-account", new CreateAccountController());
+		mappings.put("/createAccountProcess", new CreateAccountProcessController());
 		
-//		mappings.put("/notice.do", new NoticeController());
-		mappings.put("/faq.do", new FAQController());
-		mappings.put("/qna.do", new QnAController());
-		mappings.put("/qna-details.do", new QnADetailsController());
+//		mappings.put("/notice", new NoticeController());
+		mappings.put("/faq", new FAQController());
+//		mappings.put("/qna", new QnAController());
+		mappings.put("/qna-details", new QnADetailsController());
 		
 		//게시판용
-		mappings.put("/write-post.do", new WriteQnAController());
-		mappings.put("/modify-post.do", new ModifyQnAController());
-		mappings.put("/delete-post.do", new DeleteQnAController());
-		mappings.put("/insert-new-post.do", new InsertNewQnAController());
+		mappings.put("/write-post", new WriteQnAController());
+		mappings.put("/modify-post", new ModifyQnAController());
+		mappings.put("/delete-post", new DeleteQnAController());
+		mappings.put("/insert-new-post", new InsertNewQnAController());
 		
 		
 		//로그인
-		mappings.put("/login.do", new LoginController());
-		mappings.put("/kakaoLogin.do", new KakaoLoginController());
-		mappings.put("/loginProcess.do", new LoginProcessController());
-		mappings.put("/logout.do", new LogoutController());
-		
+		mappings.put("/login", new LoginController());
+		mappings.put("/kakaoLogin", new KakaoLoginController());
+		mappings.put("/loginProcess", new LoginProcessController());
+		mappings.put("/logout", new LogoutController());
 		
 		
 		

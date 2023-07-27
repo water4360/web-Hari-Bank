@@ -48,9 +48,8 @@
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark pt-5"
 		style="flex-direction: column;">
 		<div class="container">
-			<a class="navbar-brand"
-				href="${pageContext.request.contextPath}/main.do"> <img
-				alt="main-bank-logo" src="./assets/bank-logo.png" width="80%"></a>
+			<a class="navbar-brand" href="${pageContext.request.contextPath}/">
+			<img alt="main-bank-logo" src="./assets/bank-logo.png" width="80%"></a>
 			<div class="info-and-topmenu"
 				style="display: flex; flex-direction: column; align-items: flex-end;">
 				<div class="login-info"
@@ -75,14 +74,12 @@
 					<div class="collapse navbar-collapse" id="navbarSupportedContent"
 						align="center">
 						<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-							<li class="nav-item"><a class="nav-link" href="inquiry.do">조회</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="inquiryOpenbank.do">오픈뱅킹</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="transaction.do">이체</a></li>
-							<li class="nav-item"><a class="nav-link" href="products.do">금융상품</a></li>
-							<li class="nav-item"><a class="nav-link" href="qna.do">문의게시판</a></li>
-							<li class="nav-item"><a class="nav-link" href="mypage.do">마이페이지</a></li>
+							<li class="nav-item"><a class="nav-link" href="${ pageContext.request.contextPath }/inquiry">조회</a></li>
+							<li class="nav-item"><a class="nav-link" href="${ pageContext.request.contextPath }/inquiryOpenbank">오픈뱅킹</a></li>
+							<li class="nav-item"><a class="nav-link" href="${ pageContext.request.contextPath }/transaction">이체</a></li>
+							<li class="nav-item"><a class="nav-link" href="${ pageContext.request.contextPath }/products">금융상품</a></li>
+							<li class="nav-item"><a class="nav-link" href="${ pageContext.request.contextPath }/qna">문의게시판</a></li>
+							<li class="nav-item"><a class="nav-link" href="${ pageContext.request.contextPath }/mypage">마이페이지</a></li>
 						</ul>
 					</div>
 				</div>
@@ -106,7 +103,7 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-bs-dismiss="modal">취소</button>
-					<a href="logout.do" type="button" class="btn btn-basic">로그아웃</a>
+					<a href="logout" type="button" class="btn btn-basic">로그아웃</a>
 				</div>
 			</div>
 		</div>

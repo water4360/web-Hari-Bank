@@ -49,6 +49,12 @@ public class ReplyVO {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
+	@Override
+	public String toString() {
+		return "ReplyVO [no=" + no + ", boardNo=" + boardNo + ", content=" + content + ", writer=" + writer
+				+ ", regDate=" + regDate + "]";
+	}
+	
 	
 	
 }

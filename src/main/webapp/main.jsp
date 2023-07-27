@@ -23,11 +23,13 @@
 		<div class="container" id="dynamic-main-content">
 			<!-- Page content-->
 			<div class="main-container mt-5">
-				<div class="row" style="display: flex; flex-direction: row; justify-content:center; align-items: center;  align-items:flex-start;">
+				<div class="row"
+					style="display: flex; flex-direction: row; justify-content: center; align-items: center; align-items: flex-start;">
 					<div class="col-lg-8">
 						<!-- Post content-->
-<!-- 								<img class="img-fluid rounded" src="./assets/main-banner.png" -->
-								<img class="main-banner" src="./assets/main-banner.gif"style="width: 110%;">
+						<!-- 								<img class="img-fluid rounded" src="./assets/main-banner.png" -->
+						<img class="main-banner" src="./assets/main-banner.gif"
+							style="width: 110%;">
 					</div>
 					<!-- Side widgets-->
 					<c:choose>
@@ -36,32 +38,32 @@
 								<%-- 로그인/가입메뉴 --%>
 								<div class="card-body"
 									style="display: flex; flex-direction: column; align-items: center;">
-									<a class="btn btn-gradient" id="button-login" type="button" href='login.do'>
+									<a class="btn btn-gradient" id="button-login" type="button"
+										href='${ pageContext.request.contextPath }/login'>
 										로그인 <br> <i class="fa-solid fa-right-to-bracket fa-2xl"></i>
-									</a> <a class="btn btn-gradient" id="button-create-account" type="button"
-										href="create-account.do"> 계좌개설 <br> <i
-										class="fa-solid fa-money-check fa-2xl"></i>
+									</a>
+									<a class="btn btn-gradient" id="button-create-account" type="button"
+										href="${ pageContext.request.contextPath }/create-account">
+										계좌개설 <br> <i class="fa-solid fa-money-check fa-2xl"></i>
 									</a>
 								</div>
 							</div>
 						</c:when>
 						<c:otherwise>
-							<div class="col-lg-3" style="display: flex; flex-direction: column; align-items: center;">
+							<div class="col-lg-3"
+								style="display: flex; flex-direction: column; align-items: center;">
 								<%-- 개설/조회/이체메뉴 --%>
-									<a class="btn btn-gradient" id="button-transfer" type="button"
-										href='transaction.do'>즉시이체 <br>
-									<i class="fa-solid fa-money-bill-transfer fa-2xl"></i>
-									</a>
-									
-									<a class="btn btn-gradient" id="button-inquiry" type="button"
-										href='inquiry.do'> 빠른조회 <br> <i class="fa-brands fa-searchengin fa-2xl"></i>
-									</a>
-									
-									<a class="btn btn-gradient" id="button-create-account" type="button"
-										href='create-account.do'> 계좌추가개설 <br> <i
-										class="fa-solid fa-money-check fa-2xl"></i>
-									</a>
-									
+								<a class="btn btn-gradient" id="button-transfer" type="button"
+									href='${ pageContext.request.contextPath }/transaction'>즉시이체 <br> <i
+									class="fa-solid fa-money-bill-transfer fa-2xl"></i>
+								</a> <a class="btn btn-gradient" id="button-inquiry" type="button"
+									href='${ pageContext.request.contextPath }/inquiry'> 빠른조회 <br> <i
+									class="fa-brands fa-searchengin fa-2xl"></i>
+								</a> <a class="btn btn-gradient" id="button-create-account"
+									type="button" href='${ pageContext.request.contextPath }/create-account'> 계좌추가개설 <br> <i
+									class="fa-solid fa-money-check fa-2xl"></i>
+								</a>
+
 							</div>
 
 						</c:otherwise>
@@ -76,7 +78,7 @@
 		function loadPage(pageName) {
 			if (pageName === 'inquiry') {
 				$.ajax({
-					url : "${pageContext.request.contextPath}/inquiry.do",
+					url : "${pageContext.request.contextPath}/inquiry",
 					type : "GET",
 					success : function(response) {
 						$("#dynamic-main-content").html(response);
@@ -84,7 +86,7 @@
 				});
 			} else if (pageName === 'transaction') {
 				$.ajax({
-					url : "${pageContext.request.contextPath}/transaction.do",
+					url : "${pageContext.request.contextPath}/transaction",
 					type : "GET",
 					success : function(response) {
 						$("#dynamic-main-content").html(response);

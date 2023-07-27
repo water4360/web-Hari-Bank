@@ -9,13 +9,18 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+
 import bank.account.AccountVO;
 import bank.user.UserVO;
 import controller.BasicController;
 
+@Controller
 public class InquiryController extends BasicController {
 	
-	@Override
+	// index.jsp에서 a링크로 받은 board 처리!
+	@GetMapping("/inquiry")
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
 		session = request.getSession();
 		System.out.println("inquiryCtrl 진입");
@@ -27,7 +32,7 @@ public class InquiryController extends BasicController {
         	session.setAttribute("prevBtn", prevBtn);
         	
             // 로그인 페이지로 포워딩
-            return "login.do";
+            return "/login";
         } else {
         	String id = ((UserVO)session.getAttribute("loginUser")).getId();
         	List<AccountVO> accountList = daoService.getAccountListById(id);
@@ -53,7 +58,7 @@ public class InquiryController extends BasicController {
         	
         	System.out.println("현재 로그인: " + (UserVO) session.getAttribute("loginUser"));
 		}
-		return "/jsp/transaction/inquiry.jsp";
+		return "/transaction/inquiry";
 	}
 
 }

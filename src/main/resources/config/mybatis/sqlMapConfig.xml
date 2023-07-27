@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+ 
+ 
+  <configuration>
+ 	<typeAliases>
+ 		<typeAlias type="bank.account.AccountVO" alias="accountVO"/>
+ 		<typeAlias type="bank.board.PostVO" alias="postVO"/>
+ 		<typeAlias type="bank.board.ReplyVO" alias="replyVO"/>
+ 		<typeAlias type="bank.info.InfoVO" alias="infoVO"/>
+ 		<typeAlias type="bank.product.DepositVO" alias="depositVO"/>
+<!--  		<typeAlias type="" alias="VO"/> -->
+<!--  		<typeAlias type="" alias="VO"/> -->
+ 		
+<!--  		<typeAlias type="kr.co.mlec.reply.vo.ReplyVO" alias="replyVO"/> -->
+ 	</typeAliases>
+ </configuration>
+ 
+ 
+ 
+ 
+ 
+ 

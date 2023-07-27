@@ -6,7 +6,6 @@ import common.ConnectionFactory;
 import common.DAOService;
 import common.DAOServiceFactory;
 
-
 public abstract class BasicController implements Controller {
 
 	// controller들 묶어주기 + Service 상속용

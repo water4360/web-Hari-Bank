@@ -5,20 +5,33 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bank.board.PostDAO;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import bank.board.PostVO;
-import controller.BasicController;
+import service.board.PostService;
 
-public class QnAController extends BasicController {
+@Controller
+public class QnAController {
+	
+	@Autowired
+	private PostService postService;
 
-	@Override
-	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
-		PostDAO dao = new PostDAO();
-		List<PostVO> postList = dao.getAllQnas();
+	@GetMapping("/qna")
+	public String list(HttpServletRequest request, HttpServletResponse response) {
+		List<PostVO> postList = postService.getAllQnas();
 		
 		System.out.println("포스트길이 : " + postList.size());
 		request.setAttribute("qnas", postList);
-		return "./jsp/board/qna.jsp";
+		return "/board/qna";
 	}
 
+	@GetMapping("/qna/detail")
+	public String detail(HttpServletRequest request, @RequestParam("no") int no) {
+		PostVO vo = postService.getPost(no);
+		request.setAttribute("post", vo);
+		return "/board/qna/detail";
+	}
 }

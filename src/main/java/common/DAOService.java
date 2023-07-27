@@ -113,14 +113,14 @@ public class DAOService {
 	public List<PostVO> getQnaListById(String id) {
 		return pd.getQnaListById(id);
 	}
-	//글쓰기
-	public int writePost(PostVO post) {
-		return pd.writePost(post); 
-	}
-	//모든 qna 불러오기
-	public List<PostVO> getAllQnas() {
-		return pd.getAllQnas();
-	}
+//	//글쓰기
+//	public int writePost(PostVO post) {
+//		return pd.writePost(post); 
+//	}
+//	//모든 qna 불러오기
+//	public List<PostVO> getAllQnas() {
+//		return pd.getAllQnas();
+//	}
 	//qna 수정 + 조회수 추가 포함
 	public void modifyPost(PostVO vo) {
 		pd.modifyPost(vo);
