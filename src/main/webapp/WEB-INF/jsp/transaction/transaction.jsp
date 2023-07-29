@@ -21,7 +21,7 @@
 			<div class="text-center mb-4">
 				<h2>당행/타행계좌이체</h2>
 			</div>
-			<form action="transactionProcess.do" method="POST">
+			<form action="/transaction" method="POST">
 				<div class="card mx-auto" style="width: 30rem;">
 					<div class="card-header" align="center">
 						<h5 class="card-title">출금 정보</h5>
@@ -147,7 +147,7 @@
 			}
 
 			$.ajax({
-				url : '/Hari-bank/checkCurrentBalance.do',
+				url : '${ pageContext.request.contextPath }/checkCurrentBalance',
 				method : 'POST',
 				data : {
 					accountNo : selectedAccount
@@ -164,7 +164,6 @@
 					console.log(textStatus, errorThrown);
 					$('#currentBalance').text('잔액조회실패. 다시 시도하세요.').css('color',
 							'red');
-					// 					alert('잔액조회실패. 다시 시도하세요.');
 				}
 			});
 		}
@@ -185,7 +184,7 @@
 					}
 
 					$.ajax({
-						url : '/Hari-bank/checkAccountPassword.do',
+						url : '${ pageContext.request.contextPath }//checkAccountPassword',
 						method : 'POST',
 						data : {
 							accountNo : accountNo,
@@ -242,7 +241,7 @@
 						return;
 					}
 					$.ajax({
-						url : '/Hari-bank/checkReceiverAccount.do',
+						url : '${ pageContext.request.contextPath }/checkReceiverAccount',
 						method : 'POST',
 						data : {
 							sender : senderAccountNo,

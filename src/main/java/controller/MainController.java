@@ -9,21 +9,28 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import bank.account.AccountVO;
-import bank.board.NewsVO;
+import bank.info.InfoVO;
 import bank.product.DepositVO;
 import bank.transaction.TransactionVO;
 import bank.user.UserVO;
+import common.DAOService;
 
 @Controller
 public class MainController extends BasicController {
+	
+	@Autowired
+	private DAOService daoService;
 
+	@GetMapping("/main")
 	@Override
 	public String handleRequest(HttpServletRequest request, HttpServletResponse response) {
 		return "main.jsp";
@@ -259,5 +266,76 @@ public class MainController extends BasicController {
 //			
 //			
 //		}
+		
+		@GetMapping("/transaction")
+		public String transaction(HttpServletRequest request, Model model) {
+			System.out.println("이체Ctrl 진입");
+			session = request.getSession();
+			
+			String prevBtn = "transaction";
+			session.setAttribute("prevBtn", prevBtn);
+			
+			// 로그인 안된 경우
+	        if (session.getAttribute("loginUser") == null) {
+	            // 로그인 페이지로 포 워 딩!
+	            return "/login";
+	        } else {
+	        	UserVO user = (UserVO)session.getAttribute("loginUser");
+	        	System.out.println("현재 로그인: " + user);
+	        	
+	        	String id = user.getId();
+	        	
+	        	//계좌목록 가져오기
+	        	List<AccountVO> accountList = daoService.getAccountListById(id);
+	        	List<InfoVO> bankList = daoService.getBankList();
+	        	
+	        	System.out.println("계좌리스트 : " + accountList.size());
+	        	String selectedAccount = request.getParameter("accountNo");
+
+	        	System.out.println("선택된 계좌 : " + selectedAccount);
+	        	//개설된 계좌가 없으면
+	        	if(accountList.size()!=0) {
+	        		//계좌리스트 불러오고 은행목록 가져오기
+	        		session.setAttribute("myAccountList", accountList);
+	        		session.setAttribute("bankList", bankList);
+	        		return "/transaction/transaction";
+	        	} else {
+	        		//개설계좌가 없으면 계좌 개설 화면으로 돌아가기.
+	        		//원래라면 알림을 보여줘야.................
+	        		return "redirect:/create-account";
+	        	}
+			}
+		}
+		
+		
+		@PostMapping("/checkCurrentBalance")
+		public String checkBalance(HttpServletRequest request) {
+			// ajax에서 넘겨주는 정보
+			String accountNo = request.getParameter("accountNo");
+			System.out.println("계좌번호 넘어오니?" + accountNo);
+			String formattedTotalBalance = null;
+
+			// dao에서 찾아온 정보
+			AccountVO account = daoService.getAccountInfo(accountNo);
+
+			// 있는 계좌 정보라면 계좌조회
+			if (account != null) {
+				long balance = Long.valueOf(account.getBalance());
+				
+	        	//자릿수 표기 + 원 붙이기
+	        	NumberFormat numFormat = NumberFormat.getInstance(Locale.KOREA);
+	        	formattedTotalBalance = numFormat.format(balance) + "원";
+				
+				System.out.println("얼마? " + formattedTotalBalance);
+				
+//				session.setAttribute("currentBalance", balance);
+				session.setAttribute("balance", formattedTotalBalance);
+//				request.setAttribute("account", account);
+				
+			} else {
+				request.setAttribute("msg", "존재하지 않는 계좌번호입니다");
+			}
+			return formattedTotalBalance;
+		}
 		
 }

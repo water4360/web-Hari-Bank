@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="bank.account.AccountDAO">
+  
+  <!-- 아이디로 계좌조회 -->
+  	<select id="selectAllAccount" parameterType="String" resultType="accountVO">
+  		SELECT UA.*, BI.B_BANK_NAME, BD.D_PRODUCT_NAME 
+  		FROM B_USER_ACCOUNT UA 
+		JOIN B_DEPOSIT BD 
+		ON UA.D_PRODUCT_CODE = BD.D_PRODUCT_CODE 
+		JOIN B_BANK_INFO BI 
+		ON UA.B_BANK_CODE = BI.B_BANK_CODE 
+		WHERE UA.USER_ID = #{ userId }
+  	</select>
+  
+  </mapper>

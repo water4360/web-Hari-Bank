@@ -14,7 +14,6 @@
 <!--  		<typeAlias type="" alias="VO"/> -->
 <!--  		<typeAlias type="" alias="VO"/> -->
  		
-<!--  		<typeAlias type="kr.co.mlec.reply.vo.ReplyVO" alias="replyVO"/> -->
  	</typeAliases>
  </configuration>
  

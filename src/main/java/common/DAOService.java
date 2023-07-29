@@ -2,6 +2,8 @@ package common;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import bank.account.AccountDAO;
 import bank.account.AccountVO;
 import bank.board.PostDAO;
@@ -15,6 +17,7 @@ import bank.transaction.TransactionVO;
 import bank.user.UserDAO;
 import bank.user.UserVO;
 
+@Service
 public class DAOService {
 
 	protected UserDAO ud;
