@@ -9,13 +9,13 @@
 	
 	<insert id="insert" parameterType="replyVO">
 		INSERT INTO T_REPLY(NO, BOARD_NO, CONTENT, WRITER)
-			VALUES(SEQ_T_REPLY_NO.NEXTVAL, #{boardNo}, #{content}, #{writer})
+			VALUES(SEQ_REPLY_NO.NEXTVAL, #{boardNo}, #{content}, #{writer})
 	</insert>
 
 	<select id="selectAll" parameterType="int" resultType="replyVO">
 		SELECT NO, BOARD_NO boardNo, CONTENT, WRITER, TO_CHAR(REG_DATE, 'yyyy-mm-dd') as REGDATE
 			FROM T_REPLY WHERE BOARD_NO = #{boardNo}
-			ORDER BY NO DESC
+			ORDER BY NO ASC
 	</select>
 	
 

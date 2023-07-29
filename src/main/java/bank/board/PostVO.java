@@ -10,6 +10,9 @@ public class PostVO {
 	private String regDate;
 	private int viewCnt;
 
+	private int replyCnt;
+	
+	
 	public PostVO() {
 		super();
 	}
@@ -69,6 +72,15 @@ public class PostVO {
 	public void setViewCnt(int viewCnt) {
 		this.viewCnt = viewCnt;
 	}
+	
+	public int getReplyCnt() {
+		return replyCnt;
+	}
+
+	public void setReplyCnt(int replyCnt) {
+		this.replyCnt = replyCnt;
+	}
+
 	//신규생성용
 	public PostVO(int no, String writer, String title, String contents, String regDate, int viewCnt) {
 		super();
@@ -93,9 +105,9 @@ public class PostVO {
 	@Override
 	public String toString() {
 		return "PostVO [category=" + category + ", no=" + no + ", writer=" + writer + ", title=" + title + ", contents="
-				+ contents + ", regDate=" + regDate + ", viewCnt=" + viewCnt + "]";
+				+ contents + ", regDate=" + regDate + ", viewCnt=" + viewCnt + ", replyCnt=" + replyCnt + "]";
 	}
-	
+
 	
 }
 

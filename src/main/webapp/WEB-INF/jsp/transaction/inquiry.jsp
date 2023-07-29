@@ -26,7 +26,7 @@
 <body>
 	<header>
 		<%-- 상단고정 --%>
-		<jsp:include page="/jsp/main-jsp/topper.jsp"></jsp:include>
+		<jsp:include page="/jsp/include/topper.jsp"></jsp:include>
 	</header>
 	<section>
 		<div class="container mt-5">
@@ -80,14 +80,14 @@
 											</td>
 											<td style="text-align: center;"><b>${account.totalBalance}</b></td>
 											<td style="text-align: center;">
-												<form action="inquiryDetail.do" method="post"
+												<form action="${ pageContext.request.contextPath }/inquiry/detail" method="post"
 													style="display: inline-block;">
 													<input type="hidden" name="accountNo"
 														value="${account.accountNo}"> <input type="hidden"
 														name="productCode" value="${account.productCode}">
 													<input type="submit" class="btn btn-basic" value="조회">
 												</form>
-												<form action="transaction.do" method="post"
+												<form action="${ pageContext.request.contextPath }/transaction" method="post"
 													style="display: inline-block;">
 													<input type="hidden" name="accountNo"
 														value="${account.accountNo}"> <input type="hidden"
@@ -124,7 +124,7 @@ function copyToClipboard(text) {
 	</section>
 	<footer>
 		<%-- 하단고정 --%>
-		<jsp:include page="/jsp/main-jsp/footer.jsp"></jsp:include>
+		<jsp:include page="/jsp/include/footer.jsp"></jsp:include>
 	</footer>
 
 

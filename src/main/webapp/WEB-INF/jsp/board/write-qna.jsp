@@ -22,14 +22,14 @@ table {
 <body>
     <header>
         <%-- 상단고정 --%>
-        <jsp:include page="/jsp/main-jsp/topper.jsp"></jsp:include>
+		<jsp:include page="/jsp/include/topper.jsp"></jsp:include>
     </header>
     <section>
         <div class="container col-5 mt-5">
             <div class="text-center">
                 <h2>문의글 작성</h2>
             </div>
-            <form action="insert-new-post.do" method="post">
+            <form action="/qna/write" method="post">
             <input type="hidden" name="writer" value="${loginUser.id}">
             <input type="hidden" name="category" value="QNA">
                 <div class="mb-3">
@@ -40,15 +40,15 @@ table {
                 </div>
                 <div class="mb-3 justify-content-center">
                     <button type="submit" class="btn mr-2 btn-basic">글등록</button>
-                    <a href="${pageContext.request.contextPath }/qna.do" class="btn btn-secondary">목록으로</a>
-                    <a href="${pageContext.request.contextPath }/mypage.do" class="btn btn-secondary">이전으로</a>
+                    <a href="${pageContext.request.contextPath }/qna" class="btn btn-secondary">목록으로</a>
+                    <a href="${pageContext.request.contextPath }/mypage" class="btn btn-secondary">마이페이지로</a>
                 </div>
             </form>
         </div>
     </section>
     <footer>
         <%-- 하단고정 --%>
-        <jsp:include page="/jsp/main-jsp/footer.jsp"></jsp:include>
+		<jsp:include page="/jsp/include/footer.jsp"></jsp:include>
     </footer>
 </body>
 </html>

@@ -24,4 +24,9 @@ public class PostServiceImpl implements PostService {
 		return dao.selectPostByNo(no);
 	}
 
+	@Override
+	public void addPost(PostVO post) {
+		dao.insertPost(post);
+	}
+
 }

@@ -8,7 +8,10 @@
 <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
 <!-- 여기는 topper 스타일시트 -->
-<link href="/css/styles.css" rel="stylesheet" />
+<!-- <link href="/css/styles.css" rel="stylesheet" /> -->
+<!-- CSS 파일의 절대 경로를 설정 -->
+<link rel="stylesheet" type="text/css" href="<c:url value="${pageContext.request.contextPath}/css/styles.css"/>" />
+
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
 	crossorigin="anonymous">
@@ -49,13 +52,13 @@
 		style="flex-direction: column;">
 		<div class="container">
 			<a class="navbar-brand" href="${pageContext.request.contextPath}/">
-			<img alt="main-bank-logo" src="./assets/bank-logo.png" width="80%"></a>
+			<img alt="main-bank-logo" src="${pageContext.request.contextPath}/assets/bank-logo.png" width="80%"></a>
 			<div class="info-and-topmenu"
 				style="display: flex; flex-direction: column; align-items: flex-end;">
 				<div class="login-info"
 					style="padding-right: 8px; font-size: large;">
 					<c:if test="${ not empty loginUser }">
-						<img alt="user" id="user" src="./assets/gr-user2.png"
+						<img alt="user" id="user" src="${pageContext.request.contextPath}/assets/gr-user2.png"
 							style="width: 30px;">
 						<b>${ loginUser.korName }님 환영합니다</b>
 						<a class="badge bg-secondary text-decoration-none link-light"
@@ -75,11 +78,12 @@
 						align="center">
 						<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 							<li class="nav-item"><a class="nav-link" href="${ pageContext.request.contextPath }/inquiry">조회</a></li>
-							<li class="nav-item"><a class="nav-link" href="${ pageContext.request.contextPath }/inquiryOpenbank">오픈뱅킹</a></li>
+							<li class="nav-item"><a class="nav-link" href="${ pageContext.request.contextPath }/openbank">오픈뱅킹</a></li>
 							<li class="nav-item"><a class="nav-link" href="${ pageContext.request.contextPath }/transaction">이체</a></li>
-							<li class="nav-item"><a class="nav-link" href="${ pageContext.request.contextPath }/products">금융상품</a></li>
-							<li class="nav-item"><a class="nav-link" href="${ pageContext.request.contextPath }/qna">문의게시판</a></li>
+							<li class="nav-item"><a class="nav-link" href="${ pageContext.request.contextPath }/qna">고객문의</a></li>
 							<li class="nav-item"><a class="nav-link" href="${ pageContext.request.contextPath }/mypage">마이페이지</a></li>
+							<li class="nav-item"><a class="nav-link" href="${ pageContext.request.contextPath }/news">금융뉴스</a></li>
+							<li class="nav-item"><a class="nav-link" href="${ pageContext.request.contextPath }/playGame">미니게임</a></li>
 						</ul>
 					</div>
 				</div>

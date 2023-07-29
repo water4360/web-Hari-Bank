@@ -22,7 +22,7 @@ table {
 <body>
 	<header>
 		<%-- 상단고정 --%>
-		<jsp:include page="/jsp/main-jsp/topper.jsp"></jsp:include>
+		<jsp:include page="/jsp/include/topper.jsp"></jsp:include>
 	</header>
 	<section>
 
@@ -173,7 +173,7 @@ table {
 
 	<footer>
 		<%-- 하단고정 --%>
-		<jsp:include page="/jsp/main-jsp/footer.jsp"></jsp:include>
+		<jsp:include page="/jsp/include/footer.jsp"></jsp:include>
 	</footer>
 </body>
 </html>

@@ -8,6 +8,7 @@
 <%-- 카카오 로그인용 스크립트 파일 --%>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
+<%--
 <!-- Font Awesome icons (free version)-->
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"></script>
 <!-- Core theme CSS (includes Bootstrap)-->
@@ -19,6 +20,7 @@
 <!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> -->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+	 --%>
 
 <script>
 	//이 함수의 결과가 true이면 아래에 onsubmit이 넘어감.
@@ -70,7 +72,7 @@ section {
 <body>
 	<header>
 		<%-- 상단고정 --%>
-		<jsp:include page="/jsp/main-jsp/topper.jsp"></jsp:include>
+		<jsp:include page="/jsp/include/topper.jsp"></jsp:include>
 	</header>
 	<section>
 		<div class="login-outer-container" align="center">
@@ -120,7 +122,7 @@ section {
 	</section>
 	<footer>
 		<%-- 하단고정 --%>
-		<jsp:include page="/jsp/main-jsp/footer.jsp"></jsp:include>
+		<jsp:include page="/jsp/include/footer.jsp"></jsp:include>
 	</footer>
 
 	<script>

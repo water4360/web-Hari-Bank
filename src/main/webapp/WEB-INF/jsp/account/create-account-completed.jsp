@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>HB하리은행 - 회원가입 완료</title>
+<title>HB하리은행 - 계좌개설 완료</title>
 
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -23,22 +23,21 @@
 </head>
 <header>
 	<%-- 상단고정 --%>
-	<jsp:include page="/jsp/main-jsp/topper.jsp"></jsp:include>
+		<jsp:include page="/jsp/include/topper.jsp"></jsp:include>
 </header>
 <body>
 	<section>
 		<div class="container mt-5 mb-5">
-			<h3 align="center">회원가입 완료</h3>
+			<h3 align="center">HB하리사랑통장 개설완료</h3>
 			<div class="card mt-3">
 				<div class="card-body center-align">
-					<h5 class="card-title">${newUser.korName}님, 하리은행 가입을 환영합니다.</h5>
-					<p class="card-text">가입일: ${newUser.regDatetime}</p>
+					<h5 class="card-title">계좌번호</h5>
+					<p class="card-text">[${account.accountNo}]</p>
 				</div>
 				<div class="col-12 mb-4 center-align">
 					<div>
-						<a href="create-account.do" class="btn btn-lg">
-							이어서 계좌개설하기</a>
-						<a href="login.do" class="btn btn-secondary btn-lg">로그인하기</a>
+						<a href="inquiry.do" class="btn btn-lg">
+							계좌조회</a>
 						<a href="main.do" class="btn btn-secondary btn-lg">메인으로</a>
 					</div>
 				</div>
@@ -46,7 +45,7 @@
 		</div>
 		<footer>
 			<%-- 하단고정 --%>
-			<jsp:include page="/jsp/main-jsp/footer.jsp"></jsp:include>
+		<jsp:include page="/jsp/include/footer.jsp"></jsp:include>
 		</footer>
 	</section>
 </body>

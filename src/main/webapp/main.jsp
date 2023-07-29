@@ -17,7 +17,7 @@
 <body>
 	<header>
 		<%-- 상단고정 --%>
-		<jsp:include page="/jsp/main-jsp/topper.jsp"></jsp:include>
+		<jsp:include page="/jsp/include/topper.jsp"></jsp:include>
 	</header>
 	<section>
 		<div class="container" id="dynamic-main-content">
@@ -27,7 +27,7 @@
 					style="display: flex; flex-direction: row; justify-content: center; align-items: center; align-items: flex-start;">
 					<div class="col-lg-8">
 						<!-- Post content-->
-						<!-- 								<img class="img-fluid rounded" src="./assets/main-banner.png" -->
+						<!-- <img class="img-fluid rounded" src="./assets/main-banner.png" -->
 						<img class="main-banner" src="./assets/main-banner.gif"
 							style="width: 110%;">
 					</div>
@@ -39,10 +39,10 @@
 								<div class="card-body"
 									style="display: flex; flex-direction: column; align-items: center;">
 									<a class="btn btn-gradient" id="button-login" type="button"
-										href='${ pageContext.request.contextPath }/login'>
-										로그인 <br> <i class="fa-solid fa-right-to-bracket fa-2xl"></i>
-									</a>
-									<a class="btn btn-gradient" id="button-create-account" type="button"
+										href='${ pageContext.request.contextPath }/login'> 로그인 <br>
+										<i class="fa-solid fa-right-to-bracket fa-2xl"></i>
+									</a> <a class="btn btn-gradient" id="button-create-account"
+										type="button"
 										href="${ pageContext.request.contextPath }/create-account">
 										계좌개설 <br> <i class="fa-solid fa-money-check fa-2xl"></i>
 									</a>
@@ -54,14 +54,15 @@
 								style="display: flex; flex-direction: column; align-items: center;">
 								<%-- 개설/조회/이체메뉴 --%>
 								<a class="btn btn-gradient" id="button-transfer" type="button"
-									href='${ pageContext.request.contextPath }/transaction'>즉시이체 <br> <i
-									class="fa-solid fa-money-bill-transfer fa-2xl"></i>
+									href='${ pageContext.request.contextPath }/transaction'>즉시이체
+									<br> <i class="fa-solid fa-money-bill-transfer fa-2xl"></i>
 								</a> <a class="btn btn-gradient" id="button-inquiry" type="button"
-									href='${ pageContext.request.contextPath }/inquiry'> 빠른조회 <br> <i
-									class="fa-brands fa-searchengin fa-2xl"></i>
+									href='${ pageContext.request.contextPath }/inquiry'> 빠른조회 <br>
+									<i class="fa-brands fa-searchengin fa-2xl"></i>
 								</a> <a class="btn btn-gradient" id="button-create-account"
-									type="button" href='${ pageContext.request.contextPath }/create-account'> 계좌추가개설 <br> <i
-									class="fa-solid fa-money-check fa-2xl"></i>
+									type="button"
+									href='${ pageContext.request.contextPath }/create-account'>
+									계좌추가개설 <br> <i class="fa-solid fa-money-check fa-2xl"></i>
 								</a>
 
 							</div>
@@ -74,42 +75,9 @@
 		</div>
 	</section>
 
-	<script>
-		function loadPage(pageName) {
-			if (pageName === 'inquiry') {
-				$.ajax({
-					url : "${pageContext.request.contextPath}/inquiry",
-					type : "GET",
-					success : function(response) {
-						$("#dynamic-main-content").html(response);
-					}
-				});
-			} else if (pageName === 'transaction') {
-				$.ajax({
-					url : "${pageContext.request.contextPath}/transaction",
-					type : "GET",
-					success : function(response) {
-						$("#dynamic-main-content").html(response);
-					}
-				});
-			}
-		}
-	</script>
-
-
-
-	<!-- Bootstrap core JS-->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- Core theme JS-->
-	<script src="js/scripts.js"></script>
-
-
-
-
 	<footer>
 		<%-- 하단고정 --%>
-		<jsp:include page="/jsp/main-jsp/footer.jsp"></jsp:include>
+		<jsp:include page="/jsp/include/footer.jsp"></jsp:include>
 	</footer>
 </body>
 </html>

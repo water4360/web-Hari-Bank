@@ -66,8 +66,8 @@ public class LoginController extends BasicController {
 				return "redirect:/inquiry";
 			} else if (prevBtn.equals("create-account")) {
 				return "redirect:/create-account";
-			} else if (prevBtn.equals("inquiryOpenbank")) {
-				return "redirect:/inquiryOpenbank";
+			} else if (prevBtn.equals("openbank")) {
+				return "redirect:/openbank";
 			}
 			
 			
