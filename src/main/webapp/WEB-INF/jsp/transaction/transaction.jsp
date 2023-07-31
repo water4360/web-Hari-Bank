@@ -154,9 +154,10 @@
 				// 선택된 계좌 번호를 서버로 전달합니다.
 				},
 				success : function(response) {
-					// map을 통해 key : balance, value : 잔액받음
+					// map으로 전달시 key : balance, value : 잔액받음
+					// String으로 전달시 바로 문자열로 이용가능.
 					console.log(response)
-					$('#currentBalance').text(response.balance).css('color', 'black');
+					$('#currentBalance').text(response).css('color', 'black');
 				},
 				error : function(textStatus, errorThrown) {
 					// 에러가 발생했을 때 실행되는 코드입니다.

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import bank.account.AccountVO;
 import bank.info.InfoVO;
@@ -311,15 +312,39 @@ public class MainController extends BasicController {
 			}
 		}
 		
-		
+//		@ResponseBody
+//		@PostMapping("/checkCurrentBalance")
+//		public Map<String, String> checkBalance(HttpServletRequest request) {
+//			// ajax에서 넘겨주는 정보
+//			String accountNo = request.getParameter("accountNo");
+//			System.out.println("계좌번호 넘어오니?" + accountNo);
+//			
+//			Map<String, String> currentBalance = new HashMap<>();
+//			
+//			// dao에서 계좌를 찾아서,
+//			AccountVO account = daoService.getAccountInfo(accountNo);
+//
+//			if (account != null) {
+//				// 있는 계좌 정보라면 잔액을 저장
+//				long balance = Long.valueOf(account.getBalance());
+//				
+//	        	//자릿수 표기 + 원 붙이기
+//	        	NumberFormat numFormat = NumberFormat.getInstance(Locale.KOREA);
+//	        	String formattedTotalBalance = numFormat.format(balance) + "원";
+//				System.out.println("현재잔액 얼마? " + formattedTotalBalance);
+//				
+//				currentBalance.put("balance", formattedTotalBalance);
+//				
+//				return currentBalance;
+//			}
+//			return null;
+//		}
 		@ResponseBody
 		@PostMapping("/checkCurrentBalance")
-		public Map<String, String> checkBalance(HttpServletRequest request) {
+		public String checkBalance(HttpServletRequest request) {
 			// ajax에서 넘겨주는 정보
 			String accountNo = request.getParameter("accountNo");
 			System.out.println("계좌번호 넘어오니?" + accountNo);
-			
-			Map<String, String> currentBalance = new HashMap<>();
 			
 			// dao에서 계좌를 찾아서,
 			AccountVO account = daoService.getAccountInfo(accountNo);
@@ -333,9 +358,7 @@ public class MainController extends BasicController {
 	        	String formattedTotalBalance = numFormat.format(balance) + "원";
 				System.out.println("현재잔액 얼마? " + formattedTotalBalance);
 				
-				currentBalance.put("balance", formattedTotalBalance);
-				
-				return currentBalance;
+				return formattedTotalBalance;
 			}
 			return null;
 		}
