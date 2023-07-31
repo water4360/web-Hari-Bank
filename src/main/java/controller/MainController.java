@@ -4,8 +4,10 @@ import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +18,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import bank.account.AccountVO;
 import bank.info.InfoVO;
@@ -308,34 +312,32 @@ public class MainController extends BasicController {
 		}
 		
 		
+		@ResponseBody
 		@PostMapping("/checkCurrentBalance")
-		public String checkBalance(HttpServletRequest request) {
+		public Map<String, String> checkBalance(HttpServletRequest request) {
 			// ajax에서 넘겨주는 정보
 			String accountNo = request.getParameter("accountNo");
 			System.out.println("계좌번호 넘어오니?" + accountNo);
-			String formattedTotalBalance = null;
-
-			// dao에서 찾아온 정보
+			
+			Map<String, String> currentBalance = new HashMap<>();
+			
+			// dao에서 계좌를 찾아서,
 			AccountVO account = daoService.getAccountInfo(accountNo);
 
-			// 있는 계좌 정보라면 계좌조회
 			if (account != null) {
+				// 있는 계좌 정보라면 잔액을 저장
 				long balance = Long.valueOf(account.getBalance());
 				
 	        	//자릿수 표기 + 원 붙이기
 	        	NumberFormat numFormat = NumberFormat.getInstance(Locale.KOREA);
-	        	formattedTotalBalance = numFormat.format(balance) + "원";
+	        	String formattedTotalBalance = numFormat.format(balance) + "원";
+				System.out.println("현재잔액 얼마? " + formattedTotalBalance);
 				
-				System.out.println("얼마? " + formattedTotalBalance);
+				currentBalance.put("balance", formattedTotalBalance);
 				
-//				session.setAttribute("currentBalance", balance);
-				session.setAttribute("balance", formattedTotalBalance);
-//				request.setAttribute("account", account);
-				
-			} else {
-				request.setAttribute("msg", "존재하지 않는 계좌번호입니다");
+				return currentBalance;
 			}
-			return formattedTotalBalance;
+			return null;
 		}
 		
 }

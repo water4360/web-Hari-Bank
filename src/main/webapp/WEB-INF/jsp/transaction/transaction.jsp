@@ -154,12 +154,11 @@
 				// 선택된 계좌 번호를 서버로 전달합니다.
 				},
 				success : function(response) {
-					// 서버로부터 응답을 성공적으로 받았을 때 실행되는 코드입니다.
-					// 응답으로 받은 잔액을 #currentBalance 요소에 표시합니다.
-					response = response.trim();
-					$('#currentBalance').text(response).css('color', 'black');
+					// map을 통해 key : balance, value : 잔액받음
+					console.log(response)
+					$('#currentBalance').text(response.balance).css('color', 'black');
 				},
-				error : function(jqXHR, textStatus, errorThrown) {
+				error : function(textStatus, errorThrown) {
 					// 에러가 발생했을 때 실행되는 코드입니다.
 					console.log(textStatus, errorThrown);
 					$('#currentBalance').text('잔액조회실패. 다시 시도하세요.').css('color',
@@ -179,12 +178,12 @@
 					if (!accountPassword || !accountNo
 							|| accountPassword.length != 4) {
 						$(this).removeClass('is-valid is-invalid'); // 클래스 초기화
-						// 						$('#accountPassword-feedback').text('').hide(); // 피드백 메시지를 숨깁니다.
+						//('#accountPassword-feedback').text('').hide(); // 피드백 메시지를 숨깁니다.
 						return;
 					}
 
 					$.ajax({
-						url : '${ pageContext.request.contextPath }//checkAccountPassword',
+						url : '${ pageContext.request.contextPath }/checkAccountPassword',
 						method : 'POST',
 						data : {
 							accountNo : accountNo,
