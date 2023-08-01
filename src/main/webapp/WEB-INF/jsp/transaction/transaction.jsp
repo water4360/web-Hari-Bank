@@ -21,7 +21,7 @@
 			<div class="text-center mb-4">
 				<h2>당행/타행계좌이체</h2>
 			</div>
-			<form action="/transaction" method="POST">
+			<form action="${ pageContext.request.contextPath }/transaction" method="POST">
 				<div class="card mx-auto" style="width: 30rem;">
 					<div class="card-header" align="center">
 						<h5 class="card-title">출금 정보</h5>
