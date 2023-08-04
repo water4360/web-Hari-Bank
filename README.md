@@ -32,7 +32,7 @@
 
 ![당행계좌조회 타행계좌이체_시퀀스](https://github.com/water4360/web-Hari-Bank/assets/121849929/e46e76d8-4ad8-4946-90a3-0bea2f5ff88d)
 
-사용자 입력값을 받는 부분이 많았으므로 사전에 ajax를 이용한 유효성 검사를 철저히 하려 했습니다.
+사용자 입력값을 받는 부분이 많았으므로 완전히 이체를 실행하기 전, DAO쪽과 jsp 상에서의 ajax를 이용한 유효성 검사를 철저히 하려 했습니다.
 ![이체유효성검사](https://github.com/water4360/web-Hari-Bank/assets/121849929/a7114e46-e024-48eb-b809-349160993f50)
 
 </details>
