@@ -4,7 +4,7 @@
 - 부분 팀프로젝트(4인)
   
 ## 2. 사용 기술
-`Back-End` Java 11, Spring 2.7.12
+`Back-End` Java 11, Spring 5.3.29, SpringBoot 2.7.12
 
 `Front-End` JavaScript
 
