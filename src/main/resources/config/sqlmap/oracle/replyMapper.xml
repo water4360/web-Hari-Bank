@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <!-- 앞의 패키지 3개는 뗐음~~  -->
+<mapper namespace="reply.dao.ReplyDAO">
+	
+	<insert id="insert" parameterType="replyVO">
+		INSERT INTO T_REPLY(NO, BOARD_NO, CONTENT, WRITER)
+			VALUES(SEQ_REPLY_NO.NEXTVAL, #{boardNo}, #{content}, #{writer})
+	</insert>
+
+	<select id="selectAll" parameterType="int" resultType="replyVO">
+		SELECT NO, BOARD_NO boardNo, CONTENT, WRITER, TO_CHAR(REG_DATE, 'yyyy-mm-dd') as REGDATE
+			FROM T_REPLY WHERE BOARD_NO = #{boardNo}
+			ORDER BY NO DESC
+	</select>
+	
+
+</mapper>
+
+
+

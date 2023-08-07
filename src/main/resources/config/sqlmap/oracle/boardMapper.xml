@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <!-- 앞의 패키지 3개는 뗐음~~  -->
+<mapper namespace="board.dao.BoardDAO">
+
+	<select id="selectAllBoard" resultType="boardVO">
+		SELECT NO, TITLE, WRITER
+        , REG_DATE regDate
+        , (
+            SELECT COUNT(*)
+            FROM T_REPLY
+            WHERE BOARD_NO = B.NO
+            ) AS replyCnt
+		    FROM B_BOARD B
+		    ORDER BY NO DESC
+	</select>
+	
+	<!-- 글번호로 조회 -->
+	<select id="selectBoardByNo" parameterType="int" resultType="boardVO">
+		SELECT NO, TITLE, WRITER, CONTENT, VIEW_CNT viewCnt, REG_DATE regDate
+		FROM B_BOARD WHERE NO =  #{no}
+	</select>
+	
+	<!-- 새글등록 -->
+	<insert id="insertBoard" parameterType="boardVO">
+		INSERT INTO B_BOARD(NO, TITLE, WRITER, CONTENT)
+		VALUES(SEQ_T_BOARD_NO.NEXTVAL, #{title}, #{writer}, #{content})
+	</insert>
+</mapper>

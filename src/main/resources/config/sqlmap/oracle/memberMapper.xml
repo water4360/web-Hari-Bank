@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <!-- 앞의 패키지 3개는 뗐음~~  -->
+<mapper namespace="bank.user.UserDAO">
+
+	<select id="login" parameterType="userVO" resultType="userVO">
+		SELECT ID, PASSWORD, NAME, TYPE FROM T_MEMBER 
+		WHERE ID = #{id} AND PASSWORD = #{password}
+	</select>
+
+</mapper>
