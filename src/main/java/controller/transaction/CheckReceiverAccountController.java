@@ -27,8 +27,7 @@ public class CheckReceiverAccountController extends BasicController {
 		} else {
 			request.setAttribute("checkReceiverAccountResult", "incorrect");
 		}
-
 		return "/jsp/check-jsp/checkReceiver.jsp";
 	}
-
 }
+

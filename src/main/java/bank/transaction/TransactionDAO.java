@@ -54,7 +54,6 @@ public class TransactionDAO {
 		
 		
 		int result = 0;
-		int idx = 1;
 
 		StringBuilder sql = new StringBuilder();
 		sql.append("{call OP_BANK_TRANSFER(?, ?, ?, ?, ?, ?, ?, ?) }");
@@ -62,6 +61,7 @@ public class TransactionDAO {
 
 		// 밑에서 conn을 또 써야 해서 향상된 try~catch가 아닌 것으로 수정함. 20:13
 		// from은행코드,계좌,이름, to코드,계좌,이름,금액 / 결과는 출력값
+		int idx = 1;
 		try {
 			conn = new ConnectionFactory().getConnection();
 			// 오토커밋 안되도록!
