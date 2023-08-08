@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -19,20 +20,14 @@
 		<jsp:include page="/jsp/main-jsp/topper.jsp"></jsp:include>
 	</header>
 	<section>
-
 		<div class="container mt-5" align="center">
 			<div>
 				<h2>문의게시판(Q&A)</h2>
 			</div>
-			<div class="btn-group">
-			
-			
-				<c:if test="${not empty loginUser}">
-				<form action="write-post.do" method="post">
-					<button type="submit" class="btn btn-secondary">문의하기</button>
-				</form>
-				</c:if>
-			</div>
+			<c:if test="${not empty loginUser}">
+				<a class="btn btn-primary mb-3"
+					href="${pageContext.request.contextPath}/board/write">문의하기</a>
+			</c:if>
 			<div class="row justify-content-center">
 				<div class="col-md-11">
 					<table class="table table-hover">
@@ -49,8 +44,8 @@
 						<tbody>
 							<c:choose>
 								<c:when test="${ empty qnas }">
-									<td colspan="5" align="center" style="padding: 50px 0;">등록된 Q&A가
-										없습니다.</td>
+									<td colspan="5" align="center" style="padding: 50px 0;">등록된
+										Q&A가 없습니다.</td>
 								</c:when>
 
 								<c:otherwise>
@@ -58,7 +53,7 @@
 										<tr>
 											<td class="qna-no narrow-column">${qna.no}</td>
 											<td class="qna-title"><a
-												href="qna-details.do?no=${qna.no}">${qna.title}</a></td>
+												href="${pageContext.request.contextPath}/board/${qna.no}">${qna.title} [${ qna.replyCnt }]</a></td>
 											<td class="qna-writer narrow-column">${qna.writer}</td>
 											<td class="qna-regdate narrow-column">${qna.regDate}</td>
 											<td class="qna-viewcnt narrow-column">${qna.viewCnt}</td>
@@ -72,7 +67,6 @@
 			</div>
 		</div>
 	</section>
-
 	<footer>
 		<%-- 하단고정 --%>
 		<jsp:include page="/jsp/main-jsp/footer.jsp"></jsp:include>

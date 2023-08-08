@@ -7,7 +7,8 @@
 <mapper namespace="board.dao.BoardDAO">
 
 	<select id="selectAllBoard" resultType="boardVO">
-		SELECT NO, TITLE, WRITER
+		SELECT NO, TITLE, WRITER, CONTENT
+        , VIEW_CNT viewCnt
         , REG_DATE regDate
         , (
             SELECT COUNT(*)
@@ -20,8 +21,13 @@
 	
 	<!-- 글번호로 조회 -->
 	<select id="selectBoardByNo" parameterType="int" resultType="boardVO">
-		SELECT NO, TITLE, WRITER, CONTENT, VIEW_CNT viewCnt, REG_DATE regDate
-		FROM B_BOARD WHERE NO =  #{no}
+	SELECT NO, TITLE, WRITER, CONTENT, VIEW_CNT viewCnt, REG_DATE regDate
+	        , (
+	            SELECT COUNT(*)
+	            FROM T_REPLY
+	            WHERE BOARD_NO = #{ NO }
+	           ) replyCnt
+				FROM B_BOARD WHERE NO = #{ NO }
 	</select>
 	
 	<!-- 새글등록 -->

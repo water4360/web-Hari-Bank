@@ -32,20 +32,21 @@ public class BoardController {
 		// 공유영역 4가지 중 주요 영역 2가지
 		// request, session
 		List<BoardVO> list = boardService.getAllBoardList();
-		request.setAttribute("boardList", list);
+		System.out.println(list.get(list.size()-1));
+		request.setAttribute("qnas", list);
 //		return "board/list";
-		return "board/list2";
+		return "board/qna-list";
 	}
 
-	@GetMapping("/board/detail")
-	public String detail(HttpServletRequest request, @RequestParam("no") int no) {
-//		System.out.println("넘어오는 번호 : " + no);
-
-		// no번에 해당하는 게시글 조회
-		BoardVO vo = boardService.getOneBoard(no);
-		request.setAttribute("board", vo);
-		return "board/detail";
-	}
+//	@GetMapping("/board/detail")
+//	public String detail(HttpServletRequest request, @RequestParam("no") int no) {
+////		System.out.println("넘어오는 번호 : " + no);
+//
+//		// no번에 해당하는 게시글 조회
+//		BoardVO vo = boardService.getOneBoard(no);
+//		request.setAttribute("qna", vo);
+//		return "board/qna-detail";
+//	}
 
 	/**
 	 * URL에 바로 게시글넘버를 추가해서 조회하는 경우. path의 {no}로 들어오는 값(패스변수)을 boardNo로 받겠다는 뜻. 그러고보니
@@ -56,12 +57,13 @@ public class BoardController {
 	public ModelAndView detail2(@PathVariable("no") int boardNo, HttpServletRequest request) {
 		// no번에 해당하는 게시글 조회
 		BoardVO vo = boardService.getOneBoard(boardNo);
-
+		System.out.println("조회할 게시글 : " + vo);
+		
 		// 보여줄 view는 board/detail이야.
 		// 등록할 model은 "board"라는 이름의 vo객체야.
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("board/detail");
-		mav.addObject("board", vo);
+		mav.setViewName("board/qna-detail");
+		mav.addObject("post", vo);
 
 //		//원래는 이렇게 공유영역 등록.
 //		request.setAttribute("board", vo);
