@@ -33,4 +33,10 @@ public class BoardDAOImpl implements BoardDAO {
 		
 	}
 
+	@Override
+	public void increaseViewCnt(int no) {
+		session.update("board.dao.BoardDAO.increaseViewCnt", no);
+		
+	}
+
 }

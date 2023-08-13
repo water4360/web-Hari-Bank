@@ -55,6 +55,10 @@ public class BoardController {
 	@GetMapping("/board/{no}")
 //	public String detail2(@PathVariable("no") int boardNo, HttpServletRequest request) {
 	public ModelAndView detail2(@PathVariable("no") int boardNo, HttpServletRequest request) {
+		//조회수 증가용
+		boardService.increaseViewCnt(boardNo);
+		
+		
 		// no번에 해당하는 게시글 조회
 		BoardVO vo = boardService.getOneBoard(boardNo);
 		System.out.println("조회할 게시글 : " + vo);

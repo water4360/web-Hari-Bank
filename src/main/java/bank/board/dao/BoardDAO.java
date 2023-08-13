@@ -29,4 +29,9 @@ public interface BoardDAO {
 	 * @param 등록할 게시글
 	 */
 	void insertBoard(BoardVO vo);
+	
+	/**
+	 * 조회수 증가
+	 */
+	void increaseViewCnt(int no);
 }

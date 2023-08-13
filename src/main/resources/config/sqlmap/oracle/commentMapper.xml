@@ -4,17 +4,17 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  <!-- 앞의 패키지 3개는 뗐음~~  -->
-<mapper namespace="reply.dao.ReplyDAO">
+<mapper namespace="comment.dao.CommentDAO">
 	
-	<insert id="insert" parameterType="replyVO">
-		INSERT INTO T_REPLY(NO, BOARD_NO, CONTENT, WRITER)
-			VALUES(SEQ_REPLY_NO.NEXTVAL, #{boardNo}, #{content}, #{writer})
+	<insert id="insert" parameterType="commentVO">
+		INSERT INTO T_COMMENT(NO, BOARD_NO, CONTENT, WRITER)
+			VALUES(SEQ_COMMENT_NO.NEXTVAL, #{boardNo}, #{content}, #{writer})
 	</insert>
 
-	<select id="selectAll" parameterType="int" resultType="replyVO">
+	<select id="selectAll" parameterType="int" resultType="commentVO">
 		SELECT NO, BOARD_NO boardNo, CONTENT, WRITER
         , TO_CHAR(REG_DATE, 'yyyy-mm-dd') as REGDATE
-      	FROM T_REPLY WHERE BOARD_NO = #{boardNo}
+      	FROM T_COMMENT WHERE BOARD_NO = #{boardNo}
 		ORDER BY NO DESC
 	</select>
 	

@@ -25,4 +25,9 @@ public interface BoardService {
 	 * 게시글 등록
 	 */
 	public void addBoard(BoardVO vo);
+	
+	/**
+	 * 조회수 증가
+	 */
+	public void increaseViewCnt(int no);
 }

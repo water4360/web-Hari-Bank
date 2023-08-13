@@ -1,6 +1,6 @@
-package bank.reply.vo;
+package bank.comment.vo;
 
-public class ReplyVO {
+public class CommentVO {
 	private int no;
 	private int boardNo;
 	private String content;
@@ -38,11 +38,11 @@ public class ReplyVO {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
-	
 	@Override
 	public String toString() {
-		return "ReplyVO [no=" + no + ", boardNo=" + boardNo + ", content=" + content + ", writer=" + writer
+		return "CommentVO [no=" + no + ", boardNo=" + boardNo + ", content=" + content + ", writer=" + writer
 				+ ", regDate=" + regDate + "]";
 	}
+	
 	
 }

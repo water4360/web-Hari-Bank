@@ -27,14 +27,14 @@ table {
 <script>
 
 	//댓글리스트 조회(게시판번호)
-	let getReplyList = function() {
+	let getCommentList = function() {
 		$.ajax({
-			url: '${pageContext.request.contextPath}/reply/${post.no}',
+			url: '${pageContext.request.contextPath}/comment/${post.no}',
 			type: 'GET',
 			success: function(result) {
 // 				alert('댓글 불러오기 성공!')
 // 				let list = JSON.parse(result)
-				$('#replyList').empty()
+				$('#commentList').empty()
 				
 				$(result).each(function() {
  					console.log(this)
@@ -48,7 +48,7 @@ table {
 					str += '<button type="button">삭제</button>'
 					str += '</div>'
 					
-					$('#replyList').append(str)
+					$('#commentList').append(str)
 
 				})
 				
@@ -61,7 +61,7 @@ table {
 		
 		
 		$(document).ready(function() {
-			getReplyList()
+			getCommentList()
 		})
 		
 		
@@ -72,13 +72,13 @@ table {
  	--%>
 	<%-- 2번방법. 바디가 다 로드되고 나면. --%>
 	$(document).ready(function() {
-		$('#replyAddBtn').click(function() {
-			let content = document.rform.content.value
-			let writer = document.rform.writer.value
+		$('#commentAddBtn').click(function() {
+			let content = document.commentForm.content.value
+			let writer = document.commentForm.writer.value
 			
-// 			console.log(writer, content)
+			console.log(writer, content)
 			$.ajax({
-				url: '${pageContext.request.contextPath}/reply',
+				url: '${pageContext.request.contextPath}/comment',
 				type: 'POST',
 				data: {
 					content : content,
@@ -86,9 +86,9 @@ table {
 					boardNo : ${post.no}
 				}, success : function() {
 // 					alert('댓글등록 성공!')
-					document.rform.content.value=''
-					document.rform.writer.value=''
-					getReplyList()
+					document.commentForm.content.value=''
+					document.commentForm.writer.value=''
+					getCommentList()
 					
 				}, error : function() {
 					alert('댓글등록 실패! 다시 시도하세요.')
@@ -105,8 +105,7 @@ table {
 <body>
 	<header>
 		<%-- 상단고정 --%>
-		<jsp:include
-			page="/jsp/main-jsp/topper.jsp"></jsp:include>
+		<jsp:include page="/jsp/main-jsp/topper.jsp"></jsp:include>
 	</header>
 	<section>
 		<div class="container mt-5">
@@ -146,25 +145,35 @@ table {
 							<p class="card-text">${post.content}</p>
 						</div>
 						<div class="card-footer text-muted" style="text-align: left;">
-							<div class="reply-container">
-								<div id="replyCnt">댓글(${post.replyCnt}개)</div>
-								<div id="replyList">
-									<c:if test="${ empty reply }">등록된 댓글이 없습니다.</c:if>
+							<div class="comment-container">
+								<div id="commentCnt">댓글(${post.commentCnt}개)</div>
+								<div id="commentList">
+									<c:if test="${ empty comment }">등록된 댓글이 없습니다.</c:if>
 								</div>
-								<form name="replyForm">
+								<form name="commentForm">
 									<div class="card">
 										<div class="ml-2 comment_inbox">
 											<div>
-												<b class="reply_inbox_writer">${loginUser.id}</b>
+												<b class="comment_inbox_writer">${loginUser.id}</b>
+												<input type="hidden" name="writer" value="${loginUser.id}"/>
 											</div>
 											<div>
-												<textarea name="content" placeholder="댓글을 남겨보세요" rows="1"
-													class="comment_inbox_text"
+												<textarea name="content"
+													<c:if test="${not empty loginUser.id}">
+												placeholder="댓글을 남겨보세요"
+												</c:if>
+													<c:if test="${empty loginUser.id}">
+												placeholder="로그인 후 이용해주세요"
+												readonly = true
+												</c:if>
+													rows="1" class="comment_inbox_text"
 													style="border: none; outline: none; overflow: hidden; overflow-wrap: break-word; width: 550px; height: 80px;"></textarea>
 											</div>
 										</div>
 										<div class="register_box" style="text-align: right;">
-											<a href="#" type="button" id="replyAddBtn">등록</a>
+											<c:if test="${not empty loginUser.id}">
+												<a href="#" type="button" id="commentAddBtn">등록</a>
+											</c:if>
 										</div>
 									</div>
 								</form>
@@ -177,8 +186,7 @@ table {
 	</section>
 	<footer>
 		<%-- 하단고정 --%>
-		<jsp:include
-			page="/jsp/main-jsp/footer.jsp"></jsp:include>
+		<jsp:include page="/jsp/main-jsp/footer.jsp"></jsp:include>
 	</footer>
 </body>
 </html>

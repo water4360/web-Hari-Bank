@@ -12,9 +12,9 @@
         , REG_DATE regDate
         , (
             SELECT COUNT(*)
-            FROM T_REPLY
+            FROM T_COMMENT
             WHERE BOARD_NO = B.NO
-            ) AS replyCnt
+            ) AS commentCnt
 		    FROM B_BOARD B
 		    ORDER BY NO DESC
 	</select>
@@ -24,15 +24,21 @@
 	SELECT NO, TITLE, WRITER, CONTENT, VIEW_CNT viewCnt, REG_DATE regDate
 	        , (
 	            SELECT COUNT(*)
-	            FROM T_REPLY
+	            FROM T_COMMENT
 	            WHERE BOARD_NO = #{ NO }
-	           ) replyCnt
+	           ) commentCnt
 				FROM B_BOARD WHERE NO = #{ NO }
 	</select>
+	
+	<update id="increaseViewCnt" parameterType="int">
+	<!-- 조회수 증가 -->
+	UPDATE B_BOARD SET VIEW_CNT = VIEW_CNT + 1 WHERE NO = #{ NO }
+	</update>
 	
 	<!-- 새글등록 -->
 	<insert id="insertBoard" parameterType="boardVO">
 		INSERT INTO B_BOARD(NO, TITLE, WRITER, CONTENT)
 		VALUES(SEQ_T_BOARD_NO.NEXTVAL, #{title}, #{writer}, #{content})
 	</insert>
+	
 </mapper>

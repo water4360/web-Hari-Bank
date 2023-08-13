@@ -13,7 +13,7 @@ public class BoardVO {
 		@NotEmpty(message = "제목을 뭘로 할까요?")
 		private String title;
 		
-		@Pattern(regexp = "^[A-Za-z0-9가-힣]*$", message = "특수문자와 한글은 사용할 수 없어요.")
+		@Pattern(regexp = "^[A-Za-z0-9가-힣._-]*$", message = "특수문자와 한글은 사용할 수 없어요.")
 		@NotEmpty(message = "누가 적은걸까요?")
 		private String writer;
 		private String content;
@@ -21,7 +21,7 @@ public class BoardVO {
 		private String regDate;
 		
 		
-		private int replyCnt;
+		private int commentCnt;
 		
 		
 		public BoardVO() {
@@ -77,18 +77,18 @@ public class BoardVO {
 		}
 		
 
-		public int getReplyCnt() {
-			return replyCnt;
+		public int getCommentCnt() {
+			return commentCnt;
 		}
 
-		public void setReplyCnt(int replyCnt) {
-			this.replyCnt = replyCnt;
+		public void setCommentCnt(int commentCnt) {
+			this.commentCnt = commentCnt;
 		}
 
 		
 
 		public BoardVO(int no, String title, String writer,
-				String content, int viewCnt, String regDate, int replyCnt) {
+				String content, int viewCnt, String regDate, int commentCnt) {
 			super();
 			this.no = no;
 			this.title = title;
@@ -96,13 +96,13 @@ public class BoardVO {
 			this.content = content;
 			this.viewCnt = viewCnt;
 			this.regDate = regDate;
-			this.replyCnt = replyCnt;
+			this.commentCnt = commentCnt;
 		}
 
 		@Override
 		public String toString() {
 			return "BoardVO [no=" + no + ", title=" + title + ", writer=" + writer + ", content=" + content
-					+ ", viewCnt=" + viewCnt + ", regDate=" + regDate + ", replyCnt=" + replyCnt + "]";
+					+ ", viewCnt=" + viewCnt + ", regDate=" + regDate + ", commentCnt=" + commentCnt + "]";
 		}
 
 		

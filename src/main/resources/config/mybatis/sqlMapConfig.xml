@@ -8,7 +8,7 @@
  	<typeAliases>
  		<typeAlias type="bank.user.UserVO" alias="userVO"/>
  		<typeAlias type="bank.board.vo.BoardVO" alias="boardVO"/>
- 		<typeAlias type="bank.reply.vo.ReplyVO" alias="replyVO"/>
+ 		<typeAlias type="bank.comment.vo.CommentVO" alias="commentVO"/>
  	</typeAliases>
  </configuration>
  

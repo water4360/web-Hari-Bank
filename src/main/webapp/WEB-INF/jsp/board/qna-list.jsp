@@ -53,7 +53,7 @@
 										<tr>
 											<td class="qna-no narrow-column">${qna.no}</td>
 											<td class="qna-title"><a
-												href="${pageContext.request.contextPath}/board/${qna.no}">${qna.title} [${ qna.replyCnt }]</a></td>
+												href="${pageContext.request.contextPath}/board/${qna.no}">${qna.title} [${ qna.commentCnt }]</a></td>
 											<td class="qna-writer narrow-column">${qna.writer}</td>
 											<td class="qna-regdate narrow-column">${qna.regDate}</td>
 											<td class="qna-viewcnt narrow-column">${qna.viewCnt}</td>
