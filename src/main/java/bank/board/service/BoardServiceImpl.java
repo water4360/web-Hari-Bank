@@ -36,4 +36,10 @@ public class BoardServiceImpl implements BoardService {
 		dao.increaseViewCnt(no);
 	}
 
+	@Override
+	public void addBoardReply(int no) {
+		dao.addBoardReply(no);
+		
+	}
+
 }

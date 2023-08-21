@@ -39,4 +39,11 @@ public class BoardDAOImpl implements BoardDAO {
 		
 	}
 
+	@Override
+	public void addBoardReply(int no) {
+		session.insert("board.dao.BoardDAO.insertBoardReply", no);
+	}
+	
+	
+
 }

@@ -34,4 +34,10 @@ public interface BoardDAO {
 	 * 조회수 증가
 	 */
 	void increaseViewCnt(int no);
+
+	/**
+	 * 답글 등록
+	 * @param 원글 번호
+	 */
+	void addBoardReply(int no);
 }

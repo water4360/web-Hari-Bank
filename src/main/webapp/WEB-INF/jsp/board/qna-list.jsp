@@ -22,7 +22,7 @@
 	<section>
 		<div class="container mt-5" align="center">
 			<div>
-				<h2>문의게시판(Q&A)</h2>
+				<h2>스프링 문의게시판(Q&A)</h2>
 			</div>
 			<c:if test="${not empty loginUser}">
 				<a class="btn btn-primary mb-3"

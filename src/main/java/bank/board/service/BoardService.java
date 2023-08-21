@@ -30,4 +30,10 @@ public interface BoardService {
 	 * 조회수 증가
 	 */
 	public void increaseViewCnt(int no);
+	
+	/**
+	 * 답글 등록
+	 */
+	public void addBoardReply(int no);
 }
+

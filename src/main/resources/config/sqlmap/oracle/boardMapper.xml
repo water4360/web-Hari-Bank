@@ -38,7 +38,20 @@
 	<!-- 새글등록 -->
 	<insert id="insertBoard" parameterType="boardVO">
 		INSERT INTO B_BOARD(NO, TITLE, WRITER, CONTENT)
-		VALUES(SEQ_T_BOARD_NO.NEXTVAL, #{title}, #{writer}, #{content})
+		VALUES(SEQ_B_BOARD_NO.NEXTVAL, #{title}, #{writer}, #{content})
 	</insert>
+	
+	
+	<!-- 답글작성시 -->
+	<select id="selectBoardInfo" parameterType="int" resultType="boardVO">
+		SELECT TITLE, REF, LEV, STEP FROM B_BOARD WHERE NO = #{ NO }
+	</select>
+	
+	<!-- 답글등록 -->
+	<insert id="insertBoardReply" parameterType="int">
+		INSERT INTO B_BOARD(NO, TITLE, WRITER, CONTENT, REF, LEV, STEP)
+		VALUES(SEQ_B_REPLY_NO.NEXTVAL, #{title}, #{writer}, #{content}, #{REF}, #{LEV}+1, #{STEP}+1)
+	</insert>
+	
 	
 </mapper>

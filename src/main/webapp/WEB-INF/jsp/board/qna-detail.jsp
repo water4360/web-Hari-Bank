@@ -119,18 +119,21 @@ table {
 									class="btn btn-secondary mb-2">수정</a>
 								<a href="deletePost.do?no=${post.no}"
 									class="btn btn-secondary mb-2">삭제</a>
+								<a href="${pageContext.request.contextPath }/board/reply/${post.no}"
+									class="btn btn-secondary mb-2">답글</a>
 							</c:when>
 							<c:when test="${loginUser.role == 'A758'}">
-								<a
-									href="${pageContext.request.contextPath }/board/delete/${post.no}"
+								<a href="${pageContext.request.contextPath }/board/delete/${post.no}"
 									class="btn btn-secondary mb-2">삭제</a>
 							</c:when>
+							<c:when test="${not empty loginUser}">
+							<a href="${pageContext.request.contextPath }/board/reply/${post.no}"
+							class="btn btn-secondary mb-2">답글</a>
+							</c:when>
 						</c:choose>
+					</div>
 						<a href="${pageContext.request.contextPath }/board"
 							class="btn btn-secondary mb-2">목록으로</a>
-
-
-					</div>
 					<div class="card mb-3">
 						<div class="card-header align-items-start justify-content-between">
 							<div class="d-flex flex-column">

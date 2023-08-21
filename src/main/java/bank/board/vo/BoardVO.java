@@ -19,9 +19,11 @@ public class BoardVO {
 		private String content;
 		private int viewCnt;
 		private String regDate;
-		
-		
 		private int commentCnt;
+		
+		private int ref;
+		private int lev;
+		private int step;
 		
 		
 		public BoardVO() {
@@ -85,8 +87,32 @@ public class BoardVO {
 			this.commentCnt = commentCnt;
 		}
 
-		
 
+		public int getRef() {
+			return ref;
+		}
+
+		public void setRef(int ref) {
+			this.ref = ref;
+		}
+
+		public int getLev() {
+			return lev;
+		}
+
+		public void setLev(int lev) {
+			this.lev = lev;
+		}
+
+		public int getStep() {
+			return step;
+		}
+
+		public void setStep(int step) {
+			this.step = step;
+		}
+
+		//게시글 조회용
 		public BoardVO(int no, String title, String writer,
 				String content, int viewCnt, String regDate, int commentCnt) {
 			super();
@@ -98,6 +124,11 @@ public class BoardVO {
 			this.regDate = regDate;
 			this.commentCnt = commentCnt;
 		}
+		
+		//답글 등록용
+		
+		
+		
 
 		@Override
 		public String toString() {

@@ -53,7 +53,6 @@ public class BoardController {
 	 * void네? 요청url과 리턴할 jsp값이 같은 경우에는 void 쓸 수 있음!!! 즉 요청url 자체가 주소가 되는 것임.
 	 */
 	@GetMapping("/board/{no}")
-//	public String detail2(@PathVariable("no") int boardNo, HttpServletRequest request) {
 	public ModelAndView detail2(@PathVariable("no") int boardNo, HttpServletRequest request) {
 		//조회수 증가용
 		boardService.increaseViewCnt(boardNo);
@@ -77,6 +76,7 @@ public class BoardController {
 		return mav;
 	}
 
+	//글쓰기 폼
 	@GetMapping("/board/write")
 	public void writeForm(Model model, HttpSession session) {
 		BoardVO board = new BoardVO();
@@ -93,6 +93,7 @@ public class BoardController {
 		model.addAttribute("boardVO", board);
 	}
 
+	//글등록
 	@PostMapping("/board/write")
 	public String write(@Valid BoardVO board, BindingResult result) {
 
@@ -112,5 +113,49 @@ public class BoardController {
 			//걍 "board/list2"라면 위에 url이 계속 write로 남아있겠지...
 		return "redirect:/board";
 	}
+	
+	
+	
+	
+	//답글 폼
+	@GetMapping("/board/reply/{no}")
+	public ModelAndView replyForm(@PathVariable("no") int boardNo) {
+		BoardVO board = boardService.getOneBoard(boardNo);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("board/qna-reply");
+		mav.addObject("origin", board);
+		
+		return mav;
+	}
+	
+	
+	
+	//답글등록
+	@PostMapping("/board/reply/{no}")
+	public String reply(@PathVariable("no") int boardNo, @Valid BoardVO board, BindingResult result,  HttpSession session) {
+		
+		System.out.println("입력된 board : " + board);
+//		String writer = ((UserVO)session.getAttribute("loginUser")).getId();
+//		board.setWriter(writer);
+
+		if (result.hasErrors()) {
+			System.out.println("답글 작성시 에러발생!");
+			return "board/reply";
+		}
+		System.out.println("입력시 문제없음.");
+		boardService.addBoardReply(boardNo);
+		return "redirect:/board";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
