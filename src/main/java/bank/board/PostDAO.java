@@ -67,7 +67,7 @@ public class PostDAO {
 		StringBuilder sql = new StringBuilder();
 		List<PostVO> postList = new ArrayList<>();
 
-		sql.append("SELECT * FROM B_BOARD ORDER BY NO DESC ");
+		sql.append("SELECT * FROM B_BOARD ORDER BY P_NO DESC ");
 
 		try (Connection conn = new ConnectionFactory().getConnection();
 			 PreparedStatement pstmt = conn.prepareStatement(sql.toString());) {
@@ -75,12 +75,12 @@ public class PostDAO {
 			 ResultSet rs = pstmt.executeQuery();
 
 			while(rs.next()) {
-				int no = rs.getInt("NO");
-				String writer = rs.getString("WRITER");
-				String title = rs.getString("TITLE");
-				String content = rs.getString("CONTENT");
-				String regDate = rs.getString("REG_DATE");
-				int viewCnt  = rs.getInt("VIEW_CNT");
+				int no = rs.getInt("P_NO");
+				String writer = rs.getString("P_WRITER");
+				String title = rs.getString("P_TITLE");
+				String content = rs.getString("P_CONTENTS");
+				String regDate = rs.getString("P_REG_DATE");
+				int viewCnt  = rs.getInt("P_HIT");
 				
 				PostVO vo = new PostVO(no, writer, title, content, regDate, viewCnt);
 				
@@ -100,7 +100,7 @@ public class PostDAO {
 	//Q&A 상세보기?
 	public PostVO getPost(int qno) {
 		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT * FROM B_BOARD WHERE NO = ? ");
+		sql.append("SELECT * FROM B_BOARD WHERE P_NO = ? ");
 		PostVO post = null;
 
 		int idx = 1;
@@ -112,12 +112,13 @@ public class PostDAO {
 			 ResultSet rs = pstmt.executeQuery();
 			 
 			if(rs.next()) {
-				int no = rs.getInt("NO");
-				String writer = rs.getString("WRITER");
-				String title = rs.getString("TITLE");
-				String content = rs.getString("CONTENT");
-				String regDate = rs.getString("REG_DATE");
-				int viewCnt  = rs.getInt("VIEW_CNT")+1;
+				int no = rs.getInt("P_NO");
+				String writer = rs.getString("P_WRITER");
+				String title = rs.getString("P_TITLE");
+				String content = rs.getString("P_CONTENTS");
+				String regDate = rs.getString("P_REG_DATE");
+				int viewCnt  = rs.getInt("P_HIT")+1;
+				
 				
 				post = new PostVO(no, writer, title, content, regDate, viewCnt);
 			}
@@ -153,7 +154,7 @@ public class PostDAO {
 	//Q&A 삭제
 	public void deletePost(int no) {
 		StringBuilder sql = new StringBuilder();
-		sql.append("DELETE B_BOARD WHERE NO = ? ");
+		sql.append("DELETE B_BOARD WHERE P_NO = ? ");
 		
 		int idx = 1;
 		try(Connection conn = new ConnectionFactory().getConnection();
@@ -181,7 +182,7 @@ public class PostDAO {
 	//개인별 QNA
 	public List<PostVO> getQnaListById(String id) {
 		StringBuilder sql = new StringBuilder();
-		sql.append("SELECT * FROM B_BOARD WHERE WRITER = ? ORDER BY NO DESC ");
+		sql.append("SELECT * FROM B_BOARD WHERE P_WRITER = ? ORDER BY P_NO DESC ");
 		
 		PostVO post = null;
 		List<PostVO> qnaList = new ArrayList<>();
@@ -194,12 +195,12 @@ public class PostDAO {
 			 ResultSet rs = pstmt.executeQuery();
 			 
 			while(rs.next()) {
-				int no = rs.getInt("NO");
-				String writer = rs.getString("WRITER");
-				String title = rs.getString("TITLE");
-				String content = rs.getString("CONTENT");
-				String regDate = rs.getString("REG_DATE");
-				int viewCnt  = rs.getInt("VIEW_CNT");
+				int no = rs.getInt("P_NO");
+				String writer = rs.getString("P_WRITER");
+				String title = rs.getString("P_TITLE");
+				String content = rs.getString("P_CONTENTS");
+				String regDate = rs.getString("P_REG_DATE");
+				int viewCnt  = rs.getInt("P_HIT");
 				
 				post = new PostVO(no, writer, title, content, regDate, viewCnt);
 				qnaList.add(post);

@@ -27,7 +27,7 @@
 </header>
 <body>
 	<section>
-		<div class="container mt-5 mb-5">
+		<div class="container mb-10">
 			<h3 align="center">HB하리사랑통장 개설완료</h3>
 			<div class="card mt-3">
 				<div class="card-body center-align">
@@ -36,7 +36,7 @@
 				</div>
 				<div class="col-12 mb-4 center-align">
 					<div>
-						<a href="inquiry.do" class="btn btn-lg">
+						<a href="inquiry.do" class="btn btn-basic btn-lg">
 							계좌조회</a>
 						<a href="main.do" class="btn btn-secondary btn-lg">메인으로</a>
 					</div>

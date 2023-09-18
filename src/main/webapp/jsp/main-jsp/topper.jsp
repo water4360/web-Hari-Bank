@@ -80,10 +80,13 @@
 								href="inquiryOpenbank.do">오픈뱅킹</a></li>
 							<li class="nav-item"><a class="nav-link"
 								href="transaction.do">이체</a></li>
-							<li class="nav-item"><a class="nav-link" href="products.do">금융상품</a></li>
+<!-- 							<li class="nav-item"><a class="nav-link" href="products.do">금융상품</a></li> -->
 							<li class="nav-item"><a class="nav-link" href="${ pageContext.request.contextPath }/board">스프링QNA</a></li>
 							<li class="nav-item"><a class="nav-link" href="qna.do">문의게시판</a></li>
 							<li class="nav-item"><a class="nav-link" href="mypage.do">마이페이지</a></li>
+							<li class="nav-item"><a class="nav-link" href="${ pageContext.request.contextPath }/news">new뉴스</a></li>
+							<li class="nav-item"><a class="nav-link" href="${ pageContext.request.contextPath }/playGame">게임</a></li>
+
 						</ul>
 					</div>
 				</div>

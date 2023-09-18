@@ -10,39 +10,14 @@ INSERT INTO BOOKLIST(NO, TITLE, AUTHOR, PUBLISHER, STOCK)
 
 
 
-CREATE SEQUENCE SEQ_NOTICE_NO NOCACHE;
-CREATE SEQUENCE SEQ_QNA_NO NOCACHE;
-CREATE SEQUENCE SEQ_FNQ_NO NOCACHE;
+
 
 --계좌번호 단순생성용
 SELECT '0758-' || LPAD(DBMS_RANDOM.VALUE(10000000, 99999999), 8, '0') AS account_number
 FROM dual;
 
 
---계좌번호 중복방지 생성용
---프로시저 저장용
-CREATE OR REPLACE PROCEDURE PRCD_GENERATE_UNIQUE_ACCOUNT_NO(
-  v_account_no OUT VARCHAR2
-) AS
-  v_duplicate_count NUMBER;
-BEGIN
-  LOOP
-    v_account_no := '0758-' || LPAD(TO_CHAR(FLOOR(DBMS_RANDOM.VALUE(10000000, 99999999))), 8, '0');
 
-    SELECT COUNT(*)
-    INTO v_duplicate_count
-    FROM B_USER_ACCOUNT -- 생성된 계좌번호를 비교할 테이블명
-    WHERE ACCOUNT_NO = v_account_no;
-
-    EXIT WHEN v_duplicate_count = 0;
-  END LOOP;
-  
-  -- Only return the account number, do not insert it here
-  -- INSERT INTO B_USER_ACCOUNT(ACCOUNT_NO) VALUES(v_account_no);
-  -- COMMIT;
-  
-END;
-/
 
 COMMIT;
 
@@ -61,7 +36,7 @@ SELECT * FROM B_USER_ADDRESS;
 UPDATE B_USER_INFO SET B_BANK_CODE = '0758';
 
 INSERT INTO B_BOARD(P_NO, P_WRITER, P_TITLE, P_CONTENTS, P_CATEGORY) 
-	 VALUES(SEQ_QNA_NO.NEXTVAL, 'bbbb', '제목', '내용내용', 'QNA');
+	 VALUES(SEQ_QNA_NO.NEXTVAL, 'aaaa', '제목', '내용내용', 'QNA');       
 
 COMMIT;
 
@@ -272,7 +247,7 @@ EXCEPTION
 END;
 /
 
-
+SELECT * FROM USER_SYS_PRIVS;
 
 
 

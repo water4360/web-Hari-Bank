@@ -111,7 +111,7 @@ input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-o
 					<div class="col-8 mb-3">
 						<label for="email">이메일</label> <input type="email"
 							class="form-control" id="email" name="email"
-							placeholder="예)soob@library.com" required>
+							placeholder="예)haribank@naver.com" required>
 						<div class="invalid-feedback">(class)이메일 주소가 올바르지 않아요</div>
 					</div>
 
