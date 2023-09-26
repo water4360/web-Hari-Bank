@@ -4,7 +4,7 @@
 - 1인 개별(4인1조 연동)
   
 ## 2. 사용 기술
-`Back-End` Java 11, Spring 5.3.29, SpringBoot 2.7.12
+`Back-End` Java 11, Spring
 
 `Front-End` JavaScript
 
